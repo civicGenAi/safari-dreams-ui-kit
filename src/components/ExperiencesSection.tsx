@@ -1,14 +1,12 @@
 import { Link } from 'react-router-dom';
-import { Button } from '@/components/ui/button';
-import { 
-  Compass, 
-  Globe, 
-  Sun, 
-  Crown, 
-  Users, 
+import {
+  Compass,
+  Globe,
+  Sun,
+  Crown,
+  Users,
   Footprints,
-  ArrowRight,
-  Heart
+  ArrowRight
 } from 'lucide-react';
 
 const experiences = [
@@ -92,7 +90,7 @@ export const ExperiencesSection = () => {
         </div>
 
         {/* Experience Cards Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {experiences.map((exp, index) => (
             <Link
               key={exp.title}
@@ -108,43 +106,20 @@ export const ExperiencesSection = () => {
                   {exp.count}
                 </span>
               </div>
-              
+
               <h3 className="font-display text-xl font-bold text-secondary-foreground mb-2 group-hover:text-primary transition-colors">
                 {exp.title}
               </h3>
               <p className="text-secondary-foreground/60 text-sm mb-4">
                 {exp.description}
               </p>
-              
+
               <div className="flex items-center gap-2 text-primary font-heading text-sm uppercase tracking-wider group-hover:gap-3 transition-all">
                 Explore
                 <ArrowRight className="w-4 h-4" />
               </div>
             </Link>
           ))}
-        </div>
-
-        {/* CTA Section */}
-        <div className="text-center bg-secondary-foreground/5 rounded-3xl p-10 lg:p-16 border border-secondary-foreground/10">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Heart className="w-6 h-6 text-primary" />
-          </div>
-          <h3 className="font-display text-2xl md:text-3xl font-bold text-secondary-foreground mb-4">
-            At Demi Tours and Travel
-          </h3>
-          <p className="font-display text-xl md:text-2xl text-primary mb-8">
-            We Treat Our Clients Like Family
-          </p>
-          <p className="text-secondary-foreground/70 max-w-2xl mx-auto mb-8">
-            Your journey is our passion. Let us craft an unforgettable experience 
-            that exceeds your expectations. Reach out today and become part of our family.
-          </p>
-          <Link to="/contact">
-            <Button variant="primary" size="xl" className="gap-2">
-              Get in Touch
-              <ArrowRight className="w-5 h-5" />
-            </Button>
-          </Link>
         </div>
       </div>
     </section>
