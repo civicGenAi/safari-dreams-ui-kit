@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, ChevronDown, MapPin, FileText, Compass } from 'lucide-react';
+import { Menu, X, ChevronDown, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface Destination {
@@ -59,12 +59,12 @@ export const Navbar = () => {
       }`}>
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex items-center justify-between">
-            <Link to="/" className="flex items-center gap-2">
-              <span className={`font-display text-2xl md:text-3xl font-bold tracking-tight transition-colors duration-300 ${
-                isScrolled ? 'text-charcoal' : 'text-primary-foreground'
-              }`}>
-                DeMi<span className={`${isScrolled ? 'text-primary' : 'text-secondary'}`}>Tours</span>
-              </span>
+            <Link to="/" className="flex items-center">
+              <img
+                src="/src/assets/RCGP_Logo_Small-removebg-preview-1.webp"
+                alt="Logo"
+                className="h-12 md:h-14 w-auto"
+              />
             </Link>
 
             <div className="hidden lg:flex items-center gap-8">
@@ -84,14 +84,12 @@ export const Navbar = () => {
                   isDestinationsOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
                 }`}>
                   <div className="bg-background rounded-2xl shadow-lift p-6 min-w-[400px] border border-border">
-                    <div className="flex items-center gap-2 mb-4 pb-4 border-b border-border">
-                      <MapPin className="w-5 h-5 text-primary" />
+                    <div className="mb-4 pb-4 border-b border-border">
                       <span className="font-display text-lg font-semibold">Explore Destinations</span>
                     </div>
                     <div className="grid grid-cols-2 gap-3">
                       {destinations.map((dest) => (
                         <Link key={dest.name} to={`/destinations/${dest.slug}`} className="flex items-center gap-3 p-3 rounded-xl hover:bg-muted transition-colors group">
-                          <span className="text-2xl">{dest.flag}</span>
                           <div>
                             <span className="font-heading font-medium text-foreground group-hover:text-primary transition-colors">{dest.name}</span>
                             <span className="block text-xs text-muted-foreground">{dest.tours} Tours</span>
@@ -116,14 +114,12 @@ export const Navbar = () => {
                   isTravelIdeasOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
                 }`}>
                   <div className="bg-background rounded-2xl shadow-lift p-6 min-w-[450px] border border-border">
-                    <div className="flex items-center gap-2 mb-4 pb-4 border-b border-border">
-                      <Compass className="w-5 h-5 text-primary" />
+                    <div className="mb-4 pb-4 border-b border-border">
                       <span className="font-display text-lg font-semibold">Explore Travel Ideas</span>
                     </div>
                     <div className="grid grid-cols-2 gap-3 max-h-[400px] overflow-y-auto">
                       {travelIdeas.map((idea) => (
                         <Link key={idea.name} to={`/travel-ideas/${idea.slug}`} className="flex items-center gap-3 p-3 rounded-xl hover:bg-muted transition-colors group">
-                          <span className="text-2xl">{idea.icon}</span>
                           <div className="flex-1">
                             <span className="font-heading font-medium text-foreground group-hover:text-primary transition-colors text-sm block">{idea.name}</span>
                             <span className="block text-xs text-muted-foreground">{idea.tours}+ Tours</span>
@@ -172,7 +168,7 @@ export const Navbar = () => {
         <div className={`absolute right-0 top-0 h-full w-[85%] max-w-sm bg-background shadow-lift transition-transform duration-500 ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
           <div className="p-6">
             <div className="flex items-center justify-between mb-8">
-              <span className="font-display text-xl font-bold text-secondary">DeMi<span className="text-primary">Tours</span></span>
+              <img src="/src/assets/RCGP_Logo_Small-removebg-preview-1.webp" alt="Logo" className="h-10 w-auto" />
               <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 text-foreground"><X className="w-6 h-6" /></button>
             </div>
             <Button variant="primary" size="xl" className="w-full mb-6 gap-2"><FileText className="w-5 h-5" />Request Free Quote</Button>

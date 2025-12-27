@@ -116,7 +116,6 @@ const TravelIdeas = () => {
             alt="Safari background"
             className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-charcoal/90 via-charcoal/85 to-charcoal/80" />
         </div>
 
         <div className="container mx-auto px-4 lg:px-8 relative z-10">

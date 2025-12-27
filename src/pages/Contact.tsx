@@ -24,7 +24,6 @@ const Contact = () => {
           alt="Contact Us"
           className="w-full h-full object-cover"
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/90 via-charcoal/70 to-charcoal/50" />
         <div className="absolute inset-0 flex items-center">
           <div className="container mx-auto px-4 lg:px-8 text-center">
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
