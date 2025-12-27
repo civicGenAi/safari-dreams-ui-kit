@@ -56,7 +56,7 @@ const experiences = [
 
 export const ExperiencesSection = () => {
   return (
-    <section className="py-24 lg:py-32 bg-gradient-to-br from-secondary/95 to-secondary text-secondary-foreground relative overflow-hidden">
+    <section className="py-24 lg:py-32 bg-white relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
@@ -83,8 +83,8 @@ export const ExperiencesSection = () => {
             Come With Us to
             <span className="text-primary block">New Experiences</span>
           </h2>
-          <p className="text-secondary-foreground/70 text-lg">
-            Discover the perfect adventure tailored to your travel style. 
+          <p className="text-muted-foreground text-lg">
+            Discover the perfect adventure tailored to your travel style.
             From heart-pumping safaris to serene nature walks.
           </p>
         </div>
@@ -95,7 +95,7 @@ export const ExperiencesSection = () => {
             <Link
               key={exp.title}
               to="/travel-ideas"
-              className="group bg-secondary-foreground/5 backdrop-blur-sm rounded-2xl p-6 border border-secondary-foreground/10 hover:border-primary/50 hover:bg-secondary-foreground/10 transition-all duration-300 card-hover"
+              className="group bg-muted/30 backdrop-blur-sm rounded-2xl p-6 border border-border hover:border-primary/50 hover:bg-muted/50 transition-all duration-300 card-hover"
               style={{ animationDelay: `${index * 100}ms` }}
             >
               <div className="flex items-start justify-between mb-4">
@@ -107,10 +107,10 @@ export const ExperiencesSection = () => {
                 </span>
               </div>
 
-              <h3 className="font-display text-xl font-bold text-secondary-foreground mb-2 group-hover:text-primary transition-colors">
+              <h3 className="font-display text-xl font-bold text-foreground mb-2 group-hover:text-primary transition-colors">
                 {exp.title}
               </h3>
-              <p className="text-secondary-foreground/60 text-sm mb-4">
+              <p className="text-muted-foreground text-sm mb-4">
                 {exp.description}
               </p>
 
