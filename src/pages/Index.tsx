@@ -2,7 +2,7 @@ import { Navbar } from '@/components/Navbar';
 import { HeroSection } from '@/components/HeroSection';
 import { AboutSection } from '@/components/AboutSection';
 import { DestinationsSection } from '@/components/DestinationsSection';
-import { TravelIdeasSection } from '@/components/TravelIdeasSection';
+import { ExperiencesSection } from '@/components/ExperiencesSection';
 import { ToursSection } from '@/components/ToursSection';
 import { TestimonialsSection } from '@/components/TestimonialsSection';
 import { BookingForm } from '@/components/BookingForm';
@@ -18,7 +18,7 @@ const Index = () => {
         <HeroSection />
         <AboutSection />
         <DestinationsSection />
-        <TravelIdeasSection />
+        <ExperiencesSection />
         <ToursSection />
         <TestimonialsSection />
         <BookingForm />
