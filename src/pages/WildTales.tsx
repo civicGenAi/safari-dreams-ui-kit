@@ -33,54 +33,64 @@ const WildTales = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <div className="relative pt-24 pb-16 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-secondary/5 to-background" />
-        <div className="absolute inset-0 bg-grid-pattern opacity-5" />
+      <div className="relative h-[500px] md:h-[600px]">
+        <img
+          src="/src/assets/header_bg_new4.gif"
+          alt="Wild Tales"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/80 via-charcoal/60 to-charcoal/80" />
 
-        <div className="container mx-auto px-4 lg:px-8 relative z-10">
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="inline-flex items-center gap-2 bg-primary/10 px-4 py-2 rounded-full mb-6 animate-fade-in">
-              <BookOpen className="w-4 h-4 text-primary" />
-              <span className="text-sm font-heading font-medium text-primary">Stories from the Wild</span>
-            </div>
+        <div className="absolute inset-0 flex items-center">
+          <div className="container mx-auto px-4 lg:px-8">
+            <div className="max-w-4xl mx-auto text-center">
+              <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
+                <BookOpen className="w-4 h-4 text-white" />
+                <span className="text-sm font-heading font-medium text-white">Stories from the Wild</span>
+              </div>
 
-            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold mb-6 animate-fade-up">
-              Wild <span className="text-gradient-gold">Tales</span>
-            </h1>
+              <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-white">
+                Wild <span className="text-gradient-gold">Tales</span>
+              </h1>
 
-            <p className="text-xl text-muted-foreground mb-8 leading-relaxed animate-fade-up" style={{ animationDelay: '0.1s' }}>
-              Adventures, wildlife encounters, and insider stories from the heart of Africa.
-              Discover the untold tales of safari life, conservation heroes, and breathtaking journeys.
-            </p>
+              <p className="text-xl text-white/90 mb-8 leading-relaxed max-w-3xl mx-auto">
+                Adventures, wildlife encounters, and insider stories from the heart of Africa.
+                Discover the untold tales of safari life, conservation heroes, and breathtaking journeys.
+              </p>
 
-            {/* Search Bar */}
-            <div className="max-w-2xl mx-auto mb-8 animate-fade-up" style={{ animationDelay: '0.2s' }}>
-              <div className="relative">
-                <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
-                <Input
-                  type="text"
-                  placeholder="Search stories, destinations, wildlife..."
-                  value={searchQuery}
-                  onChange={(e) => setSearchQuery(e.target.value)}
-                  className="pl-12 pr-4 py-6 text-lg rounded-2xl border-2 focus:border-primary"
-                />
+              {/* Stats */}
+              <div className="grid grid-cols-3 gap-6 max-w-2xl mx-auto">
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
+                  <div className="text-3xl font-display font-bold text-white mb-1">150+</div>
+                  <div className="text-sm text-white/80">Stories</div>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
+                  <div className="text-3xl font-display font-bold text-white mb-1">50K+</div>
+                  <div className="text-sm text-white/80">Readers</div>
+                </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
+                  <div className="text-3xl font-display font-bold text-white mb-1">Weekly</div>
+                  <div className="text-sm text-white/80">Updates</div>
+                </div>
               </div>
             </div>
+          </div>
+        </div>
+      </div>
 
-            {/* Stats */}
-            <div className="grid grid-cols-3 gap-6 max-w-2xl mx-auto animate-fade-up" style={{ animationDelay: '0.3s' }}>
-              <div className="text-center">
-                <div className="text-3xl font-display font-bold text-primary mb-1">150+</div>
-                <div className="text-sm text-muted-foreground">Stories</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-display font-bold text-primary mb-1">50K+</div>
-                <div className="text-sm text-muted-foreground">Readers</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl font-display font-bold text-primary mb-1">Weekly</div>
-                <div className="text-sm text-muted-foreground">Updates</div>
-              </div>
+      {/* Search Bar Section */}
+      <div className="py-12 bg-white">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="max-w-3xl mx-auto">
+            <div className="relative">
+              <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
+              <Input
+                type="text"
+                placeholder="Search stories, destinations, wildlife..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-12 pr-4 py-6 text-lg rounded-2xl border-2 focus:border-primary shadow-md"
+              />
             </div>
           </div>
         </div>
@@ -88,82 +98,89 @@ const WildTales = () => {
 
       {/* Featured Story */}
       {featuredPost && (
-        <div className="container mx-auto px-4 lg:px-8 mb-16">
-          <div className="relative rounded-3xl overflow-hidden group shadow-2xl">
-            <div className="absolute inset-0">
-              <img
-                src={featuredPost.image}
-                alt={featuredPost.title}
-                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/70 to-transparent" />
+        <div className="bg-muted/30 py-16">
+          <div className="container mx-auto px-4 lg:px-8">
+            <div className="text-center mb-8">
+              <h2 className="font-display text-3xl md:text-4xl font-bold mb-2">Featured Story</h2>
+              <p className="text-muted-foreground">Our most popular tale this week</p>
             </div>
-
-            <div className="relative z-10 p-8 md:p-12 lg:p-16 min-h-[500px] flex flex-col justify-end">
-              <Badge className="mb-4 w-fit bg-secondary text-secondary-foreground">
-                <TrendingUp className="w-3 h-3 mr-1" />
-                Featured Story
-              </Badge>
-
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 max-w-3xl">
-                {featuredPost.title}
-              </h2>
-
-              <p className="text-white/90 text-lg mb-6 max-w-2xl leading-relaxed">
-                {featuredPost.excerpt}
-              </p>
-
-              <div className="flex flex-wrap items-center gap-6 text-white/80 text-sm mb-6">
-                <div className="flex items-center gap-2">
-                  <User className="w-4 h-4" />
-                  <span>{featuredPost.author}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Calendar className="w-4 h-4" />
-                  <span>{new Date(featuredPost.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
-                </div>
-                <div className="flex items-center gap-2">
-                  <Clock className="w-4 h-4" />
-                  <span>{featuredPost.readTime}</span>
-                </div>
+            <div className="relative rounded-3xl overflow-hidden group shadow-2xl">
+              <div className="absolute inset-0">
+                <img
+                  src={featuredPost.image}
+                  alt={featuredPost.title}
+                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/70 to-charcoal/30" />
               </div>
 
-              <Link to={`/wild-tales/${featuredPost.slug}`}>
-                <Button variant="gold" size="lg" className="group">
-                  Read Full Story
-                  <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
-                </Button>
-              </Link>
+              <div className="relative z-10 p-8 md:p-12 lg:p-16 min-h-[500px] flex flex-col justify-end">
+                <Badge className="mb-4 w-fit bg-secondary text-secondary-foreground shadow-lg">
+                  <TrendingUp className="w-3 h-3 mr-1" />
+                  Featured Story
+                </Badge>
+
+                <h3 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 max-w-3xl">
+                  {featuredPost.title}
+                </h3>
+
+                <p className="text-white/90 text-lg mb-6 max-w-2xl leading-relaxed">
+                  {featuredPost.excerpt}
+                </p>
+
+                <div className="flex flex-wrap items-center gap-6 text-white/90 text-sm mb-6">
+                  <div className="flex items-center gap-2">
+                    <User className="w-4 h-4" />
+                    <span>{featuredPost.author}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Calendar className="w-4 h-4" />
+                    <span>{new Date(featuredPost.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+                  </div>
+                  <div className="flex items-center gap-2">
+                    <Clock className="w-4 h-4" />
+                    <span>{featuredPost.readTime}</span>
+                  </div>
+                </div>
+
+                <Link to={`/wild-tales/${featuredPost.slug}`}>
+                  <Button variant="gold" size="lg" className="group shadow-2xl">
+                    Read Full Story
+                    <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
+                  </Button>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
       )}
 
-      <div className="container mx-auto px-4 lg:px-8 pb-16">
-        <div className="grid lg:grid-cols-3 gap-8">
-          {/* Main Content - Blog Posts */}
-          <div className="lg:col-span-2">
-            {/* Tag Filter */}
-            <div className="mb-8">
-              <h3 className="text-sm font-heading font-semibold mb-4 text-muted-foreground uppercase tracking-wider">
-                Filter by Topic
-              </h3>
-              <div className="flex flex-wrap gap-2">
-                {allTags.map(tag => (
-                  <button
-                    key={tag}
-                    onClick={() => setSelectedTag(tag)}
-                    className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                      selectedTag === tag
-                        ? 'bg-primary text-primary-foreground shadow-md scale-105'
-                        : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:scale-105'
-                    }`}
-                  >
-                    {tag}
-                  </button>
-                ))}
+      <div className="bg-white py-16">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="grid lg:grid-cols-3 gap-8">
+            {/* Main Content - Blog Posts */}
+            <div className="lg:col-span-2">
+              {/* Tag Filter */}
+              <div className="mb-10">
+                <h3 className="font-display text-2xl font-bold mb-6">
+                  Filter by Topic
+                </h3>
+                <div className="flex flex-wrap gap-3">
+                  {allTags.map(tag => (
+                    <button
+                      key={tag}
+                      onClick={() => setSelectedTag(tag)}
+                      className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all shadow-sm ${
+                        selectedTag === tag
+                          ? 'bg-primary text-primary-foreground shadow-md scale-105'
+                          : 'bg-card border border-border text-foreground hover:bg-muted hover:scale-105'
+                      }`}
+                    >
+                      {tag}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
 
             {/* Blog Posts Grid */}
             {filteredPosts.length === 0 ? (
@@ -269,12 +286,12 @@ const WildTales = () => {
 
           {/* Sidebar */}
           <div className="lg:col-span-1">
-            <div className="sticky top-24 space-y-8">
+            <div className="sticky top-24 space-y-6">
               {/* Newsletter Signup */}
-              <div className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl p-6 border border-primary/20">
-                <div className="flex items-center gap-2 mb-4">
+              <div className="bg-gradient-to-br from-primary/10 to-secondary/10 rounded-2xl p-6 border-2 border-primary/30 shadow-lg">
+                <div className="flex items-center gap-2 mb-3">
                   <Heart className="w-5 h-5 text-primary" />
-                  <h3 className="font-heading font-semibold">Never Miss a Story</h3>
+                  <h3 className="font-heading font-bold text-lg">Never Miss a Story</h3>
                 </div>
                 <p className="text-sm text-muted-foreground mb-4">
                   Get weekly safari stories, wildlife updates, and travel tips delivered to your inbox.
@@ -284,14 +301,14 @@ const WildTales = () => {
                   placeholder="Enter your email"
                   className="mb-3"
                 />
-                <Button variant="primary" className="w-full">
+                <Button variant="primary" className="w-full shadow-md">
                   Subscribe
                 </Button>
               </div>
 
               {/* Recent Posts */}
-              <div className="bg-card rounded-2xl p-6 border border-border">
-                <h3 className="font-heading font-semibold mb-4 flex items-center gap-2">
+              <div className="bg-card rounded-2xl p-6 border border-border shadow-md">
+                <h3 className="font-heading font-bold text-lg mb-5 flex items-center gap-2">
                   <TrendingUp className="w-5 h-5 text-primary" />
                   Recent Stories
                 </h3>
@@ -300,15 +317,15 @@ const WildTales = () => {
                     <Link
                       key={post.id}
                       to={`/wild-tales/${post.slug}`}
-                      className="flex gap-3 group"
+                      className="flex gap-3 group pb-4 border-b border-border last:border-0 last:pb-0"
                     >
                       <img
                         src={post.image}
                         alt={post.title}
-                        className="w-20 h-20 rounded-lg object-cover flex-shrink-0"
+                        className="w-20 h-20 rounded-xl object-cover flex-shrink-0 shadow-sm"
                       />
                       <div className="flex-1 min-w-0">
-                        <h4 className="font-medium text-sm line-clamp-2 group-hover:text-primary transition-colors mb-1">
+                        <h4 className="font-semibold text-sm line-clamp-2 group-hover:text-primary transition-colors mb-2">
                           {post.title}
                         </h4>
                         <div className="flex items-center gap-2 text-xs text-muted-foreground">
@@ -322,14 +339,14 @@ const WildTales = () => {
               </div>
 
               {/* Popular Tags */}
-              <div className="bg-card rounded-2xl p-6 border border-border">
-                <h3 className="font-heading font-semibold mb-4">Popular Topics</h3>
+              <div className="bg-card rounded-2xl p-6 border border-border shadow-md">
+                <h3 className="font-heading font-bold text-lg mb-4">Popular Topics</h3>
                 <div className="flex flex-wrap gap-2">
                   {popularTags.map(tag => (
                     <button
                       key={tag}
                       onClick={() => setSelectedTag(tag)}
-                      className="px-3 py-1.5 rounded-full text-xs font-medium bg-muted hover:bg-primary hover:text-primary-foreground transition-all"
+                      className="px-4 py-2 rounded-full text-xs font-semibold bg-muted hover:bg-primary hover:text-primary-foreground transition-all shadow-sm"
                     >
                       #{tag}
                     </button>
