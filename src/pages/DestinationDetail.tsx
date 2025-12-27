@@ -4,6 +4,7 @@ import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { NewsletterSection } from '@/components/NewsletterSection';
+import { TestimonialsSection } from '@/components/TestimonialsSection';
 import { mockDestinations, mockTours } from '@/data/mockData';
 import { Button } from '@/components/ui/button';
 import {
@@ -268,28 +269,7 @@ In conclusion, Tanzania offers a diverse range of attractions that are sure to s
       </div>
 
       {/* Testimonials */}
-      <div className="py-24 bg-muted/20">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="text-center mb-12">
-            <p className="text-primary font-heading uppercase tracking-widest mb-2">Authentic traveler feedback</p>
-            <h2 className="font-display text-4xl md:text-5xl font-bold">Our Travelers experiences...</h2>
-          </div>
-          <div className="max-w-4xl mx-auto text-center">
-            <div className="bg-white rounded-3xl p-12 shadow-xl">
-              <div className="flex justify-center gap-1 mb-6">
-                {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-6 h-6 fill-primary text-primary" />
-                ))}
-              </div>
-              <blockquote className="font-display text-2xl md:text-3xl text-foreground leading-relaxed mb-8">
-                "An absolutely magical experience! The guides were incredibly knowledgeable, and we saw all of the Big Five in just three days."
-              </blockquote>
-              <p className="font-heading font-semibold text-lg">Sarah & Michael Thompson</p>
-              <p className="text-muted-foreground">New York, USA</p>
-            </div>
-          </div>
-        </div>
-      </div>
+      <TestimonialsSection />
 
       {/* CTA */}
       <div className="relative py-32 overflow-hidden">
