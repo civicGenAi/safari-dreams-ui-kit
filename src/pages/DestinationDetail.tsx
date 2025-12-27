@@ -321,19 +321,18 @@ Overall, Jordan is a diverse country that offers something for everyone, from an
       <div className="py-24 bg-white">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="font-display text-4xl md:text-5xl font-bold mb-2">Popular destinations</h2>
-            <p className="text-xl text-primary">Must See Destinations</p>
+            <h2 className="font-display text-4xl md:text-5xl font-bold mb-2">Must See Destinations</h2>
           </div>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
             {otherDestinations.map((dest) => (
-              <Link key={dest.slug} to={`/destinations/${dest.slug}`} className="group relative h-96 rounded-3xl overflow-hidden shadow-lg hover:shadow-2xl transition-all">
+              <Link key={dest.slug} to={`/destinations/${dest.slug}`} className="group relative h-64 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all">
                 <img src={dest.image} alt={dest.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/60 to-transparent" />
-                <div className="absolute bottom-6 left-6 right-6">
-                  <h3 className="font-display text-3xl font-bold text-white mb-2">{dest.name}</h3>
-                  <p className="text-white/80 mb-3">{dest.tours} Tours Available</p>
-                  <Button variant="secondary" size="sm" className="group-hover:gap-2 transition-all">
-                    Explore <ArrowRight className="w-4 h-4" />
+                <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/70 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <h3 className="font-display text-lg font-bold text-white mb-1">{dest.name}</h3>
+                  <p className="text-white/80 text-sm mb-2">{dest.tours} Tours</p>
+                  <Button variant="secondary" size="sm" className="text-xs px-3 py-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                    Explore <ArrowRight className="w-3 h-3" />
                   </Button>
                 </div>
               </Link>
