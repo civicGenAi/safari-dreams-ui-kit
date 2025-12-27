@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronRight, MapPin } from 'lucide-react';
-import { AnimatedBackground } from './AnimatedBackground';
+import worldMap from '@/assets/world-map.webp';
 
 interface Destination {
   name: string;
@@ -9,7 +9,7 @@ interface Destination {
   tours: number;
   flag: string;
   description: string;
-  coordinates: { x: number; y: number };
+  coordinates: { x: string; y: string };
 }
 
 const destinations: Destination[] = [
@@ -19,7 +19,7 @@ const destinations: Destination[] = [
     tours: 29,
     flag: '🇹🇿',
     description: 'Home to Serengeti, Kilimanjaro, and Zanzibar beaches.',
-    coordinates: { x: 58, y: 55 },
+    coordinates: { x: '54%', y: '58%' },
   },
   {
     name: 'Kenya',
@@ -27,7 +27,7 @@ const destinations: Destination[] = [
     tours: 4,
     flag: '🇰🇪',
     description: 'Experience the Masai Mara and witness the Great Migration.',
-    coordinates: { x: 60, y: 48 },
+    coordinates: { x: '55%', y: '52%' },
   },
   {
     name: 'Rwanda',
@@ -35,7 +35,7 @@ const destinations: Destination[] = [
     tours: 6,
     flag: '🇷🇼',
     description: 'Trek with mountain gorillas in lush volcanic forests.',
-    coordinates: { x: 54, y: 50 },
+    coordinates: { x: '52%', y: '54%' },
   },
   {
     name: 'Uganda',
@@ -43,7 +43,7 @@ const destinations: Destination[] = [
     tours: 4,
     flag: '🇺🇬',
     description: 'The Pearl of Africa with diverse wildlife and landscapes.',
-    coordinates: { x: 55, y: 47 },
+    coordinates: { x: '53%', y: '50%' },
   },
   {
     name: 'Israel',
@@ -51,7 +51,7 @@ const destinations: Destination[] = [
     tours: 2,
     flag: '🇮🇱',
     description: 'Sacred pilgrimage sites and ancient history.',
-    coordinates: { x: 58, y: 28 },
+    coordinates: { x: '57%', y: '32%' },
   },
   {
     name: 'Egypt',
@@ -59,7 +59,7 @@ const destinations: Destination[] = [
     tours: 2,
     flag: '🇪🇬',
     description: 'Pyramids, Pharaohs, and the majestic Nile River.',
-    coordinates: { x: 54, y: 30 },
+    coordinates: { x: '54%', y: '35%' },
   },
   {
     name: 'Jordan',
@@ -67,7 +67,7 @@ const destinations: Destination[] = [
     tours: 1,
     flag: '🇯🇴',
     description: 'Ancient Petra and the stunning Wadi Rum desert.',
-    coordinates: { x: 59, y: 29 },
+    coordinates: { x: '58%', y: '33%' },
   },
 ];
 
@@ -77,9 +77,7 @@ export const DestinationsSection = () => {
   const activeData = destinations.find(d => d.name === activeDestination);
 
   return (
-    <section id="destinations" className="py-24 lg:py-32 bg-muted/30 relative overflow-hidden">
-      <AnimatedBackground />
-      
+    <section id="destinations" className="py-24 lg:py-32 bg-background relative overflow-hidden">
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
@@ -98,112 +96,76 @@ export const DestinationsSection = () => {
 
         {/* Map and List Layout */}
         <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Left: World Map */}
-          <div className="relative bg-card rounded-3xl p-8 border border-border shadow-lg">
-            <svg
-              viewBox="0 0 100 70"
-              className="w-full h-auto"
-              style={{ minHeight: '400px' }}
-            >
-              {/* Africa and Middle East simplified map */}
-              <defs>
-                <linearGradient id="mapGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-                  <stop offset="0%" stopColor="hsl(var(--muted))" />
-                  <stop offset="100%" stopColor="hsl(var(--border))" />
-                </linearGradient>
-              </defs>
-              
-              {/* Africa Continent Outline */}
-              <path
-                d="M40,20 L55,18 L65,25 L68,35 L65,50 L60,60 L55,65 L45,62 L38,55 L35,45 L36,35 L38,25 Z"
-                fill="url(#mapGradient)"
-                stroke="hsl(var(--border))"
-                strokeWidth="0.5"
-                className="transition-all duration-500"
+          {/* Left: World Map Image */}
+          <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-muted to-background border border-border shadow-lg p-6">
+            <div className="relative aspect-[16/10]">
+              <img
+                src={worldMap}
+                alt="World Map showing tour destinations"
+                className="w-full h-full object-contain opacity-90"
               />
               
-              {/* Middle East Region */}
-              <path
-                d="M55,15 L70,12 L75,18 L72,28 L65,25 L55,18 Z"
-                fill="url(#mapGradient)"
-                stroke="hsl(var(--border))"
-                strokeWidth="0.5"
-                className="transition-all duration-500"
-              />
-
               {/* Destination Markers */}
               {destinations.map((dest) => (
-                <g key={dest.name}>
+                <button
+                  key={dest.name}
+                  className={`absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 group ${
+                    activeDestination === dest.name ? 'z-20' : 'z-10'
+                  }`}
+                  style={{ left: dest.coordinates.x, top: dest.coordinates.y }}
+                  onMouseEnter={() => setActiveDestination(dest.name)}
+                  onClick={() => setActiveDestination(dest.name)}
+                >
                   {/* Pulse ring for active */}
                   {activeDestination === dest.name && (
-                    <circle
-                      cx={dest.coordinates.x}
-                      cy={dest.coordinates.y}
-                      r="4"
-                      fill="none"
-                      stroke="hsl(var(--primary))"
-                      strokeWidth="0.5"
-                      className="animate-pulse-dot"
-                    />
+                    <span className="absolute inset-0 w-8 h-8 -m-2 rounded-full bg-primary/30 animate-ping" />
                   )}
                   
                   {/* Marker dot */}
-                  <circle
-                    cx={dest.coordinates.x}
-                    cy={dest.coordinates.y}
-                    r={activeDestination === dest.name ? "2.5" : "1.5"}
-                    fill={activeDestination === dest.name ? "hsl(var(--primary))" : "hsl(var(--muted-foreground))"}
-                    className="cursor-pointer transition-all duration-300"
-                    onMouseEnter={() => setActiveDestination(dest.name)}
-                  />
-                  
-                  {/* Label for active destination */}
-                  {activeDestination === dest.name && (
-                    <text
-                      x={dest.coordinates.x + 4}
-                      y={dest.coordinates.y + 1}
-                      fill="hsl(var(--foreground))"
-                      fontSize="3"
-                      fontFamily="Montserrat"
-                      fontWeight="600"
-                    >
-                      {dest.name}
-                    </text>
-                  )}
-                </g>
-              ))}
+                  <span className={`relative flex items-center justify-center w-4 h-4 rounded-full border-2 border-background shadow-lg transition-all duration-300 ${
+                    activeDestination === dest.name 
+                      ? 'bg-primary scale-150' 
+                      : 'bg-primary/70 hover:bg-primary hover:scale-125'
+                  }`}>
+                    <span className="w-1.5 h-1.5 rounded-full bg-background" />
+                  </span>
 
-              {/* Connecting lines animation */}
-              <path
-                d="M58,55 Q60,45 60,48 Q62,40 58,28 Q58,28 54,30 Q56,29 59,29"
-                fill="none"
-                stroke="hsl(var(--primary) / 0.3)"
-                strokeWidth="0.3"
-                strokeDasharray="2,2"
-                className="animate-draw-path"
-              />
-            </svg>
+                  {/* Tooltip */}
+                  <span className={`absolute left-1/2 -translate-x-1/2 -top-10 bg-secondary text-secondary-foreground text-xs font-heading font-medium px-3 py-1.5 rounded-lg whitespace-nowrap shadow-lg transition-all duration-300 ${
+                    activeDestination === dest.name 
+                      ? 'opacity-100 visible translate-y-0' 
+                      : 'opacity-0 invisible translate-y-2'
+                  }`}>
+                    {dest.flag} {dest.name}
+                    <span className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-secondary" />
+                  </span>
+                </button>
+              ))}
+            </div>
 
             {/* Map Legend */}
-            <div className="flex items-center gap-4 mt-6 pt-6 border-t border-border">
+            <div className="flex items-center justify-center gap-6 mt-6 pt-6 border-t border-border">
               <div className="flex items-center gap-2">
-                <div className="w-3 h-3 rounded-full bg-primary" />
-                <span className="text-sm text-muted-foreground">Active</span>
+                <span className="w-3 h-3 rounded-full bg-primary animate-pulse" />
+                <span className="text-sm text-muted-foreground">Selected</span>
               </div>
               <div className="flex items-center gap-2">
-                <div className="w-2 h-2 rounded-full bg-muted-foreground" />
+                <span className="w-2.5 h-2.5 rounded-full bg-primary/60" />
                 <span className="text-sm text-muted-foreground">Available</span>
               </div>
+              <span className="text-sm text-muted-foreground">
+                {destinations.length} Countries • {destinations.reduce((acc, d) => acc + d.tours, 0)} Tours
+              </span>
             </div>
           </div>
 
           {/* Right: Destination List */}
-          <div className="space-y-4">
+          <div className="space-y-3">
             {destinations.map((dest) => (
               <Link
                 key={dest.name}
                 to={`/destinations/${dest.slug}`}
-                className={`group flex items-center justify-between p-5 rounded-2xl border transition-all duration-300 ${
+                className={`group flex items-center justify-between p-4 rounded-2xl border transition-all duration-300 ${
                   activeDestination === dest.name
                     ? 'bg-primary text-primary-foreground border-primary shadow-primary'
                     : 'bg-card border-border hover:border-primary/50 hover:shadow-md'
@@ -211,14 +173,14 @@ export const DestinationsSection = () => {
                 onMouseEnter={() => setActiveDestination(dest.name)}
               >
                 <div className="flex items-center gap-4">
-                  <span className="text-3xl">{dest.flag}</span>
+                  <span className="text-2xl">{dest.flag}</span>
                   <div>
-                    <h3 className={`font-display text-xl font-bold ${
+                    <h3 className={`font-display text-lg font-bold ${
                       activeDestination === dest.name ? 'text-primary-foreground' : 'text-foreground'
                     }`}>
                       {dest.name}
                     </h3>
-                    <p className={`text-sm ${
+                    <p className={`text-sm line-clamp-1 ${
                       activeDestination === dest.name ? 'text-primary-foreground/80' : 'text-muted-foreground'
                     }`}>
                       {dest.description}
@@ -226,7 +188,7 @@ export const DestinationsSection = () => {
                   </div>
                 </div>
                 
-                <div className="flex items-center gap-4">
+                <div className="flex items-center gap-3">
                   <span className={`font-heading font-bold text-lg ${
                     activeDestination === dest.name ? 'text-primary-foreground' : 'text-primary'
                   }`}>
@@ -241,7 +203,7 @@ export const DestinationsSection = () => {
 
             {/* Active Destination Preview */}
             {activeData && (
-              <div className="mt-8 p-6 rounded-2xl bg-secondary/5 border border-secondary/20">
+              <div className="mt-6 p-5 rounded-2xl bg-muted/50 border border-border">
                 <div className="flex items-center gap-2 mb-3">
                   <MapPin className="w-5 h-5 text-primary" />
                   <span className="font-heading font-semibold text-foreground">
