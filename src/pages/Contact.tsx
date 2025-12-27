@@ -17,16 +17,28 @@ const Contact = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      <div className="pt-24 pb-16">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="text-center mb-12">
-            <h1 className="font-display text-4xl md:text-5xl font-bold mb-4">
+      {/* Hero Section */}
+      <div className="relative h-[400px] md:h-[500px]">
+        <img
+          src="/src/assets/header_bg_new4.gif"
+          alt="Contact Us"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/90 via-charcoal/70 to-charcoal/50" />
+        <div className="absolute inset-0 flex items-center">
+          <div className="container mx-auto px-4 lg:px-8 text-center">
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
               Get in <span className="text-gradient-gold">Touch</span>
             </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
+            <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
               Have a question about our tours? Want to customize your safari? Our team is here to help you plan your perfect African adventure.
             </p>
           </div>
+        </div>
+      </div>
+
+      <div className="py-16">
+        <div className="container mx-auto px-4 lg:px-8">
 
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Contact Information */}

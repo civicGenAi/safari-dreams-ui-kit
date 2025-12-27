@@ -108,28 +108,28 @@ const TravelIdeas = () => {
     <div className="min-h-screen bg-background">
       <Navbar />
 
-      {/* Hero Section with Zebra Background */}
+      {/* Hero Section with Header Background */}
       <div className="relative pt-24 pb-20 overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="https://images.unsplash.com/photo-1557750255-c76072a7aad1?w=1920"
-            alt="Zebra pattern"
-            className="w-full h-full object-cover opacity-20"
+            src="/src/assets/header_bg_new4.gif"
+            alt="Safari background"
+            className="w-full h-full object-cover"
           />
-          <div className="absolute inset-0 bg-gradient-to-b from-background/95 via-background/90 to-background" />
+          <div className="absolute inset-0 bg-gradient-to-b from-charcoal/90 via-charcoal/85 to-charcoal/80" />
         </div>
 
         <div className="container mx-auto px-4 lg:px-8 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold mb-6">
+            <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-white">
               Curated Travel Ideas in <span className="text-gradient-gold">East Africa</span> and the Holy Land
             </h1>
 
-            <div className="inline-block bg-primary/10 px-6 py-2 rounded-full mb-8">
-              <span className="font-heading font-semibold text-primary text-lg">Travel Ideas</span>
+            <div className="inline-block bg-primary/20 px-6 py-2 rounded-full mb-8 border border-primary/30">
+              <span className="font-heading font-semibold text-white text-lg">Travel Ideas</span>
             </div>
 
-            <div className="space-y-4 text-lg text-muted-foreground leading-relaxed max-w-3xl mx-auto">
+            <div className="space-y-4 text-lg text-white/90 leading-relaxed max-w-3xl mx-auto">
               <p>
                 DeMi Tours and Travel is a Tanzania-based travel agency that specializes in providing exceptional curated travel experiences. We offer a diverse range of tour packages, including migration safaris, romantic holidays, safari and beach holidays, adventure seekers, luxury tours, gorilla and chimp trekking, cross border safaris, and day tours.
               </p>
@@ -145,7 +145,7 @@ const TravelIdeas = () => {
               <p>
                 Our mission is to provide travelers with sustainable, environmentally conscious adventures that allow them to explore the breathtaking natural beauty and rich wildlife of the region. As passionate advocates of responsible tourism, we believe that by traveling in an eco-friendly manner, we can help preserve these magnificent lands for future generations.
               </p>
-              <p className="font-medium text-foreground">
+              <p className="font-medium text-white">
                 Overall, DeMi Tours and Travel is the go-to travel agency for those seeking unforgettable travel experiences in East Africa and the Holy Land.
               </p>
             </div>
