@@ -357,6 +357,7 @@ const WildTales = () => {
           </div>
         </div>
       </div>
+      </div>
 
       <Footer />
       <WhatsAppButton />
