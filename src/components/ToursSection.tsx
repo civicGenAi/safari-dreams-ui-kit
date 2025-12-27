@@ -1,102 +1,10 @@
+import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Clock, Users, Star, Heart, ArrowRight } from 'lucide-react';
-
-interface Tour {
-  id: string;
-  title: string;
-  location: string;
-  duration: string;
-  groupSize: string;
-  price: number;
-  originalPrice?: number;
-  rating: number;
-  reviews: number;
-  image: string;
-  popular?: boolean;
-  category: string;
-}
-
-const tours: Tour[] = [
-  {
-    id: '1',
-    title: '7 Days Serengeti & Ngorongoro Safari',
-    location: 'Tanzania',
-    duration: '7 Days',
-    groupSize: '2-8',
-    price: 3499,
-    originalPrice: 3999,
-    rating: 4.9,
-    reviews: 128,
-    image: 'https://images.unsplash.com/photo-1534177616064-ef1a5c91e6e8?w=600',
-    popular: true,
-    category: 'Safari',
-  },
-  {
-    id: '2',
-    title: 'Kilimanjaro Summit Expedition',
-    location: 'Tanzania',
-    duration: '8 Days',
-    groupSize: '4-12',
-    price: 2899,
-    rating: 4.8,
-    reviews: 95,
-    image: 'https://images.unsplash.com/photo-1621414050946-1b936a78be32?w=600',
-    category: 'Trekking',
-  },
-  {
-    id: '3',
-    title: 'Gorilla Trekking Experience',
-    location: 'Rwanda',
-    duration: '4 Days',
-    groupSize: '2-6',
-    price: 4299,
-    rating: 5.0,
-    reviews: 67,
-    image: 'https://images.unsplash.com/photo-1583867095486-3e0e2e66cf44?w=600',
-    popular: true,
-    category: 'Wildlife',
-  },
-  {
-    id: '4',
-    title: 'Zanzibar Beach & Culture',
-    location: 'Tanzania',
-    duration: '5 Days',
-    groupSize: '2-10',
-    price: 1599,
-    rating: 4.7,
-    reviews: 203,
-    image: 'https://images.unsplash.com/photo-1586861635167-e5223aadc9fe?w=600',
-    category: 'Beach',
-  },
-  {
-    id: '5',
-    title: 'Masai Mara Great Migration',
-    location: 'Kenya',
-    duration: '6 Days',
-    groupSize: '2-8',
-    price: 3199,
-    originalPrice: 3599,
-    rating: 4.9,
-    reviews: 156,
-    image: 'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=600',
-    popular: true,
-    category: 'Safari',
-  },
-  {
-    id: '6',
-    title: 'Holy Land Pilgrimage Tour',
-    location: 'Israel',
-    duration: '10 Days',
-    groupSize: '10-25',
-    price: 2799,
-    rating: 4.8,
-    reviews: 42,
-    image: 'https://images.unsplash.com/photo-1544967082-d9d25d867d66?w=600',
-    category: 'Pilgrimage',
-  },
-];
+import { mockTours } from '@/data/mockData';
 
 export const ToursSection = () => {
+  const tours = mockTours.slice(0, 6);
   return (
     <section id="tours" className="py-24 lg:py-32 bg-background">
       <div className="container mx-auto px-4 lg:px-8">
@@ -143,7 +51,7 @@ export const ToursSection = () => {
               className="group bg-card rounded-3xl overflow-hidden shadow-md card-hover border border-border"
             >
               {/* Image */}
-              <div className="relative h-64 img-zoom">
+              <Link to={`/tours/${tour.slug}`} className="block relative h-64 img-zoom">
                 <img
                   src={tour.image}
                   alt={tour.title}
@@ -178,7 +86,7 @@ export const ToursSection = () => {
                 <div className="absolute bottom-4 left-4 glass-dark text-primary-foreground px-3 py-1.5 rounded-full text-xs font-heading uppercase tracking-wider">
                   {tour.category}
                 </div>
-              </div>
+              </Link>
               
               {/* Content */}
               <div className="p-6">
@@ -188,9 +96,11 @@ export const ToursSection = () => {
                 </span>
                 
                 {/* Title */}
-                <h3 className="font-display text-xl font-bold text-foreground mt-2 mb-4 group-hover:text-primary transition-colors">
-                  {tour.title}
-                </h3>
+                <Link to={`/tours/${tour.slug}`}>
+                  <h3 className="font-display text-xl font-bold text-foreground mt-2 mb-4 group-hover:text-primary transition-colors">
+                    {tour.title}
+                  </h3>
+                </Link>
                 
                 {/* Meta Info */}
                 <div className="flex items-center gap-4 text-muted-foreground text-sm mb-4">
@@ -213,10 +123,12 @@ export const ToursSection = () => {
                     </div>
                     <span className="text-muted-foreground text-sm">({tour.reviews} reviews)</span>
                   </div>
-                  <Button variant="ghost" size="sm" className="text-primary gap-1 group-hover:gap-2 transition-all">
-                    Details
-                    <ArrowRight className="w-4 h-4" />
-                  </Button>
+                  <Link to={`/tours/${tour.slug}`}>
+                    <Button variant="ghost" size="sm" className="text-primary gap-1 group-hover:gap-2 transition-all">
+                      Details
+                      <ArrowRight className="w-4 h-4" />
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </article>
@@ -225,10 +137,12 @@ export const ToursSection = () => {
 
         {/* View All Button */}
         <div className="text-center mt-12">
-          <Button variant="gold" size="xl" className="gap-2">
-            View All Tours
-            <ArrowRight className="w-5 h-5" />
-          </Button>
+          <Link to="/tours">
+            <Button variant="gold" size="xl" className="gap-2">
+              View All Tours
+              <ArrowRight className="w-5 h-5" />
+            </Button>
+          </Link>
         </div>
       </div>
     </section>
