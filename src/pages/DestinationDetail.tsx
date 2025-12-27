@@ -346,16 +346,12 @@ Overall, Jordan is a diverse country that offers something for everyone, from an
       <TestimonialsSection />
 
       {/* CTA */}
-      <div className="relative py-32 overflow-hidden">
-        <div className="absolute inset-0">
-          <img src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=1920" alt="Welcome" className="w-full h-full object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-r from-charcoal/90 via-charcoal/80 to-charcoal/90" />
-        </div>
-        <div className="container mx-auto px-4 lg:px-8 relative z-10 text-center">
-          <h2 className="font-display text-5xl md:text-6xl font-bold text-white mb-6">
+      <div className="py-32 bg-white">
+        <div className="container mx-auto px-4 lg:px-8 text-center">
+          <h2 className="font-display text-5xl md:text-6xl font-bold text-foreground mb-6">
             Welcome to Your Destination
           </h2>
-          <p className="text-xl text-white/90 max-w-2xl mx-auto mb-10">
+          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
             Ready to embark on your {destination.name} adventure? Let us help you plan the perfect journey.
           </p>
           <Link to="/contact">
