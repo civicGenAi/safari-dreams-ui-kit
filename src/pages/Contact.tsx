@@ -1,6 +1,7 @@
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
+import { NewsletterSection } from '@/components/NewsletterSection';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
@@ -38,77 +39,63 @@ const Contact = () => {
 
       <div className="py-16">
         <div className="container mx-auto px-4 lg:px-8">
+          {/* Introduction */}
+          <div className="text-center max-w-3xl mx-auto mb-12">
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
+              We will be delighted to hear from you
+            </h2>
+            <p className="text-lg text-muted-foreground">
+              Use the form below or contact us via phone, email, social media, or in-person.
+            </p>
+          </div>
 
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Contact Information */}
             <div className="lg:col-span-1 space-y-6">
               <div className="bg-card rounded-2xl border border-border p-6">
-                <h3 className="font-heading font-semibold text-lg mb-6">Contact Information</h3>
-
-                <div className="space-y-4">
-                  <div className="flex items-start gap-3">
-                    <Mail className="w-5 h-5 text-primary mt-1" />
-                    <div>
-                      <div className="font-medium text-sm mb-1">Email Us</div>
-                      <a href="mailto:info@demitours.com" className="text-sm text-muted-foreground hover:text-primary">
-                        info@demitours.com
-                      </a>
-                    </div>
+                <h3 className="font-heading font-semibold text-lg mb-3">Email us</h3>
+                <p className="text-sm text-muted-foreground mb-4">
+                  We will endeavour to reply your message within two business days.
+                </p>
+                <div className="flex items-start gap-3 mb-6">
+                  <Mail className="w-5 h-5 text-primary mt-1" />
+                  <div>
+                    <a href="mailto:info@demitours.com" className="text-sm text-primary hover:underline font-medium">
+                      Click here to email us
+                    </a>
+                    <p className="text-sm text-muted-foreground mt-1">
+                      info@demitours.com
+                    </p>
                   </div>
+                </div>
 
-                  <div className="flex items-start gap-3">
-                    <Phone className="w-5 h-5 text-primary mt-1" />
-                    <div>
-                      <div className="font-medium text-sm mb-1">Call Us</div>
-                      <a href="tel:+255123456789" className="text-sm text-muted-foreground hover:text-primary">
-                        +255 123 456 789
-                      </a>
-                    </div>
-                  </div>
-
+                <div className="border-t border-border pt-6 mb-6">
+                  <h4 className="font-heading font-semibold text-base mb-3">Trip Queries</h4>
                   <div className="flex items-start gap-3">
                     <MessageCircle className="w-5 h-5 text-primary mt-1" />
                     <div>
-                      <div className="font-medium text-sm mb-1">WhatsApp</div>
-                      <a href="https://wa.me/255123456789" className="text-sm text-muted-foreground hover:text-primary">
-                        +255 123 456 789
-                      </a>
+                      <div className="font-medium text-sm mb-2">Helpline/WhatsApp</div>
+                      <div className="space-y-1 text-sm text-muted-foreground">
+                        <a href="tel:+255688535848" className="block hover:text-primary">+(255) 688 535848</a>
+                        <a href="tel:+255762238763" className="block hover:text-primary">+(255) 762 238763</a>
+                        <a href="tel:+8613501010811" className="block hover:text-primary">+(86) 135 0101 0811 <span className="text-xs">(China)</span></a>
+                        <a href="tel:+61405968329" className="block hover:text-primary">+61405968329 <span className="text-xs">(Australia)</span></a>
+                      </div>
                     </div>
                   </div>
+                </div>
 
-                  <div className="flex items-start gap-3">
-                    <MapPin className="w-5 h-5 text-primary mt-1" />
-                    <div>
-                      <div className="font-medium text-sm mb-1">Office Address</div>
-                      <p className="text-sm text-muted-foreground">
-                        123 Safari Road<br />
-                        Arusha, Tanzania
-                      </p>
-                    </div>
-                  </div>
-
+                <div className="border-t border-border pt-6">
                   <div className="flex items-start gap-3">
                     <Clock className="w-5 h-5 text-primary mt-1" />
                     <div>
-                      <div className="font-medium text-sm mb-1">Business Hours</div>
+                      <div className="font-medium text-sm mb-1">Office Hours</div>
                       <p className="text-sm text-muted-foreground">
-                        Mon - Fri: 8:00 AM - 6:00 PM EAT<br />
-                        Sat: 9:00 AM - 2:00 PM EAT<br />
-                        Sun: Closed
+                        Monday-Friday: 8am-5pm
                       </p>
                     </div>
                   </div>
                 </div>
-              </div>
-
-              <div className="bg-primary/5 rounded-2xl border border-primary/20 p-6">
-                <h4 className="font-heading font-semibold mb-2">24/7 Emergency Support</h4>
-                <p className="text-sm text-muted-foreground mb-3">
-                  For travelers currently on tour with urgent needs
-                </p>
-                <a href="tel:+255987654321" className="text-primary font-semibold">
-                  +255 987 654 321
-                </a>
               </div>
             </div>
 
@@ -160,6 +147,7 @@ const Contact = () => {
         </div>
       </div>
 
+      <NewsletterSection />
       <Footer />
       <WhatsAppButton />
     </div>
