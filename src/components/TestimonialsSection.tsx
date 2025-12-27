@@ -72,24 +72,24 @@ export const TestimonialsSection = () => {
   }, []);
 
   return (
-    <section className="py-24 lg:py-32 bg-gradient-to-br from-primary via-primary to-primary/90 relative overflow-hidden">
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-secondary rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-accent rounded-full blur-3xl" />
+    <section className="py-24 lg:py-32 bg-white relative overflow-hidden">
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-0 left-0 w-96 h-96 bg-primary rounded-full blur-3xl" />
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary rounded-full blur-3xl" />
       </div>
 
       <div className="container mx-auto px-4 lg:px-8 relative">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="w-12 h-px bg-secondary" />
-            <span className="font-heading text-sm uppercase tracking-widest text-secondary">
+            <div className="w-12 h-px bg-primary" />
+            <span className="font-heading text-sm uppercase tracking-widest text-primary">
               Testimonials
             </span>
-            <div className="w-12 h-px bg-secondary" />
+            <div className="w-12 h-px bg-primary" />
           </div>
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-6">
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
             What Our Travelers
-            <span className="text-secondary block">Say About Us</span>
+            <span className="text-primary block">Say About Us</span>
           </h2>
         </div>
 
@@ -131,14 +131,14 @@ export const TestimonialsSection = () => {
                       : 'opacity-0 translate-x-full'
                   }`}
                 >
-                  <div className="bg-white/10 backdrop-blur-lg rounded-3xl p-8 md:p-12 border border-white/20 shadow-2xl">
+                  <div className="bg-muted/30 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-border shadow-xl">
                     <div className="flex items-center gap-1 mb-6">
                       {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="w-6 h-6 fill-secondary text-secondary" />
+                        <Star key={i} className="w-6 h-6 fill-primary text-primary" />
                       ))}
                     </div>
 
-                    <blockquote className="font-display text-xl md:text-2xl lg:text-3xl text-primary-foreground leading-relaxed mb-8">
+                    <blockquote className="font-display text-xl md:text-2xl lg:text-3xl text-foreground leading-relaxed mb-8">
                       "{testimonial.text}"
                     </blockquote>
 
@@ -146,21 +146,21 @@ export const TestimonialsSection = () => {
                       <img
                         src={testimonial.avatar}
                         alt={testimonial.name}
-                        className="w-16 h-16 rounded-full object-cover border-3 border-secondary shadow-lg"
+                        className="w-16 h-16 rounded-full object-cover border-3 border-primary shadow-lg"
                       />
                       <div>
-                        <span className="block font-heading font-semibold text-primary-foreground text-lg">
+                        <span className="block font-heading font-semibold text-foreground text-lg">
                           {testimonial.name}
                         </span>
-                        <span className="text-primary-foreground/70">
+                        <span className="text-muted-foreground">
                           {testimonial.location}
                         </span>
                       </div>
                       <div className="ml-auto text-right hidden sm:block">
-                        <span className="block font-heading text-sm text-secondary font-semibold">
+                        <span className="block font-heading text-sm text-primary font-semibold">
                           {testimonial.tour}
                         </span>
-                        <span className="text-primary-foreground/60 text-sm">
+                        <span className="text-muted-foreground text-sm">
                           {testimonial.date}
                         </span>
                       </div>
@@ -177,8 +177,8 @@ export const TestimonialsSection = () => {
                   onClick={() => setCurrentIndex(index)}
                   className={`h-2 rounded-full transition-all duration-500 ${
                     index === currentIndex
-                      ? 'w-12 bg-secondary'
-                      : 'w-2 bg-primary-foreground/30 hover:bg-primary-foreground/50'
+                      ? 'w-12 bg-primary'
+                      : 'w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50'
                   }`}
                   aria-label={`Go to testimonial ${index + 1}`}
                 />
@@ -187,32 +187,32 @@ export const TestimonialsSection = () => {
           </div>
         </div>
 
-        <div className="flex flex-wrap items-center justify-center gap-8 mt-16 pt-16 border-t border-primary-foreground/10">
-          <div className="flex items-center gap-3 text-primary-foreground/80">
-            <div className="w-14 h-14 bg-primary-foreground/10 rounded-2xl flex items-center justify-center backdrop-blur-sm">
-              <Star className="w-7 h-7 fill-secondary text-secondary" />
+        <div className="flex flex-wrap items-center justify-center gap-8 mt-16 pt-16 border-t border-border">
+          <div className="flex items-center gap-3 text-foreground">
+            <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center">
+              <Star className="w-7 h-7 fill-primary text-primary" />
             </div>
             <div>
-              <span className="block font-display text-2xl font-bold text-primary-foreground">4.9/5</span>
-              <span className="text-sm text-primary-foreground/60">TripAdvisor</span>
+              <span className="block font-display text-2xl font-bold text-foreground">4.9/5</span>
+              <span className="text-sm text-muted-foreground">TripAdvisor</span>
             </div>
           </div>
-          <div className="flex items-center gap-3 text-primary-foreground/80">
-            <div className="w-14 h-14 bg-primary-foreground/10 rounded-2xl flex items-center justify-center backdrop-blur-sm">
-              <Star className="w-7 h-7 fill-secondary text-secondary" />
+          <div className="flex items-center gap-3 text-foreground">
+            <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center">
+              <Star className="w-7 h-7 fill-primary text-primary" />
             </div>
             <div>
-              <span className="block font-display text-2xl font-bold text-primary-foreground">5.0/5</span>
-              <span className="text-sm text-primary-foreground/60">Google Reviews</span>
+              <span className="block font-display text-2xl font-bold text-foreground">5.0/5</span>
+              <span className="text-sm text-muted-foreground">Google Reviews</span>
             </div>
           </div>
-          <div className="flex items-center gap-3 text-primary-foreground/80">
-            <div className="w-14 h-14 bg-primary-foreground/10 rounded-2xl flex items-center justify-center backdrop-blur-sm">
-              <span className="font-display text-xl font-bold text-secondary">2.8K+</span>
+          <div className="flex items-center gap-3 text-foreground">
+            <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center">
+              <span className="font-display text-xl font-bold text-primary">2.8K+</span>
             </div>
             <div>
-              <span className="block font-display text-2xl font-bold text-primary-foreground">Reviews</span>
-              <span className="text-sm text-primary-foreground/60">Verified Travelers</span>
+              <span className="block font-display text-2xl font-bold text-foreground">Reviews</span>
+              <span className="text-sm text-muted-foreground">Verified Travelers</span>
             </div>
           </div>
         </div>
