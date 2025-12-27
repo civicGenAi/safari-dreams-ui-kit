@@ -83,17 +83,15 @@ export const Navbar = () => {
                 <div className={`absolute top-full left-1/2 -translate-x-1/2 pt-4 transition-all duration-300 ${
                   isDestinationsOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
                 }`}>
-                  <div className="bg-background rounded-2xl shadow-lift p-6 min-w-[280px] border border-border">
-                    <div className="mb-4 pb-4 border-b border-border">
-                      <span className="font-display text-lg font-semibold">Explore Destinations</span>
+                  <div className="bg-background rounded-2xl shadow-lift p-4 min-w-[240px] border border-border">
+                    <div className="mb-3 pb-3 border-b border-border">
+                      <span className="font-display text-base font-semibold">Destinations</span>
                     </div>
-                    <div className="space-y-2">
+                    <div className="space-y-1">
                       {destinations.map((dest) => (
-                        <Link key={dest.name} to={`/destinations/${dest.slug}`} className="flex items-center justify-between p-3 rounded-xl hover:bg-muted transition-colors group">
-                          <div>
-                            <span className="font-heading font-medium text-foreground group-hover:text-primary transition-colors">{dest.name}</span>
-                            <span className="block text-xs text-muted-foreground">{dest.tours} Tours</span>
-                          </div>
+                        <Link key={dest.name} to={`/destinations/${dest.slug}`} className="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-muted transition-colors group">
+                          <span className="font-heading text-sm font-medium text-foreground group-hover:text-primary transition-colors">{dest.name}</span>
+                          <span className="text-xs text-muted-foreground ml-2">{dest.tours}</span>
                         </Link>
                       ))}
                     </div>
@@ -113,23 +111,21 @@ export const Navbar = () => {
                 <div className={`absolute top-full left-1/2 -translate-x-1/2 pt-4 transition-all duration-300 ${
                   isTravelIdeasOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
                 }`}>
-                  <div className="bg-background rounded-2xl shadow-lift p-6 min-w-[300px] border border-border">
-                    <div className="mb-4 pb-4 border-b border-border">
-                      <span className="font-display text-lg font-semibold">Explore Travel Ideas</span>
+                  <div className="bg-background rounded-2xl shadow-lift p-4 min-w-[260px] border border-border">
+                    <div className="mb-3 pb-3 border-b border-border">
+                      <span className="font-display text-base font-semibold">Travel Ideas</span>
                     </div>
-                    <div className="space-y-2 max-h-[400px] overflow-y-auto">
+                    <div className="space-y-1 max-h-[350px] overflow-y-auto">
                       {travelIdeas.map((idea) => (
-                        <Link key={idea.name} to={`/travel-ideas/${idea.slug}`} className="flex items-center justify-between p-3 rounded-xl hover:bg-muted transition-colors group">
-                          <div className="flex-1">
-                            <span className="font-heading font-medium text-foreground group-hover:text-primary transition-colors text-sm block">{idea.name}</span>
-                            <span className="block text-xs text-muted-foreground">{idea.tours}+ Tours</span>
-                          </div>
+                        <Link key={idea.name} to={`/travel-ideas/${idea.slug}`} className="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-muted transition-colors group">
+                          <span className="font-heading text-sm font-medium text-foreground group-hover:text-primary transition-colors flex-1">{idea.name}</span>
+                          <span className="text-xs text-muted-foreground ml-2">{idea.tours}+</span>
                         </Link>
                       ))}
                     </div>
-                    <div className="mt-4 pt-4 border-t border-border">
-                      <Link to="/travel-ideas" className="text-sm text-primary hover:underline font-medium">
-                        View All Travel Ideas →
+                    <div className="mt-3 pt-3 border-t border-border">
+                      <Link to="/travel-ideas" className="text-xs text-primary hover:underline font-medium">
+                        View All →
                       </Link>
                     </div>
                   </div>
