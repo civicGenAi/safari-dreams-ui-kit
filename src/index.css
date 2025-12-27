@@ -21,12 +21,12 @@
     --primary: 32 89% 49%;
     --primary-foreground: 0 0% 100%;
 
-    /* Secondary Black - #050505 */
-    --secondary: 0 0% 2%;
-    --secondary-foreground: 0 0% 100%;
+    /* Secondary - Warm Dark Gray (softer than pure black) */
+    --secondary: 30 10% 15%;
+    --secondary-foreground: 40 25% 97%;
 
     /* Muted */
-    --muted: 35 30% 90%;
+    --muted: 35 30% 92%;
     --muted-foreground: 0 0% 25%;
 
     /* Accent - Warm Orange Variant */

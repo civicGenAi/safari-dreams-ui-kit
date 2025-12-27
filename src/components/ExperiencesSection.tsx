@@ -58,7 +58,7 @@ const experiences = [
 
 export const ExperiencesSection = () => {
   return (
-    <section className="py-24 lg:py-32 bg-secondary text-secondary-foreground relative overflow-hidden">
+    <section className="py-24 lg:py-32 bg-gradient-to-br from-secondary/95 to-secondary text-secondary-foreground relative overflow-hidden">
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-5">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
