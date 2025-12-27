@@ -132,11 +132,11 @@ export const DestinationsSection = () => {
 
                   {/* Tooltip */}
                   <span className={`absolute left-1/2 -translate-x-1/2 -top-10 bg-secondary text-secondary-foreground text-xs font-heading font-medium px-3 py-1.5 rounded-lg whitespace-nowrap shadow-lg transition-all duration-300 ${
-                    activeDestination === dest.name 
-                      ? 'opacity-100 visible translate-y-0' 
+                    activeDestination === dest.name
+                      ? 'opacity-100 visible translate-y-0'
                       : 'opacity-0 invisible translate-y-2'
                   }`}>
-                    {dest.flag} {dest.name}
+                    {dest.name}
                     <span className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-secondary" />
                   </span>
                 </button>
@@ -173,7 +173,6 @@ export const DestinationsSection = () => {
                 onMouseEnter={() => setActiveDestination(dest.name)}
               >
                 <div className="flex items-center gap-4">
-                  <span className="text-2xl">{dest.flag}</span>
                   <div>
                     <h3 className={`font-display text-lg font-bold ${
                       activeDestination === dest.name ? 'text-primary-foreground' : 'text-foreground'
