@@ -13,7 +13,7 @@ export const WhatsAppButton = () => {
       href={whatsappUrl}
       target="_blank"
       rel="noopener noreferrer"
-      className="fixed right-6 bottom-6 z-50 group"
+      className="fixed left-6 bottom-6 z-50 group"
       aria-label="Chat on WhatsApp"
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
@@ -45,12 +45,12 @@ export const WhatsAppButton = () => {
         </div>
 
         {/* Expandable Text on Hover */}
-        <div className={`absolute right-full mr-3 top-1/2 -translate-y-1/2 transition-all duration-300 ${
-          isHovered ? 'opacity-100 translate-x-0 visible' : 'opacity-0 translate-x-2 invisible'
+        <div className={`absolute left-full ml-3 top-1/2 -translate-y-1/2 transition-all duration-300 ${
+          isHovered ? 'opacity-100 translate-x-0 visible' : 'opacity-0 -translate-x-2 invisible'
         }`}>
           <div className="bg-white rounded-2xl shadow-2xl px-5 py-3 border-2 border-[#25D366]/20 relative">
             {/* Tooltip Arrow */}
-            <div className="absolute right-0 top-1/2 translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-white border-r-2 border-b-2 border-[#25D366]/20 rotate-[-45deg]" />
+            <div className="absolute left-0 top-1/2 -translate-x-1/2 -translate-y-1/2 w-3 h-3 bg-white border-l-2 border-t-2 border-[#25D366]/20 rotate-[-45deg]" />
 
             <div className="flex items-center gap-3 whitespace-nowrap">
               <div className="flex flex-col">
@@ -65,9 +65,9 @@ export const WhatsAppButton = () => {
         </div>
 
         {/* Mobile Label (always visible on mobile) */}
-        <div className="md:hidden absolute -top-12 right-0 bg-[#25D366] text-white px-3 py-1.5 rounded-lg text-xs font-semibold shadow-lg whitespace-nowrap">
+        <div className="md:hidden absolute -top-12 left-0 bg-[#25D366] text-white px-3 py-1.5 rounded-lg text-xs font-semibold shadow-lg whitespace-nowrap">
           Need help? Chat now!
-          <div className="absolute top-full right-4 -translate-y-1/2 w-2 h-2 bg-[#25D366] rotate-45" />
+          <div className="absolute top-full left-4 -translate-y-1/2 w-2 h-2 bg-[#25D366] rotate-45" />
         </div>
       </div>
 
