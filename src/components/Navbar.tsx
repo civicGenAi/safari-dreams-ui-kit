@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, ChevronDown, MapPin, FileText } from 'lucide-react';
+import { Menu, X, ChevronDown, MapPin, FileText, Compass } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 
 interface Destination {
@@ -20,10 +20,31 @@ const destinations: Destination[] = [
   { name: 'Jordan', slug: 'jordan', tours: 1, flag: '🇯🇴' },
 ];
 
+interface TravelIdea {
+  name: string;
+  slug: string;
+  tours: number;
+  icon: string;
+}
+
+const travelIdeas: TravelIdea[] = [
+  { name: 'Migration Safari', slug: 'migration-safari', tours: 6, icon: '🦓' },
+  { name: 'Romantic Holidays', slug: 'romantic-holidays', tours: 8, icon: '💑' },
+  { name: 'Safari Beach Holidays', slug: 'safari-beach-holidays', tours: 6, icon: '🏖️' },
+  { name: 'Adventure Seekers', slug: 'adventure-seekers', tours: 6, icon: '🏔️' },
+  { name: 'Luxury Tours', slug: 'luxury-tours', tours: 2, icon: '✨' },
+  { name: 'Gorilla & Chimp Trekking', slug: 'gorilla-chimp-trekking', tours: 10, icon: '🦍' },
+  { name: 'Cross Border Trekking', slug: 'cross-border-trekking', tours: 3, icon: '🥾' },
+  { name: 'Cross Border Safari', slug: 'cross-border-safari', tours: 4, icon: '🌍' },
+  { name: 'Pilgrimages', slug: 'pilgrimages', tours: 2, icon: '⛪' },
+  { name: 'Day Tours', slug: 'day-tours', tours: 5, icon: '🚙' },
+];
+
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDestinationsOpen, setIsDestinationsOpen] = useState(false);
+  const [isTravelIdeasOpen, setIsTravelIdeasOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -82,9 +103,42 @@ export const Navbar = () => {
                 </div>
               </div>
 
-              <Link to="/travel-ideas" className={`font-heading text-sm uppercase tracking-widest transition-colors link-underline ${
-                isScrolled ? 'text-charcoal hover:text-primary font-semibold' : 'text-primary-foreground/90 hover:text-primary-foreground'
-              }`}>Travel Ideas</Link>
+              {/* Travel Ideas Dropdown */}
+              <div className="relative" onMouseEnter={() => setIsTravelIdeasOpen(true)} onMouseLeave={() => setIsTravelIdeasOpen(false)}>
+                <button className={`flex items-center gap-1 font-heading text-sm uppercase tracking-widest transition-colors ${
+                  isScrolled ? 'text-charcoal hover:text-primary font-semibold' : 'text-primary-foreground/90 hover:text-primary-foreground'
+                }`}>
+                  Travel Ideas
+                  <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isTravelIdeasOpen ? 'rotate-180' : ''}`} />
+                </button>
+
+                <div className={`absolute top-full left-1/2 -translate-x-1/2 pt-4 transition-all duration-300 ${
+                  isTravelIdeasOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
+                }`}>
+                  <div className="bg-background rounded-2xl shadow-lift p-6 min-w-[450px] border border-border">
+                    <div className="flex items-center gap-2 mb-4 pb-4 border-b border-border">
+                      <Compass className="w-5 h-5 text-primary" />
+                      <span className="font-display text-lg font-semibold">Explore Travel Ideas</span>
+                    </div>
+                    <div className="grid grid-cols-2 gap-3 max-h-[400px] overflow-y-auto">
+                      {travelIdeas.map((idea) => (
+                        <Link key={idea.name} to={`/travel-ideas/${idea.slug}`} className="flex items-center gap-3 p-3 rounded-xl hover:bg-muted transition-colors group">
+                          <span className="text-2xl">{idea.icon}</span>
+                          <div className="flex-1">
+                            <span className="font-heading font-medium text-foreground group-hover:text-primary transition-colors text-sm block">{idea.name}</span>
+                            <span className="block text-xs text-muted-foreground">{idea.tours}+ Tours</span>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
+                    <div className="mt-4 pt-4 border-t border-border">
+                      <Link to="/travel-ideas" className="text-sm text-primary hover:underline font-medium">
+                        View All Travel Ideas →
+                      </Link>
+                    </div>
+                  </div>
+                </div>
+              </div>
               <Link to="/our-story" className={`font-heading text-sm uppercase tracking-widest transition-colors link-underline ${
                 isScrolled ? 'text-charcoal hover:text-primary font-semibold' : 'text-primary-foreground/90 hover:text-primary-foreground'
               }`}>Our Story</Link>
