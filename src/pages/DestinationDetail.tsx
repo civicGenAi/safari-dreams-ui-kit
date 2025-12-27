@@ -72,6 +72,80 @@ Other notable destinations in Tanzania include the Ngorongoro Conservation Area,
 
 In conclusion, Tanzania offers a diverse range of attractions that are sure to satisfy any traveler's desires, from wildlife safaris to cultural experiences to relaxing beach getaways. With its stunning natural beauty, rich cultural heritage, and friendly locals, Tanzania is truly a must-visit destination for anyone seeking an unforgettable African adventure.`
     },
+    kenya: {
+      title: 'Incredible Kenya - Open and ready to welcome you',
+      heroImage: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=1920',
+      content: `Kenya boasts a range of natural and cultural attractions that offer travelers a host of exciting experiences. The Masai Mara National Reserve is an iconic destination, famous for its incredible wildlife and thrilling safari experiences. Visitors can experience the great wildebeest migration, spot the Big Five game animals, and explore the reserve's diverse landscapes.
+
+Amboseli National Park is another must-see attraction. It provides stunning views of Mount Kilimanjaro and is home to large herds of elephants. Visitors can go on game drives, nature walks, and cultural tours while learning about the traditions and customs of the Maasai people.
+
+History and culture enthusiasts will find the ancient Swahili city of Lamu a fascinating destination. This UNESCO World Heritage Site features narrow streets, traditional houses, and stunning architecture that offer a glimpse into Kenya's rich cultural heritage.
+
+Kenya's beaches are renowned worldwide. Mombasa being a popular destination for travellers seeking sun, sand, and sea. Visitors can enjoy a variety of beach activities, including snorkelling and scuba diving. Diani Beach, located south of Mombasa, is also a popular destination. Its long stretches of white sandy beaches and crystal-clear waters is a must see.
+
+Other popular attractions in Kenya include Lake Nakuru National Park. Famous for its flamingos and rhinoceroses. The Giraffe Centre in Nairobi is another gem. Here, visitors get up close with these majestic creatures.
+
+Whether you're interested in wildlife, culture, history, or beach activities, Kenya offers a wealth of unforgettable experiences for travelers.`
+    },
+    rwanda: {
+      title: 'Rwanda: From Gorilla Trekking to Historical Sites',
+      heroImage: 'https://images.unsplash.com/photo-1609198092357-f7c14a0902c8?w=1920',
+      content: `Rwanda is a country located in East Africa and has plenty of tourist attractions that are worth visiting. One of the most popular tourist destinations is Volcanoes National Park, which is home to the endangered mountain gorillas. Visitors can enjoy gorilla trekking in the park, which provides an unforgettable experience.
+
+Another must-visit attraction is the Nyungwe Forest National Park, which is a vast rainforest that offers various activities such as chimpanzee tracking, canopy walks, and birdwatching. Akagera National Park is another notable attraction, which is the only park in Rwanda where visitors can spot the big five animals.
+
+For those interested in history, the Kigali Genocide Memorial is a somber but important site to visit, which serves as a reminder of the tragic events that took place in Rwanda in 1994. Additionally, the Nyanza King's Palace Museum provides visitors with a glimpse into the traditional way of life of the Rwandan monarchy.
+
+Other attractions include Lake Kivu, which is perfect for relaxing and enjoying water sports, and the Inema Art Center, which showcases contemporary African art. Rwanda's tourism industry is growing rapidly, and visitors are sure to have an enjoyable and memorable experience exploring the country's many attractions.`
+    },
+    uganda: {
+      title: 'The Pearl of Africa',
+      heroImage: 'https://images.unsplash.com/photo-1612504508838-e9c04e1eabfe?w=1920',
+      content: `Uganda, known as the Pearl of Africa, boasts an abundance of natural beauty and cultural heritage. One of the top attractions is the Bwindi Impenetrable National Park, a UNESCO World Heritage Site that hosts nearly half of the world's mountain gorillas. Visitors can embark on gorilla trekking expeditions to witness these magnificent creatures in their natural habitat.
+
+Queen Elizabeth National Park is another must-visit attraction with its diverse range of wildlife, including elephants, lions, hippos, and over 600 bird species. Tourists can indulge in game drives, bird watching tours, and boat safaris while enjoying the scenic views and landscapes.
+
+For adventurous travelers, the Rwenzori Mountains offer a challenging hiking experience and breathtaking views of the surrounding scenery. The Nile River, on the other hand, is a popular destination for water sports such as white-water rafting, kayaking, and bungee jumping.
+
+Kampala, the capital city, is a bustling metropolis with a mix of cultural and historical experiences. The Kasubi Tombs, a UNESCO World Heritage Site, is an essential cultural landmark that honors the Buganda kings' burial place. The Uganda Museum is also a popular destination that offers a glimpse into the country's rich cultural heritage.
+
+Uganda's cultural heritage is showcased in its vibrant traditional music and dance performances. The Ndere Cultural Centre in Kampala offers a range of cultural shows, including drumming performances, storytelling, and traditional dance.
+
+Overall, Uganda is a destination that offers a wealth of exciting experiences for travelers, from wildlife encounters to cultural immersion and stunning natural landscapes.`
+    },
+    israel: {
+      title: 'Israel - Journey to the Holy Land',
+      heroImage: 'https://images.unsplash.com/photo-1544967082-d9d25d867d66?w=1920',
+      content: `In Israel, you'll find a wealth of historical and religious sites that are of great interest to many tourists, especially those of Christian faith. The ancient city of Jerusalem is a must-see, with its iconic sites such as the Western Wall, the Church of the Holy Sepulchre, and the Dome of the Rock. Other important religious sites include Nazareth, where Jesus is said to have grown up, and Bethlehem, the birthplace of Jesus.
+
+But Israel is not just about religious tourism – there is something for everyone. For nature lovers, there are the stunning landscapes of the Negev Desert, the salty waters of the Dead Sea, and the serene beauty of the Sea of Galilee. Foodies will enjoy the diverse and delicious cuisine of Israel, which draws on the influences of many different cultures.
+
+At DeMi Tours and Travel, we offer a range of exciting tour packages to help you explore all that Israel has to offer. Whether you're looking for a guided tour of Jerusalem's holy sites, a desert adventure in the Negev, or a culinary tour of Tel Aviv, we can help you plan the perfect trip. Our knowledgeable guides and carefully crafted itineraries ensure that you'll have an unforgettable experience in Israel. Book your trip today and discover the wonders of this incredible country!`
+    },
+    egypt: {
+      title: "Exploring Egypt's Magnificent Attractions",
+      heroImage: 'https://images.unsplash.com/photo-1539768942893-daf53e448371?w=1920',
+      content: `Egypt is a country steeped in history and culture, making it a must-visit destination for travelers. One of the main draws is the ancient pyramids. They are considered to be some of the world's greatest architectural wonders. The Great Pyramids of Giza, the Sphinx, and the Temple of Luxor are all popular tourist attractions. They attract millions of tourists every year. Visitors can also experience the magic of Abu Simbel. This massive temple complex is located on the banks of Lake Nasser in southern Egypt.
+
+In addition to its rich history, Egypt is also a hub for adventure travel. From hot air balloon rides over Luxor to sandboarding in the deserts. There are plenty of opportunities for adrenaline-fueled activities. The country is also renowned for its stunning Red Sea coastline, offering snorkelling and diving opportunities for those looking to explore its vibrant underwater world.
+
+For those looking for a more urban experience, Cairo and Alexandria are two must-visit cities. Cairo, the capital of Egypt, is a bustling metropolis that is home to some of the country's most iconic landmarks, including the Citadel and the Egyptian Museum. Alexandria, on the other hand, is a coastal city that is renowned for its stunning beaches and charming historical sites, such as the Qaitbay Citadel and the Bibliotheca Alexandrina.
+
+Finally, no trip to Egypt would be complete without exploring the Nile River. This ancient river is the lifeblood of the country. A cruise down its banks is a unique and unforgettable experience. Whether you're interested in history, adventure, or just soaking up the local culture, Egypt is a country that has something to offer every traveler.`
+    },
+    jordan: {
+      title: 'Jordan: From Ancient Wonders to Natural Beauty',
+      heroImage: 'https://images.unsplash.com/photo-1579606032821-4e6161c81bd3?w=1920',
+      content: `Jordan is a fascinating country with numerous tourist attractions that showcase its rich history, culture, and natural beauty. One of the most famous attractions in Jordan is Petra, an ancient city carved out of rock, which was one of the New Seven Wonders of the World. Visitors can explore the magnificent architecture and intricate carvings of the city, including the Treasury, the Monastery, and the Royal Tombs.
+
+Another popular tourist attraction in Jordan is the Dead Sea, a unique body of water that is known for its high salt concentration, which allows visitors to float effortlessly on its surface. The Dead Sea is also famous for its therapeutic properties, with many people visiting the area to benefit from its mineral-rich mud and water.
+
+Jordan is also home to several historical sites, including the Roman city of Jerash, the medieval castle of Ajloun, and the Crusader fortress of Karak. Visitors can immerse themselves in Jordan's rich culture by visiting the traditional markets of Amman, the capital city, or by experiencing the Bedouin way of life in the Wadi Rum desert.
+
+For those who enjoy outdoor activities, Jordan offers plenty of opportunities for hiking, rock climbing, and canyoneering in the stunning landscapes of Wadi Mujib, Dana Biosphere Reserve, and the Wadi Rum desert. Additionally, visitors can experience the thrill of diving in the Red Sea or swimming in the natural pools of the Ma'in Hot Springs.
+
+Overall, Jordan is a diverse country that offers something for everyone, from ancient history to natural wonders, and is definitely worth exploring.`
+    },
   };
 
   const content = destinationContent[slug || ''] || {
