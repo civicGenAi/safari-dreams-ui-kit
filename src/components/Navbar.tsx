@@ -83,13 +83,13 @@ export const Navbar = () => {
                 <div className={`absolute top-full left-1/2 -translate-x-1/2 pt-4 transition-all duration-300 ${
                   isDestinationsOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
                 }`}>
-                  <div className="bg-background rounded-2xl shadow-lift p-6 min-w-[400px] border border-border">
+                  <div className="bg-background rounded-2xl shadow-lift p-6 min-w-[280px] border border-border">
                     <div className="mb-4 pb-4 border-b border-border">
                       <span className="font-display text-lg font-semibold">Explore Destinations</span>
                     </div>
-                    <div className="grid grid-cols-2 gap-3">
+                    <div className="space-y-2">
                       {destinations.map((dest) => (
-                        <Link key={dest.name} to={`/destinations/${dest.slug}`} className="flex items-center gap-3 p-3 rounded-xl hover:bg-muted transition-colors group">
+                        <Link key={dest.name} to={`/destinations/${dest.slug}`} className="flex items-center justify-between p-3 rounded-xl hover:bg-muted transition-colors group">
                           <div>
                             <span className="font-heading font-medium text-foreground group-hover:text-primary transition-colors">{dest.name}</span>
                             <span className="block text-xs text-muted-foreground">{dest.tours} Tours</span>
@@ -113,13 +113,13 @@ export const Navbar = () => {
                 <div className={`absolute top-full left-1/2 -translate-x-1/2 pt-4 transition-all duration-300 ${
                   isTravelIdeasOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
                 }`}>
-                  <div className="bg-background rounded-2xl shadow-lift p-6 min-w-[450px] border border-border">
+                  <div className="bg-background rounded-2xl shadow-lift p-6 min-w-[300px] border border-border">
                     <div className="mb-4 pb-4 border-b border-border">
                       <span className="font-display text-lg font-semibold">Explore Travel Ideas</span>
                     </div>
-                    <div className="grid grid-cols-2 gap-3 max-h-[400px] overflow-y-auto">
+                    <div className="space-y-2 max-h-[400px] overflow-y-auto">
                       {travelIdeas.map((idea) => (
-                        <Link key={idea.name} to={`/travel-ideas/${idea.slug}`} className="flex items-center gap-3 p-3 rounded-xl hover:bg-muted transition-colors group">
+                        <Link key={idea.name} to={`/travel-ideas/${idea.slug}`} className="flex items-center justify-between p-3 rounded-xl hover:bg-muted transition-colors group">
                           <div className="flex-1">
                             <span className="font-heading font-medium text-foreground group-hover:text-primary transition-colors text-sm block">{idea.name}</span>
                             <span className="block text-xs text-muted-foreground">{idea.tours}+ Tours</span>
