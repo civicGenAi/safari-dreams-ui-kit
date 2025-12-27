@@ -26,7 +26,6 @@ const OurStory = () => {
       {/* Hero */}
       <div className="relative h-[500px]">
         <img src="/src/assets/header_bg_new4.gif" alt="Our Story" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/90 via-charcoal/70 to-charcoal/50" />
         <div className="absolute inset-0 flex items-center">
           <div className="container mx-auto px-4 lg:px-8">
             <h1 className="font-display text-5xl md:text-6xl font-bold text-white mb-4 max-w-2xl">
