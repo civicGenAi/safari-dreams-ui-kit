@@ -10,6 +10,7 @@ import TourDetail from "./pages/TourDetail";
 import DestinationDetail from "./pages/DestinationDetail";
 import Booking from "./pages/Booking";
 import TravelIdeas from "./pages/TravelIdeas";
+import WildTales from "./pages/WildTales";
 import OurStory from "./pages/OurStory";
 import Contact from "./pages/Contact";
 
@@ -28,6 +29,7 @@ const App = () => (
           <Route path="/destinations/:slug" element={<DestinationDetail />} />
           <Route path="/booking/:slug" element={<Booking />} />
           <Route path="/travel-ideas" element={<TravelIdeas />} />
+          <Route path="/wild-tales" element={<WildTales />} />
           <Route path="/our-story" element={<OurStory />} />
           <Route path="/contact" element={<Contact />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

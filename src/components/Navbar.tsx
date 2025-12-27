@@ -34,26 +34,26 @@ export const Navbar = () => {
   return (
     <>
       <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled ? 'bg-background/95 backdrop-blur-md shadow-md py-3' : 'bg-transparent py-5'
+        isScrolled ? 'bg-white/98 backdrop-blur-lg shadow-lg border-b border-border py-3' : 'bg-transparent py-5'
       }`}>
         <div className="container mx-auto px-4 lg:px-8">
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center gap-2">
               <span className={`font-display text-2xl md:text-3xl font-bold tracking-tight transition-colors duration-300 ${
-                isScrolled ? 'text-secondary' : 'text-primary-foreground'
+                isScrolled ? 'text-charcoal' : 'text-primary-foreground'
               }`}>
-                DeMi<span className="text-primary">Tours</span>
+                DeMi<span className={`${isScrolled ? 'text-primary' : 'text-secondary'}`}>Tours</span>
               </span>
             </Link>
 
             <div className="hidden lg:flex items-center gap-8">
               <Link to="/" className={`font-heading text-sm uppercase tracking-widest transition-colors link-underline ${
-                isScrolled ? 'text-foreground hover:text-primary' : 'text-primary-foreground/90 hover:text-primary-foreground'
+                isScrolled ? 'text-charcoal hover:text-primary font-semibold' : 'text-primary-foreground/90 hover:text-primary-foreground'
               }`}>Home</Link>
 
               <div className="relative" onMouseEnter={() => setIsDestinationsOpen(true)} onMouseLeave={() => setIsDestinationsOpen(false)}>
                 <button className={`flex items-center gap-1 font-heading text-sm uppercase tracking-widest transition-colors ${
-                  isScrolled ? 'text-foreground hover:text-primary' : 'text-primary-foreground/90 hover:text-primary-foreground'
+                  isScrolled ? 'text-charcoal hover:text-primary font-semibold' : 'text-primary-foreground/90 hover:text-primary-foreground'
                 }`}>
                   Destinations
                   <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isDestinationsOpen ? 'rotate-180' : ''}`} />
@@ -83,16 +83,16 @@ export const Navbar = () => {
               </div>
 
               <Link to="/travel-ideas" className={`font-heading text-sm uppercase tracking-widest transition-colors link-underline ${
-                isScrolled ? 'text-foreground hover:text-primary' : 'text-primary-foreground/90 hover:text-primary-foreground'
+                isScrolled ? 'text-charcoal hover:text-primary font-semibold' : 'text-primary-foreground/90 hover:text-primary-foreground'
               }`}>Travel Ideas</Link>
               <Link to="/our-story" className={`font-heading text-sm uppercase tracking-widest transition-colors link-underline ${
-                isScrolled ? 'text-foreground hover:text-primary' : 'text-primary-foreground/90 hover:text-primary-foreground'
+                isScrolled ? 'text-charcoal hover:text-primary font-semibold' : 'text-primary-foreground/90 hover:text-primary-foreground'
               }`}>Our Story</Link>
               <Link to="/wild-tales" className={`font-heading text-sm uppercase tracking-widest transition-colors link-underline ${
-                isScrolled ? 'text-foreground hover:text-primary' : 'text-primary-foreground/90 hover:text-primary-foreground'
+                isScrolled ? 'text-charcoal hover:text-primary font-semibold' : 'text-primary-foreground/90 hover:text-primary-foreground'
               }`}>Wild Tales</Link>
               <Link to="/contact" className={`font-heading text-sm uppercase tracking-widest transition-colors link-underline ${
-                isScrolled ? 'text-foreground hover:text-primary' : 'text-primary-foreground/90 hover:text-primary-foreground'
+                isScrolled ? 'text-charcoal hover:text-primary font-semibold' : 'text-primary-foreground/90 hover:text-primary-foreground'
               }`}>Get in Touch</Link>
             </div>
 
@@ -104,7 +104,7 @@ export const Navbar = () => {
             </div>
 
             <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className={`lg:hidden p-2 transition-colors ${
-              isScrolled ? 'text-foreground' : 'text-primary-foreground'
+              isScrolled ? 'text-charcoal' : 'text-primary-foreground'
             }`}>
               {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
