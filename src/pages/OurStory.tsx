@@ -155,25 +155,6 @@ const OurStory = () => {
                   </Button>
                 </Link>
               </div>
-
-              {/* Our Rates */}
-              <div className="pt-8 border-t border-border">
-                <div className="space-y-6">
-                  {rates.map((rate) => (
-                    <div key={rate.number} className="flex gap-4">
-                      <div className="flex-shrink-0">
-                        <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                          <span className="font-bold text-primary">{rate.number}</span>
-                        </div>
-                      </div>
-                      <div>
-                        <h4 className="font-heading font-bold mb-2">{rate.title}</h4>
-                        <p className="text-sm text-muted-foreground leading-relaxed">{rate.description}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
             </div>
           </div>
         </div>
