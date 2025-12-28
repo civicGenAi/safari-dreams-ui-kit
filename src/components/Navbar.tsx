@@ -41,9 +41,10 @@ const travelIdeas: TravelIdea[] = [
 
 interface NavbarProps {
   activeCategory?: string;
+  activeDestination?: string;
 }
 
-export const Navbar = ({ activeCategory }: NavbarProps = {}) => {
+export const Navbar = ({ activeCategory, activeDestination }: NavbarProps = {}) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDestinationsOpen, setIsDestinationsOpen] = useState(false);
@@ -93,8 +94,15 @@ export const Navbar = ({ activeCategory }: NavbarProps = {}) => {
                     <div className="space-y-1">
                       {destinations.map((dest, index) => (
                         <div key={dest.name}>
-                          <Link to={`/destinations/${dest.slug}`} className="block px-3 py-2 rounded-lg hover:bg-muted transition-colors group">
-                            <span className="font-heading text-sm font-medium text-foreground group-hover:text-primary transition-colors">{dest.name}</span>
+                          <Link
+                            to={`/destinations/${dest.slug}`}
+                            className={`block px-3 py-2 rounded-lg hover:bg-muted transition-colors group ${
+                              activeDestination === dest.slug ? 'bg-primary/10' : ''
+                            }`}
+                          >
+                            <span className={`font-heading text-sm font-medium transition-colors ${
+                              activeDestination === dest.slug ? 'text-primary' : 'text-foreground group-hover:text-primary'
+                            }`}>{dest.name}</span>
                           </Link>
                           {index < destinations.length - 1 && (
                             <div className="h-px bg-border/50 my-1" />
