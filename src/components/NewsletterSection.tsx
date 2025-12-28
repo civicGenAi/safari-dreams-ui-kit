@@ -1,6 +1,13 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { Send, CheckCircle } from 'lucide-react';
+import { ArrowRight, CheckCircle } from 'lucide-react';
+import { Link } from 'react-router-dom';
+
+// Import staff images for avatars
+import staffCaudence from '@/assets/staff/staff_caudence_ceo-1.webp';
+import staffBrenda from '@/assets/staff/staff_brenda_reservation.webp';
+import staffAbel from '@/assets/staff/staff_abel_marketing.webp';
+import staffHuruma from '@/assets/staff/staff_huruma_guide.webp';
 
 export const NewsletterSection = () => {
   const [email, setEmail] = useState('');
@@ -17,91 +24,93 @@ export const NewsletterSection = () => {
     }
   };
 
+  const staffAvatars = [staffCaudence, staffBrenda, staffAbel, staffHuruma];
+
   return (
-    <section className="relative py-24 lg:py-32 overflow-hidden">
-      {/* Background Image */}
-      <div className="absolute inset-0">
-        <img
-          src="https://images.unsplash.com/photo-1518709766631-a6a7f45921c3?w=1920"
-          alt="African sunset landscape"
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/90 via-charcoal/80 to-charcoal/70" />
-      </div>
-
-      <div className="container mx-auto px-4 lg:px-8 relative">
-        <div className="max-w-3xl mx-auto text-center">
-          {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-secondary/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
-            <span className="w-2 h-2 bg-secondary rounded-full animate-pulse" />
-            <span className="text-primary-foreground/90 text-sm font-heading uppercase tracking-wider">
-              Newsletter
-            </span>
-          </div>
-
-          {/* Heading */}
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-primary-foreground mb-6">
-            Get Exclusive Travel
-            <span className="text-secondary block">Tips & Offers</span>
-          </h2>
-
-          <p className="text-primary-foreground/80 text-lg mb-10 max-w-xl mx-auto">
-            Subscribe to our newsletter and be the first to know about special deals, 
-            new destinations, and insider travel tips.
-          </p>
-
-          {/* Form */}
-          <form onSubmit={handleSubmit} className="relative max-w-lg mx-auto">
-            <div className="flex flex-col sm:flex-row gap-4">
-              <div className="flex-1 relative">
+    <section className="py-16 lg:py-20 bg-[#f5f3ef]">
+      <div className="container mx-auto px-4 lg:px-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+          {/* Left Column - Newsletter Signup */}
+          <div>
+            <h2 className="font-display text-2xl md:text-3xl lg:text-4xl italic text-secondary mb-4">
+              Be The First To Know
+            </h2>
+            <p className="text-muted-foreground mb-6">
+              Sign up for newest travel ideas, exclusive offers & tales to inspire you.
+            </p>
+            
+            <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-3">
+              <div className="flex-1">
                 <input
                   type="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
                   placeholder="Enter your email address"
-                  className="w-full h-14 px-6 rounded-full bg-primary-foreground/10 backdrop-blur-sm border border-primary-foreground/20 text-primary-foreground placeholder:text-primary-foreground/50 focus:outline-none focus:border-secondary transition-colors"
+                  className="w-full h-12 px-5 rounded-md bg-background border border-border text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-secondary transition-colors"
                   required
                 />
               </div>
               <Button
                 type="submit"
-                variant="gold"
-                size="xl"
-                className="gap-2 min-w-[160px]"
+                className="bg-secondary hover:bg-secondary/90 text-secondary-foreground h-12 px-6 gap-2"
                 disabled={isSubmitted}
               >
                 {isSubmitted ? (
                   <>
-                    <CheckCircle className="w-5 h-5" />
+                    <CheckCircle className="w-4 h-4" />
                     Subscribed!
                   </>
                 ) : (
                   <>
+                    <ArrowRight className="w-4 h-4" />
                     Subscribe
-                    <Send className="w-4 h-4" />
                   </>
                 )}
               </Button>
-            </div>
-            <p className="text-primary-foreground/60 text-sm mt-4">
-              Join 15,000+ subscribers. No spam, unsubscribe anytime.
-            </p>
-          </form>
+            </form>
+          </div>
 
-          {/* Features */}
-          <div className="flex flex-wrap items-center justify-center gap-8 mt-12">
-            {[
-              'Early Access to Deals',
-              'Exclusive Discounts',
-              'Travel Inspiration',
-            ].map((feature) => (
-              <div key={feature} className="flex items-center gap-2">
-                <CheckCircle className="w-5 h-5 text-secondary" />
-                <span className="text-primary-foreground/80 font-heading text-sm">
-                  {feature}
-                </span>
+          {/* Divider */}
+          <div className="hidden lg:block absolute left-1/2 top-1/2 -translate-y-1/2 w-px h-24 bg-border" />
+
+          {/* Right Column - We're Here To Help */}
+          <div className="lg:pl-8">
+            <h2 className="font-display text-2xl md:text-3xl lg:text-4xl italic text-secondary mb-4">
+              We're Here To Help
+            </h2>
+            <p className="text-muted-foreground mb-6">
+              Speak to your destination expert.
+            </p>
+            
+            <div className="flex items-center gap-6">
+              {/* Stacked Avatars */}
+              <div className="flex -space-x-3">
+                {staffAvatars.map((avatar, index) => (
+                  <div
+                    key={index}
+                    className="w-12 h-12 rounded-full border-2 border-background overflow-hidden bg-muted"
+                    style={{ zIndex: staffAvatars.length - index }}
+                  >
+                    <img
+                      src={avatar}
+                      alt={`Team member ${index + 1}`}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                ))}
               </div>
-            ))}
+
+              {/* Book Now Button */}
+              <Link to="/booking">
+                <Button
+                  variant="outline"
+                  className="border-secondary/40 text-secondary hover:bg-secondary/10 h-10 px-5 gap-2"
+                >
+                  Book Now
+                  <ArrowRight className="w-4 h-4" />
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
