@@ -17,6 +17,8 @@ export default {
         display: ["Playfair Display", "Georgia", "serif"],
         heading: ["Montserrat", "system-ui", "sans-serif"],
         sans: ["Inter", "system-ui", "sans-serif"],
+        allura: ["Allura", "cursive"],
+        caveat: ["Caveat", "cursive"],
       },
       colors: {
         border: "hsl(var(--border))",
