@@ -178,37 +178,43 @@ Overall, Jordan is a diverse country that offers something for everyone, from an
       {/* Large Picture Section */}
       <div className="container mx-auto px-4 lg:px-8 py-16">
         <div className="grid lg:grid-cols-12 gap-12 items-start">
-          {/* Large Image with Note Card */}
-          <div className="lg:col-span-7">
-            <div className="relative rounded-3xl overflow-hidden">
+          {/* Large Image and Country Facts */}
+          <div className="lg:col-span-7 space-y-6">
+            {/* Image */}
+            <div className="rounded-3xl overflow-hidden">
               <img src={content.heroImage} alt={destination.name} className="w-full h-[600px] object-cover" />
+            </div>
 
-              {/* Please Note Card */}
-              <div className="absolute bottom-6 left-6 right-6 bg-white/95 backdrop-blur-sm rounded-2xl p-6 border border-border shadow-2xl">
-                <div className="flex items-start gap-4">
-                  <svg className="w-8 h-8 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                  </svg>
-                  <div className="flex-1">
-                    <h3 className="font-display text-xl font-bold mb-3">Please Note</h3>
-                    <div className="grid grid-cols-2 gap-3 text-sm">
-                      <div>
-                        <span className="text-muted-foreground">Best Time:</span>
-                        <p className="font-semibold">{destination.bestTime}</p>
-                      </div>
-                      <div>
-                        <span className="text-muted-foreground">Climate:</span>
-                        <p className="font-semibold">{destination.climate}</p>
-                      </div>
-                      <div>
-                        <span className="text-muted-foreground">Currency:</span>
-                        <p className="font-semibold">{destination.currency}</p>
-                      </div>
-                      <div>
-                        <span className="text-muted-foreground">Language:</span>
-                        <p className="font-semibold">{destination.language}</p>
-                      </div>
-                    </div>
+            {/* Please Note Card */}
+            <div className="bg-white rounded-2xl p-6 shadow-lg border border-border">
+              <div className="flex items-start gap-4 mb-4">
+                <svg className="w-8 h-8 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <div>
+                  <h3 className="font-display text-xl font-bold">Please Note Below</h3>
+                  <p className="text-primary font-semibold">Country Facts</p>
+                </div>
+              </div>
+
+              {/* Dotted Box with Country Information */}
+              <div className="border-2 border-dashed border-primary/30 rounded-xl p-6 bg-muted/20">
+                <div className="grid grid-cols-2 gap-4">
+                  <div>
+                    <span className="text-muted-foreground text-sm">Best Time:</span>
+                    <p className="font-semibold text-foreground">{destination.bestTime}</p>
+                  </div>
+                  <div>
+                    <span className="text-muted-foreground text-sm">Climate:</span>
+                    <p className="font-semibold text-foreground">{destination.climate}</p>
+                  </div>
+                  <div>
+                    <span className="text-muted-foreground text-sm">Currency:</span>
+                    <p className="font-semibold text-foreground">{destination.currency}</p>
+                  </div>
+                  <div>
+                    <span className="text-muted-foreground text-sm">Language:</span>
+                    <p className="font-semibold text-foreground">{destination.language}</p>
                   </div>
                 </div>
               </div>
