@@ -195,11 +195,11 @@ const OurStory = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
             {team.slice(0, 4).map((member, index) => (
               <div key={index} className="text-center group">
-                <div className="relative mb-4 overflow-hidden rounded-2xl shadow-lg">
+                <div className="relative mb-4 overflow-hidden rounded-2xl shadow-lg bg-muted/20">
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full aspect-square object-contain transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
                     <div className="flex gap-3">
@@ -225,11 +225,11 @@ const OurStory = () => {
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {team.slice(4, 8).map((member, index) => (
               <div key={index} className="text-center group">
-                <div className="relative mb-4 overflow-hidden rounded-2xl shadow-lg">
+                <div className="relative mb-4 overflow-hidden rounded-2xl shadow-lg bg-muted/20">
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-110"
+                    className="w-full aspect-square object-contain transition-transform duration-500 group-hover:scale-110"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
                     <div className="flex gap-3">
