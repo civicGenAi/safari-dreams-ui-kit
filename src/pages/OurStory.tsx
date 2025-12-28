@@ -254,7 +254,7 @@ const OurStory = () => {
       <TestimonialsSection />
 
       {/* CTA */}
-      <div className="py-32 bg-white">
+      <div className="py-32 bg-muted/20">
         <div className="container mx-auto px-4 lg:px-8 text-center">
           <h2 className="font-display text-5xl md:text-6xl font-bold text-foreground mb-6">
             Your Trip. Our Responsibility.
