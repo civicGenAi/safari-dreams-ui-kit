@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronRight, MapPin, Globe, Users, Handshake, Lightbulb } from 'lucide-react';
+import { ChevronRight, MapPin, Globe, Users, Handshake, Lightbulb, ArrowRight } from 'lucide-react';
 import worldMap from '@/assets/world-map.webp';
 
 interface Destination {
@@ -9,6 +9,7 @@ interface Destination {
   tours: number;
   flag: string;
   description: string;
+  image: string;
   coordinates: { x: string; y: string };
   facts?: {
     visaRequirements?: string;
@@ -24,7 +25,8 @@ const destinations: Destination[] = [
     slug: 'tanzania',
     tours: 29,
     flag: '🇹🇿',
-    description: 'Zanzibar, an archipelago off Tanzania\'s coast, is famous for its pristine beaches, clear waters, and rich cultural heritage. Visitors can relax on the island\'s white sand beaches, go snorkeling or scuba diving, and explore the Stone Town, a UNESCO World Heritage Site that showcases the influences of African, Arab, and European cultures.\n\nOther notable destinations in Tanzania include the Ngorongoro Conservation Area, which features an enormous crater teeming with wildlife, and Tarangire National Park, known for its large elephant herds. The Olduvai Gorge, a site where some of the oldest human remains were discovered, and the ruins of the ancient city of Kilwa Kisiwani are also fascinating attractions for history and culture enthusiasts.\n\nIn conclusion, Tanzania offers a diverse range of attractions that are sure to satisfy any traveler\'s desires, from wildlife safaris to cultural experiences to relaxing beach getaways. With its stunning natural beauty, rich cultural heritage, and friendly locals, Tanzania is truly a must-visit destination for anyone seeking an unforgettable African adventure.',
+    description: 'Serengeti, Kilimanjaro, and Zanzibar beaches.',
+    image: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=600',
     coordinates: { x: '54%', y: '58%' },
     facts: {
       visaRequirements: 'Commonwealth & EAC citizens - don\'t need visa. Everyone else need a visa.',
@@ -39,6 +41,7 @@ const destinations: Destination[] = [
     tours: 4,
     flag: '🇰🇪',
     description: 'Experience the Masai Mara and witness the Great Migration.',
+    image: 'https://images.unsplash.com/photo-1547970810-dc1eac37d174?w=600',
     coordinates: { x: '55%', y: '52%' },
   },
   {
@@ -47,6 +50,7 @@ const destinations: Destination[] = [
     tours: 6,
     flag: '🇷🇼',
     description: 'Trek with mountain gorillas in lush volcanic forests.',
+    image: 'https://images.unsplash.com/photo-1521651201144-634f700b36ef?w=600',
     coordinates: { x: '52%', y: '54%' },
   },
   {
@@ -55,6 +59,7 @@ const destinations: Destination[] = [
     tours: 4,
     flag: '🇺🇬',
     description: 'The Pearl of Africa with diverse wildlife and landscapes.',
+    image: 'https://images.unsplash.com/photo-1619451334792-150fd785ee74?w=600',
     coordinates: { x: '53%', y: '50%' },
   },
   {
@@ -63,6 +68,7 @@ const destinations: Destination[] = [
     tours: 2,
     flag: '🇮🇱',
     description: 'Sacred pilgrimage sites and ancient history.',
+    image: 'https://images.unsplash.com/photo-1544967082-d9d25d867d66?w=600',
     coordinates: { x: '57%', y: '32%' },
   },
   {
@@ -71,6 +77,7 @@ const destinations: Destination[] = [
     tours: 2,
     flag: '🇪🇬',
     description: 'Pyramids, Pharaohs, and the majestic Nile River.',
+    image: 'https://images.unsplash.com/photo-1539768942893-daf53e448371?w=600',
     coordinates: { x: '54%', y: '35%' },
   },
   {
@@ -79,6 +86,7 @@ const destinations: Destination[] = [
     tours: 1,
     flag: '🇯🇴',
     description: 'Ancient Petra and the stunning Wadi Rum desert.',
+    image: 'https://images.unsplash.com/photo-1579606032821-4e6161c81571?w=600',
     coordinates: { x: '58%', y: '33%' },
   },
 ];
@@ -90,131 +98,83 @@ const stats = [
   { icon: Handshake, value: '50+', label: 'SERVICE PARTNERS' },
 ];
 
-export const DestinationsSection = () => {
-  const [activeDestination, setActiveDestination] = useState<string>('Tanzania');
+// Staggered card heights and offsets for visual interest
+const cardStyles = [
+  { height: 'h-[380px]', offset: 'mt-0' },        // Israel - tall
+  { height: 'h-[420px]', offset: 'mt-8' },        // Kenya - taller, offset down
+  { height: 'h-[360px]', offset: 'mt-4' },        // Rwanda - medium
+  { height: 'h-[400px]', offset: 'mt-12' },       // Tanzania - tall, more offset
+  { height: 'h-[340px]', offset: 'mt-2' },        // Uganda - shorter
+  { height: 'h-[380px]', offset: 'mt-10' },       // Egypt - medium, offset
+  { height: 'h-[360px]', offset: 'mt-6' },        // Jordan - medium
+];
 
-  const activeData = destinations.find(d => d.name === activeDestination);
+// Reorder destinations for display: Israel, Kenya, Rwanda, Tanzania, Uganda
+const displayOrder = ['Israel', 'Kenya', 'Rwanda', 'Tanzania', 'Uganda'];
+
+export const DestinationsSection = () => {
+  const orderedDestinations = displayOrder
+    .map(name => destinations.find(d => d.name === name))
+    .filter(Boolean) as Destination[];
 
   return (
-    <section id="destinations" className="pb-0 bg-background relative overflow-hidden">
-      <div className="container mx-auto px-4 lg:px-8 relative z-10 py-24 lg:py-32">
+    <section id="destinations" className="py-24 lg:py-32 bg-[#f8f6f3]">
+      <div className="container mx-auto px-4 lg:px-8">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="w-12 h-px bg-primary" />
-            <span className="font-heading text-sm uppercase tracking-widest text-primary">
-              Explore Destinations
-            </span>
-            <div className="w-12 h-px bg-primary" />
-          </div>
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
-            Discover Your Next
-            <span className="text-gradient-primary block">Dream Destination</span>
+          <span className="font-heading text-sm uppercase tracking-widest text-foreground font-semibold mb-4 block">
+            POPULAR DESTINATIONS
+          </span>
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl text-primary italic mb-6">
+            Must See<br />Destinations
           </h2>
+          <div className="w-16 h-1 bg-primary/60 mx-auto" />
         </div>
 
-        {/* Main Content */}
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
-          {/* Left: Image with Country Facts Overlay */}
-          <div className="relative">
-            {/* Safari Image */}
-            <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-              <img
-                src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=800"
-                alt={activeData?.name || 'Safari destination'}
-                className="w-full h-[500px] object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 to-transparent" />
-            </div>
-
-            {/* Country Facts Overlay Box */}
-            {activeData?.facts && (
-              <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-[90%] max-w-md bg-primary/95 text-primary-foreground rounded-2xl p-6 shadow-2xl">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-12 h-12 rounded-full border-2 border-dashed border-primary-foreground/40 flex items-center justify-center">
-                    <Globe className="w-6 h-6" />
-                  </div>
-                  <div>
-                    <h4 className="font-display text-lg font-bold">Please Note Below</h4>
-                    <p className="text-primary-foreground/80 text-sm">Country Facts</p>
-                  </div>
-                </div>
-
-                <div className="space-y-3 pt-4 border-t border-dashed border-primary-foreground/30">
-                  <div className="flex justify-between border-b border-dotted border-primary-foreground/20 pb-2">
-                    <span className="text-sm font-medium">Country</span>
-                    <span className="text-sm text-primary-foreground/80">{activeData.name}</span>
-                  </div>
-                  <div className="flex justify-between border-b border-dotted border-primary-foreground/20 pb-2">
-                    <span className="text-sm font-medium">Visa Requirements</span>
-                    <span className="text-sm text-primary-foreground/80 text-right max-w-[200px]">{activeData.facts.visaRequirements}</span>
-                  </div>
-                  <div className="flex justify-between border-b border-dotted border-primary-foreground/20 pb-2">
-                    <span className="text-sm font-medium">Languages spoken</span>
-                    <span className="text-sm text-primary-foreground/80">{activeData.facts.languages}</span>
-                  </div>
-                  <div className="flex justify-between border-b border-dotted border-primary-foreground/20 pb-2">
-                    <span className="text-sm font-medium">Currency used</span>
-                    <span className="text-sm text-primary-foreground/80">{activeData.facts.currency}</span>
-                  </div>
-                  <div className="flex justify-between">
-                    <span className="text-sm font-medium">Area (km2)</span>
-                    <span className="text-sm text-primary-foreground/80">{activeData.facts.area}</span>
-                  </div>
-                </div>
-              </div>
-            )}
-          </div>
-
-          {/* Right: Description Text */}
-          <div className="lg:pt-8">
-            <div className="prose prose-lg max-w-none">
-              {activeData?.description.split('\n\n').map((paragraph, index) => (
-                <p key={index} className="text-muted-foreground leading-relaxed mb-6">
-                  {paragraph.split(', ').map((part, i, arr) => (
-                    <span key={i}>
-                      {i > 0 && ', '}
-                      {part.includes('Zanzibar') || part.includes('Ngorongoro') || part.includes('Tarangire') || part.includes('Olduvai') || part.includes('Kilwa') || part.includes('wildlife safaris') || part.includes('cultural experiences') || part.includes('beach getaways') ? (
-                        <span className="text-primary">{part}</span>
-                      ) : (
-                        part
-                      )}
-                    </span>
-                  ))}
-                </p>
-              ))}
-            </div>
-
-            {/* Destination Quick Select */}
-            <div className="flex flex-wrap gap-2 mt-8">
-              {destinations.map((dest) => (
-                <button
-                  key={dest.name}
-                  onClick={() => setActiveDestination(dest.name)}
-                  className={`px-4 py-2 rounded-full text-sm font-heading transition-all ${
-                    activeDestination === dest.name
-                      ? 'bg-primary text-primary-foreground'
-                      : 'bg-muted text-muted-foreground hover:bg-primary/10 hover:text-primary'
-                  }`}
-                >
-                  {dest.name} ({dest.tours})
-                </button>
-              ))}
-            </div>
-
+        {/* Staggered Cards Grid */}
+        <div className="flex justify-center gap-4 md:gap-6 lg:gap-8 flex-wrap lg:flex-nowrap mb-16">
+          {orderedDestinations.map((dest, index) => (
             <Link
-              to={`/destinations/${activeData?.slug}`}
-              className="inline-flex items-center gap-2 text-primary font-heading text-sm uppercase tracking-wider hover:gap-3 transition-all mt-8"
+              key={dest.name}
+              to={`/destinations/${dest.slug}`}
+              className={`group relative w-[180px] md:w-[200px] lg:w-[220px] ${cardStyles[index].height} ${cardStyles[index].offset} rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 flex-shrink-0`}
             >
-              Explore {activeData?.name}
-              <ChevronRight className="w-4 h-4" />
+              <img
+                src={dest.image}
+                alt={dest.name}
+                className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-transparent to-transparent" />
+              <div className="absolute bottom-6 left-0 right-0 text-center">
+                <h3 className="font-display text-2xl md:text-3xl text-white font-medium tracking-wide">
+                  {dest.name}
+                </h3>
+              </div>
             </Link>
-          </div>
+          ))}
+        </div>
+
+        {/* Call to Action */}
+        <div className="text-center">
+          <p className="text-foreground/80 text-lg">
+            Talk to Us, Call{' '}
+            <a href="tel:+255688535848" className="text-primary font-semibold hover:underline">
+              +(255) 688 535848
+            </a>
+            {' '}or{' '}
+            <Link 
+              to="/booking" 
+              className="inline-flex items-center gap-1 text-foreground font-semibold underline underline-offset-4 hover:text-primary transition-colors"
+            >
+              Request a Quote
+              <ArrowRight className="w-4 h-4" />
+            </Link>
+          </p>
         </div>
       </div>
 
       {/* Stats Bar */}
-      <div className="bg-muted border-t border-border mt-32">
+      <div className="bg-muted border-t border-border mt-16">
         <div className="container mx-auto px-4 lg:px-8 py-8">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
