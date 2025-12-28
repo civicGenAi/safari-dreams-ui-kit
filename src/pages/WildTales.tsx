@@ -320,13 +320,13 @@ const WildTales = () => {
                         alt={post.title}
                         className="w-20 h-20 rounded-xl object-cover flex-shrink-0 shadow-sm"
                       />
-                      <div className="flex-1 min-w-0">
-                        <h4 className="font-semibold text-sm line-clamp-2 group-hover:text-primary transition-colors mb-2">
+                      <div className="flex-1 min-w-0 overflow-hidden">
+                        <h4 className="font-semibold text-sm line-clamp-2 group-hover:text-primary transition-colors mb-2 break-words">
                           {post.title}
                         </h4>
                         <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                          <Calendar className="w-3 h-3" />
-                          <span>{new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
+                          <Calendar className="w-3 h-3 flex-shrink-0" />
+                          <span className="truncate">{new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
                         </div>
                       </div>
                     </Link>
