@@ -76,12 +76,12 @@ export const Navbar = ({ activeCategory }: NavbarProps = {}) => {
               }`}>Home</Link>
 
               <div className="relative" onMouseEnter={() => setIsDestinationsOpen(true)} onMouseLeave={() => setIsDestinationsOpen(false)}>
-                <button className={`flex items-center gap-1 font-heading text-sm uppercase tracking-widest transition-colors ${
+                <Link to="/destinations" className={`flex items-center gap-1 font-heading text-sm uppercase tracking-widest transition-colors ${
                   isScrolled ? 'text-charcoal hover:text-primary font-semibold' : 'text-primary-foreground/90 hover:text-primary-foreground'
                 }`}>
                   Destinations
                   <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isDestinationsOpen ? 'rotate-180' : ''}`} />
-                </button>
+                </Link>
 
                 <div className={`absolute top-full left-1/2 -translate-x-1/2 pt-4 transition-all duration-300 ${
                   isDestinationsOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
