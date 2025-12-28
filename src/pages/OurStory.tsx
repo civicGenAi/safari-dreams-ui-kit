@@ -22,26 +22,31 @@ const OurStory = () => {
   const rates = [
     {
       number: '01',
+      title: 'Our Rates',
+      description: 'Memorable travel experiences are priceless. We offer best value for money. Occasionally we have special offers.'
+    },
+    {
+      number: '02',
       title: 'Exciting Selection of Tours',
       description: 'Every desire to travel starts as an idea. We have simplified the process for you. Travel experiences on our website are grouped into ideas. However we are still open to tweaking our ideas to suit your taste.'
     },
     {
-      number: '02',
+      number: '03',
       title: 'In Safe Hands',
       description: 'Of seasoned industry professionals and guides, with deep knowledge and understanding of the region\'s flora and fauna. We are also represented on SafariBookings a leading online marketplace for safaris.'
     },
     {
-      number: '03',
+      number: '04',
       title: 'Sustainability',
       description: 'At DeMi Tours, we are committed to thoughtful and responsible travel. We hold ourselves accountable for upholding responsible travel principles throughout our safaris. We achieve this by engaging local communities in the regions in which we travel. We also create programs that foster sustainable and authentic preservation of those communities.'
     },
     {
-      number: '04',
+      number: '05',
       title: 'Book With Confidence',
       description: 'Once you decide on your favourite package and travel date, easily book it online. Upon receiving your booking, we will send you a secure payment link.'
     },
     {
-      number: '05',
+      number: '06',
       title: 'Bespoke Travel Ideas',
       description: 'We are flexible enough to custom-make an itinerary for you from start to finish, working within your stipulated budget.'
     }
@@ -72,45 +77,10 @@ const OurStory = () => {
       <div className="py-16 bg-white">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-start">
-            {/* Left - Image with Our Rates */}
+            {/* Left - Image */}
             <div className="space-y-8">
               <div className="relative rounded-3xl overflow-hidden shadow-2xl">
                 <img src="/src/assets/our_story.jpeg" alt="Our Story" className="w-full h-auto" />
-
-                {/* Overlay Card */}
-                <div className="absolute bottom-8 left-8 right-8">
-                  <div className="relative rounded-2xl overflow-hidden shadow-2xl">
-                    <img src="/src/assets/Untitled.png" alt="Background" className="w-full h-auto" />
-                    <div className="absolute inset-0 flex items-center justify-center p-6">
-                      <h3 className="font-display text-2xl md:text-3xl font-bold text-center text-foreground">
-                        We are Responsive to Your Travel Ideas
-                      </h3>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Our Rates */}
-              <div className="bg-muted/30 rounded-3xl p-8">
-                <h3 className="font-display text-2xl font-bold mb-4">Our Rates</h3>
-                <p className="text-muted-foreground mb-8">
-                  Memorable travel experiences are priceless. We offer best value for money. Occasionally we have special offers.
-                </p>
-                <div className="space-y-6">
-                  {rates.map((rate) => (
-                    <div key={rate.number} className="flex gap-4">
-                      <div className="flex-shrink-0">
-                        <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                          <span className="font-bold text-primary">{rate.number}</span>
-                        </div>
-                      </div>
-                      <div>
-                        <h4 className="font-heading font-bold mb-2">{rate.title}</h4>
-                        <p className="text-sm text-muted-foreground leading-relaxed">{rate.description}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
               </div>
             </div>
 
@@ -185,6 +155,25 @@ const OurStory = () => {
                   </Button>
                 </Link>
               </div>
+
+              {/* Our Rates */}
+              <div className="pt-8 border-t border-border">
+                <div className="space-y-6">
+                  {rates.map((rate) => (
+                    <div key={rate.number} className="flex gap-4">
+                      <div className="flex-shrink-0">
+                        <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                          <span className="font-bold text-primary">{rate.number}</span>
+                        </div>
+                      </div>
+                      <div>
+                        <h4 className="font-heading font-bold mb-2">{rate.title}</h4>
+                        <p className="text-sm text-muted-foreground leading-relaxed">{rate.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -198,62 +187,17 @@ const OurStory = () => {
             <p className="text-xl text-muted-foreground">We are passionate. We love what we do.</p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 mb-8">
-            <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <h3 className="font-heading font-bold text-xl mb-4 flex items-center gap-2">
-                <span className="text-primary">&gt;&gt;</span> Empowerment
-              </h3>
-              <p className="text-muted-foreground">
-                Our founder is passionate about empowering women in the travel industry and beyond. She mentors and trains young women who are joining the industry.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <h3 className="font-heading font-bold text-xl mb-4 flex items-center gap-2">
-                <span className="text-primary">&gt;&gt;</span> Diversity
-              </h3>
-              <p className="text-muted-foreground">
-                At Demi Tours and Travel, we celebrate diversity and offer a wide range of travel experiences. From safaris to romantic getaways, adventure trips to luxury vacations.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <h3 className="font-heading font-bold text-xl mb-4 flex items-center gap-2">
-                <span className="text-primary">&gt;&gt;</span> Attention to detail
-              </h3>
-              <p className="text-muted-foreground">
-                We take pride in our attention to detail and organizational skills, ensuring that our customers have a seamless and stress-free journey.
-              </p>
-            </div>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <h3 className="font-heading font-bold text-xl mb-4 flex items-center gap-2">
-                <span className="text-primary">&gt;&gt;</span> Customer service
-              </h3>
-              <p className="text-muted-foreground">
-                Our commitment to excellent customer service sets us apart. We prioritize building strong relationships with our customers.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <h3 className="font-heading font-bold text-xl mb-4 flex items-center gap-2">
-                <span className="text-primary">&gt;&gt;</span> Social responsibility
-              </h3>
-              <p className="text-muted-foreground">
-                We believe in the power of ecotourism as a responsible and sustainable way to explore the natural wonders of our planet.
-              </p>
-            </div>
-
-            <div className="bg-white rounded-2xl p-8 shadow-lg">
-              <h3 className="font-heading font-bold text-xl mb-4 flex items-center gap-2">
-                <span className="text-primary">&gt;&gt;</span> Sustainability
-              </h3>
-              <p className="text-muted-foreground">
-                We are committed to thoughtful and responsible travel. We hold ourselves accountable for upholding responsible travel principles.
-              </p>
-            </div>
+          <div className="grid md:grid-cols-3 gap-x-12 gap-y-8 mb-8">
+            {rates.map((rate) => (
+              <div key={rate.number}>
+                <h3 className="font-heading font-bold text-xl mb-3 flex items-center gap-2">
+                  <span className="text-primary">{rate.number}</span> {rate.title}
+                </h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  {rate.description}
+                </p>
+              </div>
+            ))}
           </div>
         </div>
       </div>
@@ -266,40 +210,9 @@ const OurStory = () => {
             <p className="text-xl text-muted-foreground">Putting A Name To The Face</p>
           </div>
 
-          {/* CEO - Founder (Top) */}
-          <div className="flex justify-center mb-12">
-            <div className="text-center group max-w-xs">
-              <div className="relative mb-4 overflow-hidden rounded-2xl shadow-2xl">
-                <img
-                  src={team[0].image}
-                  alt={team[0].name}
-                  className="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-8">
-                  <div className="flex gap-4">
-                    <a href="#" className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors">
-                      <Facebook className="w-5 h-5 text-white" />
-                    </a>
-                    <a href="#" className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors">
-                      <Twitter className="w-5 h-5 text-white" />
-                    </a>
-                    <a href="#" className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors">
-                      <Linkedin className="w-5 h-5 text-white" />
-                    </a>
-                    <a href="#" className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors">
-                      <Instagram className="w-5 h-5 text-white" />
-                    </a>
-                  </div>
-                </div>
-              </div>
-              <h3 className="font-heading font-bold text-xl mb-1">{team[0].name}</h3>
-              <p className="text-primary font-semibold">{team[0].role}</p>
-            </div>
-          </div>
-
-          {/* Management Team */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
-            {team.slice(1, 5).map((member, index) => (
+          {/* First Row */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
+            {team.slice(0, 4).map((member, index) => (
               <div key={index} className="text-center group">
                 <div className="relative mb-4 overflow-hidden rounded-2xl shadow-lg">
                   <img
@@ -327,9 +240,9 @@ const OurStory = () => {
             ))}
           </div>
 
-          {/* Tour Guides & Marketing */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
-            {team.slice(5).map((member, index) => (
+          {/* Second Row */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            {team.slice(4, 8).map((member, index) => (
               <div key={index} className="text-center group">
                 <div className="relative mb-4 overflow-hidden rounded-2xl shadow-lg">
                   <img
