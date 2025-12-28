@@ -5,7 +5,7 @@ import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import WhatsAppButton from '../components/WhatsAppButton';
 import NewsletterSection from '../components/NewsletterSection';
-import Button from '../components/Button';
+import { Button } from '@/components/ui/button';
 
 const TravelIdeaDetail = () => {
   const { slug } = useParams<{ slug: string }>();
