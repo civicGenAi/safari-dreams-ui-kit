@@ -5,36 +5,29 @@ import {
   Facebook, 
   Instagram, 
   Twitter, 
-  Youtube,
-  ChevronRight,
   ArrowUp
 } from 'lucide-react';
-
-const quickLinks = [
-  { name: 'About Us', href: '#about' },
-  { name: 'Our Tours', href: '#tours' },
-  { name: 'Destinations', href: '#destinations' },
-  { name: 'Travel Ideas', href: '#travel-ideas' },
-  { name: 'Blog', href: '#blog' },
-  { name: 'Contact', href: '#contact' },
-];
+import { Link } from 'react-router-dom';
+import logo from '@/assets/RCGP_Logo_Small-removebg-preview-1.webp';
+import ttssp from '@/assets/tanzniatourism.webp';
 
 const destinations = [
-  { name: 'Tanzania Safari', href: '#tanzania' },
-  { name: 'Kenya Tours', href: '#kenya' },
-  { name: 'Rwanda Gorillas', href: '#rwanda' },
-  { name: 'Uganda Adventures', href: '#uganda' },
-  { name: 'Israel Pilgrimage', href: '#israel' },
-  { name: 'Egypt Wonders', href: '#egypt' },
+  { name: 'Tanzania', href: '/destinations/tanzania' },
+  { name: 'Kenya', href: '/destinations/kenya' },
+  { name: 'Rwanda', href: '/destinations/rwanda' },
+  { name: 'Uganda', href: '/destinations/uganda' },
+  { name: 'Israel', href: '/destinations/israel' },
+  { name: 'Egypt', href: '/destinations/egypt' },
+  { name: 'Jordan', href: '/destinations/jordan' },
 ];
 
-const travelIdeas = [
-  { name: 'Safari Adventures', href: '#safari' },
-  { name: 'Beach Holidays', href: '#beach' },
-  { name: 'Mountain Trekking', href: '#trekking' },
-  { name: 'Cultural Tours', href: '#cultural' },
-  { name: 'Wildlife Expeditions', href: '#wildlife' },
-  { name: 'Honeymoon Packages', href: '#honeymoon' },
+const quickLinks = [
+  { name: 'Destinations', href: '/destinations' },
+  { name: 'Travel Ideas', href: '/travel-ideas' },
+  { name: 'Our Story', href: '/our-story' },
+  { name: 'Wild Tales', href: '/wild-tales' },
+  { name: 'FAQs', href: '#faqs' },
+  { name: 'Get in touch', href: '/contact' },
 ];
 
 export const Footer = () => {
@@ -43,145 +36,177 @@ export const Footer = () => {
   };
 
   return (
-    <footer className="bg-charcoal text-primary-foreground">
+    <footer className="bg-[#a68a64] text-white">
       {/* Main Footer */}
       <div className="container mx-auto px-4 lg:px-8 py-16 lg:py-20">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
-          {/* Brand Column */}
+          {/* Brand Column with Description */}
           <div className="lg:col-span-1">
-            <a href="/" className="inline-block mb-6">
+            <Link to="/" className="inline-block mb-6">
               <img
-                src="/src/assets/RCGP_Logo_Small-removebg-preview-1.webp"
+                src={logo}
                 alt="DeMi Tours"
-                className="h-12 w-auto"
+                className="h-16 w-auto"
               />
-            </a>
-            <p className="text-primary-foreground/70 mb-6 leading-relaxed">
-              Crafting extraordinary safari experiences across East Africa and beyond since 2009.
-              Your gateway to unforgettable adventures.
+            </Link>
+            <p className="text-white/80 mb-6 leading-relaxed text-sm">
+              Our commitment to sustainability extends to our partnerships with local communities in the regions we visit. In addition to our responsible travel practices, a portion of our earnings is dedicated to supporting{' '}
+              <a href="#" className="underline hover:text-white transition-colors">Dyslexia Tanzania</a>, 
+              a non-profit organization that aims to raise awareness about dyslexia and advocate for equal learning opportunities for children with dyslexia.
             </p>
             
-            {/* Social Links */}
-            <div className="flex items-center gap-3">
-              {[
-                { icon: Facebook, href: '#' },
-                { icon: Instagram, href: '#' },
-                { icon: Twitter, href: '#' },
-                { icon: Youtube, href: '#' },
-              ].map((social, index) => (
-                <a
-                  key={index}
-                  href={social.href}
-                  className="w-10 h-10 rounded-full bg-primary-foreground/10 flex items-center justify-center hover:bg-secondary hover:text-charcoal transition-colors"
-                  aria-label={`Social link ${index + 1}`}
-                >
-                  <social.icon className="w-5 h-5" />
-                </a>
+            {/* Payment Partners */}
+            <div className="mt-6">
+              <span className="text-secondary font-heading text-sm uppercase tracking-wider font-medium">
+                PAYMENT PARTNERS
+              </span>
+              <div className="flex items-center gap-2 mt-3">
+                {['Mastercard', 'PayPal', 'Visa', 'Western Union', 'Skrill'].map((payment) => (
+                  <div
+                    key={payment}
+                    className="w-12 h-8 bg-white rounded flex items-center justify-center text-charcoal text-[8px] font-bold"
+                  >
+                    {payment.substring(0, 4)}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          {/* Our Destinations */}
+          <div>
+            <h4 className="font-display text-lg font-bold mb-6 text-white uppercase tracking-wide">
+              OUR DESTINATIONS
+            </h4>
+            <ul className="space-y-3">
+              {destinations.map((link) => (
+                <li key={link.name}>
+                  <Link
+                    to={link.href}
+                    className="text-white/80 hover:text-white transition-colors text-sm"
+                  >
+                    {link.name}
+                  </Link>
+                </li>
               ))}
+            </ul>
+            
+            {/* TTSSP Certification */}
+            <div className="mt-8">
+              <img
+                src={ttssp}
+                alt="Tanzania Tourism Sector Safety and Protection"
+                className="w-28 h-auto"
+              />
+              <p className="text-white/70 text-xs mt-2">
+                DeMi Certified by TTSSP
+              </p>
             </div>
           </div>
 
           {/* Quick Links */}
           <div>
-            <h4 className="font-display text-lg font-bold mb-6">Quick Links</h4>
+            <h4 className="font-display text-lg font-bold mb-6 text-white uppercase tracking-wide">
+              QUICK LINKS
+            </h4>
             <ul className="space-y-3">
               {quickLinks.map((link) => (
                 <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="flex items-center gap-2 text-primary-foreground/70 hover:text-secondary transition-colors group"
+                  <Link
+                    to={link.href}
+                    className="text-white/80 hover:text-white transition-colors text-sm"
                   >
-                    <ChevronRight className="w-4 h-4 opacity-0 -ml-6 group-hover:opacity-100 group-hover:ml-0 transition-all" />
                     {link.name}
-                  </a>
+                  </Link>
                 </li>
               ))}
             </ul>
           </div>
 
-          {/* Destinations */}
+          {/* Contacts */}
           <div>
-            <h4 className="font-display text-lg font-bold mb-6">Destinations</h4>
-            <ul className="space-y-3">
-              {destinations.map((link) => (
-                <li key={link.name}>
-                  <a
-                    href={link.href}
-                    className="flex items-center gap-2 text-primary-foreground/70 hover:text-secondary transition-colors group"
-                  >
-                    <ChevronRight className="w-4 h-4 opacity-0 -ml-6 group-hover:opacity-100 group-hover:ml-0 transition-all" />
-                    {link.name}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
+            <h4 className="font-display text-lg font-bold mb-6 text-white uppercase tracking-wide">
+              CONTACTS
+            </h4>
+            
+            {/* Main Office */}
+            <div className="mb-6">
+              <p className="text-white/90 text-sm font-medium">DeMi Tours & Travels</p>
+              <p className="text-white/70 text-sm">Mega Complex, 7th Flr.</p>
+              <p className="text-white/70 text-sm">Livingstone Street.</p>
+              <p className="text-white/70 text-sm">P.O Box 15258,</p>
+              <p className="text-white/70 text-sm">Arusha, Tanzania.</p>
+            </div>
 
-          {/* Contact Info */}
-          <div>
-            <h4 className="font-display text-lg font-bold mb-6">Contact Us</h4>
-            <ul className="space-y-4">
-              <li>
-                <a
-                  href="tel:+255688535848"
-                  className="flex items-start gap-3 text-primary-foreground/70 hover:text-secondary transition-colors"
-                >
-                  <Phone className="w-5 h-5 mt-0.5 text-secondary" />
-                  <div>
-                    <span className="block font-heading font-medium text-primary-foreground">
-                      +255 688 535848
-                    </span>
-                    <span className="text-sm">Mon-Sat, 8am-6pm EAT</span>
-                  </div>
-                </a>
-              </li>
-              <li>
-                <a
-                  href="mailto:info@demitours.com"
-                  className="flex items-start gap-3 text-primary-foreground/70 hover:text-secondary transition-colors"
-                >
-                  <Mail className="w-5 h-5 mt-0.5 text-secondary" />
-                  <div>
-                    <span className="block font-heading font-medium text-primary-foreground">
-                      info@demitours.com
-                    </span>
-                    <span className="text-sm">We reply within 24 hours</span>
-                  </div>
-                </a>
-              </li>
-              <li className="flex items-start gap-3 text-primary-foreground/70">
-                <MapPin className="w-5 h-5 mt-0.5 text-secondary flex-shrink-0" />
-                <div>
-                  <span className="block font-heading font-medium text-primary-foreground">
-                    Arusha, Tanzania
-                  </span>
-                  <span className="text-sm">Plot 123, Safari Street</span>
-                </div>
-              </li>
-            </ul>
+            {/* China Office */}
+            <div className="mb-6">
+              <p className="text-white/90 text-sm font-medium">China Office</p>
+              <p className="text-white/70 text-sm">1016# Garden Hotel- Guangzhou</p>
+              <p className="text-white/70 text-sm">+(86) 135 0101 0811 -Yuan Wei</p>
+            </div>
+
+            {/* Australia Office */}
+            <div className="mb-6">
+              <p className="text-white/90 text-sm font-medium">Australia Office</p>
+              <p className="text-white/70 text-sm">NSW 2000 Australia</p>
+              <p className="text-white/70 text-sm">Tel: +61405968329</p>
+              <p className="text-white/70 text-sm">Gabriely Francis Sydney</p>
+            </div>
+
+            {/* WhatsApp */}
+            <p className="text-white/90 text-sm mb-2">Call/WhatsApp</p>
+            <p className="text-white font-bold text-xl">+(255)688 535848</p>
+            <p className="text-white font-bold text-xl">+(255)762 238763</p>
+
+            {/* Email */}
+            <a 
+              href="mailto:info@demitours.com" 
+              className="block mt-4 text-white/90 text-sm hover:text-white transition-colors"
+            >
+              info@demitours.com
+            </a>
           </div>
         </div>
       </div>
 
       {/* Bottom Bar */}
-      <div className="border-t border-primary-foreground/10">
+      <div className="border-t border-white/20 bg-charcoal">
         <div className="container mx-auto px-4 lg:px-8 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4">
-            <p className="text-primary-foreground/60 text-sm text-center md:text-left">
-              © {new Date().getFullYear()} DeMi Tours. All rights reserved.
+            <p className="text-white/60 text-sm text-center md:text-left">
+              © {new Date().getFullYear()}{' '}
+              <a href="/" className="underline hover:text-white transition-colors">
+                DeMi Tours
+              </a>
+              . All rights reserved.
             </p>
-            <div className="flex items-center gap-6 text-sm text-primary-foreground/60">
-              <a href="#" className="hover:text-secondary transition-colors">Privacy Policy</a>
-              <a href="#" className="hover:text-secondary transition-colors">Terms of Service</a>
-              <a href="#" className="hover:text-secondary transition-colors">Cookies</a>
+            
+            <div className="flex items-center gap-6 text-sm text-white/60">
+              <a href="#" className="hover:text-white transition-colors underline">Terms & Conditions</a>
+              <a href="#" className="hover:text-white transition-colors">Cookie Preferences</a>
+              <a href="#" className="hover:text-white transition-colors underline">Privacy Policy</a>
             </div>
-            <button
-              onClick={scrollToTop}
-              className="w-10 h-10 rounded-full bg-secondary text-charcoal flex items-center justify-center hover:bg-secondary/90 transition-colors"
-              aria-label="Scroll to top"
-            >
-              <ArrowUp className="w-5 h-5" />
-            </button>
+            
+            {/* Social Links */}
+            <div className="flex items-center gap-3">
+              {[Facebook, Twitter, Instagram].map((Icon, index) => (
+                <a
+                  key={index}
+                  href="#"
+                  className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-charcoal transition-colors text-white/70"
+                  aria-label={`Social link ${index + 1}`}
+                >
+                  <Icon className="w-4 h-4" />
+                </a>
+              ))}
+              <button
+                onClick={scrollToTop}
+                className="w-10 h-10 rounded-full bg-secondary text-charcoal flex items-center justify-center hover:bg-secondary/90 transition-colors ml-2"
+                aria-label="Scroll to top"
+              >
+                <ArrowUp className="w-5 h-5" />
+              </button>
+            </div>
           </div>
         </div>
       </div>
