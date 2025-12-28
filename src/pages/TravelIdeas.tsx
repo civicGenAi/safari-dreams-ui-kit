@@ -1,11 +1,19 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Compass, Heart, Palmtree, Mountain, Crown, Footprints, MapPin, Clock, Church } from 'lucide-react';
+import { Compass, Heart, Palmtree, Mountain, Crown, Footprints, MapPin, Clock, Church, ChevronDown, ArrowRight } from 'lucide-react';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { NewsletterSection } from '@/components/NewsletterSection';
+import { Button } from '@/components/ui/button';
 
 const TravelIdeas = () => {
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
+
+  const toggleFaq = (index: number) => {
+    setOpenFaq(openFaq === index ? null : index);
+  };
+
   const travelIdeas = [
     {
       name: 'Migration Safaris',
@@ -310,71 +318,75 @@ const TravelIdeas = () => {
             </div>
           </div>
 
-          {/* Other FAQs */}
-          <div className="space-y-6 max-w-4xl">
-            <div className="border-b border-border pb-6">
-              <h3 className="font-heading font-bold text-lg mb-3">
-                Q. Are children allowed on safari?
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Yes, children are welcome on our safaris. We offer family-friendly packages designed to accommodate travelers of all ages.
-              </p>
-            </div>
-
-            <div className="border-b border-border pb-6">
-              <h3 className="font-heading font-bold text-lg mb-3">
-                Q. Do you cater for special needs?
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Yes, we accommodate special needs and dietary requirements. Please inform us in advance so we can make necessary arrangements.
-              </p>
-            </div>
-
-            <div className="border-b border-border pb-6">
-              <h3 className="font-heading font-bold text-lg mb-3">
-                Q. What type of safari vehicles do you use?
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                We use modern 4x4 safari vehicles with pop-up roofs for optimal game viewing and photography.
-              </p>
-            </div>
-
-            <div className="border-b border-border pb-6">
-              <h3 className="font-heading font-bold text-lg mb-3">
-                Q. What are the road conditions like?
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Road conditions vary from paved highways to rough terrain in national parks. Our vehicles are well-maintained and suitable for all conditions.
-              </p>
-            </div>
-
-            <div className="border-b border-border pb-6">
-              <h3 className="font-heading font-bold text-lg mb-3">
-                Q. What type of accommodation do you use?
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                We offer a range from luxury lodges and tented camps to budget-friendly accommodations, all carefully selected for quality and location.
-              </p>
-            </div>
-
-            <div className="border-b border-border pb-6">
-              <h3 className="font-heading font-bold text-lg mb-3">
-                Q. How is the food like?
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Our tours include diverse meals featuring both local and international cuisine, prepared to high standards of hygiene and quality.
-              </p>
-            </div>
-
-            <div className="pb-6">
-              <h3 className="font-heading font-bold text-lg mb-3">
-                Q. Are there places to shop?
-              </h3>
-              <p className="text-muted-foreground leading-relaxed">
-                Yes, most areas have local markets and shops where you can purchase souvenirs, crafts, and other items.
-              </p>
-            </div>
+          {/* Other FAQs - Collapsible */}
+          <div className="space-y-4 max-w-4xl">
+            {[
+              {
+                question: 'Are children allowed on safari?',
+                answer: 'Yes, children are welcome on our safaris. We offer family-friendly packages designed to accommodate travelers of all ages.'
+              },
+              {
+                question: 'Do you cater for special needs?',
+                answer: 'Yes, we accommodate special needs and dietary requirements. Please inform us in advance so we can make necessary arrangements.'
+              },
+              {
+                question: 'What type of safari vehicles do you use?',
+                answer: 'We use modern 4x4 safari vehicles with pop-up roofs for optimal game viewing and photography.'
+              },
+              {
+                question: 'What are the road conditions like?',
+                answer: 'Road conditions vary from paved highways to rough terrain in national parks. Our vehicles are well-maintained and suitable for all conditions.'
+              },
+              {
+                question: 'What type of accommodation do you use?',
+                answer: 'We offer a range from luxury lodges and tented camps to budget-friendly accommodations, all carefully selected for quality and location.'
+              },
+              {
+                question: 'How is the food like?',
+                answer: 'Our tours include diverse meals featuring both local and international cuisine, prepared to high standards of hygiene and quality.'
+              },
+              {
+                question: 'Are there places to shop?',
+                answer: 'Yes, most areas have local markets and shops where you can purchase souvenirs, crafts, and other items.'
+              }
+            ].map((faq, index) => (
+              <div key={index} className="border-b border-border pb-4">
+                <button
+                  onClick={() => toggleFaq(index)}
+                  className="w-full flex items-center justify-between text-left group"
+                >
+                  <h3 className="font-heading font-bold text-lg group-hover:text-primary transition-colors">
+                    Q. {faq.question}
+                  </h3>
+                  <ChevronDown
+                    className={`w-5 h-5 text-primary transition-transform duration-300 flex-shrink-0 ml-4 ${
+                      openFaq === index ? 'rotate-180' : ''
+                    }`}
+                  />
+                </button>
+                {openFaq === index && (
+                  <p className="text-muted-foreground leading-relaxed mt-3 animate-in fade-in slide-in-from-top-2 duration-300">
+                    {faq.answer}
+                  </p>
+                )}
+              </div>
+            ))}
           </div>
+        </div>
+      </div>
+
+      {/* CTA Section */}
+      <div className="py-24 md:py-32 bg-muted/20">
+        <div className="container mx-auto px-4 lg:px-8 text-center">
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-8">
+            Exceptional Curated Travel Ideas & Experiences !
+          </h2>
+          <Link to="/contact">
+            <Button variant="primary" size="xl" className="gap-2 shadow-2xl">
+              Start Exploring
+              <ArrowRight className="w-5 h-5" />
+            </Button>
+          </Link>
         </div>
       </div>
 
