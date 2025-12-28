@@ -1,8 +1,8 @@
 import { Link, useParams } from 'react-router-dom';
 import { useState } from 'react';
 import { ArrowRight, ChevronDown, ChevronUp } from 'lucide-react';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import { Navbar } from '@/components/Navbar';
+import { Footer } from '@/components/Footer';
 import WhatsAppButton from '../components/WhatsAppButton';
 import NewsletterSection from '../components/NewsletterSection';
 import { Button } from '@/components/ui/button';
