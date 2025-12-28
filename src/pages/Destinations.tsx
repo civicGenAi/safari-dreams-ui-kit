@@ -127,7 +127,7 @@ const Destinations = () => {
         </div>
         <div className="relative container mx-auto px-4 lg:px-8 text-center">
           <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-tight">
-            <span className="inline-block font-['Allura'] font-normal text-6xl md:text-7xl lg:text-8xl transform hover:scale-105 transition-transform duration-300">
+            <span className="inline-block font-allura font-normal text-6xl md:text-7xl lg:text-8xl transform hover:scale-105 transition-transform duration-300">
               Curated
             </span>
             <br />
