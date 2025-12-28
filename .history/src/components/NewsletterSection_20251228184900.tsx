@@ -4,10 +4,10 @@ import { ArrowRight, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 // Import staff images for avatars
-import staffCaudence from '@/assets/footer_customer_care.webp';
-import staffBrenda from '@/assets/footer_customer_care2.webp';
-import staffAbel from '@/assets/footer_customer_care3.webp';
-import staffHuruma from '@/assets/footer_customer_care4.webp';
+import staffCaudence from '@/assets/staff/staff_caudence_ceo-1.webp';
+import staffBrenda from '@/assets/staff/staff_brenda_reservation.webp';
+import staffAbel from '@/assets/staff/staff_abel_marketing.webp';
+import staffHuruma from '@/assets/staff/staff_huruma_guide.webp';
 
 export const NewsletterSection = () => {
   const [email, setEmail] = useState('');
