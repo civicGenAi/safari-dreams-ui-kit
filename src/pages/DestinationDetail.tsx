@@ -156,7 +156,7 @@ Overall, Jordan is a diverse country that offers something for everyone, from an
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <Navbar activeDestination={slug} />
 
       {/* Hero */}
       <div className="relative h-[400px] md:h-[500px]">
