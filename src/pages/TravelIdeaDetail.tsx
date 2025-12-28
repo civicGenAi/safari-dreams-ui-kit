@@ -9,12 +9,17 @@ import { Button } from '@/components/ui/button';
 
 const TravelIdeaDetail = () => {
   const { slug } = useParams<{ slug: string }>();
+  const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [showFilters, setShowFilters] = useState({
     price: true,
     categories: true,
     destinations: true,
     reviews: true
   });
+
+  const toggleFaq = (index: number) => {
+    setOpenFaq(openFaq === index ? null : index);
+  };
 
   const travelIdeaData: any = {
     'migration-safaris': {
@@ -448,14 +453,26 @@ const TravelIdeaDetail = () => {
 
           <div className="grid lg:grid-cols-[1fr,500px] gap-12 items-start">
             {/* FAQs */}
-            <div className="space-y-6">
+            <div className="space-y-4">
               {faqs.map((faq, index) => (
-                <div key={index} className="border-b border-border pb-6">
-                  <h3 className="font-heading font-bold text-lg mb-3">
-                    Q. {faq.question}
-                  </h3>
-                  {faq.answer && (
-                    <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
+                <div key={index} className="border-b border-border pb-4">
+                  <button
+                    onClick={() => toggleFaq(index)}
+                    className="w-full flex items-center justify-between text-left group"
+                  >
+                    <h3 className="font-heading font-bold text-lg group-hover:text-primary transition-colors">
+                      Q. {faq.question}
+                    </h3>
+                    <ChevronDown
+                      className={`w-5 h-5 text-primary transition-transform duration-300 flex-shrink-0 ml-4 ${
+                        openFaq === index ? 'rotate-180' : ''
+                      }`}
+                    />
+                  </button>
+                  {openFaq === index && faq.answer && (
+                    <p className="text-muted-foreground leading-relaxed mt-3 animate-in fade-in slide-in-from-top-2 duration-300">
+                      {faq.answer}
+                    </p>
                   )}
                 </div>
               ))}
