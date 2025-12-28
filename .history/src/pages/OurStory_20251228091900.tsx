@@ -13,7 +13,7 @@ const OurStory = () => {
     { name: 'Lynn Mackanja', role: 'Legal Consultant', image: '/src/assets/staff/staff_lynn_legal.webp' },
     { name: 'Johns Tenga', role: 'Director of Operations', image: '/src/assets/staff/staff_tenga_operations.webp' },
     { name: 'Brenda Richard', role: 'Safaris & reservations consultant', image: '/src/assets/staff/staff_brenda_reservation.webp' },
-    { name: 'Juma Habibu', role: 'Finance Director', image: '/src/assets/staff/staff_juma_finance.webp' },
+    { name: 'Juma Habibu', role: 'Finance Director', image: '/src/assets/staff/juma.jpg' },
     { name: 'Huruma Mpanda', role: 'tour guide', image: '/src/assets/staff/staff_huruma_guide.webp' },
     { name: 'Abdulrahaman Abel', role: 'Marketing Manager', image: '/src/assets/staff/staff_abel_marketing.webp' },
     { name: 'Raheli Festo Ochieng', role: 'tour guide', image: '/src/assets/staff/staff_rachel_guide.webp' },
