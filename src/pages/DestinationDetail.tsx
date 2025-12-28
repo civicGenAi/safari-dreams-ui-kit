@@ -186,35 +186,71 @@ Overall, Jordan is a diverse country that offers something for everyone, from an
             </div>
 
             {/* Please Note Card */}
-            <div className="bg-white rounded-2xl p-6 shadow-lg border border-border">
-              <div className="flex items-start gap-4 mb-4">
-                <svg className="w-8 h-8 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+            <div className="relative bg-[#B8956A] rounded-2xl p-8 shadow-lg overflow-hidden">
+              {/* Decorative dotted line */}
+              <div className="absolute top-6 right-6 w-24 h-24">
+                <svg viewBox="0 0 100 100" className="w-full h-full opacity-30">
+                  <path d="M10,50 Q30,10 50,50 T90,50" fill="none" stroke="white" strokeWidth="2" strokeDasharray="4,4" strokeLinecap="round"/>
+                  <circle cx="90" cy="50" r="4" fill="white"/>
                 </svg>
+              </div>
+
+              <div className="flex items-start gap-4 mb-6 relative">
+                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
+                  <MapPin className="w-6 h-6 text-white" />
+                </div>
                 <div>
-                  <h3 className="font-display text-xl font-bold">Please Note Below</h3>
-                  <p className="text-primary font-semibold">Country Facts</p>
+                  <h3 className="font-display text-2xl font-bold text-white">Please Note Below</h3>
+                  <p className="text-white/90 font-semibold text-lg">Country Facts</p>
                 </div>
               </div>
 
               {/* Dotted Box with Country Information */}
-              <div className="border-2 border-dashed border-primary/30 rounded-xl p-6 bg-muted/20">
-                <div className="grid grid-cols-2 gap-4">
+              <div className="border-2 border-dashed border-white/30 rounded-xl p-6 bg-white/10 backdrop-blur-sm">
+                <div className="space-y-4">
                   <div>
-                    <span className="text-muted-foreground text-sm">Best Time:</span>
-                    <p className="font-semibold text-foreground">{destination.bestTime}</p>
+                    <span className="text-white/80 text-sm font-medium block mb-1">Country</span>
+                    <p className="font-semibold text-white">{destination.country}</p>
                   </div>
                   <div>
-                    <span className="text-muted-foreground text-sm">Climate:</span>
-                    <p className="font-semibold text-foreground">{destination.climate}</p>
+                    <span className="text-white/80 text-sm font-medium block mb-1">Visa Requirements</span>
+                    <p className="font-semibold text-white text-sm leading-relaxed">
+                      {slug === 'tanzania' && 'Commonwealth & EAC citizens - don\'t need visa. Everyone else need a visa.'}
+                      {slug === 'kenya' && 'Most nationalities can obtain visa on arrival. EAC citizens enter visa-free.'}
+                      {slug === 'rwanda' && 'Visa on arrival for most nationalities. EAC, AU member states visa-free.'}
+                      {slug === 'uganda' && 'East African citizens visa-free. Most nationalities can get e-visa online.'}
+                      {slug === 'israel' && 'Many countries visa-free for up to 90 days. Check specific requirements.'}
+                      {slug === 'egypt' && 'Visa required. Can be obtained on arrival or online (e-visa) for most nationalities.'}
+                      {slug === 'jordan' && 'Visa on arrival available. Free if staying 3+ nights through Jordan Pass.'}
+                    </p>
                   </div>
                   <div>
-                    <span className="text-muted-foreground text-sm">Currency:</span>
-                    <p className="font-semibold text-foreground">{destination.currency}</p>
+                    <span className="text-white/80 text-sm font-medium block mb-1">Languages spoken</span>
+                    <p className="font-semibold text-white">{destination.language}</p>
                   </div>
                   <div>
-                    <span className="text-muted-foreground text-sm">Language:</span>
-                    <p className="font-semibold text-foreground">{destination.language}</p>
+                    <span className="text-white/80 text-sm font-medium block mb-1">Currency used</span>
+                    <p className="font-semibold text-white">
+                      {slug === 'tanzania' && 'Tanzania Shilling, USD, Euro'}
+                      {slug === 'kenya' && 'Kenyan Shilling, USD'}
+                      {slug === 'rwanda' && 'Rwandan Franc, USD'}
+                      {slug === 'uganda' && 'Ugandan Shilling, USD'}
+                      {slug === 'israel' && 'Israeli Shekel, USD, Euro'}
+                      {slug === 'egypt' && 'Egyptian Pound, USD, Euro'}
+                      {slug === 'jordan' && 'Jordanian Dinar, USD'}
+                    </p>
+                  </div>
+                  <div>
+                    <span className="text-white/80 text-sm font-medium block mb-1">Area (km2)</span>
+                    <p className="font-semibold text-white">
+                      {slug === 'tanzania' && '945,087 km²'}
+                      {slug === 'kenya' && '580,367 km²'}
+                      {slug === 'rwanda' && '26,338 km²'}
+                      {slug === 'uganda' && '241,038 km²'}
+                      {slug === 'israel' && '22,072 km²'}
+                      {slug === 'egypt' && '1,010,408 km²'}
+                      {slug === 'jordan' && '89,342 km²'}
+                    </p>
                   </div>
                 </div>
               </div>
