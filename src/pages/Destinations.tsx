@@ -116,18 +116,30 @@ const Destinations = () => {
       </div>
 
       {/* Curated Destinations Section */}
-      <div className="relative py-24 md:py-32">
+      <div className="relative py-32 md:py-40 overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="/src/assets/curated_bg.jpg"
+            src="/src/assets/header_bg_new4.gif"
             alt="Curated Destinations"
-            className="w-full h-full object-cover opacity-10"
+            className="w-full h-full object-cover"
           />
+          <div className="absolute inset-0 bg-gradient-to-r from-charcoal/80 via-charcoal/70 to-charcoal/80"></div>
         </div>
         <div className="relative container mx-auto px-4 lg:px-8 text-center">
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground">
-            Curated Destinations
+          <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-tight">
+            <span className="inline-block transform hover:scale-105 transition-transform duration-300">
+              Curated
+            </span>
+            <br />
+            <span className="inline-block text-primary drop-shadow-[0_2px_10px_rgba(218,165,32,0.5)] transform hover:scale-105 transition-transform duration-300">
+              Destinations
+            </span>
           </h2>
+          <div className="mt-8 flex justify-center gap-4">
+            <div className="h-1 w-20 bg-primary rounded-full"></div>
+            <div className="h-1 w-12 bg-primary/60 rounded-full"></div>
+            <div className="h-1 w-8 bg-primary/40 rounded-full"></div>
+          </div>
         </div>
       </div>
 
