@@ -199,6 +199,99 @@ const TravelIdeas = () => {
         </div>
       </div>
 
+      {/* FAQs Section */}
+      <div className="py-16 md:py-24">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="grid lg:grid-cols-[1fr,400px] gap-12 items-start">
+            {/* FAQs - Left */}
+            <div>
+              <h2 className="font-display text-3xl md:text-4xl font-bold mb-8">
+                FAQs On Our Travel Ideas
+              </h2>
+
+              <div className="space-y-6">
+                <div className="border-b border-border pb-6">
+                  <h3 className="font-heading font-bold text-lg mb-3">
+                    Are children allowed on safari?
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Yes, children are welcome on our safaris. We offer family-friendly packages designed to accommodate travelers of all ages.
+                  </p>
+                </div>
+
+                <div className="border-b border-border pb-6">
+                  <h3 className="font-heading font-bold text-lg mb-3">
+                    Do you cater for special needs?
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Yes, we accommodate special needs and dietary requirements. Please inform us in advance so we can make necessary arrangements.
+                  </p>
+                </div>
+
+                <div className="border-b border-border pb-6">
+                  <h3 className="font-heading font-bold text-lg mb-3">
+                    What type of safari vehicles do you use?
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    We use modern 4x4 safari vehicles with pop-up roofs for optimal game viewing and photography.
+                  </p>
+                </div>
+
+                <div className="border-b border-border pb-6">
+                  <h3 className="font-heading font-bold text-lg mb-3">
+                    What are the road conditions like?
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Road conditions vary from paved highways to rough terrain in national parks. Our vehicles are well-maintained and suitable for all conditions.
+                  </p>
+                </div>
+
+                <div className="border-b border-border pb-6">
+                  <h3 className="font-heading font-bold text-lg mb-3">
+                    What type of accommodation do you use?
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    We offer a range from luxury lodges and tented camps to budget-friendly accommodations, all carefully selected for quality and location.
+                  </p>
+                </div>
+
+                <div className="border-b border-border pb-6">
+                  <h3 className="font-heading font-bold text-lg mb-3">
+                    How is the food like?
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Our tours include diverse meals featuring both local and international cuisine, prepared to high standards of hygiene and quality.
+                  </p>
+                </div>
+
+                <div className="pb-6">
+                  <h3 className="font-heading font-bold text-lg mb-3">
+                    Are there places to shop?
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">
+                    Yes, most areas have local markets and shops where you can purchase souvenirs, crafts, and other items.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Images - Right */}
+            <div className="space-y-6">
+              <img
+                src="/src/assets/faq_safari1.jpg"
+                alt="Safari Wildlife"
+                className="w-full h-64 object-cover rounded-2xl shadow-lg"
+              />
+              <img
+                src="/src/assets/faq_safari2.jpg"
+                alt="Safari Experience"
+                className="w-full h-64 object-cover rounded-2xl shadow-lg"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
       <NewsletterSection />
       <Footer />
       <WhatsAppButton />
