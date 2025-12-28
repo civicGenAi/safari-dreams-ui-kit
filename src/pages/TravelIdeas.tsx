@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 import { Compass, Heart, Palmtree, Mountain, Crown, Footprints, MapPin, Clock, Church } from 'lucide-react';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
-import WhatsAppButton from '../components/WhatsAppButton';
-import NewsletterSection from '../components/NewsletterSection';
+import { WhatsAppButton } from '@/components/WhatsAppButton';
+import { NewsletterSection } from '@/components/NewsletterSection';
 
 const TravelIdeas = () => {
   const travelIdeas = [
