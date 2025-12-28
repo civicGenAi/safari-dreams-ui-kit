@@ -202,76 +202,96 @@ const TravelIdeas = () => {
       {/* FAQs Section */}
       <div className="py-16 md:py-24">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="grid lg:grid-cols-[1fr,400px] gap-12 items-start">
-            {/* FAQs - Left */}
+          <h2 className="font-display text-3xl md:text-4xl font-bold mb-12">
+            FAQs On Our Travel Ideas
+          </h2>
+
+          {/* First FAQ with Images */}
+          <div className="grid lg:grid-cols-[1fr,400px] gap-12 items-start mb-12">
+            {/* What's included/excluded - Left */}
             <div>
-              <h2 className="font-display text-3xl md:text-4xl font-bold mb-8">
-                FAQs On Our Travel Ideas
-              </h2>
+              <h3 className="font-heading font-bold text-xl mb-6">
+                Q. What's included and excluded in every tour?
+              </h3>
 
-              <div className="space-y-6">
-                <div className="border-b border-border pb-6">
-                  <h3 className="font-heading font-bold text-lg mb-3">
-                    Are children allowed on safari?
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Yes, children are welcome on our safaris. We offer family-friendly packages designed to accommodate travelers of all ages.
-                  </p>
-                </div>
+              <div className="mb-6">
+                <h4 className="font-heading font-semibold text-lg mb-4">Package includes:</h4>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>A well-maintained safari land cruiser with a roof hatch for enhanced game viewing</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>A professional English-speaking safari guide</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>Airport transfers</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>All government taxes</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>All park fees for all the national parks</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>Meals and accommodations as per itinerary</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>Unlimited mineral water during the entire safari</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>Mto Wa Mbu Cultural tour plus local lunch</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>Maasai Village visit</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>Evacuation Insurance – Amref Flying Doctors</span>
+                  </li>
+                </ul>
+              </div>
 
-                <div className="border-b border-border pb-6">
-                  <h3 className="font-heading font-bold text-lg mb-3">
-                    Do you cater for special needs?
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Yes, we accommodate special needs and dietary requirements. Please inform us in advance so we can make necessary arrangements.
-                  </p>
-                </div>
-
-                <div className="border-b border-border pb-6">
-                  <h3 className="font-heading font-bold text-lg mb-3">
-                    What type of safari vehicles do you use?
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    We use modern 4x4 safari vehicles with pop-up roofs for optimal game viewing and photography.
-                  </p>
-                </div>
-
-                <div className="border-b border-border pb-6">
-                  <h3 className="font-heading font-bold text-lg mb-3">
-                    What are the road conditions like?
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Road conditions vary from paved highways to rough terrain in national parks. Our vehicles are well-maintained and suitable for all conditions.
-                  </p>
-                </div>
-
-                <div className="border-b border-border pb-6">
-                  <h3 className="font-heading font-bold text-lg mb-3">
-                    What type of accommodation do you use?
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    We offer a range from luxury lodges and tented camps to budget-friendly accommodations, all carefully selected for quality and location.
-                  </p>
-                </div>
-
-                <div className="border-b border-border pb-6">
-                  <h3 className="font-heading font-bold text-lg mb-3">
-                    How is the food like?
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Our tours include diverse meals featuring both local and international cuisine, prepared to high standards of hygiene and quality.
-                  </p>
-                </div>
-
-                <div className="pb-6">
-                  <h3 className="font-heading font-bold text-lg mb-3">
-                    Are there places to shop?
-                  </h3>
-                  <p className="text-muted-foreground leading-relaxed">
-                    Yes, most areas have local markets and shops where you can purchase souvenirs, crafts, and other items.
-                  </p>
-                </div>
+              <div>
+                <h4 className="font-heading font-semibold text-lg mb-4">Package excludes:</h4>
+                <ul className="space-y-2 text-muted-foreground">
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>Local & international flights</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>Tips</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>Drinks at the camps</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>Crater rim walk –$45 per person</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>Walking safari in Manyara national park –$45 per person</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>Night game drive in Manyara national park -$45 per person</span>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <span className="text-primary mt-1">•</span>
+                    <span>Balloon safari in Serengeti –$540 per person</span>
+                  </li>
+                </ul>
               </div>
             </div>
 
@@ -287,6 +307,72 @@ const TravelIdeas = () => {
                 alt="Safari Experience"
                 className="w-full h-64 object-cover rounded-2xl shadow-lg"
               />
+            </div>
+          </div>
+
+          {/* Other FAQs */}
+          <div className="space-y-6 max-w-4xl">
+            <div className="border-b border-border pb-6">
+              <h3 className="font-heading font-bold text-lg mb-3">
+                Q. Are children allowed on safari?
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Yes, children are welcome on our safaris. We offer family-friendly packages designed to accommodate travelers of all ages.
+              </p>
+            </div>
+
+            <div className="border-b border-border pb-6">
+              <h3 className="font-heading font-bold text-lg mb-3">
+                Q. Do you cater for special needs?
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Yes, we accommodate special needs and dietary requirements. Please inform us in advance so we can make necessary arrangements.
+              </p>
+            </div>
+
+            <div className="border-b border-border pb-6">
+              <h3 className="font-heading font-bold text-lg mb-3">
+                Q. What type of safari vehicles do you use?
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                We use modern 4x4 safari vehicles with pop-up roofs for optimal game viewing and photography.
+              </p>
+            </div>
+
+            <div className="border-b border-border pb-6">
+              <h3 className="font-heading font-bold text-lg mb-3">
+                Q. What are the road conditions like?
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Road conditions vary from paved highways to rough terrain in national parks. Our vehicles are well-maintained and suitable for all conditions.
+              </p>
+            </div>
+
+            <div className="border-b border-border pb-6">
+              <h3 className="font-heading font-bold text-lg mb-3">
+                Q. What type of accommodation do you use?
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                We offer a range from luxury lodges and tented camps to budget-friendly accommodations, all carefully selected for quality and location.
+              </p>
+            </div>
+
+            <div className="border-b border-border pb-6">
+              <h3 className="font-heading font-bold text-lg mb-3">
+                Q. How is the food like?
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Our tours include diverse meals featuring both local and international cuisine, prepared to high standards of hygiene and quality.
+              </p>
+            </div>
+
+            <div className="pb-6">
+              <h3 className="font-heading font-bold text-lg mb-3">
+                Q. Are there places to shop?
+              </h3>
+              <p className="text-muted-foreground leading-relaxed">
+                Yes, most areas have local markets and shops where you can purchase souvenirs, crafts, and other items.
+              </p>
             </div>
           </div>
         </div>
