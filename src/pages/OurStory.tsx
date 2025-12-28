@@ -1,22 +1,50 @@
+import { Link } from 'react-router-dom';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
-import { Heart, Award, Users, Globe, Shield, Leaf } from 'lucide-react';
+import { TestimonialsSection } from '@/components/TestimonialsSection';
+import { NewsletterSection } from '@/components/NewsletterSection';
+import { Button } from '@/components/ui/button';
+import { ArrowRight } from 'lucide-react';
 
 const OurStory = () => {
-  const values = [
-    { icon: Heart, title: 'Passion for Wildlife', description: 'We live and breathe safari. Our love for Africa\'s wildlife drives everything we do.' },
-    { icon: Award, title: 'Excellence', description: 'Over 15 years of creating unforgettable experiences with 98% customer satisfaction.' },
-    { icon: Users, title: 'Expert Guides', description: 'Our certified guides are local experts with decades of combined experience.' },
-    { icon: Globe, title: 'Sustainable Tourism', description: 'We practice responsible tourism that benefits local communities and wildlife.' },
-    { icon: Shield, title: 'Safety First', description: 'Your safety is our top priority with comprehensive insurance and protocols.' },
-    { icon: Leaf, title: 'Conservation', description: 'We contribute 5% of profits to wildlife conservation and community projects.' },
+  const team = [
+    { name: 'Caudence Ayoti', role: 'CEO, Founder', image: '/src/assets/staff/caudence.jpg' },
+    { name: 'Lynn Mackanja', role: 'Legal Consultant', image: '/src/assets/staff/lynn.jpg' },
+    { name: 'Johns Tenga', role: 'Director of Operations', image: '/src/assets/staff/johns.jpg' },
+    { name: 'Brenda Richard', role: 'Safaris & reservations consultant', image: '/src/assets/staff/brenda.jpg' },
+    { name: 'Juma Habibu', role: 'Finance Director', image: '/src/assets/staff/juma.jpg' },
+    { name: 'Huruma Mpanda', role: 'tour guide', image: '/src/assets/staff/huruma.jpg' },
+    { name: 'Abdulrahaman Abel', role: 'Marketing Manager', image: '/src/assets/staff/abdulrahaman.jpg' },
+    { name: 'Raheli Festo Ochieng', role: 'tour guide', image: '/src/assets/staff/raheli.jpg' },
   ];
 
-  const team = [
-    { name: 'David Thompson', role: 'Founder & CEO', image: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400', bio: '20+ years in safari tourism' },
-    { name: 'Sarah Mitchell', role: 'Head of Operations', image: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=400', bio: 'Former wildlife biologist' },
-    { name: 'James Kariuki', role: 'Lead Safari Guide', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=400', bio: 'Born and raised in Masai Mara' },
+  const rates = [
+    {
+      number: '01',
+      title: 'Exciting Selection of Tours',
+      description: 'Every desire to travel starts as an idea. We have simplified the process for you. Travel experiences on our website are grouped into ideas. However we are still open to tweaking our ideas to suit your taste.'
+    },
+    {
+      number: '02',
+      title: 'In Safe Hands',
+      description: 'Of seasoned industry professionals and guides, with deep knowledge and understanding of the region\'s flora and fauna. We are also represented on SafariBookings a leading online marketplace for safaris.'
+    },
+    {
+      number: '03',
+      title: 'Sustainability',
+      description: 'At DeMi Tours, we are committed to thoughtful and responsible travel. We hold ourselves accountable for upholding responsible travel principles throughout our safaris. We achieve this by engaging local communities in the regions in which we travel. We also create programs that foster sustainable and authentic preservation of those communities.'
+    },
+    {
+      number: '04',
+      title: 'Book With Confidence',
+      description: 'Once you decide on your favourite package and travel date, easily book it online. Upon receiving your booking, we will send you a secure payment link.'
+    },
+    {
+      number: '05',
+      title: 'Bespoke Travel Ideas',
+      description: 'We are flexible enough to custom-make an itinerary for you from start to finish, working within your stipulated budget.'
+    }
   ];
 
   return (
@@ -24,86 +52,191 @@ const OurStory = () => {
       <Navbar />
 
       {/* Hero */}
-      <div className="relative h-[500px]">
+      <div className="relative h-[300px] md:h-[400px]">
         <img src="/src/assets/header_bg_new4.gif" alt="Our Story" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/80 via-charcoal/60 to-charcoal/80" />
         <div className="absolute inset-0 flex items-center">
           <div className="container mx-auto px-4 lg:px-8">
-            <h1 className="font-display text-5xl md:text-6xl font-bold text-white mb-4 max-w-2xl">
-              Our Story: 15 Years of Safari Excellence
+            <div className="text-white mb-4">
+              <Link to="/" className="hover:text-primary transition-colors">Home</Link>
+              <span className="mx-2">»</span>
+              <span>Our Story</span>
+            </div>
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white">
+              Our Story
             </h1>
-            <p className="text-white/90 text-xl max-w-xl">
-              From a small family business to East Africa's most trusted safari operator
-            </p>
           </div>
         </div>
       </div>
 
-      <div className="container mx-auto px-4 lg:px-8 py-16">
-        {/* Story */}
-        <div className="max-w-3xl mx-auto mb-16">
-          <h2 className="text-3xl font-display font-bold mb-6">How It All Began</h2>
-          <div className="prose prose-lg max-w-none text-muted-foreground space-y-4">
-            <p>
-              It started with a dream in 2009. David Thompson, a wildlife photographer from London, fell in love with the Serengeti during his first visit. He met James Kariuki, a local Maasai guide, and together they envisioned creating authentic, sustainable safari experiences that would connect travelers with Africa's soul.
-            </p>
-            <p>
-              What began as small walking safaris with a single Land Cruiser has grown into a company trusted by thousands of travelers from over 50 countries. But our core mission remains unchanged: to create transformative experiences while protecting the wildlife and supporting the communities that make it all possible.
-            </p>
-            <p>
-              Today, we operate in seven countries across East Africa, employ over 50 local staff, and contribute to conservation projects protecting endangered species. Every safari you book with us helps preserve Africa's natural heritage for future generations.
-            </p>
-          </div>
-        </div>
-
-        {/* Values */}
-        <div className="mb-16">
-          <h2 className="text-3xl font-display font-bold text-center mb-12">Our Values</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {values.map((value, index) => (
-              <div key={index} className="p-6 rounded-2xl bg-card border border-border">
-                <value.icon className="w-12 h-12 text-primary mb-4" />
-                <h3 className="font-heading font-semibold text-lg mb-2">{value.title}</h3>
-                <p className="text-muted-foreground text-sm">{value.description}</p>
+      {/* Main Content */}
+      <div className="py-16 bg-white">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-12 items-start">
+            {/* Left - Image with Our Rates */}
+            <div className="space-y-8">
+              <div className="relative rounded-3xl overflow-hidden shadow-2xl">
+                <img src="/src/assets/our_story.jpeg" alt="Our Story" className="w-full h-auto" />
               </div>
-            ))}
+
+              {/* Our Rates */}
+              <div className="bg-muted/30 rounded-3xl p-8">
+                <h3 className="font-display text-2xl font-bold mb-4">Our Rates</h3>
+                <p className="text-muted-foreground mb-8">
+                  Memorable travel experiences are priceless. We offer best value for money. Occasionally we have special offers.
+                </p>
+                <div className="space-y-6">
+                  {rates.map((rate) => (
+                    <div key={rate.number} className="flex gap-4">
+                      <div className="flex-shrink-0">
+                        <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                          <span className="font-bold text-primary">{rate.number}</span>
+                        </div>
+                      </div>
+                      <div>
+                        <h4 className="font-heading font-bold mb-2">{rate.title}</h4>
+                        <p className="text-sm text-muted-foreground leading-relaxed">{rate.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+
+            {/* Right - Content */}
+            <div className="space-y-8">
+              <div>
+                <h2 className="font-display text-3xl md:text-4xl font-bold mb-4">
+                  Come with us to new experiences
+                </h2>
+                <p className="text-xl text-primary font-semibold mb-6">
+                  We treat our clients like family.
+                </p>
+                <div className="space-y-4 text-muted-foreground leading-relaxed">
+                  <p>
+                    Demi Tours and Travel is a "sista" owned travel agency based in Arusha, Tanzania. Something that makes us different from a lot of tour companies is that, the founders are the same as you. Travel enthusiasts.
+                  </p>
+                  <p>
+                    After two decades of industry expertise, our visionary founder, Caudence, recognized a glaring gender gap within the male-dominated travel industry. Driven by the desire to empower more women and bridge this divide, the seed of an idea blossomed, culminating in the birth of Demi Tours and Travel.
+                  </p>
+                </div>
+              </div>
+
+              {/* Sections */}
+              <div className="space-y-6">
+                <div>
+                  <h3 className="font-heading font-bold text-xl mb-3">Empowerment :</h3>
+                  <p className="text-muted-foreground">
+                    Our founder is passionate about empowering women in the travel industry and beyond. She mentors and trains young women who are joining the industry, helping them reach their full potential. She is a member of TAWTO (Tanzania Association of Women Tour Operators )
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="font-heading font-bold text-xl mb-3">Diversity :</h3>
+                  <p className="text-muted-foreground">
+                    At Demi Tours and Travel, we celebrate diversity and offer a wide range of travel experiences. From safaris to romantic getaways, adventure trips to luxury vacations, cross-border excursions to pilgrimages, gorilla trekking to beach holidays, day tours to bespoke tours, we have something for everyone.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="font-heading font-bold text-xl mb-3">Attention to detail :</h3>
+                  <p className="text-muted-foreground">
+                    We take pride in our attention to detail and organizational skills, ensuring that our customers have a seamless and stress-free journey. Our team works tirelessly to ensure that every aspect of your trip is well-planned and executed to perfection.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="font-heading font-bold text-xl mb-3">Customer service :</h3>
+                  <p className="text-muted-foreground">
+                    Our commitment to excellent customer service sets us apart. We prioritize building strong relationships with our customers, ensuring that their needs and preferences are met. Our personalized approach ensures that our customers have a satisfying and memorable travel experience.
+                  </p>
+                </div>
+
+                <div>
+                  <h3 className="font-heading font-bold text-xl mb-3">Social responsibility :</h3>
+                  <p className="text-muted-foreground mb-4">
+                    We at Demi Tours, believe in the power of ecotourism as a responsible and sustainable way to explore the natural wonders of our planet.
+                    Our commitment to ecotourism goes beyond just showcasing the beauty of the destinations we visit. We also actively support local conservation efforts and promote environmental awareness.
+                  </p>
+                  <p className="text-muted-foreground">
+                    We achieve this by partnering with accommodation providers, who engage in sustainable practices and initiatives. A portion of our earnings is dedicated to supporting Dyslexia Tanzania, a non-profit organization that aims to raise awareness about dyslexia and advocate for equal learning opportunities for children with dyslexia.
+                  </p>
+                </div>
+
+                <p className="text-muted-foreground italic">
+                  Thank you for considering DeMi Tours and Travel for your next adventure. We look forward to providing you with an exceptional experience that will create lasting memories.
+                </p>
+              </div>
+            </div>
           </div>
         </div>
+      </div>
 
-        {/* Team */}
-        <div>
-          <h2 className="text-3xl font-display font-bold text-center mb-12">Meet Our Team</h2>
-          <div className="grid md:grid-cols-3 gap-8">
+      {/* Responsive Card */}
+      <div className="py-16 bg-muted/20">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="relative max-w-4xl mx-auto rounded-3xl overflow-hidden shadow-2xl">
+            <img src="/src/assets/Untitled.png" alt="Background" className="w-full h-auto opacity-20" />
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-foreground">
+                We are Responsive to Your Travel Ideas
+              </h2>
+              <Link to="/contact">
+                <Button variant="primary" size="xl" className="gap-2">
+                  Talk to us
+                  <ArrowRight className="w-5 h-5" />
+                </Button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Meet The FAM */}
+      <div className="py-24 bg-white">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="font-display text-4xl md:text-5xl font-bold mb-2">Meet The FAM</h2>
+            <p className="text-xl text-muted-foreground">Putting A Name To The Face</p>
+          </div>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
             {team.map((member, index) => (
-              <div key={index} className="text-center">
-                <img src={member.image} alt={member.name} className="w-48 h-48 rounded-full mx-auto mb-4 object-cover" />
-                <h3 className="font-heading font-semibold text-xl mb-1">{member.name}</h3>
-                <p className="text-primary mb-2">{member.role}</p>
-                <p className="text-sm text-muted-foreground">{member.bio}</p>
+              <div key={index} className="text-center group">
+                <div className="relative mb-4 overflow-hidden rounded-2xl shadow-lg">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                </div>
+                <h3 className="font-heading font-bold text-lg mb-1">{member.name}</h3>
+                <p className="text-sm text-primary">{member.role}</p>
               </div>
             ))}
           </div>
         </div>
+      </div>
 
-        {/* Stats */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16 p-8 rounded-2xl bg-primary/5">
-          <div className="text-center">
-            <div className="text-4xl font-display font-bold text-primary mb-2">15+</div>
-            <div className="text-sm text-muted-foreground">Years Experience</div>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl font-display font-bold text-primary mb-2">12K+</div>
-            <div className="text-sm text-muted-foreground">Happy Travelers</div>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl font-display font-bold text-primary mb-2">98%</div>
-            <div className="text-sm text-muted-foreground">Satisfaction Rate</div>
-          </div>
-          <div className="text-center">
-            <div className="text-4xl font-display font-bold text-primary mb-2">50+</div>
-            <div className="text-sm text-muted-foreground">Tour Packages</div>
-          </div>
+      {/* Testimonials */}
+      <TestimonialsSection />
+
+      {/* CTA */}
+      <div className="py-32 bg-white">
+        <div className="container mx-auto px-4 lg:px-8 text-center">
+          <h2 className="font-display text-5xl md:text-6xl font-bold text-foreground mb-6">
+            Your Trip. Our Responsibility.
+          </h2>
+          <Link to="/contact">
+            <Button variant="primary" size="xl" className="gap-2 shadow-2xl">
+              Plan Your Trip
+              <ArrowRight className="w-5 h-5" />
+            </Button>
+          </Link>
         </div>
       </div>
+
+      {/* Newsletter */}
+      <NewsletterSection />
 
       <Footer />
       <WhatsAppButton />
