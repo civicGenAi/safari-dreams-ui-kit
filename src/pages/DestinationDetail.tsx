@@ -364,130 +364,29 @@ Overall, Jordan is a diverse country that offers something for everyone, from an
         </div>
       )}
 
-      {/* Must See Destinations - Map Section */}
-      <section className="py-24 lg:py-32 bg-background relative overflow-hidden">
-        <div className="container mx-auto px-4 lg:px-8 relative z-10">
-          {/* Section Header */}
-          <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="flex items-center justify-center gap-3 mb-6">
-              <div className="w-12 h-px bg-primary" />
-              <span className="font-heading text-sm uppercase tracking-widest text-primary">
-                Explore More
-              </span>
-              <div className="w-12 h-px bg-primary" />
-            </div>
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
-              Must See
-              <span className="text-gradient-primary block">Destinations</span>
-            </h2>
+      {/* Popular Destinations */}
+      <div className="py-24 bg-white">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="text-center mb-12">
+            <h2 className="font-display text-4xl md:text-5xl font-bold mb-2">Must See Destinations</h2>
           </div>
-
-          {/* Map and List Layout */}
-          <div className="grid lg:grid-cols-2 gap-12 items-start">
-            {/* Left: World Map Image */}
-            <div className="relative rounded-3xl overflow-hidden bg-gradient-to-br from-muted to-background border border-border shadow-lg p-6">
-              <div className="relative aspect-[16/10]">
-                <img
-                  src="/src/assets/world-map.webp"
-                  alt="World Map showing tour destinations"
-                  className="w-full h-full object-contain opacity-90"
-                />
-
-                {/* Destination Markers */}
-                {mockDestinations.map((dest) => (
-                  <div
-                    key={dest.name}
-                    className={`absolute transform -translate-x-1/2 -translate-y-1/2 transition-all duration-300 group ${
-                      dest.slug === slug ? 'z-20' : 'z-10'
-                    }`}
-                    style={{ left: dest.coordinates.x, top: dest.coordinates.y }}
-                  >
-                    {/* Pulse ring for current destination */}
-                    {dest.slug === slug && (
-                      <span className="absolute inset-0 w-8 h-8 -m-2 rounded-full bg-primary/30 animate-ping" />
-                    )}
-
-                    {/* Marker dot */}
-                    <span className={`relative flex items-center justify-center w-4 h-4 rounded-full border-2 border-background shadow-lg transition-all duration-300 ${
-                      dest.slug === slug
-                        ? 'bg-primary scale-150'
-                        : 'bg-primary/70 hover:bg-primary hover:scale-125'
-                    }`}>
-                      <span className="w-1.5 h-1.5 rounded-full bg-background" />
-                    </span>
-
-                    {/* Tooltip */}
-                    <span className={`absolute left-1/2 -translate-x-1/2 -top-10 bg-secondary text-secondary-foreground text-xs font-heading font-medium px-3 py-1.5 rounded-lg whitespace-nowrap shadow-lg transition-all duration-300 ${
-                      dest.slug === slug
-                        ? 'opacity-100 visible translate-y-0'
-                        : 'opacity-0 invisible translate-y-2'
-                    }`}>
-                      {dest.name}
-                      <span className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-secondary" />
-                    </span>
-                  </div>
-                ))}
-              </div>
-
-              {/* Map Legend */}
-              <div className="flex items-center justify-center gap-6 mt-6 pt-6 border-t border-border">
-                <div className="flex items-center gap-2">
-                  <span className="w-3 h-3 rounded-full bg-primary animate-pulse" />
-                  <span className="text-sm text-muted-foreground">Current</span>
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
+            {otherDestinations.map((dest) => (
+              <Link key={dest.slug} to={`/destinations/${dest.slug}`} className="group relative h-64 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all">
+                <img src={dest.image} alt={dest.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
+                <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/70 to-transparent" />
+                <div className="absolute bottom-4 left-4 right-4">
+                  <h3 className="font-display text-lg font-bold text-white mb-1">{dest.name}</h3>
+                  <p className="text-white/80 text-sm mb-2">{dest.tours} Tours</p>
+                  <Button variant="secondary" size="sm" className="text-xs px-3 py-1 opacity-0 group-hover:opacity-100 transition-opacity">
+                    Explore <ArrowRight className="w-3 h-3" />
+                  </Button>
                 </div>
-                <div className="flex items-center gap-2">
-                  <span className="w-2.5 h-2.5 rounded-full bg-primary/60" />
-                  <span className="text-sm text-muted-foreground">Available</span>
-                </div>
-                <span className="text-sm text-muted-foreground">
-                  {mockDestinations.length} Countries
-                </span>
-              </div>
-            </div>
-
-            {/* Right: Destination List */}
-            <div className="space-y-3">
-              {mockDestinations.map((dest) => (
-                <Link
-                  key={dest.name}
-                  to={`/destinations/${dest.slug}`}
-                  className={`group flex items-center justify-between p-4 rounded-2xl border transition-all duration-300 ${
-                    dest.slug === slug
-                      ? 'bg-primary text-primary-foreground border-primary shadow-primary'
-                      : 'bg-card border-border hover:border-primary/50 hover:shadow-md'
-                  }`}
-                >
-                  <div className="flex items-center gap-4">
-                    <div>
-                      <h3 className={`font-display text-lg font-bold ${
-                        dest.slug === slug ? 'text-primary-foreground' : 'text-foreground'
-                      }`}>
-                        {dest.name}
-                      </h3>
-                      <p className={`text-sm line-clamp-1 ${
-                        dest.slug === slug ? 'text-primary-foreground/80' : 'text-muted-foreground'
-                      }`}>
-                        {dest.description}
-                      </p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-center gap-3">
-                    <span className={`font-heading font-bold text-lg ${
-                      dest.slug === slug ? 'text-primary-foreground' : 'text-primary'
-                    }`}>
-                      ({dest.tours})
-                    </span>
-                    <ChevronRight className={`w-5 h-5 transition-transform group-hover:translate-x-1 ${
-                      dest.slug === slug ? 'text-primary-foreground' : 'text-muted-foreground'
-                    }`} />
-                  </div>
-                </Link>
-              ))}
-            </div>
+              </Link>
+            ))}
           </div>
         </div>
-      </section>
+      </div>
 
       {/* Testimonials */}
       <TestimonialsSection />
