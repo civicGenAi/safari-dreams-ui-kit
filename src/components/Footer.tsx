@@ -50,12 +50,14 @@ export const Footer = () => {
           {/* Brand Column */}
           <div className="lg:col-span-1">
             <a href="/" className="inline-block mb-6">
-              <span className="font-display text-3xl font-bold">
-                DeMi<span className="text-secondary">Tours</span>
-              </span>
+              <img
+                src="/src/assets/RCGP_Logo_Small-removebg-preview-1.webp"
+                alt="DeMi Tours"
+                className="h-12 w-auto"
+              />
             </a>
             <p className="text-primary-foreground/70 mb-6 leading-relaxed">
-              Crafting extraordinary safari experiences across East Africa and beyond since 2009. 
+              Crafting extraordinary safari experiences across East Africa and beyond since 2009.
               Your gateway to unforgettable adventures.
             </p>
             
