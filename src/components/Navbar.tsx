@@ -28,19 +28,22 @@ interface TravelIdea {
 }
 
 const travelIdeas: TravelIdea[] = [
-  { name: 'Migration Safari', slug: 'migration-safari', tours: 6, icon: '🦓' },
+  { name: 'Migration Safaris', slug: 'migration-safaris', tours: 6, icon: '🦓' },
   { name: 'Romantic Holidays', slug: 'romantic-holidays', tours: 8, icon: '💑' },
-  { name: 'Safari Beach Holidays', slug: 'safari-beach-holidays', tours: 6, icon: '🏖️' },
-  { name: 'Adventure Seekers', slug: 'adventure-seekers', tours: 6, icon: '🏔️' },
-  { name: 'Luxury Tours', slug: 'luxury-tours', tours: 2, icon: '✨' },
-  { name: 'Gorilla & Chimp Trekking', slug: 'gorilla-chimp-trekking', tours: 10, icon: '🦍' },
-  { name: 'Cross Border Trekking', slug: 'cross-border-trekking', tours: 3, icon: '🥾' },
-  { name: 'Cross Border Safari', slug: 'cross-border-safari', tours: 4, icon: '🌍' },
-  { name: 'Pilgrimages', slug: 'pilgrimages', tours: 2, icon: '⛪' },
-  { name: 'Day Tours', slug: 'day-tours', tours: 5, icon: '🚙' },
+  { name: 'Safari Beach Holidays', slug: 'safari-beach-holidays', tours: 10, icon: '🏖️' },
+  { name: 'Adventure Seekers', slug: 'adventure-seekers', tours: 12, icon: '🏔️' },
+  { name: 'Luxury Tours', slug: 'luxury-tours', tours: 7, icon: '✨' },
+  { name: 'Gorilla and Chimp Trekking', slug: 'gorilla-chimp-trekking', tours: 5, icon: '🦍' },
+  { name: 'Cross Border Safaris', slug: 'cross-border-safaris', tours: 9, icon: '🌍' },
+  { name: 'Day Tours', slug: 'day-tours', tours: 8, icon: '🚙' },
+  { name: 'Pilgrimages', slug: 'pilgrimages', tours: 4, icon: '⛪' },
 ];
 
-export const Navbar = () => {
+interface NavbarProps {
+  activeCategory?: string;
+}
+
+export const Navbar = ({ activeCategory }: NavbarProps = {}) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDestinationsOpen, setIsDestinationsOpen] = useState(false);
@@ -101,12 +104,12 @@ export const Navbar = () => {
 
               {/* Travel Ideas Dropdown */}
               <div className="relative" onMouseEnter={() => setIsTravelIdeasOpen(true)} onMouseLeave={() => setIsTravelIdeasOpen(false)}>
-                <button className={`flex items-center gap-1 font-heading text-sm uppercase tracking-widest transition-colors ${
+                <Link to="/travel-ideas" className={`flex items-center gap-1 font-heading text-sm uppercase tracking-widest transition-colors ${
                   isScrolled ? 'text-charcoal hover:text-primary font-semibold' : 'text-primary-foreground/90 hover:text-primary-foreground'
                 }`}>
                   Travel Ideas
                   <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isTravelIdeasOpen ? 'rotate-180' : ''}`} />
-                </button>
+                </Link>
 
                 <div className={`absolute top-full left-1/2 -translate-x-1/2 pt-4 transition-all duration-300 ${
                   isTravelIdeasOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
@@ -117,8 +120,16 @@ export const Navbar = () => {
                     </div>
                     <div className="space-y-1 max-h-[350px] overflow-y-auto">
                       {travelIdeas.map((idea) => (
-                        <Link key={idea.name} to={`/travel-ideas/${idea.slug}`} className="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-muted transition-colors group">
-                          <span className="font-heading text-sm font-medium text-foreground group-hover:text-primary transition-colors flex-1">{idea.name}</span>
+                        <Link
+                          key={idea.name}
+                          to={`/travel-ideas/${idea.slug}`}
+                          className={`flex items-center justify-between px-3 py-2 rounded-lg hover:bg-muted transition-colors group ${
+                            activeCategory === idea.slug ? 'bg-primary/10' : ''
+                          }`}
+                        >
+                          <span className={`font-heading text-sm font-medium transition-colors flex-1 ${
+                            activeCategory === idea.slug ? 'text-primary' : 'text-foreground group-hover:text-primary'
+                          }`}>{idea.name}</span>
                           <span className="text-xs text-muted-foreground ml-2">{idea.tours}+</span>
                         </Link>
                       ))}

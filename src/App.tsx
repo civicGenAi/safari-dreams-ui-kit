@@ -10,6 +10,7 @@ import TourDetail from "./pages/TourDetail";
 import DestinationDetail from "./pages/DestinationDetail";
 import Booking from "./pages/Booking";
 import TravelIdeas from "./pages/TravelIdeas";
+import TravelIdeaDetail from "./pages/TravelIdeaDetail";
 import WildTales from "./pages/WildTales";
 import WildTaleDetail from "./pages/WildTaleDetail";
 import OurStory from "./pages/OurStory";
@@ -30,6 +31,7 @@ const App = () => (
           <Route path="/destinations/:slug" element={<DestinationDetail />} />
           <Route path="/booking/:slug" element={<Booking />} />
           <Route path="/travel-ideas" element={<TravelIdeas />} />
+          <Route path="/travel-ideas/:slug" element={<TravelIdeaDetail />} />
           <Route path="/wild-tales" element={<WildTales />} />
           <Route path="/wild-tales/:slug" element={<WildTaleDetail />} />
           <Route path="/our-story" element={<OurStory />} />
