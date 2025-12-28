@@ -91,11 +91,15 @@ export const Navbar = ({ activeCategory }: NavbarProps = {}) => {
                       <span className="font-display text-base font-semibold">Destinations</span>
                     </div>
                     <div className="space-y-1">
-                      {destinations.map((dest) => (
-                        <Link key={dest.name} to={`/destinations/${dest.slug}`} className="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-muted transition-colors group">
-                          <span className="font-heading text-sm font-medium text-foreground group-hover:text-primary transition-colors">{dest.name}</span>
-                          <span className="text-xs text-muted-foreground ml-2">{dest.tours}</span>
-                        </Link>
+                      {destinations.map((dest, index) => (
+                        <div key={dest.name}>
+                          <Link to={`/destinations/${dest.slug}`} className="block px-3 py-2 rounded-lg hover:bg-muted transition-colors group">
+                            <span className="font-heading text-sm font-medium text-foreground group-hover:text-primary transition-colors">{dest.name}</span>
+                          </Link>
+                          {index < destinations.length - 1 && (
+                            <div className="h-px bg-border/50 my-1" />
+                          )}
+                        </div>
                       ))}
                     </div>
                   </div>
@@ -119,19 +123,22 @@ export const Navbar = ({ activeCategory }: NavbarProps = {}) => {
                       <span className="font-display text-base font-semibold">Travel Ideas</span>
                     </div>
                     <div className="space-y-1 max-h-[350px] overflow-y-auto">
-                      {travelIdeas.map((idea) => (
-                        <Link
-                          key={idea.name}
-                          to={`/travel-ideas/${idea.slug}`}
-                          className={`flex items-center justify-between px-3 py-2 rounded-lg hover:bg-muted transition-colors group ${
-                            activeCategory === idea.slug ? 'bg-primary/10' : ''
-                          }`}
-                        >
-                          <span className={`font-heading text-sm font-medium transition-colors flex-1 ${
-                            activeCategory === idea.slug ? 'text-primary' : 'text-foreground group-hover:text-primary'
-                          }`}>{idea.name}</span>
-                          <span className="text-xs text-muted-foreground ml-2">{idea.tours}+</span>
-                        </Link>
+                      {travelIdeas.map((idea, index) => (
+                        <div key={idea.name}>
+                          <Link
+                            to={`/travel-ideas/${idea.slug}`}
+                            className={`block px-3 py-2 rounded-lg hover:bg-muted transition-colors group ${
+                              activeCategory === idea.slug ? 'bg-primary/10' : ''
+                            }`}
+                          >
+                            <span className={`font-heading text-sm font-medium transition-colors ${
+                              activeCategory === idea.slug ? 'text-primary' : 'text-foreground group-hover:text-primary'
+                            }`}>{idea.name}</span>
+                          </Link>
+                          {index < travelIdeas.length - 1 && (
+                            <div className="h-px bg-border/50 my-1" />
+                          )}
+                        </div>
                       ))}
                     </div>
                     <div className="mt-3 pt-3 border-t border-border">
