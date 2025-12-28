@@ -5,7 +5,7 @@ import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { TestimonialsSection } from '@/components/TestimonialsSection';
 import { NewsletterSection } from '@/components/NewsletterSection';
 import { Button } from '@/components/ui/button';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
 
 const OurStory = () => {
   const team = [
@@ -54,7 +54,6 @@ const OurStory = () => {
       {/* Hero */}
       <div className="relative h-[300px] md:h-[400px]">
         <img src="/src/assets/header_bg_new4.gif" alt="Our Story" className="w-full h-full object-cover" />
-        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/80 via-charcoal/60 to-charcoal/80" />
         <div className="absolute inset-0 flex items-center">
           <div className="container mx-auto px-4 lg:px-8">
             <div className="text-white mb-4">
@@ -77,6 +76,18 @@ const OurStory = () => {
             <div className="space-y-8">
               <div className="relative rounded-3xl overflow-hidden shadow-2xl">
                 <img src="/src/assets/our_story.jpeg" alt="Our Story" className="w-full h-auto" />
+
+                {/* Overlay Card */}
+                <div className="absolute bottom-8 left-8 right-8">
+                  <div className="relative rounded-2xl overflow-hidden shadow-2xl">
+                    <img src="/src/assets/Untitled.png" alt="Background" className="w-full h-auto" />
+                    <div className="absolute inset-0 flex items-center justify-center p-6">
+                      <h3 className="font-display text-2xl md:text-3xl font-bold text-center text-foreground">
+                        We are Responsive to Your Travel Ideas
+                      </h3>
+                    </div>
+                  </div>
+                </div>
               </div>
 
               {/* Our Rates */}
@@ -163,30 +174,85 @@ const OurStory = () => {
                   </p>
                 </div>
 
-                <p className="text-muted-foreground italic">
+                <p className="text-muted-foreground italic mb-8">
                   Thank you for considering DeMi Tours and Travel for your next adventure. We look forward to providing you with an exceptional experience that will create lasting memories.
                 </p>
+
+                <Link to="/contact">
+                  <Button variant="primary" size="lg" className="gap-2">
+                    Talk to us
+                    <ArrowRight className="w-5 h-5" />
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Responsive Card */}
-      <div className="py-16 bg-muted/20">
+      {/* THE DIFFERENCE */}
+      <div className="py-24 bg-muted/20">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="relative max-w-4xl mx-auto rounded-3xl overflow-hidden shadow-2xl">
-            <img src="/src/assets/Untitled.png" alt="Background" className="w-full h-auto opacity-20" />
-            <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
-              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-foreground">
-                We are Responsive to Your Travel Ideas
-              </h2>
-              <Link to="/contact">
-                <Button variant="primary" size="xl" className="gap-2">
-                  Talk to us
-                  <ArrowRight className="w-5 h-5" />
-                </Button>
-              </Link>
+          <div className="text-center mb-16">
+            <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">THE DIFFERENCE</h2>
+            <p className="text-xl text-muted-foreground">We are passionate. We love what we do.</p>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8 mb-8">
+            <div className="bg-white rounded-2xl p-8 shadow-lg">
+              <h3 className="font-heading font-bold text-xl mb-4 flex items-center gap-2">
+                <span className="text-primary">&gt;&gt;</span> Empowerment
+              </h3>
+              <p className="text-muted-foreground">
+                Our founder is passionate about empowering women in the travel industry and beyond. She mentors and trains young women who are joining the industry.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-2xl p-8 shadow-lg">
+              <h3 className="font-heading font-bold text-xl mb-4 flex items-center gap-2">
+                <span className="text-primary">&gt;&gt;</span> Diversity
+              </h3>
+              <p className="text-muted-foreground">
+                At Demi Tours and Travel, we celebrate diversity and offer a wide range of travel experiences. From safaris to romantic getaways, adventure trips to luxury vacations.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-2xl p-8 shadow-lg">
+              <h3 className="font-heading font-bold text-xl mb-4 flex items-center gap-2">
+                <span className="text-primary">&gt;&gt;</span> Attention to detail
+              </h3>
+              <p className="text-muted-foreground">
+                We take pride in our attention to detail and organizational skills, ensuring that our customers have a seamless and stress-free journey.
+              </p>
+            </div>
+          </div>
+
+          <div className="grid md:grid-cols-3 gap-8">
+            <div className="bg-white rounded-2xl p-8 shadow-lg">
+              <h3 className="font-heading font-bold text-xl mb-4 flex items-center gap-2">
+                <span className="text-primary">&gt;&gt;</span> Customer service
+              </h3>
+              <p className="text-muted-foreground">
+                Our commitment to excellent customer service sets us apart. We prioritize building strong relationships with our customers.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-2xl p-8 shadow-lg">
+              <h3 className="font-heading font-bold text-xl mb-4 flex items-center gap-2">
+                <span className="text-primary">&gt;&gt;</span> Social responsibility
+              </h3>
+              <p className="text-muted-foreground">
+                We believe in the power of ecotourism as a responsible and sustainable way to explore the natural wonders of our planet.
+              </p>
+            </div>
+
+            <div className="bg-white rounded-2xl p-8 shadow-lg">
+              <h3 className="font-heading font-bold text-xl mb-4 flex items-center gap-2">
+                <span className="text-primary">&gt;&gt;</span> Sustainability
+              </h3>
+              <p className="text-muted-foreground">
+                We are committed to thoughtful and responsible travel. We hold ourselves accountable for upholding responsible travel principles.
+              </p>
             </div>
           </div>
         </div>
@@ -195,12 +261,45 @@ const OurStory = () => {
       {/* Meet The FAM */}
       <div className="py-24 bg-white">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="text-center mb-12">
+          <div className="text-center mb-16">
             <h2 className="font-display text-4xl md:text-5xl font-bold mb-2">Meet The FAM</h2>
             <p className="text-xl text-muted-foreground">Putting A Name To The Face</p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
-            {team.map((member, index) => (
+
+          {/* CEO - Founder (Top) */}
+          <div className="flex justify-center mb-12">
+            <div className="text-center group max-w-xs">
+              <div className="relative mb-4 overflow-hidden rounded-2xl shadow-2xl">
+                <img
+                  src={team[0].image}
+                  alt={team[0].name}
+                  className="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-8">
+                  <div className="flex gap-4">
+                    <a href="#" className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors">
+                      <Facebook className="w-5 h-5 text-white" />
+                    </a>
+                    <a href="#" className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors">
+                      <Twitter className="w-5 h-5 text-white" />
+                    </a>
+                    <a href="#" className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors">
+                      <Linkedin className="w-5 h-5 text-white" />
+                    </a>
+                    <a href="#" className="w-10 h-10 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors">
+                      <Instagram className="w-5 h-5 text-white" />
+                    </a>
+                  </div>
+                </div>
+              </div>
+              <h3 className="font-heading font-bold text-xl mb-1">{team[0].name}</h3>
+              <p className="text-primary font-semibold">{team[0].role}</p>
+            </div>
+          </div>
+
+          {/* Management Team */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-12">
+            {team.slice(1, 5).map((member, index) => (
               <div key={index} className="text-center group">
                 <div className="relative mb-4 overflow-hidden rounded-2xl shadow-lg">
                   <img
@@ -208,8 +307,48 @@ const OurStory = () => {
                     alt={member.name}
                     className="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-110"
                   />
+                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
+                    <div className="flex gap-3">
+                      <a href="#" className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors">
+                        <Facebook className="w-4 h-4 text-white" />
+                      </a>
+                      <a href="#" className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors">
+                        <Linkedin className="w-4 h-4 text-white" />
+                      </a>
+                      <a href="#" className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors">
+                        <Instagram className="w-4 h-4 text-white" />
+                      </a>
+                    </div>
+                  </div>
                 </div>
-                <h3 className="font-heading font-bold text-lg mb-1">{member.name}</h3>
+                <h3 className="font-heading font-bold text-base mb-1">{member.name}</h3>
+                <p className="text-sm text-primary">{member.role}</p>
+              </div>
+            ))}
+          </div>
+
+          {/* Tour Guides & Marketing */}
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-8 max-w-3xl mx-auto">
+            {team.slice(5).map((member, index) => (
+              <div key={index} className="text-center group">
+                <div className="relative mb-4 overflow-hidden rounded-2xl shadow-lg">
+                  <img
+                    src={member.image}
+                    alt={member.name}
+                    className="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-110"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
+                    <div className="flex gap-3">
+                      <a href="#" className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors">
+                        <Facebook className="w-4 h-4 text-white" />
+                      </a>
+                      <a href="#" className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors">
+                        <Instagram className="w-4 h-4 text-white" />
+                      </a>
+                    </div>
+                  </div>
+                </div>
+                <h3 className="font-heading font-bold text-base mb-1">{member.name}</h3>
                 <p className="text-sm text-primary">{member.role}</p>
               </div>
             ))}
