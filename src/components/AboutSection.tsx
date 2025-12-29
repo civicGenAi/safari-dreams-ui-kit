@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Award, Users, MapPin, Calendar } from 'lucide-react';
 import { AnimatedBackground } from './AnimatedBackground';
+import aboutImage from '@/assets/about.jpg';
 
 const features = [
   'Expert Local Guides',
@@ -57,7 +58,7 @@ export const AboutSection = () => {
             {/* Main Circular Image */}
             <div className="relative w-72 h-72 md:w-80 md:h-80 rounded-full overflow-hidden shadow-lift border-4 border-background">
               <img
-                src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=800"
+                src={aboutImage}
                 alt="Safari adventure"
                 className="w-full h-full object-cover"
               />
