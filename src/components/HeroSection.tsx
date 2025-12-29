@@ -108,7 +108,7 @@ export const HeroSection = () => {
               isAnimating ? 'opacity-0 translate-y-8' : 'opacity-100 translate-y-0'
             }`}
           >
-            <span className="font-allura font-normal block mb-2">
+            <span className="font-allura font-normal block mb-2 animate-fade-in-up">
               {slides[currentSlide].titleFirstPart}
             </span>
             <span className="font-display block">
@@ -128,28 +128,6 @@ export const HeroSection = () => {
               </button>
             </Link>
           </div>
-
-          {/* Rating Badge */}
-          <div
-            className={`mt-12 inline-flex items-center gap-4 glass-dark rounded-2xl px-6 py-4 transition-all duration-700 delay-400 ${
-              isAnimating ? 'opacity-0 translate-y-8' : 'opacity-100 translate-y-0'
-            }`}
-          >
-            <div className="flex items-center gap-1">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-5 h-5 fill-secondary text-secondary" />
-              ))}
-            </div>
-            <div className="h-8 w-px bg-primary-foreground/20" />
-            <div>
-              <span className="block text-primary-foreground font-display text-xl font-bold">
-                4.9/5
-              </span>
-              <span className="text-primary-foreground/70 text-sm">
-                Based on 2,847 reviews
-              </span>
-            </div>
-          </div>
         </div>
       </div>
 
@@ -157,19 +135,25 @@ export const HeroSection = () => {
       <div className="absolute bottom-1/2 translate-y-1/2 left-4 lg:left-8">
         <button
           onClick={prevSlide}
-          className="w-12 h-12 rounded-full glass flex items-center justify-center text-primary-foreground hover:bg-primary-foreground/20 transition-colors"
+          className="group relative w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-primary-foreground hover:bg-white/20 hover:scale-110 transition-all duration-300"
           aria-label="Previous slide"
         >
-          <ChevronLeft className="w-6 h-6" />
+          <ChevronLeft className="w-6 h-6 relative z-10" />
+          <div className="absolute inset-0 rounded-full border-2 border-white/40 scale-0 group-hover:scale-100 transition-transform duration-300"></div>
+          <div className="absolute -top-1 -right-1 w-2 h-2 bg-secondary rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <div className="absolute -bottom-1 -left-1 w-2 h-2 bg-secondary rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
         </button>
       </div>
       <div className="absolute bottom-1/2 translate-y-1/2 right-4 lg:right-8">
         <button
           onClick={nextSlide}
-          className="w-12 h-12 rounded-full glass flex items-center justify-center text-primary-foreground hover:bg-primary-foreground/20 transition-colors"
+          className="group relative w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-primary-foreground hover:bg-white/20 hover:scale-110 transition-all duration-300"
           aria-label="Next slide"
         >
-          <ChevronRight className="w-6 h-6" />
+          <ChevronRight className="w-6 h-6 relative z-10" />
+          <div className="absolute inset-0 rounded-full border-2 border-white/40 scale-0 group-hover:scale-100 transition-transform duration-300"></div>
+          <div className="absolute -top-1 -right-1 w-2 h-2 bg-secondary rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+          <div className="absolute -bottom-1 -left-1 w-2 h-2 bg-secondary rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
         </button>
       </div>
 
