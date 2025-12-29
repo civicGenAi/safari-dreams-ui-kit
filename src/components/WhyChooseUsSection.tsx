@@ -1,6 +1,9 @@
 import { Link } from 'react-router-dom';
 import { MapPin, Sparkles, Church } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import cheetahImage from '@/assets/home_fastbooking_cheetah.webp';
+import beachLadyImage from '@/assets/home_fastbooking_beach_lady.webp';
+import baptismSiteImage from '@/assets/tour_pilgrimage_jordan_baptism_site.jpg';
 
 export const WhyChooseUsSection = () => {
   return (
@@ -25,7 +28,7 @@ export const WhyChooseUsSection = () => {
           <div className="group relative rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 h-96">
             <div className="absolute inset-0">
               <img
-                src="https://images.unsplash.com/photo-1516426122078-c23e76319801?w=800"
+                src={cheetahImage}
                 alt="Safari itinerary"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
@@ -57,7 +60,7 @@ export const WhyChooseUsSection = () => {
           <div className="group relative rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 h-96">
             <div className="absolute inset-0">
               <img
-                src="https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=800"
+                src={beachLadyImage}
                 alt="Relaxation"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
@@ -89,7 +92,7 @@ export const WhyChooseUsSection = () => {
           <div className="group relative rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 h-96">
             <div className="absolute inset-0">
               <img
-                src="https://images.unsplash.com/photo-1544967082-d9d25d867d66?w=800"
+                src={baptismSiteImage}
                 alt="Pilgrimage"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
