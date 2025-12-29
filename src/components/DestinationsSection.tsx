@@ -109,8 +109,8 @@ const cardStyles = [
   { height: 'h-[360px]', offset: 'mt-6' },        // Jordan - medium
 ];
 
-// Reorder destinations for display: Israel, Kenya, Rwanda, Tanzania, Uganda
-const displayOrder = ['Israel', 'Kenya', 'Rwanda', 'Tanzania', 'Uganda'];
+// All 7 destinations in display order
+const displayOrder = ['Israel', 'Kenya', 'Rwanda', 'Tanzania', 'Uganda', 'Egypt', 'Jordan'];
 
 export const DestinationsSection = () => {
   const orderedDestinations = displayOrder
