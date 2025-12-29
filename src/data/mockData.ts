@@ -1,5 +1,5 @@
 // Real Tour Data - 41 Actual Packages
-import { Tour } from './types';
+import { Tour, Testimonial } from './types';
 
 export const realTours: Tour[] = [
   // ========== DAY TRIPS ==========
@@ -2042,6 +2042,42 @@ export const realTours: Tour[] = [
     difficulty: 'Easy to Moderate',
     bestTime: 'June to October, January to February',
     languages: ['English', 'Swahili'],
+  },
+];
+
+export const mockTestimonials: Testimonial[] = [
+  {
+    id: '1',
+    name: 'Sarah Johnson',
+    location: 'New York, USA',
+    tour: 'Serengeti & Ngorongoro Safari',
+    rating: 5,
+    date: '2024-08-15',
+    comment: 'Absolutely incredible experience! Our guide was knowledgeable and spotted animals we never would have seen on our own. The accommodations were luxurious, and seeing the Great Migration was a dream come true.',
+    verified: true,
+    images: [
+      'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=400',
+    ],
+  },
+  {
+    id: '2',
+    name: 'Michael Chen',
+    location: 'Singapore',
+    tour: 'Kilimanjaro Summit Expedition',
+    rating: 5,
+    date: '2024-07-22',
+    comment: 'Conquering Kilimanjaro was the hardest thing I\'ve ever done, but also the most rewarding. The guides were amazing - patient, encouraging, and very safety-conscious. Standing on the summit at sunrise was unforgettable!',
+    verified: true,
+  },
+  {
+    id: '3',
+    name: 'Emma Wilson',
+    location: 'London, UK',
+    tour: 'Gorilla Trekking Experience',
+    rating: 5,
+    date: '2024-09-05',
+    comment: 'Meeting the gorillas face-to-face was the most profound wildlife experience of my life. The hour we spent with them felt like minutes. Rwanda is beautiful, and the organization was flawless.',
+    verified: true,
   },
 ];
 
