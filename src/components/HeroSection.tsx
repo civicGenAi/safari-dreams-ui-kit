@@ -1,35 +1,55 @@
 import { useState, useEffect, useCallback } from 'react';
-import { ChevronLeft, ChevronRight, Star, Play } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import heroSafari1 from '@/assets/hero-safari-1.jpg';
-import heroSafari2 from '@/assets/hero-safari-2.jpg';
-import heroSafari3 from '@/assets/hero-safari-3.jpg';
+import { Link } from 'react-router-dom';
+import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
+import warrior01 from '@/assets/hero/revslider_welcome_warrior01.webp';
+import migration02 from '@/assets/hero/revslider_migration02.jpg';
+import pilgrimage03 from '@/assets/hero/revslider_pilgrimage_dome03.jpg';
+import adventure04 from '@/assets/hero/revslider_adventure04.jpg';
+import luxury05 from '@/assets/hero/revslider_luxury05.jpg';
 
 interface Slide {
   image: string;
-  title: string;
-  subtitle: string;
-  location: string;
+  titleFirstPart: string;
+  titleSecondPart: string;
+  buttonText: string;
+  buttonLink: string;
 }
 
 const slides: Slide[] = [
   {
-    image: heroSafari1,
-    title: 'Experience the Magic of African Safari',
-    subtitle: 'Embark on an unforgettable journey through Tanzania\'s wilderness',
-    location: 'Tanzania',
+    image: warrior01,
+    titleFirstPart: 'An Epic & Pulsating',
+    titleSecondPart: 'adventure',
+    buttonText: 'Take Me There',
+    buttonLink: '/travel-ideas/pilgrimages',
   },
   {
-    image: heroSafari2,
-    title: 'Witness the Great Migration',
-    subtitle: 'Over 2 million wildebeest crossing the Serengeti plains',
-    location: 'Serengeti',
+    image: migration02,
+    titleFirstPart: 'The Great Migration',
+    titleSecondPart: 'leap of faith',
+    buttonText: 'Take Me There',
+    buttonLink: '/travel-ideas/migration-safaris',
   },
   {
-    image: heroSafari3,
-    title: 'Encounter the King of the Jungle',
-    subtitle: 'Get up close with Africa\'s magnificent wildlife',
-    location: 'Masai Mara',
+    image: pilgrimage03,
+    titleFirstPart: 'Holy Land',
+    titleSecondPart: 'pilgrimage',
+    buttonText: 'Take Me There',
+    buttonLink: '/travel-ideas/pilgrimages',
+  },
+  {
+    image: adventure04,
+    titleFirstPart: 'Come With Us to a',
+    titleSecondPart: 'new experience',
+    buttonText: "Let's Go",
+    buttonLink: '/travel-ideas/day-tours',
+  },
+  {
+    image: luxury05,
+    titleFirstPart: 'Experience Total Luxury',
+    titleSecondPart: 'in the wild',
+    buttonText: "Let's Go",
+    buttonLink: '/travel-ideas/luxury-tours',
   },
 ];
 
@@ -70,7 +90,7 @@ export const HeroSection = () => {
         >
           <img
             src={slide.image}
-            alt={slide.title}
+            alt={slide.titleFirstPart}
             className="absolute inset-0 w-full h-full object-cover"
           />
           {/* Gradient Overlay */}
@@ -82,49 +102,31 @@ export const HeroSection = () => {
       {/* Content */}
       <div className="relative h-full container mx-auto px-4 lg:px-8 flex items-center">
         <div className="max-w-3xl pt-20">
-          {/* Location Tag */}
-          <div
-            className={`inline-flex items-center gap-2 bg-secondary/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6 transition-all duration-700 ${
-              isAnimating ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'
-            }`}
-          >
-            <span className="w-2 h-2 bg-secondary rounded-full animate-pulse" />
-            <span className="text-primary-foreground/90 text-sm font-heading uppercase tracking-wider">
-              {slides[currentSlide].location}
-            </span>
-          </div>
-
           {/* Title */}
           <h1
-            className={`font-display text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-primary-foreground font-bold leading-tight mb-6 text-shadow-hero transition-all duration-700 delay-100 ${
+            className={`text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-primary-foreground font-bold leading-tight mb-8 text-shadow-hero transition-all duration-700 delay-100 ${
               isAnimating ? 'opacity-0 translate-y-8' : 'opacity-100 translate-y-0'
             }`}
           >
-            {slides[currentSlide].title}
+            <span className="font-allura font-normal block mb-2">
+              {slides[currentSlide].titleFirstPart}
+            </span>
+            <span className="font-display block">
+              {slides[currentSlide].titleSecondPart}
+            </span>
           </h1>
 
-          {/* Subtitle */}
-          <p
-            className={`text-lg md:text-xl text-primary-foreground/80 mb-8 max-w-xl leading-relaxed transition-all duration-700 delay-200 ${
-              isAnimating ? 'opacity-0 translate-y-8' : 'opacity-100 translate-y-0'
-            }`}
-          >
-            {slides[currentSlide].subtitle}
-          </p>
-
-          {/* CTAs */}
+          {/* CTA Button */}
           <div
             className={`flex flex-wrap gap-4 transition-all duration-700 delay-300 ${
               isAnimating ? 'opacity-0 translate-y-8' : 'opacity-100 translate-y-0'
             }`}
           >
-            <Button variant="gold" size="xl">
-              Explore Tours
-            </Button>
-            <Button variant="outline-white" size="xl" className="gap-2">
-              <Play className="w-4 h-4" />
-              Watch Video
-            </Button>
+            <Link to={slides[currentSlide].buttonLink}>
+              <button className="px-8 py-4 border-2 border-white text-white font-heading font-semibold text-lg uppercase tracking-wider hover:bg-white/10 transition-all duration-300 backdrop-blur-sm">
+                {slides[currentSlide].buttonText}
+              </button>
+            </Link>
           </div>
 
           {/* Rating Badge */}
@@ -171,7 +173,7 @@ export const HeroSection = () => {
         </button>
       </div>
 
-      {/* Slide Indicators */}
+      {/* Slide Indicators - Dotted with Expand on Hover */}
       <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-3">
         {slides.map((_, index) => (
           <button
@@ -183,10 +185,10 @@ export const HeroSection = () => {
                 setTimeout(() => setIsAnimating(false), 800);
               }
             }}
-            className={`h-2 rounded-full transition-all duration-300 ${
+            className={`h-3 rounded-full transition-all duration-300 ${
               index === currentSlide
-                ? 'w-10 bg-secondary'
-                : 'w-2 bg-primary-foreground/40 hover:bg-primary-foreground/60'
+                ? 'w-12 bg-secondary'
+                : 'w-3 bg-primary-foreground/40 hover:w-8 hover:bg-primary-foreground/60'
             }`}
             aria-label={`Go to slide ${index + 1}`}
           />
