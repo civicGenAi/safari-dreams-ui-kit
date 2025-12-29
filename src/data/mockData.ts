@@ -2045,4 +2045,7 @@ export const realTours: Tour[] = [
   },
 ];
 
+// Export as mockTours for compatibility
+export const mockTours = realTours;
+
 export default realTours;
