@@ -8,11 +8,6 @@ import baptismSiteImage from '@/assets/tour_pilgrimage_jordan_baptism_site.jpg';
 export const WhyChooseUsSection = () => {
   return (
     <section className="py-24 lg:py-32 bg-gradient-to-br from-muted/50 to-background relative overflow-hidden">
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary rounded-full blur-3xl" />
-        <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-secondary rounded-full blur-3xl" />
-      </div>
-
       <div className="container mx-auto px-4 lg:px-8 relative">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
@@ -32,11 +27,11 @@ export const WhyChooseUsSection = () => {
                 alt="Safari itinerary"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/70 to-charcoal/30" />
+              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-charcoal/40 to-transparent" />
             </div>
 
             <div className="relative h-full flex flex-col items-center justify-center text-center p-8">
-              <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+              <div className="w-20 h-20 bg-white/30 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
                 <MapPin className="w-10 h-10 text-white" />
               </div>
 
@@ -64,11 +59,11 @@ export const WhyChooseUsSection = () => {
                 alt="Relaxation"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/70 to-charcoal/30" />
+              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-charcoal/40 to-transparent" />
             </div>
 
             <div className="relative h-full flex flex-col items-center justify-center text-center p-8">
-              <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+              <div className="w-20 h-20 bg-white/30 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
                 <Sparkles className="w-10 h-10 text-white" />
               </div>
 
@@ -96,11 +91,11 @@ export const WhyChooseUsSection = () => {
                 alt="Pilgrimage"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/70 to-charcoal/30" />
+              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-charcoal/40 to-transparent" />
             </div>
 
             <div className="relative h-full flex flex-col items-center justify-center text-center p-8">
-              <div className="w-20 h-20 bg-white/20 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+              <div className="w-20 h-20 bg-white/30 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
                 <Church className="w-10 h-10 text-white" />
               </div>
 
