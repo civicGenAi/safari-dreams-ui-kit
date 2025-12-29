@@ -3,13 +3,13 @@ import { Button } from '@/components/ui/button';
 import worldMap from '@/assets/world-map.webp';
 
 const destinations = [
-  { name: 'Kenya', slug: 'kenya', tours: 4 },
-  { name: 'Rwanda', slug: 'rwanda', tours: 6 },
-  { name: 'Tanzania', slug: 'tanzania', tours: 29 },
-  { name: 'Uganda', slug: 'uganda', tours: 8 },
-  { name: 'Israel', slug: 'israel', tours: 5 },
-  { name: 'Egypt', slug: 'egypt', tours: 7 },
-  { name: 'Jordan', slug: 'jordan', tours: 6 },
+  { name: 'Kenya', slug: 'kenya', tours: 4, coordinates: { x: '55%', y: '52%' } },
+  { name: 'Rwanda', slug: 'rwanda', tours: 6, coordinates: { x: '52%', y: '54%' } },
+  { name: 'Tanzania', slug: 'tanzania', tours: 29, coordinates: { x: '54%', y: '58%' } },
+  { name: 'Uganda', slug: 'uganda', tours: 8, coordinates: { x: '51%', y: '50%' } },
+  { name: 'Israel', slug: 'israel', tours: 5, coordinates: { x: '55%', y: '42%' } },
+  { name: 'Egypt', slug: 'egypt', tours: 7, coordinates: { x: '52%', y: '40%' } },
+  { name: 'Jordan', slug: 'jordan', tours: 6, coordinates: { x: '56%', y: '43%' } },
 ];
 
 export const DestinationsSection = () => {
@@ -24,6 +24,29 @@ export const DestinationsSection = () => {
               alt="World Map"
               className="w-full h-auto"
             />
+
+            {/* Destination Markers */}
+            {destinations.map((dest) => (
+              <div
+                key={dest.name}
+                className="absolute transform -translate-x-1/2 -translate-y-1/2 group cursor-pointer"
+                style={{ left: dest.coordinates.x, top: dest.coordinates.y }}
+              >
+                {/* Pulse ring */}
+                <span className="absolute inset-0 w-6 h-6 -m-1 rounded-full bg-primary/30 animate-pulse" />
+
+                {/* Marker dot */}
+                <span className="relative flex items-center justify-center w-4 h-4 rounded-full border-2 border-background shadow-lg bg-primary group-hover:scale-150 transition-transform duration-300">
+                  <span className="w-1.5 h-1.5 rounded-full bg-background" />
+                </span>
+
+                {/* Tooltip */}
+                <span className="absolute left-1/2 -translate-x-1/2 -top-10 bg-secondary text-secondary-foreground text-xs font-heading font-medium px-3 py-1.5 rounded-lg whitespace-nowrap shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                  {dest.name}
+                  <span className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-secondary" />
+                </span>
+              </div>
+            ))}
           </div>
 
           {/* Right: Content */}
