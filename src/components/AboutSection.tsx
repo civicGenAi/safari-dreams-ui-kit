@@ -1,21 +1,13 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Award, Users, MapPin, Calendar } from 'lucide-react';
 import { AnimatedBackground } from './AnimatedBackground';
 import aboutImage from '@/assets/about.jpg';
-
-const features = [
-  'Expert Local Guides',
-  'Customized Itineraries',
-  'Sustainable Tourism',
-  '24/7 Support',
-];
 
 export const AboutSection = () => {
   return (
     <section id="about" className="py-24 lg:py-32 bg-background overflow-hidden relative">
       <AnimatedBackground />
-      
+
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         {/* Three Column Layout */}
         <div className="grid lg:grid-cols-3 gap-12 lg:gap-16 items-center">
@@ -25,27 +17,22 @@ export const AboutSection = () => {
             <div className="flex items-center gap-3 mb-6 lg:justify-start justify-center">
               <div className="w-12 h-px bg-primary" />
               <span className="font-heading text-sm uppercase tracking-widest text-primary">
-                About Demi Tours
+                At DEMI TOURS and travel
               </span>
             </div>
 
             {/* Heading */}
-            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight">
-              Your Gateway to
-              <span className="text-gradient-primary block mt-2">Unforgettable Adventures</span>
+            <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground leading-tight mb-6">
+              We craft unforgettable travel ideas. Think of us as matchmakers.
             </h2>
 
-            {/* Features */}
-            <div className="mt-10 space-y-4">
-              {features.map((feature) => (
-                <div key={feature} className="flex items-center gap-3">
-                  <div className="w-6 h-6 rounded-full bg-primary/20 flex items-center justify-center">
-                    <div className="w-2 h-2 rounded-full bg-primary" />
-                  </div>
-                  <span className="font-heading text-sm text-foreground">{feature}</span>
-                </div>
-              ))}
-            </div>
+            <p className="text-xl text-primary font-semibold mb-4">
+              Jambo, welcome to demi tours and travel
+            </p>
+
+            <p className="text-muted-foreground leading-relaxed">
+              DeMi Tours and Travel: Unveiling the Wonders of Africa and beyond.
+            </p>
           </div>
 
           {/* Center: Circular Image */}
@@ -54,7 +41,7 @@ export const AboutSection = () => {
             <div className="absolute inset-0 flex items-center justify-center">
               <div className="w-80 h-80 md:w-96 md:h-96 rounded-full border-2 border-dashed border-primary/30 animate-spin" style={{ animationDuration: '60s' }} />
             </div>
-            
+
             {/* Main Circular Image */}
             <div className="relative w-72 h-72 md:w-80 md:h-80 rounded-full overflow-hidden shadow-lift border-4 border-background">
               <img
@@ -68,46 +55,52 @@ export const AboutSection = () => {
 
             {/* Experience Badge - Top Right */}
             <div className="absolute -top-4 right-0 lg:right-4 bg-primary text-primary-foreground rounded-2xl px-5 py-4 shadow-primary">
-              <span className="block font-display text-3xl font-bold">15+</span>
-              <span className="block font-heading text-xs uppercase tracking-wider">Years</span>
+              <span className="block font-display text-3xl font-bold">20</span>
+              <span className="block font-heading text-xs uppercase tracking-wider">Years of Experience</span>
             </div>
 
             {/* Stats Badge - Bottom Left */}
             <div className="absolute -bottom-4 left-0 lg:left-4 bg-secondary text-secondary-foreground rounded-2xl px-5 py-4 shadow-lg">
-              <span className="block font-display text-3xl font-bold">10K+</span>
-              <span className="block font-heading text-xs uppercase tracking-wider">Travelers</span>
+              <span className="block font-display text-3xl font-bold">40</span>
+              <span className="block font-heading text-xs uppercase tracking-wider">Travel Ideas</span>
             </div>
           </div>
 
           {/* Right: Descriptions & CTA */}
           <div className="space-y-6">
-            <p className="text-muted-foreground text-lg leading-relaxed">
-              Since 2009, <span className="text-foreground font-semibold">Demi Tours and Travel</span> has been crafting extraordinary safari experiences across 
-              East Africa and beyond. We believe every journey should be as unique as the 
-              travelers who embark on it.
-            </p>
-            
             <p className="text-muted-foreground leading-relaxed">
-              Our team of expert guides and travel specialists are passionate about sharing 
-              the wonders of Africa with you. From the majestic Serengeti plains to the 
-              snow-capped peak of Kilimanjaro, we create memories that last a lifetime.
+              Nestled in the heart of Arusha, Tanzania, DeMi Tours and Travel beckons travellers with a kaleidoscope of experiences. We are more than just a travel agency; we are architects of adventure, curators of cultural immersion, and facilitators of personal transformation.
             </p>
 
             <p className="text-muted-foreground leading-relaxed">
-              We take pride in sustainable tourism practices, supporting local communities, 
-              and providing personalized service that makes every traveler feel like family.
+              Our diverse range of travel and tour packages cater to every wanderlust, from the intrepid explorer to the serene beachcomber.
             </p>
 
-            {/* CTAs */}
-            <div className="flex flex-wrap gap-4 pt-4">
+            <p className="text-muted-foreground leading-relaxed">
+              Join DeMi Tours and Travel on an extraordinary adventure and discover the magic that awaits you in East Africa. We promise to unlock the wonders of the region, create lasting memories, and leave you yearning for your next African escapade.
+            </p>
+
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-4 pt-6">
+              <div className="text-center">
+                <div className="font-display text-3xl font-bold text-primary">20</div>
+                <div className="text-xs text-muted-foreground">Years of Experience</div>
+              </div>
+              <div className="text-center">
+                <div className="font-display text-3xl font-bold text-primary">40</div>
+                <div className="text-xs text-muted-foreground">Curated Travel Ideas</div>
+              </div>
+              <div className="text-center">
+                <div className="font-display text-3xl font-bold text-primary">200</div>
+                <div className="text-xs text-muted-foreground">Repeat Clients</div>
+              </div>
+            </div>
+
+            {/* CTA */}
+            <div className="pt-4">
               <Link to="/our-story">
                 <Button variant="primary" size="lg">
                   Our Story
-                </Button>
-              </Link>
-              <Link to="/contact">
-                <Button variant="outline" size="lg">
-                  Get in Touch
                 </Button>
               </Link>
             </div>
