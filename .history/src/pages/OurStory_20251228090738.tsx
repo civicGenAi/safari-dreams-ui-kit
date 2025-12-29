@@ -5,48 +5,43 @@ import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { TestimonialsSection } from '@/components/TestimonialsSection';
 import { NewsletterSection } from '@/components/NewsletterSection';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 const OurStory = () => {
   const team = [
-    { name: 'Caudence Ayoti', role: 'CEO, Founder', image: '/src/assets/staff/staff_caudence_ceo-1.webp' },
-    { name: 'Lynn Mackanja', role: 'Legal Consultant', image: '/src/assets/staff/staff_lynn_legal.webp' },
-    { name: 'Johns Tenga', role: 'Director of Operations', image: '/src/assets/staff/staff_tenga_operations.webp' },
-    { name: 'Brenda Richard', role: 'Safaris & reservations consultant', image: '/src/assets/staff/staff_brenda_reservation.webp' },
-    { name: 'Juma Habibu', role: 'Finance Director', image: '/src/assets/staff/staff_juma_finance.webp' },
-    { name: 'Huruma Mpanda', role: 'tour guide', image: '/src/assets/staff/staff_huruma_guide.webp' },
-    { name: 'Abdulrahaman Abel', role: 'Marketing Manager', image: '/src/assets/staff/staff_abel_marketing.webp' },
-    { name: 'Raheli Festo Ochieng', role: 'tour guide', image: '/src/assets/staff/staff_rachel_guide.webp' },
+    { name: 'Caudence Ayoti', role: 'CEO, Founder', image: '/src/assets/staff/caudence.jpg' },
+    { name: 'Lynn Mackanja', role: 'Legal Consultant', image: '/src/assets/staff/lynn.jpg' },
+    { name: 'Johns Tenga', role: 'Director of Operations', image: '/src/assets/staff/johns.jpg' },
+    { name: 'Brenda Richard', role: 'Safaris & reservations consultant', image: '/src/assets/staff/brenda.jpg' },
+    { name: 'Juma Habibu', role: 'Finance Director', image: '/src/assets/staff/juma.jpg' },
+    { name: 'Huruma Mpanda', role: 'tour guide', image: '/src/assets/staff/huruma.jpg' },
+    { name: 'Abdulrahaman Abel', role: 'Marketing Manager', image: '/src/assets/staff/abdulrahaman.jpg' },
+    { name: 'Raheli Festo Ochieng', role: 'tour guide', image: '/src/assets/staff/raheli.jpg' },
   ];
 
   const rates = [
     {
       number: '01',
-      title: 'Our Rates',
-      description: 'Memorable travel experiences are priceless. We offer best value for money. Occasionally we have special offers.'
-    },
-    {
-      number: '02',
       title: 'Exciting Selection of Tours',
       description: 'Every desire to travel starts as an idea. We have simplified the process for you. Travel experiences on our website are grouped into ideas. However we are still open to tweaking our ideas to suit your taste.'
     },
     {
-      number: '03',
+      number: '02',
       title: 'In Safe Hands',
       description: 'Of seasoned industry professionals and guides, with deep knowledge and understanding of the region\'s flora and fauna. We are also represented on SafariBookings a leading online marketplace for safaris.'
     },
     {
-      number: '04',
+      number: '03',
       title: 'Sustainability',
       description: 'At DeMi Tours, we are committed to thoughtful and responsible travel. We hold ourselves accountable for upholding responsible travel principles throughout our safaris. We achieve this by engaging local communities in the regions in which we travel. We also create programs that foster sustainable and authentic preservation of those communities.'
     },
     {
-      number: '05',
+      number: '04',
       title: 'Book With Confidence',
       description: 'Once you decide on your favourite package and travel date, easily book it online. Upon receiving your booking, we will send you a secure payment link.'
     },
     {
-      number: '06',
+      number: '05',
       title: 'Bespoke Travel Ideas',
       description: 'We are flexible enough to custom-make an itinerary for you from start to finish, working within your stipulated budget.'
     }
@@ -59,6 +54,7 @@ const OurStory = () => {
       {/* Hero */}
       <div className="relative h-[300px] md:h-[400px]">
         <img src="/src/assets/header_bg_new4.gif" alt="Our Story" className="w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/80 via-charcoal/60 to-charcoal/80" />
         <div className="absolute inset-0 flex items-center">
           <div className="container mx-auto px-4 lg:px-8">
             <div className="text-white mb-4">
@@ -77,10 +73,33 @@ const OurStory = () => {
       <div className="py-16 bg-white">
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-start">
-            {/* Left - Image */}
+            {/* Left - Image with Our Rates */}
             <div className="space-y-8">
               <div className="relative rounded-3xl overflow-hidden shadow-2xl">
                 <img src="/src/assets/our_story.jpeg" alt="Our Story" className="w-full h-auto" />
+              </div>
+
+              {/* Our Rates */}
+              <div className="bg-muted/30 rounded-3xl p-8">
+                <h3 className="font-display text-2xl font-bold mb-4">Our Rates</h3>
+                <p className="text-muted-foreground mb-8">
+                  Memorable travel experiences are priceless. We offer best value for money. Occasionally we have special offers.
+                </p>
+                <div className="space-y-6">
+                  {rates.map((rate) => (
+                    <div key={rate.number} className="flex gap-4">
+                      <div className="flex-shrink-0">
+                        <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
+                          <span className="font-bold text-primary">{rate.number}</span>
+                        </div>
+                      </div>
+                      <div>
+                        <h4 className="font-heading font-bold mb-2">{rate.title}</h4>
+                        <p className="text-sm text-muted-foreground leading-relaxed">{rate.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
 
@@ -144,41 +163,31 @@ const OurStory = () => {
                   </p>
                 </div>
 
-                <p className="text-muted-foreground italic mb-8">
+                <p className="text-muted-foreground italic">
                   Thank you for considering DeMi Tours and Travel for your next adventure. We look forward to providing you with an exceptional experience that will create lasting memories.
                 </p>
-
-                <Link to="/contact">
-                  <Button variant="primary" size="lg" className="gap-2">
-                    Talk to us
-                    <ArrowRight className="w-5 h-5" />
-                  </Button>
-                </Link>
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      {/* THE DIFFERENCE */}
-      <div className="py-24 bg-muted/20">
+      {/* Responsive Card */}
+      <div className="py-16 bg-muted/20">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">THE DIFFERENCE</h2>
-            <p className="text-xl text-muted-foreground">We are passionate. We love what we do.</p>
-          </div>
-
-          <div className="grid md:grid-cols-3 gap-x-12 gap-y-8 mb-8">
-            {rates.map((rate) => (
-              <div key={rate.number}>
-                <h3 className="font-heading font-bold text-xl mb-3 flex items-center gap-2">
-                  <span className="text-primary">{rate.number}</span> {rate.title}
-                </h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  {rate.description}
-                </p>
-              </div>
-            ))}
+          <div className="relative max-w-4xl mx-auto rounded-3xl overflow-hidden shadow-2xl">
+            <img src="/src/assets/Untitled.png" alt="Background" className="w-full h-auto opacity-20" />
+            <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-8">
+              <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-foreground">
+                We are Responsive to Your Travel Ideas
+              </h2>
+              <Link to="/contact">
+                <Button variant="primary" size="xl" className="gap-2">
+                  Talk to us
+                  <ArrowRight className="w-5 h-5" />
+                </Button>
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -186,63 +195,21 @@ const OurStory = () => {
       {/* Meet The FAM */}
       <div className="py-24 bg-white">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12">
             <h2 className="font-display text-4xl md:text-5xl font-bold mb-2">Meet The FAM</h2>
             <p className="text-xl text-muted-foreground">Putting A Name To The Face</p>
           </div>
-
-          {/* First Row */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
-            {team.slice(0, 4).map((member, index) => (
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+            {team.map((member, index) => (
               <div key={index} className="text-center group">
-                <div className="relative mb-4 overflow-hidden rounded-2xl shadow-lg bg-muted/20">
+                <div className="relative mb-4 overflow-hidden rounded-2xl shadow-lg">
                   <img
                     src={member.image}
                     alt={member.name}
-                    className="w-full aspect-square object-contain transition-transform duration-500 group-hover:scale-110"
+                    className="w-full aspect-square object-cover transition-transform duration-500 group-hover:scale-110"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
-                    <div className="flex gap-3">
-                      <a href="#" className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors">
-                        <Facebook className="w-4 h-4 text-white" />
-                      </a>
-                      <a href="#" className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors">
-                        <Linkedin className="w-4 h-4 text-white" />
-                      </a>
-                      <a href="#" className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors">
-                        <Instagram className="w-4 h-4 text-white" />
-                      </a>
-                    </div>
-                  </div>
                 </div>
-                <h3 className="font-heading font-bold text-base mb-1">{member.name}</h3>
-                <p className="text-sm text-primary">{member.role}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Second Row */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {team.slice(4, 8).map((member, index) => (
-              <div key={index} className="text-center group">
-                <div className="relative mb-4 overflow-hidden rounded-2xl shadow-lg bg-muted/20">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full aspect-square object-contain transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
-                    <div className="flex gap-3">
-                      <a href="#" className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors">
-                        <Facebook className="w-4 h-4 text-white" />
-                      </a>
-                      <a href="#" className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors">
-                        <Instagram className="w-4 h-4 text-white" />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <h3 className="font-heading font-bold text-base mb-1">{member.name}</h3>
+                <h3 className="font-heading font-bold text-lg mb-1">{member.name}</h3>
                 <p className="text-sm text-primary">{member.role}</p>
               </div>
             ))}
@@ -254,7 +221,7 @@ const OurStory = () => {
       <TestimonialsSection />
 
       {/* CTA */}
-      <div className="py-32 bg-muted/20">
+      <div className="py-32 bg-white">
         <div className="container mx-auto px-4 lg:px-8 text-center">
           <h2 className="font-display text-5xl md:text-6xl font-bold text-foreground mb-6">
             Your Trip. Our Responsibility.

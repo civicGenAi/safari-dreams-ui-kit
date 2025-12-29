@@ -35,7 +35,7 @@ const WildTales = () => {
       {/* Hero Section */}
       <div className="relative h-[500px] md:h-[600px]">
         <img
-          src="/src/assets/header_bg_wildbeest.jpg"
+          src="/src/assets/header_bg_new4.gif"
           alt="Wild Tales"
           className="w-full h-full object-cover"
         />
@@ -43,30 +43,34 @@ const WildTales = () => {
 
         <div className="absolute inset-0 flex items-center">
           <div className="container mx-auto px-4 lg:px-8">
-            <div className="max-w-5xl mx-auto text-center">
-              <p className="text-2xl md:text-3xl lg:text-4xl text-white/95 mb-12 leading-relaxed font-light">
-                Adventures, wildlife encounters, and insider stories from the heart of Africa
+            <div className="max-w-4xl mx-auto text-center">
+              <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-sm px-4 py-2 rounded-full mb-6">
+                <BookOpen className="w-4 h-4 text-white" />
+                <span className="text-sm font-heading font-medium text-white">Stories from the Wild</span>
+              </div>
+
+              <h1 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold mb-6 text-white">
+                Wild <span className="text-gradient-gold">Tales</span>
+              </h1>
+
+              <p className="text-xl text-white/90 mb-8 leading-relaxed max-w-3xl mx-auto">
+                Adventures, wildlife encounters, and insider stories from the heart of Africa.
+                Discover the untold tales of safari life, conservation heroes, and breathtaking journeys.
               </p>
 
-              {/* Stats - Circular with Rope Style */}
-              <div className="flex items-center justify-center gap-8 md:gap-12">
-                <div className="relative">
-                  <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-white/10 backdrop-blur-md border-4 border-dashed border-white/40 flex flex-col items-center justify-center shadow-2xl">
-                    <div className="text-4xl md:text-5xl font-display font-bold text-white mb-1">150+</div>
-                    <div className="text-sm text-white/90">Stories</div>
-                  </div>
+              {/* Stats */}
+              <div className="grid grid-cols-3 gap-6 max-w-2xl mx-auto">
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
+                  <div className="text-3xl font-display font-bold text-white mb-1">150+</div>
+                  <div className="text-sm text-white/80">Stories</div>
                 </div>
-                <div className="relative">
-                  <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-white/10 backdrop-blur-md border-4 border-dashed border-white/40 flex flex-col items-center justify-center shadow-2xl">
-                    <div className="text-4xl md:text-5xl font-display font-bold text-white mb-1">50K+</div>
-                    <div className="text-sm text-white/90">Readers</div>
-                  </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
+                  <div className="text-3xl font-display font-bold text-white mb-1">50K+</div>
+                  <div className="text-sm text-white/80">Readers</div>
                 </div>
-                <div className="relative">
-                  <div className="w-32 h-32 md:w-40 md:h-40 rounded-full bg-white/10 backdrop-blur-md border-4 border-dashed border-white/40 flex flex-col items-center justify-center shadow-2xl">
-                    <div className="text-4xl md:text-5xl font-display font-bold text-white mb-1">Weekly</div>
-                    <div className="text-sm text-white/90">Updates</div>
-                  </div>
+                <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-4 border border-white/20">
+                  <div className="text-3xl font-display font-bold text-white mb-1">Weekly</div>
+                  <div className="text-sm text-white/80">Updates</div>
                 </div>
               </div>
             </div>
@@ -320,13 +324,13 @@ const WildTales = () => {
                         alt={post.title}
                         className="w-20 h-20 rounded-xl object-cover flex-shrink-0 shadow-sm"
                       />
-                      <div className="flex-1 min-w-0 overflow-hidden">
-                        <h4 className="font-semibold text-sm line-clamp-2 group-hover:text-primary transition-colors mb-2 break-words">
+                      <div className="flex-1 min-w-0">
+                        <h4 className="font-semibold text-sm line-clamp-2 group-hover:text-primary transition-colors mb-2">
                           {post.title}
                         </h4>
                         <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                          <Calendar className="w-3 h-3 flex-shrink-0" />
-                          <span className="truncate">{new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
+                          <Calendar className="w-3 h-3" />
+                          <span>{new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
                         </div>
                       </div>
                     </Link>

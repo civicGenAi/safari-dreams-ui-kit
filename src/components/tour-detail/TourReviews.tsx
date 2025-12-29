@@ -78,7 +78,7 @@ export const TourReviews = ({ tourId, rating, totalReviews }: TourReviewsProps) 
                   <div className="flex items-center gap-2">
                     <h4 className="font-heading font-semibold">{review.name}</h4>
                     {review.verified && (
-                      <VerifiedIcon className="w-4 h-4 text-blue-500" title="Verified traveler" />
+                      <VerifiedIcon className="w-4 h-4 text-blue-500" aria-label="Verified traveler" />
                     )}
                   </div>
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">

@@ -1,63 +1,50 @@
 import { useState, useEffect } from 'react';
-import { Star } from 'lucide-react';
+import { Star, ChevronLeft, ChevronRight } from 'lucide-react';
+import feedbackClient1 from '@/assets/feedback_client.webp';
+import feedbackClient2 from '@/assets/feedback_client2.webp';
 
 interface Testimonial {
   id: string;
   name: string;
   location: string;
-  avatar: string;
+  title: string;
   rating: number;
   text: string;
-  tour: string;
-  date: string;
 }
 
 const testimonials: Testimonial[] = [
   {
     id: '1',
-    name: 'Sarah & Michael Thompson',
-    location: 'New York, USA',
-    avatar: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100',
+    name: 'ANAT K',
+    location: 'Haifa, Israel',
+    title: 'Great Safari, Professional Planning',
     rating: 5,
-    text: 'An absolutely magical experience! The guides were incredibly knowledgeable, and we saw all of the Big Five in just three days. The accommodations exceeded our expectations.',
-    tour: 'Serengeti Safari',
-    date: 'October 2024',
+    text: '"In one word- Wow!!! What an adventure. Great Safari production, everything was planned to the letter. Great choice of lodges and the BEST guide! Huruma, the guide, was the icing on the cake - professional spotting abilities upgraded the entire safari experience. Asanta sana"',
   },
   {
     id: '2',
-    name: 'James & Emily Watson',
+    name: 'SARAH T',
     location: 'London, UK',
-    avatar: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100',
+    title: 'Life-Changing Experience',
     rating: 5,
-    text: 'Climbing Kilimanjaro was a life-changing experience. The DeMi Tours team made sure we were safe and well-prepared at every step. Reaching the summit was unforgettable.',
-    tour: 'Kilimanjaro Summit',
-    date: 'September 2024',
+    text: '"An absolutely magical experience! The guides were incredibly knowledgeable, and we saw all of the Big Five in just three days. The accommodations exceeded our expectations. Would highly recommend DeMi Tours to anyone!"',
   },
   {
     id: '3',
-    name: 'Maria Rodriguez',
-    location: 'Madrid, Spain',
-    avatar: 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100',
+    name: 'JAMES W',
+    location: 'Sydney, Australia',
+    title: 'Unforgettable Kilimanjaro Summit',
     rating: 5,
-    text: 'The gorilla trekking in Rwanda was beyond words. Coming face to face with these gentle giants was the most incredible wildlife encounter of my life.',
-    tour: 'Rwanda Gorillas',
-    date: 'November 2024',
+    text: '"Climbing Kilimanjaro was a life-changing experience. The DeMi Tours team made sure we were safe and well-prepared at every step. Reaching the summit at sunrise was absolutely unforgettable. Thank you!"',
   },
   {
     id: '4',
-    name: 'David & Lisa Chen',
-    location: 'Sydney, Australia',
-    avatar: 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=100',
+    name: 'MARIA R',
+    location: 'Madrid, Spain',
+    title: 'Gorilla Trekking Adventure',
     rating: 5,
-    text: 'From the moment we landed in Tanzania, everything was perfectly organized. The sunset over the Serengeti is something we\'ll never forget. Highly recommend!',
-    tour: 'Tanzania Explorer',
-    date: 'August 2024',
+    text: '"The gorilla trekking in Rwanda was beyond words. Coming face to face with these gentle giants was the most incredible wildlife encounter of my life. DeMi Tours handled every detail perfectly."',
   },
-];
-
-const safariImages = [
-  'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=800',
-  'https://images.unsplash.com/photo-1549366021-9f761d450615?w=800',
 ];
 
 export const TestimonialsSection = () => {
@@ -66,153 +53,123 @@ export const TestimonialsSection = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % testimonials.length);
-    }, 5000);
+    }, 6000);
 
     return () => clearInterval(interval);
   }, []);
 
-  return (
-    <section className="py-24 lg:py-32 bg-white relative overflow-hidden">
-      <div className="absolute inset-0 opacity-5">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-primary rounded-full blur-3xl" />
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-secondary rounded-full blur-3xl" />
-      </div>
+  const goToPrevious = () => {
+    setCurrentIndex((prev) => (prev - 1 + testimonials.length) % testimonials.length);
+  };
 
+  const goToNext = () => {
+    setCurrentIndex((prev) => (prev + 1) % testimonials.length);
+  };
+
+  return (
+    <section className="py-24 lg:py-32 bg-muted/30 relative overflow-hidden">
       <div className="container mx-auto px-4 lg:px-8 relative">
-        <div className="text-center max-w-3xl mx-auto mb-16">
-          <div className="flex items-center justify-center gap-3 mb-6">
-            <div className="w-12 h-px bg-primary" />
-            <span className="font-heading text-sm uppercase tracking-widest text-primary">
-              Testimonials
-            </span>
-            <div className="w-12 h-px bg-primary" />
-          </div>
-          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
-            What Our Travelers
-            <span className="text-primary block">Say About Us</span>
+        {/* Section Header */}
+        <div className="text-center mb-12">
+          <span className="font-heading text-sm uppercase tracking-[0.3em] text-primary font-medium">
+            AUTHENTIC TRAVELER FEEDBACK
+          </span>
+          <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mt-6 italic">
+            Our Travelers experiences...
           </h2>
+          <div className="w-16 h-px bg-primary/60 mx-auto mt-6" />
         </div>
 
+        {/* Main Content - Images on sides, testimonial in center */}
         <div className="grid lg:grid-cols-12 gap-8 items-center">
-          {/* Left Empty Space */}
-          <div className="hidden lg:block lg:col-span-2"></div>
-
-          {/* Center Images */}
-          <div className="hidden lg:block lg:col-span-3 space-y-6">
-            <div className="relative group overflow-hidden rounded-3xl shadow-2xl transform hover:scale-105 transition-transform duration-500">
+          {/* Left Image */}
+          <div className="hidden lg:block lg:col-span-3">
+            <div className="relative">
               <img
-                src={safariImages[0]}
-                alt="Safari experience"
-                className="w-full h-64 object-cover"
+                src={feedbackClient1}
+                alt="Happy traveler"
+                className="w-full h-[500px] object-cover rounded-3xl shadow-2xl"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-            </div>
-            <div className="relative group overflow-hidden rounded-3xl shadow-2xl transform hover:scale-105 transition-transform duration-500">
-              <img
-                src={safariImages[1]}
-                alt="Safari adventure"
-                className="w-full h-64 object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/20 to-transparent rounded-3xl" />
             </div>
           </div>
 
-          {/* Testimonials */}
-          <div className="lg:col-span-7">
-            <div className="relative min-h-[400px]">
-              {testimonials.map((testimonial, index) => (
-                <div
-                  key={testimonial.id}
-                  className={`absolute inset-0 transition-all duration-1000 ${
-                    index === currentIndex
-                      ? 'opacity-100 translate-x-0'
-                      : index < currentIndex
-                      ? 'opacity-0 -translate-x-full'
-                      : 'opacity-0 translate-x-full'
-                  }`}
-                >
-                  <div className="bg-muted/30 backdrop-blur-sm rounded-3xl p-8 md:p-12 border border-border shadow-xl">
-                    <div className="flex items-center gap-1 mb-6">
-                      {[...Array(testimonial.rating)].map((_, i) => (
-                        <Star key={i} className="w-6 h-6 fill-primary text-primary" />
-                      ))}
+          {/* Center - Testimonials Carousel */}
+          <div className="lg:col-span-6 relative">
+            <div className="relative min-h-[350px] flex items-center">
+              {/* Navigation Arrows */}
+              <button
+                onClick={goToPrevious}
+                className="absolute left-0 lg:-left-4 z-10 w-12 h-12 rounded-full border-2 border-dashed border-muted-foreground/30 flex items-center justify-center hover:border-primary hover:text-primary transition-colors bg-background/80 backdrop-blur-sm"
+                aria-label="Previous testimonial"
+              >
+                <ChevronLeft className="w-5 h-5 text-muted-foreground" />
+              </button>
+
+              <button
+                onClick={goToNext}
+                className="absolute right-0 lg:-right-4 z-10 w-12 h-12 rounded-full border-2 border-dashed border-muted-foreground/30 flex items-center justify-center hover:border-primary hover:text-primary transition-colors bg-background/80 backdrop-blur-sm"
+                aria-label="Next testimonial"
+              >
+                <ChevronRight className="w-5 h-5 text-muted-foreground" />
+              </button>
+
+              {/* Testimonials */}
+              <div className="w-full px-16">
+                {testimonials.map((testimonial, index) => (
+                  <div
+                    key={testimonial.id}
+                    className={`transition-all duration-700 ${
+                      index === currentIndex
+                        ? 'opacity-100 block'
+                        : 'opacity-0 hidden'
+                    }`}
+                  >
+                    <div className="bg-background rounded-3xl p-8 md:p-10 shadow-xl border border-border text-center">
+                      {/* Title */}
+                      <h3 className="font-display text-xl md:text-2xl font-semibold text-foreground mb-6 underline decoration-primary/30 underline-offset-4">
+                        {testimonial.title}
+                      </h3>
+
+                      {/* Quote */}
+                      <blockquote className="font-display text-base md:text-lg text-muted-foreground leading-relaxed mb-6 italic">
+                        {testimonial.text}
+                      </blockquote>
+
+                      {/* Stars */}
+                      <div className="flex items-center justify-center gap-1 mb-6">
+                        {[...Array(testimonial.rating)].map((_, i) => (
+                          <Star key={i} className="w-5 h-5 fill-secondary text-secondary" />
+                        ))}
+                      </div>
                     </div>
 
-                    <blockquote className="font-display text-xl md:text-2xl lg:text-3xl text-foreground leading-relaxed mb-8">
-                      "{testimonial.text}"
-                    </blockquote>
-
-                    <div className="flex items-center gap-4">
-                      <img
-                        src={testimonial.avatar}
-                        alt={testimonial.name}
-                        className="w-16 h-16 rounded-full object-cover border-3 border-primary shadow-lg"
-                      />
-                      <div>
-                        <span className="block font-heading font-semibold text-foreground text-lg">
+                    {/* Author Badge - Outside card */}
+                    <div className="flex justify-center -mt-5">
+                      <div className="bg-muted/80 backdrop-blur-sm px-6 py-3 rounded-full shadow-lg">
+                        <span className="block font-heading font-bold text-foreground text-sm tracking-wide">
                           {testimonial.name}
                         </span>
-                        <span className="text-muted-foreground">
+                        <span className="text-muted-foreground text-xs">
                           {testimonial.location}
-                        </span>
-                      </div>
-                      <div className="ml-auto text-right hidden sm:block">
-                        <span className="block font-heading text-sm text-primary font-semibold">
-                          {testimonial.tour}
-                        </span>
-                        <span className="text-muted-foreground text-sm">
-                          {testimonial.date}
                         </span>
                       </div>
                     </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
+          </div>
 
-            <div className="flex items-center justify-center gap-2 mt-8">
-              {testimonials.map((_, index) => (
-                <button
-                  key={index}
-                  onClick={() => setCurrentIndex(index)}
-                  className={`h-2 rounded-full transition-all duration-500 ${
-                    index === currentIndex
-                      ? 'w-12 bg-primary'
-                      : 'w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50'
-                  }`}
-                  aria-label={`Go to testimonial ${index + 1}`}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="flex flex-wrap items-center justify-center gap-8 mt-16 pt-16 border-t border-border">
-          <div className="flex items-center gap-3 text-foreground">
-            <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center">
-              <Star className="w-7 h-7 fill-primary text-primary" />
-            </div>
-            <div>
-              <span className="block font-display text-2xl font-bold text-foreground">4.9/5</span>
-              <span className="text-sm text-muted-foreground">TripAdvisor</span>
-            </div>
-          </div>
-          <div className="flex items-center gap-3 text-foreground">
-            <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center">
-              <Star className="w-7 h-7 fill-primary text-primary" />
-            </div>
-            <div>
-              <span className="block font-display text-2xl font-bold text-foreground">5.0/5</span>
-              <span className="text-sm text-muted-foreground">Google Reviews</span>
-            </div>
-          </div>
-          <div className="flex items-center gap-3 text-foreground">
-            <div className="w-14 h-14 bg-primary/10 rounded-2xl flex items-center justify-center">
-              <span className="font-display text-xl font-bold text-primary">2.8K+</span>
-            </div>
-            <div>
-              <span className="block font-display text-2xl font-bold text-foreground">Reviews</span>
-              <span className="text-sm text-muted-foreground">Verified Travelers</span>
+          {/* Right Image */}
+          <div className="hidden lg:block lg:col-span-3">
+            <div className="relative">
+              <img
+                src={feedbackClient2}
+                alt="Safari photographer"
+                className="w-full h-[500px] object-cover rounded-3xl shadow-2xl"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/20 to-transparent rounded-3xl" />
             </div>
           </div>
         </div>
