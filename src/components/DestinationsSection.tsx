@@ -22,7 +22,7 @@ export const DestinationsSection = () => {
             <img
               src={worldMap}
               alt="World Map"
-              className="w-full h-auto rounded-2xl shadow-lg"
+              className="w-full h-auto"
             />
           </div>
 
