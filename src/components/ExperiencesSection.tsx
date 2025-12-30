@@ -79,6 +79,7 @@ const experiences = [
     description: 'Thrilling expeditions for the bold traveler.',
     color: 'bg-orange-500/10 text-orange-600',
     image: '/src/assets/tours_daytours_arusha_national_park2.webp',
+    slug: 'adventure',
   },
   {
     icon: CrossBorderIcon,
@@ -87,6 +88,7 @@ const experiences = [
     description: 'Multi-country safari adventures.',
     color: 'bg-emerald-500/10 text-emerald-600',
     image: '/src/assets/idea_crossborder_elephants.webp',
+    slug: 'cross-border',
   },
   {
     icon: DayTourIcon,
@@ -95,6 +97,7 @@ const experiences = [
     description: 'Perfect short excursions and city tours.',
     color: 'bg-amber-500/10 text-amber-600',
     image: '/src/assets/ideas_daytour_leopardkill.webp',
+    slug: 'day-tours',
   },
   {
     icon: LuxuryIcon,
@@ -103,6 +106,7 @@ const experiences = [
     description: 'Premium experiences with exclusive lodges.',
     color: 'bg-purple-500/10 text-purple-600',
     image: '/src/assets/idea_luxury_poolside.webp',
+    slug: 'luxury',
   },
   {
     icon: MigrationIcon,
@@ -111,6 +115,7 @@ const experiences = [
     description: 'Witness the Great Wildebeest Migration.',
     color: 'bg-blue-500/10 text-blue-600',
     image: '/src/assets/ideas_migration_wildebeast.jpg',
+    slug: 'migration',
   },
   {
     icon: GorillaIcon,
@@ -119,6 +124,7 @@ const experiences = [
     description: 'Encounter our closest relatives in the wild.',
     color: 'bg-green-500/10 text-green-600',
     image: '/src/assets/idea_gorilla_chimp_trek.webp',
+    slug: 'gorilla-chimp-trekking',
   },
 ];
 
@@ -226,7 +232,7 @@ export const ExperiencesSection = () => {
         <div className="grid grid-cols-1 md:grid-cols-6 lg:grid-cols-12 gap-4 lg:gap-6 auto-rows-[280px]">
           {/* Big Card - Left (Adventure Seekers) */}
           <Link
-            to="/travel-ideas"
+            to={`/travel-ideas/${experiences[0].slug}`}
             className="group relative overflow-hidden rounded-3xl md:col-span-6 lg:col-span-5 md:row-span-2 card-hover"
             style={{ animationDelay: '0ms' }}
           >
@@ -264,7 +270,7 @@ export const ExperiencesSection = () => {
 
           {/* Small Card Top Middle (Cross Border Safari) */}
           <Link
-            to="/travel-ideas"
+            to={`/travel-ideas/${experiences[1].slug}`}
             className="group relative overflow-hidden rounded-3xl md:col-span-3 lg:col-span-3 card-hover"
             style={{ animationDelay: '100ms' }}
           >
@@ -302,7 +308,7 @@ export const ExperiencesSection = () => {
 
           {/* Right Column - Card 1 (Luxury Tours) */}
           <Link
-            to="/travel-ideas"
+            to={`/travel-ideas/${experiences[3].slug}`}
             className="group relative overflow-hidden rounded-3xl md:col-span-3 lg:col-span-4 card-hover"
             style={{ animationDelay: '200ms' }}
           >
@@ -340,7 +346,7 @@ export const ExperiencesSection = () => {
 
           {/* Small Card Bottom Middle (Day Tours) */}
           <Link
-            to="/travel-ideas"
+            to={`/travel-ideas/${experiences[2].slug}`}
             className="group relative overflow-hidden rounded-3xl md:col-span-3 lg:col-span-3 card-hover"
             style={{ animationDelay: '150ms' }}
           >
@@ -378,7 +384,7 @@ export const ExperiencesSection = () => {
 
           {/* Right Column - Card 2 (Migration Safari) */}
           <Link
-            to="/travel-ideas"
+            to={`/travel-ideas/${experiences[4].slug}`}
             className="group relative overflow-hidden rounded-3xl md:col-span-3 lg:col-span-2 card-hover"
             style={{ animationDelay: '250ms' }}
           >
@@ -416,7 +422,7 @@ export const ExperiencesSection = () => {
 
           {/* Right Column - Card 3 (Gorilla & Chimp Trekking) */}
           <Link
-            to="/travel-ideas"
+            to={`/travel-ideas/${experiences[5].slug}`}
             className="group relative overflow-hidden rounded-3xl md:col-span-3 lg:col-span-2 card-hover"
             style={{ animationDelay: '300ms' }}
           >
