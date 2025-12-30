@@ -5,6 +5,7 @@ import { DestinationsSection } from '@/components/DestinationsSection';
 import { WhyChooseUsSection } from '@/components/WhyChooseUsSection';
 import { ToursSection } from '@/components/ToursSection';
 import { ExperiencesSection } from '@/components/ExperiencesSection';
+import { CtaBookingSection } from '@/components/CtaBookingSection';
 import { ClientFamilySection } from '@/components/ClientFamilySection';
 import { TestimonialsSection } from '@/components/TestimonialsSection';
 import { FaqBlogSection } from '@/components/FaqBlogSection';
@@ -23,6 +24,7 @@ const Index = () => {
         <WhyChooseUsSection />
         <ToursSection />
         <ExperiencesSection />
+        <CtaBookingSection />
         <TestimonialsSection />
         <FaqBlogSection />
         <NewsletterSection />
