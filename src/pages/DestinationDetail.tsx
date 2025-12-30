@@ -34,7 +34,9 @@ const DestinationDetail = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const autoScrollRef = useRef<NodeJS.Timeout>();
 
-  const otherDestinations = mockDestinations.filter((d) => d.slug !== slug).slice(0, 6);
+  const otherDestinations = mockDestinations
+    .filter((d) => d.slug !== slug && !['egypt', 'israel', 'jordan'].includes(d.slug))
+    .slice(0, 6);
   const destinationTours = mockTours.filter((t) => t.destination === slug);
 
   useEffect(() => {
@@ -186,70 +188,61 @@ Overall, Jordan is a diverse country that offers something for everyone, from an
             </div>
 
             {/* Please Note Card */}
-            <div className="relative bg-[#B8956A] rounded-2xl p-8 shadow-lg overflow-hidden">
+            <div className="relative border-2 border-dashed border-primary/30 rounded-2xl p-8 shadow-lg overflow-hidden bg-white">
               {/* Decorative dotted line */}
               <div className="absolute top-6 right-6 w-24 h-24">
-                <svg viewBox="0 0 100 100" className="w-full h-full opacity-30">
-                  <path d="M10,50 Q30,10 50,50 T90,50" fill="none" stroke="white" strokeWidth="2" strokeDasharray="4,4" strokeLinecap="round"/>
-                  <circle cx="90" cy="50" r="4" fill="white"/>
+                <svg viewBox="0 0 100 100" className="w-full h-full opacity-20">
+                  <path d="M10,50 Q30,10 50,50 T90,50" fill="none" stroke="currentColor" strokeWidth="2" strokeDasharray="4,4" strokeLinecap="round"/>
+                  <circle cx="90" cy="50" r="4" fill="currentColor"/>
                 </svg>
               </div>
 
               <div className="flex items-start gap-4 mb-6 relative">
-                <div className="w-12 h-12 bg-white/20 rounded-full flex items-center justify-center flex-shrink-0">
-                  <MapPin className="w-6 h-6 text-white" />
+                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center flex-shrink-0">
+                  <MapPin className="w-6 h-6 text-primary" />
                 </div>
                 <div>
-                  <h3 className="font-display text-2xl font-bold text-white">Please Note Below</h3>
-                  <p className="text-white/90 font-semibold text-lg">Country Facts</p>
+                  <h3 className="font-display text-2xl font-bold text-foreground">Please Note Below</h3>
+                  <p className="text-muted-foreground font-semibold text-lg">Country Facts</p>
                 </div>
               </div>
 
               {/* Dotted Box with Country Information */}
-              <div className="border-2 border-dashed border-white/30 rounded-xl p-6 bg-white/10 backdrop-blur-sm">
+              <div className="border-2 border-dashed border-primary/20 rounded-xl p-6 bg-muted/10">
                 <div className="space-y-4">
                   <div>
-                    <span className="text-white/80 text-sm font-medium block mb-1">Country</span>
-                    <p className="font-semibold text-white">{destination.country}</p>
+                    <span className="text-muted-foreground text-sm font-medium block mb-1">Country</span>
+                    <p className="font-semibold text-foreground">{destination.country}</p>
                   </div>
                   <div>
-                    <span className="text-white/80 text-sm font-medium block mb-1">Visa Requirements</span>
-                    <p className="font-semibold text-white text-sm leading-relaxed">
+                    <span className="text-muted-foreground text-sm font-medium block mb-1">Visa Requirements</span>
+                    <p className="font-semibold text-foreground text-sm leading-relaxed">
                       {slug === 'tanzania' && 'Commonwealth & EAC citizens - don\'t need visa. Everyone else need a visa.'}
                       {slug === 'kenya' && 'Most nationalities can obtain visa on arrival. EAC citizens enter visa-free.'}
                       {slug === 'rwanda' && 'Visa on arrival for most nationalities. EAC, AU member states visa-free.'}
                       {slug === 'uganda' && 'East African citizens visa-free. Most nationalities can get e-visa online.'}
-                      {slug === 'israel' && 'Many countries visa-free for up to 90 days. Check specific requirements.'}
-                      {slug === 'egypt' && 'Visa required. Can be obtained on arrival or online (e-visa) for most nationalities.'}
-                      {slug === 'jordan' && 'Visa on arrival available. Free if staying 3+ nights through Jordan Pass.'}
                     </p>
                   </div>
                   <div>
-                    <span className="text-white/80 text-sm font-medium block mb-1">Languages spoken</span>
-                    <p className="font-semibold text-white">{destination.language}</p>
+                    <span className="text-muted-foreground text-sm font-medium block mb-1">Languages spoken</span>
+                    <p className="font-semibold text-foreground">{destination.language}</p>
                   </div>
                   <div>
-                    <span className="text-white/80 text-sm font-medium block mb-1">Currency used</span>
-                    <p className="font-semibold text-white">
+                    <span className="text-muted-foreground text-sm font-medium block mb-1">Currency used</span>
+                    <p className="font-semibold text-foreground">
                       {slug === 'tanzania' && 'Tanzania Shilling, USD, Euro'}
                       {slug === 'kenya' && 'Kenyan Shilling, USD'}
                       {slug === 'rwanda' && 'Rwandan Franc, USD'}
                       {slug === 'uganda' && 'Ugandan Shilling, USD'}
-                      {slug === 'israel' && 'Israeli Shekel, USD, Euro'}
-                      {slug === 'egypt' && 'Egyptian Pound, USD, Euro'}
-                      {slug === 'jordan' && 'Jordanian Dinar, USD'}
                     </p>
                   </div>
                   <div>
-                    <span className="text-white/80 text-sm font-medium block mb-1">Area (km2)</span>
-                    <p className="font-semibold text-white">
+                    <span className="text-muted-foreground text-sm font-medium block mb-1">Area (km2)</span>
+                    <p className="font-semibold text-foreground">
                       {slug === 'tanzania' && '945,087 km²'}
                       {slug === 'kenya' && '580,367 km²'}
                       {slug === 'rwanda' && '26,338 km²'}
                       {slug === 'uganda' && '241,038 km²'}
-                      {slug === 'israel' && '22,072 km²'}
-                      {slug === 'egypt' && '1,010,408 km²'}
-                      {slug === 'jordan' && '89,342 km²'}
                     </p>
                   </div>
                 </div>
@@ -270,28 +263,48 @@ Overall, Jordan is a diverse country that offers something for everyone, from an
       </div>
 
       {/* Stats Section */}
-      <div className="bg-muted/30 py-16">
+      <div className="bg-muted/30 py-24">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl">
-            <div className="text-center p-6 bg-white rounded-2xl border-2 border-dashed border-primary/30">
-              <Lightbulb className="w-8 h-8 text-primary mx-auto mb-3" />
-              <div className="text-4xl font-display font-bold text-primary mb-2">50+</div>
-              <div className="text-sm text-muted-foreground">Travel ideas</div>
-            </div>
-            <div className="text-center p-6 bg-white rounded-2xl border-2 border-dashed border-primary/30">
-              <MapPin className="w-8 h-8 text-primary mx-auto mb-3" />
-              <div className="text-4xl font-display font-bold text-primary mb-2">7+</div>
-              <div className="text-sm text-muted-foreground">Destinations</div>
-            </div>
-            <div className="text-center p-6 bg-white rounded-2xl border-2 border-dashed border-primary/30">
-              <Heart className="w-8 h-8 text-primary mx-auto mb-3" />
-              <div className="text-4xl font-display font-bold text-primary mb-2">200+</div>
-              <div className="text-sm text-muted-foreground uppercase">Repeat Clients</div>
-            </div>
-            <div className="text-center p-6 bg-white rounded-2xl border-2 border-dashed border-primary/30">
-              <Building className="w-8 h-8 text-primary mx-auto mb-3" />
-              <div className="text-4xl font-display font-bold text-primary mb-2">50+</div>
-              <div className="text-sm text-muted-foreground uppercase">Service Partners</div>
+          <div className="max-w-5xl mx-auto">
+            <div className="relative flex items-center justify-center">
+              {/* Central decorative circle */}
+              <div className="absolute w-64 h-64 rounded-full border-2 border-dashed border-primary/20 hidden md:block" />
+              <div className="absolute w-96 h-96 rounded-full border border-primary/10 hidden lg:block" />
+
+              {/* Stats in circular arrangement */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-8 relative z-10">
+                <div className="flex flex-col items-center">
+                  <div className="w-32 h-32 rounded-full bg-white border-4 border-primary/20 flex flex-col items-center justify-center shadow-lg hover:shadow-2xl hover:scale-110 transition-all duration-300">
+                    <Lightbulb className="w-8 h-8 text-primary mb-2" />
+                    <div className="text-3xl font-display font-bold text-primary">50+</div>
+                  </div>
+                  <div className="text-sm font-medium text-foreground mt-4 text-center">Travel ideas</div>
+                </div>
+
+                <div className="flex flex-col items-center">
+                  <div className="w-32 h-32 rounded-full bg-white border-4 border-primary/20 flex flex-col items-center justify-center shadow-lg hover:shadow-2xl hover:scale-110 transition-all duration-300">
+                    <MapPin className="w-8 h-8 text-primary mb-2" />
+                    <div className="text-3xl font-display font-bold text-primary">4+</div>
+                  </div>
+                  <div className="text-sm font-medium text-foreground mt-4 text-center">Destinations</div>
+                </div>
+
+                <div className="flex flex-col items-center">
+                  <div className="w-32 h-32 rounded-full bg-white border-4 border-primary/20 flex flex-col items-center justify-center shadow-lg hover:shadow-2xl hover:scale-110 transition-all duration-300">
+                    <Heart className="w-8 h-8 text-primary mb-2" />
+                    <div className="text-3xl font-display font-bold text-primary">200+</div>
+                  </div>
+                  <div className="text-sm font-medium text-foreground mt-4 text-center uppercase">Repeat Clients</div>
+                </div>
+
+                <div className="flex flex-col items-center">
+                  <div className="w-32 h-32 rounded-full bg-white border-4 border-primary/20 flex flex-col items-center justify-center shadow-lg hover:shadow-2xl hover:scale-110 transition-all duration-300">
+                    <Building className="w-8 h-8 text-primary mb-2" />
+                    <div className="text-3xl font-display font-bold text-primary">50+</div>
+                  </div>
+                  <div className="text-sm font-medium text-foreground mt-4 text-center uppercase">Service Partners</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
