@@ -4,125 +4,164 @@ import { ArrowRight } from 'lucide-react';
 const packages = [
   {
     title: 'Suns Out Bums Out',
-    discount: '15% off on all advance bookings',
+    discount: '15%',
+    description: 'off on all advance bookings',
     image: '/src/assets/home_fastbooking_beach_lady.webp',
     cta: 'Book Now',
+    color: 'primary',
   },
   {
     title: 'Repeat Clients',
-    discount: '18% off on all advance bookings',
+    discount: '18%',
+    description: 'off on all advance bookings',
     image: '/src/assets/idea_crossborder_elephants.webp',
     cta: 'Book Now',
+    color: 'secondary',
   },
   {
     title: 'Exclusive Deals',
-    discount: 'Want to save up to 25%? Book 3 months upfront.',
+    discount: '25%',
+    description: 'Save up to 25%? Book 3 months upfront',
     image: '/src/assets/home_fastbooking_cheetah.webp',
     cta: 'Book Now',
+    color: 'gold',
   },
 ];
 
 export const SeasonalPackagesSection = () => {
   return (
-    <section className="py-24 lg:py-32 bg-gradient-to-b from-[#4A5D6F] to-[#5B7A8F] relative overflow-hidden">
-      {/* Background decorations */}
-      <div className="absolute inset-0 pointer-events-none opacity-10">
-        <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <pattern id="seasonal-pattern" width="60" height="60" patternUnits="userSpaceOnUse">
-              <circle cx="30" cy="30" r="1.5" fill="white" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#seasonal-pattern)" />
-        </svg>
-      </div>
-
+    <section className="py-24 lg:py-32 bg-white relative overflow-hidden">
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
-        {/* Section Header with Hot Air Balloon */}
+        {/* Section Header */}
         <div className="text-center mb-16">
-          <div className="flex items-center justify-center mb-6">
-            <svg className="w-20 h-20" viewBox="0 0 100 120" fill="none" xmlns="http://www.w3.org/2000/svg">
-              {/* Hot air balloon */}
-              <ellipse cx="50" cy="45" rx="35" ry="40" fill="#D4AF37" opacity="0.3" />
-              <ellipse cx="50" cy="45" rx="35" ry="40" fill="none" stroke="#D4AF37" strokeWidth="2" />
-
-              {/* Balloon segments */}
-              <path d="M15 45 Q50 20 85 45" stroke="#8B7355" strokeWidth="2" fill="none" />
-              <path d="M15 45 Q50 70 85 45" stroke="#8B7355" strokeWidth="2" fill="none" />
-              <line x1="50" y1="10" x2="50" y2="80" stroke="#8B7355" strokeWidth="2" />
-              <line x1="20" y1="30" x2="80" y2="30" stroke="#8B7355" strokeWidth="2" />
-              <line x1="20" y1="60" x2="80" y2="60" stroke="#8B7355" strokeWidth="2" />
-
-              {/* Basket */}
-              <rect x="42" y="85" width="16" height="20" rx="2" fill="#8B7355" stroke="#6B5345" strokeWidth="1.5" />
-              <line x1="42" y1="90" x2="58" y2="90" stroke="#6B5345" strokeWidth="1" />
-              <line x1="42" y1="95" x2="58" y2="95" stroke="#6B5345" strokeWidth="1" />
-              <line x1="42" y1="100" x2="58" y2="100" stroke="#6B5345" strokeWidth="1" />
-
-              {/* Ropes */}
-              <line x1="35" y1="80" x2="42" y2="85" stroke="#6B5345" strokeWidth="1.5" />
-              <line x1="65" y1="80" x2="58" y2="85" stroke="#6B5345" strokeWidth="1.5" />
-              <line x1="25" y1="70" x2="42" y2="85" stroke="#6B5345" strokeWidth="1.5" />
-              <line x1="75" y1="70" x2="58" y2="85" stroke="#6B5345" strokeWidth="1.5" />
-            </svg>
-          </div>
-
           <div className="relative inline-block">
-            <span className="absolute -top-8 -right-12 text-white/40 font-heading text-xs uppercase tracking-widest">
+            <span className="absolute -top-8 right-0 text-primary/60 font-heading text-xs uppercase tracking-widest animate-pulse">
               GRAB THIS
             </span>
-            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+            <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground">
               Best Value Experiences
             </h2>
           </div>
-
-          <div className="flex items-center justify-center gap-4 mt-6">
-            <div className="h-px w-16 bg-white/30" />
-            <div className="h-px w-16 bg-white/30" />
-          </div>
         </div>
 
-        {/* Package Cards */}
-        <div className="grid md:grid-cols-3 gap-6 lg:gap-8">
-          {packages.map((pkg, index) => (
-            <div
-              key={index}
-              className="group relative bg-white rounded-2xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              {/* Image */}
-              <div className="relative h-64 overflow-hidden">
-                <img
-                  src={pkg.image}
-                  alt={pkg.title}
-                  className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-charcoal/20 to-transparent" />
+        {/* Creative Asymmetric Package Grid */}
+        <div className="grid md:grid-cols-12 gap-6 lg:gap-8 auto-rows-[320px]">
+          {/* Large Featured Card - Left (Suns Out Bums Out) */}
+          <Link
+            to="/contact"
+            className="group relative md:col-span-7 md:row-span-2 rounded-3xl overflow-hidden shadow-2xl hover:shadow-3xl transition-all duration-500 hover:-translate-y-4"
+          >
+            <div className="absolute inset-0">
+              <img
+                src={packages[0].image}
+                alt={packages[0].title}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/40 to-transparent" />
+            </div>
 
-                {/* Title overlay on image */}
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="font-display text-3xl md:text-4xl font-bold text-white mb-2">
-                    {pkg.title}
-                  </h3>
+            <div className="relative h-full flex flex-col justify-between p-8 lg:p-12">
+              {/* Discount Badge - Top */}
+              <div className="self-start">
+                <div className="bg-primary text-white rounded-full px-8 py-4 shadow-xl transform -rotate-3 group-hover:rotate-0 transition-transform duration-500">
+                  <div className="text-center">
+                    <div className="text-5xl lg:text-6xl font-display font-bold">{packages[0].discount}</div>
+                    <div className="text-sm font-heading uppercase tracking-wider mt-1">OFF</div>
+                  </div>
                 </div>
               </div>
 
-              {/* Content */}
-              <div className="p-6 bg-white">
-                <p className="text-foreground/80 text-base mb-6 min-h-[3rem]">
-                  {pkg.discount}
+              {/* Content - Bottom */}
+              <div className="transform transition-all duration-500 group-hover:-translate-y-2">
+                <h3 className="font-display text-4xl lg:text-5xl font-bold text-white mb-4">
+                  {packages[0].title}
+                </h3>
+                <p className="text-white/90 text-lg lg:text-xl mb-6 max-w-md">
+                  {packages[0].description}
                 </p>
-
-                <Link
-                  to="/contact"
-                  className="inline-flex items-center gap-2 text-foreground font-heading text-sm uppercase tracking-wider hover:gap-3 transition-all group/link"
-                >
-                  {pkg.cta}
-                  <ArrowRight className="w-4 h-4 text-primary" />
-                </Link>
+                <div className="inline-flex items-center gap-3 bg-white text-foreground px-6 py-4 rounded-full font-heading font-semibold uppercase tracking-wider shadow-lg group-hover:gap-5 transition-all">
+                  {packages[0].cta}
+                  <ArrowRight className="w-5 h-5" />
+                </div>
               </div>
             </div>
-          ))}
+          </Link>
+
+          {/* Medium Card - Top Right (Repeat Clients) */}
+          <Link
+            to="/contact"
+            className="group relative md:col-span-5 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-4"
+          >
+            <div className="absolute inset-0">
+              <img
+                src={packages[1].image}
+                alt={packages[1].title}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/40 to-transparent" />
+            </div>
+
+            <div className="relative h-full flex flex-col justify-end p-6 lg:p-8">
+              {/* Discount Badge */}
+              <div className="absolute top-6 right-6">
+                <div className="bg-secondary text-white rounded-full w-20 h-20 lg:w-24 lg:h-24 flex items-center justify-center shadow-xl transform group-hover:scale-110 transition-transform">
+                  <div className="text-center">
+                    <div className="text-3xl lg:text-4xl font-display font-bold">{packages[1].discount}</div>
+                    <div className="text-xs font-heading uppercase">OFF</div>
+                  </div>
+                </div>
+              </div>
+
+              <h3 className="font-display text-2xl lg:text-3xl font-bold text-white mb-3">
+                {packages[1].title}
+              </h3>
+              <p className="text-white/90 text-sm lg:text-base mb-4">
+                {packages[1].description}
+              </p>
+              <div className="inline-flex items-center gap-2 text-white font-heading font-semibold uppercase tracking-wider group-hover:gap-4 transition-all">
+                {packages[1].cta}
+                <ArrowRight className="w-5 h-5" />
+              </div>
+            </div>
+          </Link>
+
+          {/* Medium Card - Bottom Right (Exclusive Deals) */}
+          <Link
+            to="/contact"
+            className="group relative md:col-span-5 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-4 border-2 border-[#D4AF37]/20"
+          >
+            <div className="absolute inset-0">
+              <img
+                src={packages[2].image}
+                alt={packages[2].title}
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/80 via-charcoal/40 to-transparent" />
+            </div>
+
+            <div className="relative h-full flex flex-col justify-end p-6 lg:p-8">
+              {/* Discount Badge */}
+              <div className="absolute top-6 right-6">
+                <div className="bg-gradient-to-br from-[#D4AF37] to-[#F4E4A6] text-charcoal rounded-full w-20 h-20 lg:w-24 lg:h-24 flex items-center justify-center shadow-xl transform group-hover:scale-110 group-hover:rotate-12 transition-all">
+                  <div className="text-center">
+                    <div className="text-3xl lg:text-4xl font-display font-bold">{packages[2].discount}</div>
+                    <div className="text-xs font-heading uppercase font-bold">OFF</div>
+                  </div>
+                </div>
+              </div>
+
+              <h3 className="font-display text-2xl lg:text-3xl font-bold text-white mb-3">
+                {packages[2].title}
+              </h3>
+              <p className="text-white/90 text-sm lg:text-base mb-4 line-clamp-2">
+                {packages[2].description}
+              </p>
+              <div className="inline-flex items-center gap-2 bg-[#D4AF37] text-charcoal px-5 py-3 rounded-full font-heading font-semibold uppercase tracking-wider text-sm shadow-lg group-hover:gap-4 transition-all">
+                {packages[2].cta}
+                <ArrowRight className="w-4 h-4" />
+              </div>
+            </div>
+          </Link>
         </div>
       </div>
     </section>
