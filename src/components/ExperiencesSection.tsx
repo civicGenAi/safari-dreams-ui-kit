@@ -137,6 +137,71 @@ export const ExperiencesSection = () => {
         </svg>
       </div>
 
+      {/* Animated Adventure Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <svg className="w-full h-full" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          {/* Mountain peaks silhouette - top */}
+          <g opacity="0.04" fill="#2D3748">
+            <path d="M0 200 L50 150 L100 200 L150 120 L200 200 L250 160 L300 200 L0 200 Z" />
+            <path d="M1140 200 L1190 150 L1240 200 L1290 120 L1340 200 L1390 160 L1440 200 L1140 200 Z" />
+          </g>
+
+          {/* Acacia tree silhouettes - scattered */}
+          <g opacity="0.05" fill="#EE8509">
+            <ellipse cx="120" cy="400" rx="30" ry="8" />
+            <rect x="118" y="400" width="4" height="40" />
+
+            <ellipse cx="1320" cy="500" rx="25" ry="7" />
+            <rect x="1318" y="500" width="4" height="35" />
+          </g>
+
+          {/* Floating adventure icons - subtle */}
+          <g opacity="0.03" stroke="#EE8509" fill="none">
+            {/* Binoculars */}
+            <g>
+              <circle cx="200" cy="300" r="8" strokeWidth="1.5" />
+              <circle cx="220" cy="300" r="8" strokeWidth="1.5" />
+              <path d="M208 300 L212 300" strokeWidth="2" />
+              <animate attributeName="opacity" values="0.03;0.05;0.03" dur="5s" repeatCount="indefinite" />
+            </g>
+
+            {/* Camera */}
+            <g transform="translate(1200, 350)">
+              <rect x="0" y="0" width="24" height="18" rx="2" strokeWidth="1.5" />
+              <circle cx="12" cy="9" r="5" strokeWidth="1.5" />
+              <animate attributeName="opacity" values="0.03;0.05;0.03" dur="6s" repeatCount="indefinite" />
+            </g>
+          </g>
+
+          {/* Safari vehicle tracks */}
+          <g opacity="0.04" stroke="#2D3748" fill="none">
+            <path d="M300 700 L350 700 M310 690 L340 690" strokeWidth="2" strokeDasharray="4 4" />
+            <path d="M400 700 L450 700 M410 690 L440 690" strokeWidth="2" strokeDasharray="4 4" />
+            <path d="M500 700 L550 700 M510 690 L540 690" strokeWidth="2" strokeDasharray="4 4" />
+          </g>
+
+          {/* Stars - adventure in the sky */}
+          <g opacity="0.04" fill="#EE8509">
+            <path d="M900 100 L902 106 L908 106 L903 110 L905 116 L900 112 L895 116 L897 110 L892 106 L898 106 Z">
+              <animate attributeName="opacity" values="0.04;0.06;0.04" dur="4s" repeatCount="indefinite" />
+            </path>
+            <path d="M1100 150 L1102 156 L1108 156 L1103 160 L1105 166 L1100 162 L1095 166 L1097 160 L1092 156 L1098 156 Z">
+              <animate attributeName="opacity" values="0.04;0.06;0.04" dur="5s" repeatCount="indefinite" />
+            </path>
+          </g>
+
+          {/* Wind/movement lines */}
+          <g opacity="0.03" stroke="#2D3748" strokeWidth="1.5" fill="none">
+            <path d="M50 600 Q70 595 90 600" strokeDasharray="3 6">
+              <animate attributeName="d" values="M50 600 Q70 595 90 600;M50 600 Q70 598 90 600;M50 600 Q70 595 90 600" dur="4s" repeatCount="indefinite" />
+            </path>
+            <path d="M60 620 Q80 615 100 620" strokeDasharray="3 6">
+              <animate attributeName="d" values="M60 620 Q80 615 100 620;M60 620 Q80 618 100 620;M60 620 Q80 615 100 620" dur="5s" repeatCount="indefinite" />
+            </path>
+          </g>
+        </svg>
+      </div>
+
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-16">
