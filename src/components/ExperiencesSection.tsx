@@ -79,7 +79,7 @@ const experiences = [
     description: 'Thrilling expeditions for the bold traveler.',
     color: 'bg-orange-500/10 text-orange-600',
     image: '/src/assets/tours_daytours_arusha_national_park2.webp',
-    slug: 'adventure',
+    slug: 'adventure-seekers',
   },
   {
     icon: CrossBorderIcon,
@@ -88,7 +88,7 @@ const experiences = [
     description: 'Multi-country safari adventures.',
     color: 'bg-emerald-500/10 text-emerald-600',
     image: '/src/assets/idea_crossborder_elephants.webp',
-    slug: 'cross-border',
+    slug: 'cross-border-safaris',
   },
   {
     icon: DayTourIcon,
@@ -106,7 +106,7 @@ const experiences = [
     description: 'Premium experiences with exclusive lodges.',
     color: 'bg-purple-500/10 text-purple-600',
     image: '/src/assets/idea_luxury_poolside.webp',
-    slug: 'luxury',
+    slug: 'luxury-tours',
   },
   {
     icon: MigrationIcon,
@@ -115,7 +115,7 @@ const experiences = [
     description: 'Witness the Great Wildebeest Migration.',
     color: 'bg-blue-500/10 text-blue-600',
     image: '/src/assets/ideas_migration_wildebeast.jpg',
-    slug: 'migration',
+    slug: 'migration-safaris',
   },
   {
     icon: GorillaIcon,
