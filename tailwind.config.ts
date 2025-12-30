@@ -18,6 +18,7 @@ export default {
         heading: ["Poppins", "system-ui", "sans-serif"],
         sans: ["Inter", "system-ui", "sans-serif"],
         luxury: ["Cormorant Garamond", "Georgia", "serif"],
+        script: ["Allura", "cursive"],
       },
       colors: {
         border: "hsl(var(--border))",
