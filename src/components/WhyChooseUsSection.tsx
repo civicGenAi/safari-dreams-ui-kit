@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { MapPin, Sparkles, Church } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import cheetahImage from '@/assets/home_fastbooking_cheetah.webp';
 import beachLadyImage from '@/assets/home_fastbooking_beach_lady.webp';
@@ -31,10 +30,6 @@ export const WhyChooseUsSection = () => {
             </div>
 
             <div className="relative h-full flex flex-col items-center justify-center text-center p-8">
-              <div className="w-20 h-20 bg-white/30 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-                <MapPin className="w-10 h-10 text-white" />
-              </div>
-
               <h3 className="font-display text-2xl font-bold text-white mb-4">
                 Well Crafted Itineraries
               </h3>
@@ -63,10 +58,6 @@ export const WhyChooseUsSection = () => {
             </div>
 
             <div className="relative h-full flex flex-col items-center justify-center text-center p-8">
-              <div className="w-20 h-20 bg-white/30 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-                <Sparkles className="w-10 h-10 text-white" />
-              </div>
-
               <h3 className="font-display text-2xl font-bold text-white mb-4">
                 Take a Break
               </h3>
@@ -95,10 +86,6 @@ export const WhyChooseUsSection = () => {
             </div>
 
             <div className="relative h-full flex flex-col items-center justify-center text-center p-8">
-              <div className="w-20 h-20 bg-white/30 backdrop-blur-sm rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-                <Church className="w-10 h-10 text-white" />
-              </div>
-
               <h3 className="font-display text-2xl font-bold text-white mb-4">
                 Pilgrimage Tours
               </h3>
