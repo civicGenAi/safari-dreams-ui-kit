@@ -1,24 +1,22 @@
-import { 
-  Phone, 
-  Mail, 
-  MapPin, 
-  Facebook, 
-  Instagram, 
-  Twitter, 
+import {
+  Phone,
+  Mail,
+  MapPin,
+  Facebook,
+  Instagram,
+  Twitter,
   ArrowUp
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import logo from '@/assets/RCGP_Logo_Small-removebg-preview-1.webp';
 import ttssp from '@/assets/tanzniatourism.webp';
+import payment from '@/assets/payment.webp';
 
 const destinations = [
   { name: 'Tanzania', href: '/destinations/tanzania' },
   { name: 'Kenya', href: '/destinations/kenya' },
   { name: 'Rwanda', href: '/destinations/rwanda' },
   { name: 'Uganda', href: '/destinations/uganda' },
-  { name: 'Israel', href: '/destinations/israel' },
-  { name: 'Egypt', href: '/destinations/egypt' },
-  { name: 'Jordan', href: '/destinations/jordan' },
 ];
 
 const quickLinks = [
@@ -60,15 +58,12 @@ export const Footer = () => {
               <span className="text-secondary font-heading text-sm uppercase tracking-wider font-medium">
                 PAYMENT PARTNERS
               </span>
-              <div className="flex items-center gap-2 mt-3">
-                {['Mastercard', 'PayPal', 'Visa', 'Western Union', 'Skrill'].map((payment) => (
-                  <div
-                    key={payment}
-                    className="w-12 h-8 bg-white rounded flex items-center justify-center text-charcoal text-[8px] font-bold"
-                  >
-                    {payment.substring(0, 4)}
-                  </div>
-                ))}
+              <div className="mt-3">
+                <img
+                  src={payment}
+                  alt="Payment Partners - Mastercard, Visa, PayPal, Western Union, Skrill"
+                  className="h-12 w-auto"
+                />
               </div>
             </div>
           </div>
