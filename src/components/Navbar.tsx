@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Menu, X, ChevronDown, FileText } from 'lucide-react';
 import { Button } from '@/components/ui/button';
+import { BookingFormModal } from '@/components/BookingFormModal';
 
 interface Destination {
   name: string;
@@ -49,6 +50,7 @@ export const Navbar = ({ activeCategory, activeDestination }: NavbarProps = {}) 
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isDestinationsOpen, setIsDestinationsOpen] = useState(false);
   const [isTravelIdeasOpen, setIsTravelIdeasOpen] = useState(false);
+  const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
@@ -169,7 +171,12 @@ export const Navbar = ({ activeCategory, activeDestination }: NavbarProps = {}) 
             </div>
 
             <div className="hidden lg:flex items-center gap-4">
-              <Button variant="primary" size="lg" className="gap-2">
+              <Button
+                variant="primary"
+                size="lg"
+                className="gap-2"
+                onClick={() => setIsBookingModalOpen(true)}
+              >
                 <FileText className="w-4 h-4" />
                 Request Free Quote
               </Button>
@@ -193,7 +200,18 @@ export const Navbar = ({ activeCategory, activeDestination }: NavbarProps = {}) 
               <img src="/src/assets/RCGP_Logo_Small-removebg-preview-1.webp" alt="Logo" className="h-10 w-auto" />
               <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 text-foreground"><X className="w-6 h-6" /></button>
             </div>
-            <Button variant="primary" size="xl" className="w-full mb-6 gap-2"><FileText className="w-5 h-5" />Request Free Quote</Button>
+            <Button
+              variant="primary"
+              size="xl"
+              className="w-full mb-6 gap-2"
+              onClick={() => {
+                setIsBookingModalOpen(true);
+                setIsMobileMenuOpen(false);
+              }}
+            >
+              <FileText className="w-5 h-5" />
+              Request Free Quote
+            </Button>
             <nav className="space-y-1">
               <Link to="/" className="block py-3 px-4 font-heading text-sm uppercase tracking-wider text-foreground hover:bg-muted rounded-lg" onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
               <Link to="/travel-ideas" className="block py-3 px-4 font-heading text-sm uppercase tracking-wider text-foreground hover:bg-muted rounded-lg" onClick={() => setIsMobileMenuOpen(false)}>Travel Ideas</Link>
@@ -204,6 +222,11 @@ export const Navbar = ({ activeCategory, activeDestination }: NavbarProps = {}) 
           </div>
         </div>
       </div>
+
+      <BookingFormModal
+        isOpen={isBookingModalOpen}
+        onClose={() => setIsBookingModalOpen(false)}
+      />
     </>
   );
 };
