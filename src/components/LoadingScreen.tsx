@@ -55,444 +55,296 @@ export const LoadingScreen = ({ onLoadComplete }: { onLoadComplete: () => void }
 
   // Reveal animals at different points
   useEffect(() => {
-    const thresholds = [15, 30, 50, 70, 85];
-    const newShowAnimals = thresholds.map((t) => jeepPosition >= t);
-    setShowAnimals(newShowAnimals);
-  }, [jeepPosition]);
-
-  // Progress through stages
-  useEffect(() => {
-    const stageInterval = setInterval(() => {
-      setCurrentStage((prev) => {
-        if (prev >= safariStages.length - 1) {
-          clearInterval(stageInterval);
-          return prev;
+    // Simulate loading progress
+    const progressInterval = setInterval(() => {
+      setProgress((prev) => {
+        if (prev >= 100) {
+          clearInterval(progressInterval);
+          return 100;
         }
-        return prev + 1;
+        const increment = prev < 60 ? 15 : prev < 90 ? 10 : 5;
+        return Math.min(prev + increment, 100);
       });
-    }, 800);
+    }, 200);
 
-    return () => clearInterval(stageInterval);
-  }, []);
+    // When progress reaches 100, start fade out
+    const checkComplete = setInterval(() => {
+      if (progress >= 100) {
+        clearInterval(checkComplete);
+        setTimeout(() => {
+          setFadeOut(true);
+          setTimeout(onLoadComplete, 1000);
+        }, 500);
+      }
+    }, 100);
 
-  // Complete loading
-  useEffect(() => {
-    if (jeepPosition >= 110 && currentStage >= safariStages.length - 1) {
-      setTimeout(() => {
-        setFadeOut(true);
-        setTimeout(onLoadComplete, 600);
-      }, 500);
-    }
-  }, [jeepPosition, currentStage, onLoadComplete]);
-
-  const BinocularsIcon = () => (
-    <svg viewBox="0 0 64 64" className="w-full h-full" fill="currentColor">
-      <circle cx="18" cy="38" r="14" strokeWidth="3" stroke="currentColor" fill="none" />
-      <circle cx="46" cy="38" r="14" strokeWidth="3" stroke="currentColor" fill="none" />
-      <rect x="28" y="32" width="8" height="12" rx="2" />
-      <circle cx="18" cy="38" r="8" opacity="0.3" />
-      <circle cx="46" cy="38" r="8" opacity="0.3" />
-    </svg>
-  );
-
-  const CompassIcon = () => (
-    <svg viewBox="0 0 64 64" className="w-full h-full animate-spin-slow">
-      <circle cx="32" cy="32" r="28" strokeWidth="3" stroke="currentColor" fill="none" />
-      <circle cx="32" cy="32" r="22" strokeWidth="1" stroke="currentColor" fill="none" opacity="0.3" />
-      <polygon points="32,8 36,32 32,38 28,32" fill="hsl(var(--loading-accent))" />
-      <polygon points="32,56 36,32 32,26 28,32" fill="currentColor" opacity="0.5" />
-      <circle cx="32" cy="32" r="4" fill="currentColor" />
-    </svg>
-  );
-
-  const JeepIcon = () => (
-    <svg viewBox="0 0 80 50" className="w-full h-full" fill="currentColor">
-      <rect x="5" y="20" width="60" height="20" rx="3" />
-      <rect x="10" y="10" width="40" height="15" rx="2" />
-      <rect x="15" y="14" width="10" height="8" fill="hsl(var(--loading-glass))" rx="1" />
-      <rect x="30" y="14" width="10" height="8" fill="hsl(var(--loading-glass))" rx="1" />
-      <circle cx="18" cy="42" r="8" />
-      <circle cx="52" cy="42" r="8" />
-      <circle cx="18" cy="42" r="4" fill="hsl(var(--background))" />
-      <circle cx="52" cy="42" r="4" fill="hsl(var(--background))" />
-      <rect x="60" y="25" width="10" height="3" rx="1" />
-    </svg>
-  );
-
-  const CameraIcon = () => (
-    <svg viewBox="0 0 64 64" className="w-full h-full" fill="currentColor">
-      <rect x="8" y="18" width="48" height="32" rx="4" />
-      <circle cx="32" cy="34" r="12" strokeWidth="3" stroke="hsl(var(--background))" fill="none" />
-      <circle cx="32" cy="34" r="6" fill="hsl(var(--loading-accent))" />
-      <rect x="22" y="12" width="20" height="8" rx="2" />
-      <circle cx="48" cy="24" r="3" fill="hsl(var(--loading-accent))" />
-    </svg>
-  );
-
-  const ElephantSilhouette = ({ className }: { className?: string }) => (
-    <svg viewBox="0 0 100 80" className={className} fill="currentColor">
-      <path d="M85 45c0-15-8-25-20-28V12c0-3-2-5-5-5s-5 2-5 5v3c-3-1-6-1-10-1s-7 0-10 1v-3c0-3-2-5-5-5s-5 2-5 5v5c-12 3-20 13-20 28v10c0 5 4 9 9 9h5v8c0 3 2 5 5 5s5-2 5-5v-8h22v8c0 3 2 5 5 5s5-2 5-5v-8h5c5 0 9-4 9-9V45zM25 40c-3 0-5-2-5-5s2-5 5-5 5 2 5 5-2 5-5 5z" />
-    </svg>
-  );
-
-  const GiraffeSilhouette = ({ className }: { className?: string }) => (
-    <svg viewBox="0 0 60 100" className={className} fill="currentColor">
-      <ellipse cx="30" cy="15" rx="12" ry="10" />
-      <rect x="25" y="20" width="10" height="45" />
-      <ellipse cx="30" cy="70" rx="18" ry="12" />
-      <rect x="20" y="78" width="5" height="20" />
-      <rect x="35" y="78" width="5" height="20" />
-      <path d="M20 10L15 5M40 10L45 5" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-    </svg>
-  );
-
-  const LionSilhouette = ({ className }: { className?: string }) => (
-    <svg viewBox="0 0 100 70" className={className} fill="currentColor">
-      <ellipse cx="35" cy="35" rx="25" ry="20" />
-      <circle cx="35" cy="25" r="18" />
-      <ellipse cx="35" cy="25" rx="28" ry="22" opacity="0.5" />
-      <rect x="55" y="40" width="35" height="8" rx="4" />
-      <circle cx="90" cy="44" r="6" />
-      <rect x="20" y="50" width="6" height="18" />
-      <rect x="35" y="50" width="6" height="18" />
-      <circle cx="30" cy="22" r="3" fill="hsl(var(--background))" />
-      <circle cx="40" cy="22" r="3" fill="hsl(var(--background))" />
-    </svg>
-  );
-
-  const ZebraSilhouette = ({ className }: { className?: string }) => (
-    <svg viewBox="0 0 90 70" className={className} fill="currentColor">
-      <ellipse cx="45" cy="40" rx="30" ry="18" />
-      <path d="M15 35C10 30 8 20 15 15L25 25V38Z" />
-      <rect x="25" y="55" width="5" height="15" />
-      <rect x="40" y="55" width="5" height="15" />
-      <rect x="55" y="55" width="5" height="15" />
-      <path d="M75 40H88C88 48 80 52 75 48Z" />
-    </svg>
-  );
-
-  const BirdSilhouette = ({ className }: { className?: string }) => (
-    <svg viewBox="0 0 60 40" className={className} fill="currentColor">
-      <path d="M30 20C15 20 5 10 0 5C5 15 10 20 20 22C10 25 5 35 0 40C10 30 20 25 30 25C40 25 50 30 60 35C55 28 45 25 40 23C50 20 55 10 60 5C50 15 40 20 30 20Z" />
-    </svg>
-  );
-
-  const stageIcons: Record<string, JSX.Element> = {
-    binoculars: <BinocularsIcon />,
-    compass: <CompassIcon />,
-    jeep: <JeepIcon />,
-    camera: <CameraIcon />,
-  };
+    return () => {
+      clearInterval(progressInterval);
+      clearInterval(checkComplete);
+    };
+  }, [progress, onLoadComplete]);
 
   return (
     <div
-      className={`fixed inset-0 z-[9999] bg-white overflow-hidden transition-all duration-600 ${
-        fadeOut ? 'opacity-0 scale-105' : 'opacity-100 scale-100'
+      className={`fixed inset-0 z-[9999] overflow-hidden transition-opacity duration-1000 ${
+        fadeOut ? 'opacity-0' : 'opacity-100'
       }`}
     >
-      {/* Subtle pattern background */}
-      <div className="absolute inset-0 opacity-[0.03]">
-        <svg width="100%" height="100%">
-          <defs>
-            <pattern id="safari-pattern" width="60" height="60" patternUnits="userSpaceOnUse">
-              <circle cx="30" cy="30" r="1.5" fill="hsl(var(--loading-earth))" />
-              <path d="M0 30h60M30 0v60" stroke="hsl(var(--loading-earth))" strokeWidth="0.5" opacity="0.5" />
-            </pattern>
-          </defs>
-          <rect width="100%" height="100%" fill="url(#safari-pattern)" />
+      {/* Dynamic gradient background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-[#1a1410] via-[#2D3748] to-[#1a1410]">
+        {/* Animated stars */}
+        <div className="absolute inset-0">
+          {[...Array(50)].map((_, i) => (
+            <div
+              key={i}
+              className="absolute w-1 h-1 bg-white rounded-full"
+              style={{
+                top: `${Math.random() * 100}%`,
+                left: `${Math.random() * 100}%`,
+                animation: `twinkle ${2 + Math.random() * 3}s ease-in-out infinite`,
+                animationDelay: `${Math.random() * 2}s`,
+                opacity: Math.random() * 0.7 + 0.3,
+              }}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* Animated savannah landscape - SVG */}
+      <div className="absolute inset-0 pointer-events-none">
+        <svg className="w-full h-full" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          {/* Sun/Moon in background */}
+          <circle cx="1200" cy="200" r="80" fill="#EE8509" opacity="0.3">
+            <animate attributeName="opacity" values="0.2;0.4;0.2" dur="4s" repeatCount="indefinite" />
+          </circle>
+
+          {/* Mountain silhouettes */}
+          <g opacity="0.15" fill="#2D3748">
+            <path d="M0 600 L200 400 L400 550 L600 350 L800 500 L1000 300 L1200 450 L1440 400 L1440 900 L0 900 Z">
+              <animateTransform attributeName="transform" type="translate" values="0,0; -20,5; 0,0" dur="20s" repeatCount="indefinite" />
+            </path>
+          </g>
+
+          {/* Ground/Savannah layer */}
+          <g opacity="0.25" fill="#8B7355">
+            <path d="M0 700 Q360 680 720 700 T1440 700 L1440 900 L0 900 Z" />
+          </g>
+
+          {/* Acacia trees - silhouettes */}
+          <g opacity="0.3" fill="#2D3748">
+            {/* Left acacia tree */}
+            <ellipse cx="250" cy="650" rx="60" ry="15">
+              <animateTransform attributeName="transform" type="scale" values="1,1; 1.05,0.95; 1,1" dur="4s" repeatCount="indefinite" additive="sum" />
+            </ellipse>
+            <rect x="246" y="650" width="8" height="100" />
+
+            {/* Right acacia tree */}
+            <ellipse cx="1150" cy="680" rx="50" ry="12">
+              <animateTransform attributeName="transform" type="scale" values="1,1; 1.05,0.95; 1,1" dur="5s" repeatCount="indefinite" additive="sum" />
+            </ellipse>
+            <rect x="1147" y="680" width="6" height="80" />
+          </g>
+
+          {/* Animated animals crossing */}
+          <g className="animals">
+            {/* Wildebeest herd */}
+            <g opacity="0.4">
+              <ellipse cx="200" cy="750" rx="15" ry="10" fill="#2D3748">
+                <animateTransform attributeName="transform" type="translate" values="0,0; 1200,0" dur="25s" repeatCount="indefinite" />
+              </ellipse>
+              <ellipse cx="250" cy="755" rx="12" ry="8" fill="#2D3748">
+                <animateTransform attributeName="transform" type="translate" values="0,0; 1200,0" dur="27s" repeatCount="indefinite" />
+              </ellipse>
+              <ellipse cx="230" cy="745" rx="14" ry="9" fill="#2D3748">
+                <animateTransform attributeName="transform" type="translate" values="0,0; 1200,0" dur="26s" repeatCount="indefinite" />
+              </ellipse>
+            </g>
+
+            {/* Birds flying */}
+            <g opacity="0.35" stroke="#2D3748" strokeWidth="2" fill="none">
+              <path d="M100 200 Q105 195 110 200 Q115 195 120 200">
+                <animateTransform attributeName="transform" type="translate" values="0,0; 1400,-100" dur="20s" repeatCount="indefinite" />
+              </path>
+              <path d="M150 180 Q155 175 160 180 Q165 175 170 180">
+                <animateTransform attributeName="transform" type="translate" values="0,0; 1400,-80" dur="22s" repeatCount="indefinite" />
+              </path>
+            </g>
+
+            {/* Giraffe silhouette */}
+            <g opacity="0.35" fill="#2D3748">
+              <ellipse cx="900" cy="720" rx="20" ry="15" />
+              <rect x="895" y="650" width="10" height="70" />
+              <ellipse cx="900" cy="640" rx="18" ry="20" />
+              <rect x="897" y="600" width="6" height="40" />
+              <ellipse cx="900" cy="595" rx="12" ry="15" />
+              <animateTransform attributeName="transform" type="translate" values="1400,0; -1000,0" dur="35s" repeatCount="indefinite" />
+            </g>
+          </g>
+
+          {/* Grass foreground */}
+          <g opacity="0.2" stroke="#4A5568" strokeWidth="1.5" fill="none">
+            {[...Array(30)].map((_, i) => (
+              <path
+                key={i}
+                d={`M${i * 50} 850 Q${i * 50 + 5} 835 ${i * 50 + 10} 850`}
+                style={{ animation: `grassSway ${3 + (i % 3)}s ease-in-out infinite`, animationDelay: `${i * 0.1}s` }}
+              />
+            ))}
+          </g>
         </svg>
       </div>
 
-      {/* Decorative corner elements */}
-      <div className="absolute top-8 left-8 w-20 h-20 border-l-2 border-t-2 border-loading-earth/20 rounded-tl-lg" />
-      <div className="absolute top-8 right-8 w-20 h-20 border-r-2 border-t-2 border-loading-earth/20 rounded-tr-lg" />
-      <div className="absolute bottom-8 left-8 w-20 h-20 border-l-2 border-b-2 border-loading-earth/20 rounded-bl-lg" />
-      <div className="absolute bottom-8 right-8 w-20 h-20 border-r-2 border-b-2 border-loading-earth/20 rounded-br-lg" />
+      {/* Main Content Container */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center z-10">
+        {/* Logo with creative animation */}
+        <div className="relative mb-12">
+          {/* Rotating compass ring */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-56 h-56 rounded-full border-2 border-primary/30 border-dashed" style={{ animation: 'rotate 20s linear infinite' }} />
+          </div>
 
-      {/* Main content */}
-      <div className="relative z-10 h-full flex flex-col items-center justify-center px-4">
-        
-        {/* Title */}
-        <div className="text-center mb-8 animate-fade-in">
-          <h1 className="text-3xl md:text-4xl font-bold text-loading-earth tracking-wide mb-2">
-            Safari Adventure
-          </h1>
-          <div className="flex items-center justify-center gap-3">
-            <div className="w-12 h-0.5 bg-gradient-to-r from-transparent to-loading-accent" />
-            <span className="text-loading-accent text-sm uppercase tracking-[0.3em]">Loading</span>
-            <div className="w-12 h-0.5 bg-gradient-to-l from-transparent to-loading-accent" />
+          {/* Pulsing glow */}
+          <div className="absolute inset-0 flex items-center justify-center">
+            <div className="w-48 h-48 rounded-full bg-primary/10 blur-2xl" style={{ animation: 'pulse 2s ease-in-out infinite' }} />
           </div>
         </div>
 
-        {/* Safari Journey Scene */}
-        <div className="relative w-full max-w-4xl h-64 md:h-80 mb-8">
-          
-          {/* Sky gradient */}
-          <div className="absolute inset-x-0 top-0 h-1/2 bg-gradient-to-b from-loading-sky/30 via-loading-sky/10 to-transparent rounded-t-3xl" />
-          
-          {/* Sun */}
-          <div className="absolute top-4 right-12 md:right-24">
-            <div className="relative w-16 h-16 md:w-20 md:h-20">
-              <div className="absolute inset-0 bg-loading-sun rounded-full animate-pulse-slow" />
-              <div className="absolute inset-2 bg-loading-sun-bright rounded-full" />
-              {/* Sun rays */}
-              {[...Array(8)].map((_, i) => (
-                <div
-                  key={i}
-                  className="absolute top-1/2 left-1/2 w-1 h-8 bg-loading-sun/40 origin-bottom animate-ray-pulse"
-                  style={{
-                    transform: `translate(-50%, -100%) rotate(${i * 45}deg)`,
-                    animationDelay: `${i * 0.1}s`,
-                  }}
-                />
-              ))}
-            </div>
+          {/* Logo container */}
+          <div className="relative bg-white/95 backdrop-blur-sm rounded-3xl p-10 shadow-2xl border border-primary/20">
+            <img
+              src={logo}
+              alt="DeMi Tours"
+              className="h-28 w-auto"
+              style={{ animation: 'float 3s ease-in-out infinite' }}
+            />
           </div>
 
-          {/* Flying birds */}
-          <div className="absolute top-8 left-1/4 animate-fly-across" style={{ animationDelay: '0s' }}>
-            <BirdSilhouette className="w-8 h-6 text-loading-earth/30" />
-          </div>
-          <div className="absolute top-16 left-1/3 animate-fly-across" style={{ animationDelay: '0.5s' }}>
-            <BirdSilhouette className="w-6 h-4 text-loading-earth/20" />
-          </div>
-          <div className="absolute top-12 left-1/2 animate-fly-across" style={{ animationDelay: '1s' }}>
-            <BirdSilhouette className="w-10 h-7 text-loading-earth/25" />
-          </div>
-
-          {/* Ground/Savanna */}
-          <div className="absolute inset-x-0 bottom-0 h-1/2">
-            {/* Grass texture */}
-            <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
-              <defs>
-                <linearGradient id="ground-gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                  <stop offset="0%" stopColor="hsl(var(--loading-grass))" />
-                  <stop offset="100%" stopColor="hsl(var(--loading-grass-dark))" />
-                </linearGradient>
-              </defs>
-              <ellipse cx="50%" cy="0" rx="60%" ry="100%" fill="url(#ground-gradient)" />
-            </svg>
-
-            {/* Journey path */}
-            <svg className="absolute inset-0 w-full h-full" viewBox="0 0 800 160" preserveAspectRatio="none">
-              <path
-                d="M-20 100 Q100 120 200 90 T400 100 T600 85 T820 100"
-                stroke="hsl(var(--loading-path))"
-                strokeWidth="4"
-                fill="none"
-                strokeDasharray="800"
-                strokeDashoffset={800 - pathProgress * 8}
-                strokeLinecap="round"
-                className="transition-all duration-100"
-                opacity="0.6"
-              />
-              {/* Path dots */}
-              <circle cx="100" cy="105" r="4" fill="hsl(var(--loading-accent))" opacity={pathProgress > 12 ? 1 : 0.2} className="transition-opacity duration-300" />
-              <circle cx="250" cy="92" r="4" fill="hsl(var(--loading-accent))" opacity={pathProgress > 31 ? 1 : 0.2} className="transition-opacity duration-300" />
-              <circle cx="400" cy="100" r="4" fill="hsl(var(--loading-accent))" opacity={pathProgress > 50 ? 1 : 0.2} className="transition-opacity duration-300" />
-              <circle cx="550" cy="88" r="4" fill="hsl(var(--loading-accent))" opacity={pathProgress > 69 ? 1 : 0.2} className="transition-opacity duration-300" />
-              <circle cx="700" cy="95" r="4" fill="hsl(var(--loading-accent))" opacity={pathProgress > 88 ? 1 : 0.2} className="transition-opacity duration-300" />
-            </svg>
-
-            {/* Dust particles */}
-            {dustParticles.map((particle) => (
+          {/* Orbiting safari icons */}
+          <div className="absolute inset-0 flex items-center justify-center" style={{ animation: 'rotate 15s linear infinite' }}>
+            {[0, 72, 144, 216, 288].map((angle, i) => (
               <div
-                key={particle.id}
-                className="absolute rounded-full bg-loading-dust animate-dust-fade"
+                key={i}
+                className="absolute w-8 h-8 bg-primary/20 rounded-full flex items-center justify-center"
                 style={{
-                  left: `${particle.x}%`,
-                  top: `${particle.y}%`,
-                  width: `${particle.size}px`,
-                  height: `${particle.size}px`,
-                  opacity: particle.opacity,
+                  transform: `rotate(${angle}deg) translateY(-110px)`,
                 }}
-              />
+              >
+                <div className="text-primary text-xs">★</div>
+              </div>
             ))}
-
-            {/* Safari Jeep */}
-            <div
-              className="absolute w-20 h-12 md:w-28 md:h-16 text-loading-jeep transition-all duration-100 ease-linear"
-              style={{
-                left: `${jeepPosition}%`,
-                top: '35%',
-                transform: 'translateX(-50%)',
-              }}
-            >
-              {/* DeMi Tours branding above jeep */}
-              <div className="absolute -top-6 left-1/2 -translate-x-1/2 whitespace-nowrap">
-                <span className="font-display text-xs md:text-sm font-bold text-loading-accent tracking-wide drop-shadow-sm">
-                  DeMi Tours
-                </span>
-              </div>
-              <div className="animate-jeep-bounce">
-                <JeepIcon />
-              </div>
-            </div>
-
-            {/* Animals appearing along the journey */}
-            <div className={`absolute left-[8%] bottom-[25%] transition-all duration-700 ${showAnimals[0] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-              <ElephantSilhouette className="w-16 h-12 md:w-24 md:h-16 text-loading-animal" />
-            </div>
-            
-            <div className={`absolute left-[25%] bottom-[35%] transition-all duration-700 ${showAnimals[1] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-              <GiraffeSilhouette className="w-10 h-16 md:w-14 md:h-24 text-loading-animal" />
-            </div>
-            
-            <div className={`absolute left-[45%] bottom-[20%] transition-all duration-700 ${showAnimals[2] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-              <ZebraSilhouette className="w-14 h-10 md:w-20 md:h-14 text-loading-animal" />
-            </div>
-            
-            <div className={`absolute left-[65%] bottom-[30%] transition-all duration-700 ${showAnimals[3] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-              <LionSilhouette className="w-16 h-10 md:w-24 md:h-14 text-loading-animal" />
-            </div>
-
-            <div className={`absolute right-[8%] bottom-[40%] transition-all duration-700 ${showAnimals[4] ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-4'}`}>
-              <GiraffeSilhouette className="w-8 h-14 md:w-12 md:h-20 text-loading-animal opacity-60" />
-            </div>
-
-            {/* Acacia trees */}
-            <div className="absolute left-[15%] bottom-[45%]">
-              <svg width="50" height="60" viewBox="0 0 50 60" className="text-loading-tree">
-                <ellipse cx="25" cy="15" rx="22" ry="12" fill="currentColor" />
-                <rect x="22" y="25" width="6" height="35" fill="currentColor" />
-              </svg>
-            </div>
-            <div className="absolute right-[20%] bottom-[50%]">
-              <svg width="40" height="50" viewBox="0 0 50 60" className="text-loading-tree opacity-70">
-                <ellipse cx="25" cy="15" rx="22" ry="12" fill="currentColor" />
-                <rect x="22" y="25" width="6" height="35" fill="currentColor" />
-              </svg>
-            </div>
           </div>
         </div>
 
-        {/* Stage indicators */}
-        <div className="flex items-center justify-center gap-4 md:gap-8 mb-6">
-          {safariStages.map((stage, index) => (
-            <div
-              key={stage.icon}
-              className={`flex flex-col items-center transition-all duration-500 ${
-                index <= currentStage ? 'opacity-100 scale-100' : 'opacity-30 scale-90'
-              }`}
-            >
-              <div
-                className={`w-12 h-12 md:w-16 md:h-16 p-2 md:p-3 rounded-full border-2 transition-all duration-500 ${
-                  index === currentStage
-                    ? 'border-loading-accent bg-loading-accent/10 text-loading-accent animate-pulse'
-                    : index < currentStage
-                    ? 'border-loading-earth bg-loading-earth/10 text-loading-earth'
-                    : 'border-loading-earth/30 text-loading-earth/30'
-                }`}
-              >
-                {stageIcons[stage.icon]}
-              </div>
-              {index < safariStages.length - 1 && (
-                <div className="hidden md:block absolute translate-x-10">
-                  <div className={`w-8 h-0.5 transition-all duration-500 ${index < currentStage ? 'bg-loading-earth' : 'bg-loading-earth/20'}`} />
-                </div>
-              )}
-            </div>
-          ))}
-        </div>
-
-        {/* Current stage text */}
-        <div className="text-center h-8">
-          <p className="text-loading-earth font-medium text-lg tracking-wide animate-pulse">
-            {safariStages[currentStage]?.text}
+        {/* Loading Text with Safari Theme */}
+        <div className="text-center mb-8">
+          <h2 className="font-display text-4xl md:text-5xl font-bold mb-3 bg-gradient-to-r from-primary via-secondary to-primary bg-clip-text text-transparent" style={{ animation: 'shimmer 3s ease-in-out infinite', backgroundSize: '200% 100%' }}>
+            Preparing Your Safari
+          </h2>
+          <p className="font-heading text-sm text-gray-300 uppercase tracking-[0.3em] flex items-center justify-center gap-2">
+            <span style={{ animation: 'bounce 1s ease-in-out infinite' }}>🦁</span>
+            Adventure Awaits
+            <span style={{ animation: 'bounce 1s ease-in-out infinite 0.5s' }}>🌍</span>
           </p>
         </div>
 
-        {/* Journey progress bar */}
-        <div className="w-64 md:w-80 mt-6">
-          <div className="relative h-2 bg-loading-earth/10 rounded-full overflow-hidden">
+        {/* Creative Progress Bar - Safari Track */}
+        <div className="relative w-96 max-w-md">
+          {/* Track background */}
+          <div className="relative h-3 bg-gray-700/50 rounded-full overflow-hidden backdrop-blur-sm border border-gray-600/30">
+            {/* Animated stars in background */}
+            <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent" style={{ animation: 'shimmer 2s linear infinite' }} />
+
+            {/* Progress fill with gradient */}
             <div
-              className="absolute inset-y-0 left-0 bg-gradient-to-r from-loading-earth via-loading-accent to-loading-earth rounded-full transition-all duration-300"
-              style={{ width: `${Math.min(jeepPosition, 100)}%` }}
+              className="h-full bg-gradient-to-r from-primary via-secondary to-primary rounded-full transition-all duration-300 ease-out relative overflow-hidden shadow-lg shadow-primary/50"
+              style={{ width: `${progress}%`, backgroundSize: '200% 100%', animation: 'shimmer 2s linear infinite' }}
             >
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent animate-shimmer" />
+              {/* Shine effect */}
+              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/40 to-transparent" style={{ animation: 'slideRight 1.5s linear infinite' }} />
             </div>
+
+            {/* Safari vehicle indicator */}
+            <div
+              className="absolute top-1/2 -translate-y-1/2 transition-all duration-300"
+              style={{ left: `calc(${progress}% - 16px)` }}
+            >
+              <div className="w-8 h-8 bg-primary rounded-full flex items-center justify-center shadow-lg border-2 border-white" style={{ animation: 'bounce 0.5s ease-in-out infinite' }}>
+                <svg className="w-4 h-4 text-white" viewBox="0 0 24 24" fill="currentColor">
+                  <rect x="4" y="10" width="16" height="8" rx="2" />
+                  <circle cx="8" cy="18" r="2" />
+                  <circle cx="16" cy="18" r="2" />
+                  <rect x="10" y="6" width="6" height="4" rx="1" />
+                </svg>
+              </div>
+            </div>
+
+          {/* Progress Text */}
+          <div className="flex justify-between items-center mt-4">
+            <span className="text-xs font-heading text-gray-400 uppercase tracking-wider">
+              Loading Safari Experience
+            </span>
+            <span className="text-lg font-display font-bold text-primary">
+              {progress}%
+            </span>
           </div>
-          <div className="flex justify-between mt-2 text-xs text-loading-earth/50 uppercase tracking-wider">
-            <span>Start</span>
-            <span>Destination</span>
-          </div>
+        </div>
+
+        {/* Loading messages */}
+        <div className="mt-6 text-center h-6">
+          <p className="text-xs text-gray-400 font-heading" style={{ animation: 'fadeInOut 3s ease-in-out infinite' }}>
+            {progress < 30 && "Packing your virtual bags..."}
+            {progress >= 30 && progress < 60 && "Spotting wildlife..."}
+            {progress >= 60 && progress < 90 && "Preparing your adventure..."}
+            {progress >= 90 && "Almost there..."}
+          </p>
         </div>
       </div>
 
-      {/* Custom animations */}
+      {/* Custom Keyframe Animations */}
       <style>{`
-        @keyframes fade-in {
-          from { opacity: 0; transform: translateY(-10px); }
-          to { opacity: 1; transform: translateY(0); }
+        @keyframes twinkle {
+          0%, 100% { opacity: 0.3; transform: scale(1); }
+          50% { opacity: 1; transform: scale(1.2); }
         }
-        
-        @keyframes pulse-slow {
-          0%, 100% { opacity: 0.6; transform: scale(1); }
-          50% { opacity: 1; transform: scale(1.1); }
+
+        @keyframes rotate {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
         }
-        
-        @keyframes ray-pulse {
-          0%, 100% { opacity: 0.3; height: 2rem; }
-          50% { opacity: 0.6; height: 2.5rem; }
+
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
         }
-        
-        @keyframes fly-across {
-          0% { transform: translateX(-100px) translateY(0); opacity: 0; }
-          10% { opacity: 1; }
-          90% { opacity: 1; }
-          100% { transform: translateX(calc(100vw + 100px)) translateY(-20px); opacity: 0; }
-        }
-        
-        @keyframes jeep-bounce {
-          0%, 100% { transform: translateY(0) rotate(-1deg); }
-          50% { transform: translateY(-3px) rotate(1deg); }
-        }
-        
-        @keyframes dust-fade {
-          0% { opacity: 0.5; transform: scale(1) translateY(0); }
-          100% { opacity: 0; transform: scale(2) translateY(-20px); }
-        }
-        
+
         @keyframes shimmer {
+          0% { background-position: -200% 0; }
+          100% { background-position: 200% 0; }
+        }
+
+        @keyframes slideRight {
           0% { transform: translateX(-100%); }
           100% { transform: translateX(200%); }
         }
-        
-        @keyframes spin-slow {
-          0% { transform: rotate(0deg); }
-          100% { transform: rotate(360deg); }
+
+        @keyframes pulse {
+          0%, 100% { opacity: 0.5; transform: scale(1); }
+          50% { opacity: 0.8; transform: scale(1.05); }
         }
-        
-        .animate-fade-in {
-          animation: fade-in 0.8s ease-out forwards;
+
+        @keyframes bounce {
+          0%, 100% { transform: translateY(0); }
+          50% { transform: translateY(-5px); }
         }
-        
-        .animate-pulse-slow {
-          animation: pulse-slow 3s ease-in-out infinite;
+
+        @keyframes fadeInOut {
+          0%, 100% { opacity: 0.5; }
+          50% { opacity: 1; }
         }
-        
-        .animate-ray-pulse {
-          animation: ray-pulse 2s ease-in-out infinite;
-        }
-        
-        .animate-fly-across {
-          animation: fly-across 8s linear infinite;
-        }
-        
-        .animate-jeep-bounce {
-          animation: jeep-bounce 0.3s ease-in-out infinite;
-        }
-        
-        .animate-dust-fade {
-          animation: dust-fade 1s ease-out forwards;
-        }
-        
-        .animate-shimmer {
-          animation: shimmer 2s infinite;
-        }
-        
-        .animate-spin-slow {
-          animation: spin-slow 8s linear infinite;
+
+        @keyframes grassSway {
+          0%, 100% { transform: translateX(0) rotate(0deg); }
+          50% { transform: translateX(3px) rotate(2deg); }
         }
       `}</style>
     </div>
