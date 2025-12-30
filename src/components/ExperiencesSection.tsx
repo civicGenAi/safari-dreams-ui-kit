@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
@@ -180,7 +181,7 @@ export const ExperiencesSection = () => {
             <div className="relative h-full flex flex-col justify-between p-8">
               <div className="flex items-start justify-between">
                 <div className="w-16 h-16 lg:w-20 lg:h-20 rounded-2xl bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-white">
-                  <experiences[0].icon />
+                  {React.createElement(experiences[0].icon)}
                 </div>
                 <span className="font-display text-4xl lg:text-5xl font-bold text-white/90">
                   {experiences[0].count}
@@ -218,7 +219,7 @@ export const ExperiencesSection = () => {
             <div className="relative h-full flex flex-col justify-between p-6">
               <div className="flex items-start justify-between">
                 <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-white">
-                  <experiences[1].icon />
+                  {React.createElement(experiences[1].icon)}
                 </div>
                 <span className="font-display text-2xl font-bold text-white/90">
                   {experiences[1].count}
@@ -256,7 +257,7 @@ export const ExperiencesSection = () => {
             <div className="relative h-full flex flex-col justify-between p-6">
               <div className="flex items-start justify-between">
                 <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-white">
-                  <experiences[3].icon />
+                  {React.createElement(experiences[3].icon)}
                 </div>
                 <span className="font-display text-2xl font-bold text-white/90">
                   {experiences[3].count}
@@ -294,7 +295,7 @@ export const ExperiencesSection = () => {
             <div className="relative h-full flex flex-col justify-between p-6">
               <div className="flex items-start justify-between">
                 <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-white">
-                  <experiences[2].icon />
+                  {React.createElement(experiences[2].icon)}
                 </div>
                 <span className="font-display text-2xl font-bold text-white/90">
                   {experiences[2].count}
@@ -332,7 +333,7 @@ export const ExperiencesSection = () => {
             <div className="relative h-full flex flex-col justify-between p-6">
               <div className="flex items-start justify-between">
                 <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-white">
-                  <experiences[4].icon />
+                  {React.createElement(experiences[4].icon)}
                 </div>
                 <span className="font-display text-2xl font-bold text-white/90">
                   {experiences[4].count}
@@ -370,7 +371,7 @@ export const ExperiencesSection = () => {
             <div className="relative h-full flex flex-col justify-between p-6">
               <div className="flex items-start justify-between">
                 <div className="w-12 h-12 rounded-xl bg-white/20 backdrop-blur-md border border-white/30 flex items-center justify-center text-white">
-                  <experiences[5].icon />
+                  {React.createElement(experiences[5].icon)}
                 </div>
                 <span className="font-display text-2xl font-bold text-white/90">
                   {experiences[5].count}
