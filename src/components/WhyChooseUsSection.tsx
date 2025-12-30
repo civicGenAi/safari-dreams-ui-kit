@@ -26,7 +26,7 @@ export const WhyChooseUsSection = () => {
                 src={cheetahImage}
                 alt="Safari itinerary"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                style={{ objectPosition: '50% 40%' }}
+                style={{ objectPosition: '50% 25%' }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-charcoal/30 to-transparent" />
             </div>
