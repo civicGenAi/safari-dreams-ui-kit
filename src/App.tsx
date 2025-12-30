@@ -18,6 +18,9 @@ import WildTales from "./pages/WildTales";
 import WildTaleDetail from "./pages/WildTaleDetail";
 import OurStory from "./pages/OurStory";
 import Contact from "./pages/Contact";
+import TermsConditions from "./pages/TermsConditions";
+import CookiePreferences from "./pages/CookiePreferences";
+import PrivacyPolicy from "./pages/PrivacyPolicy";
 
 const queryClient = new QueryClient();
 
@@ -67,6 +70,9 @@ const App = () => {
             <Route path="/wild-tales/:slug" element={<WildTaleDetail />} />
             <Route path="/our-story" element={<OurStory />} />
             <Route path="/contact" element={<Contact />} />
+            <Route path="/terms-conditions" element={<TermsConditions />} />
+            <Route path="/cookie-preferences" element={<CookiePreferences />} />
+            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

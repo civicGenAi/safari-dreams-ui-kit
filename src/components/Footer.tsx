@@ -177,9 +177,9 @@ export const Footer = () => {
             </p>
             
             <div className="flex items-center gap-6 text-sm text-white/60">
-              <a href="#" className="hover:text-white transition-colors underline">Terms & Conditions</a>
-              <a href="#" className="hover:text-white transition-colors">Cookie Preferences</a>
-              <a href="#" className="hover:text-white transition-colors underline">Privacy Policy</a>
+              <Link to="/terms-conditions" className="hover:text-white transition-colors underline">Terms & Conditions</Link>
+              <Link to="/cookie-preferences" className="hover:text-white transition-colors">Cookie Preferences</Link>
+              <Link to="/privacy-policy" className="hover:text-white transition-colors underline">Privacy Policy</Link>
             </div>
             
             {/* Social Links */}
