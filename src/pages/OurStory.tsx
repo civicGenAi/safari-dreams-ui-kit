@@ -254,14 +254,24 @@ const OurStory = () => {
       <TestimonialsSection />
 
       {/* CTA */}
-      <div className="py-32 bg-white relative overflow-hidden">
+      <div className="py-32 relative overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <img
+            src="/src/assets/header_bg_new4.gif"
+            alt="Background"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-charcoal/85 via-charcoal/75 to-charcoal/85" />
+        </div>
+
         {/* Animated SVG Background */}
-        <div className="absolute inset-0 pointer-events-none opacity-[0.04]">
+        <div className="absolute inset-0 pointer-events-none opacity-[0.08]">
           <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
             {/* Safari footprints trail */}
-            <g fill="currentColor" className="text-primary">
+            <g fill="white">
               {[...Array(8)].map((_, i) => (
-                <g key={i} opacity={0.6}>
+                <g key={i} opacity={0.7}>
                   <ellipse cx={100 + i * 180} cy={100 + (i % 2) * 80} rx="15" ry="25" transform={`rotate(${25 + i * 10} ${100 + i * 180} ${100 + (i % 2) * 80})`}>
                     <animateTransform attributeName="transform" type="translate" values="0,0; 0,-10; 0,0" dur={`${3 + i * 0.3}s`} repeatCount="indefinite" />
                   </ellipse>
@@ -273,11 +283,11 @@ const OurStory = () => {
             </g>
 
             {/* Floating compass elements */}
-            <g stroke="currentColor" strokeWidth="2" fill="none" className="text-secondary">
+            <g stroke="white" strokeWidth="2" fill="none">
               {[...Array(6)].map((_, i) => (
                 <g key={i}>
                   <circle cx={200 + i * 250} cy={300 + (i % 3) * 100} r="40">
-                    <animate attributeName="opacity" values="0.3;0.7;0.3" dur={`${4 + i * 0.5}s`} repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0.4;0.8;0.4" dur={`${4 + i * 0.5}s`} repeatCount="indefinite" />
                   </circle>
                   <line x1={200 + i * 250} y1={260 + (i % 3) * 100} x2={200 + i * 250} y2={280 + (i % 3) * 100}>
                     <animateTransform attributeName="transform" type="rotate" values={`0 ${200 + i * 250} ${300 + (i % 3) * 100}; 360 ${200 + i * 250} ${300 + (i % 3) * 100}`} dur={`${20 + i * 2}s`} repeatCount="indefinite" />
@@ -290,7 +300,7 @@ const OurStory = () => {
             </g>
 
             {/* Safari vehicle paths */}
-            <g stroke="currentColor" strokeWidth="3" fill="none" className="text-primary" strokeDasharray="10,15">
+            <g stroke="white" strokeWidth="3" fill="none" strokeDasharray="10,15">
               <path d="M 0 250 Q 400 200 800 250 T 1600 250">
                 <animate attributeName="stroke-dashoffset" values="0;100" dur="15s" repeatCount="indefinite" />
               </path>
@@ -300,7 +310,7 @@ const OurStory = () => {
             </g>
 
             {/* Acacia tree silhouettes */}
-            <g fill="currentColor" className="text-secondary" opacity="0.5">
+            <g fill="white" opacity="0.6">
               {[...Array(5)].map((_, i) => (
                 <g key={i}>
                   <ellipse cx={150 + i * 350} cy={500} rx="50" ry="15">
@@ -312,7 +322,7 @@ const OurStory = () => {
             </g>
 
             {/* Flying birds */}
-            <g stroke="currentColor" strokeWidth="2" fill="none" className="text-primary">
+            <g stroke="white" strokeWidth="2" fill="none">
               {[...Array(4)].map((_, i) => (
                 <path key={i} d={`M ${100 + i * 80} ${150 + i * 50} Q ${110 + i * 80} ${145 + i * 50} ${120 + i * 80} ${150 + i * 50} Q ${130 + i * 80} ${145 + i * 50} ${140 + i * 80} ${150 + i * 50}`}>
                   <animateTransform attributeName="transform" type="translate" values={`0,0; ${1400 + i * 100},-${200 + i * 50}`} dur={`${25 + i * 3}s`} repeatCount="indefinite" />
@@ -323,7 +333,7 @@ const OurStory = () => {
         </div>
 
         <div className="container mx-auto px-4 lg:px-8 text-center relative z-10">
-          <h2 className="font-display text-5xl md:text-6xl font-bold text-foreground mb-6">
+          <h2 className="font-display text-5xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg">
             Your Trip. Our Responsibility.
           </h2>
           <Link to="/contact">
