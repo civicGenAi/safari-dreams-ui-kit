@@ -104,14 +104,14 @@ export const HeroSection = () => {
         <div className="max-w-3xl pt-20">
           {/* Title */}
           <h1
-            className={`text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-primary-foreground font-bold leading-tight mb-8 text-shadow-hero transition-all duration-700 delay-100 ${
+            className={`text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-primary-foreground leading-tight mb-8 text-shadow-hero transition-all duration-700 delay-100 ${
               isAnimating ? 'opacity-0 translate-y-8' : 'opacity-100 translate-y-0'
             }`}
           >
-            <span className="font-allura font-normal block mb-2 animate-fade-in-up">
+            <span className="font-heading font-semibold block mb-2 animate-fade-in-up">
               {slides[currentSlide].titleFirstPart}
             </span>
-            <span className="font-display block">
+            <span className="font-display font-bold block text-5xl md:text-6xl lg:text-7xl xl:text-8xl">
               {slides[currentSlide].titleSecondPart}
             </span>
           </h1>
