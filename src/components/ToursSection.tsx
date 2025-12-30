@@ -32,8 +32,93 @@ export const ToursSection = () => {
   const toursToShow = sortedTours.slice(0, 6);
 
   return (
-    <section id="tours" className="py-24 lg:py-32 bg-white">
-      <div className="container mx-auto px-4 lg:px-8">
+    <section id="tours" className="py-24 lg:py-32 bg-white relative overflow-hidden">
+      {/* Animated SVG Tour Elements */}
+      <div className="absolute inset-0 pointer-events-none">
+        <svg className="w-full h-full" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          {/* Map markers - scattered */}
+          <g opacity="0.04" fill="#EE8509">
+            <path d="M250 200 C250 200 250 180 250 170 C250 160 240 150 250 150 C260 150 250 160 250 170 C250 180 250 200 250 200 Z" />
+            <circle cx="250" cy="155" r="4" fill="#FFF" />
+
+            <path d="M1180 300 C1180 300 1180 280 1180 270 C1180 260 1170 250 1180 250 C1190 250 1180 260 1180 270 C1180 280 1180 300 1180 300 Z" />
+            <circle cx="1180" cy="255" r="4" fill="#FFF" />
+          </g>
+
+          {/* Luggage/travel bag silhouettes */}
+          <g opacity="0.05" stroke="#2D3748" fill="none">
+            <rect x="150" y="650" width="30" height="35" rx="3" strokeWidth="2" />
+            <rect x="155" y="645" width="20" height="5" rx="2" strokeWidth="1.5" />
+            <line x1="165" y1="665" x2="165" y2="680" strokeWidth="1.5" />
+
+            <rect x="1250" y="700" width="28" height="32" rx="3" strokeWidth="2" />
+            <rect x="1254" y="695" width="20" height="5" rx="2" strokeWidth="1.5" />
+            <line x1="1264" y1="715" x2="1264" y2="728" strokeWidth="1.5" />
+          </g>
+
+          {/* Airplane flight paths - dotted trails */}
+          <g opacity="0.03" stroke="#EE8509" fill="none">
+            <path d="M100 350 Q400 320 700 350" strokeWidth="2" strokeDasharray="4 8">
+              <animate attributeName="stroke-dashoffset" values="0;24;0" dur="12s" repeatCount="indefinite" />
+            </path>
+            <path d="M800 400 Q1000 380 1200 400" strokeWidth="2" strokeDasharray="4 8">
+              <animate attributeName="stroke-dashoffset" values="0;24;0" dur="14s" repeatCount="indefinite" />
+            </path>
+          </g>
+
+          {/* Small airplanes */}
+          <g opacity="0.04" fill="#2D3748">
+            <g>
+              <path d="M720 340 L728 343 L735 340 L728 346 L720 340 Z" />
+              <rect x="726" y="340" width="4" height="8" />
+              <animateTransform attributeName="transform" type="translate" values="0,0; 40,-5; 80,0" dur="16s" repeatCount="indefinite" />
+            </g>
+          </g>
+
+          {/* Star ratings decorative */}
+          <g opacity="0.04" fill="#EE8509">
+            <path d="M350 550 L352 555 L357 555 L353 558 L355 563 L350 560 L345 563 L347 558 L343 555 L348 555 Z">
+              <animate attributeName="opacity" values="0.04;0.06;0.04" dur="3s" repeatCount="indefinite" />
+            </path>
+            <path d="M365 555 L367 560 L372 560 L368 563 L370 568 L365 565 L360 568 L362 563 L358 560 L363 560 Z">
+              <animate attributeName="opacity" values="0.04;0.06;0.04" dur="3.5s" repeatCount="indefinite" />
+            </path>
+            <path d="M380 550 L382 555 L387 555 L383 558 L385 563 L380 560 L375 563 L377 558 L373 555 L378 555 Z">
+              <animate attributeName="opacity" values="0.04;0.06;0.04" dur="4s" repeatCount="indefinite" />
+            </path>
+          </g>
+
+          {/* Calendar/time dots */}
+          <g opacity="0.04" fill="#2D3748">
+            <circle cx="1050" cy="200" r="2" />
+            <circle cx="1060" cy="200" r="2" />
+            <circle cx="1070" cy="200" r="2" />
+            <circle cx="1080" cy="200" r="2" />
+            <circle cx="1050" cy="210" r="2" />
+            <circle cx="1060" cy="210" r="2" />
+            <circle cx="1070" cy="210" r="2" />
+          </g>
+
+          {/* Price tag shapes */}
+          <g opacity="0.05" stroke="#EE8509" fill="none">
+            <path d="M100 500 L120 500 L125 505 L120 510 L100 510 Z" strokeWidth="1.5" />
+            <circle cx="105" cy="505" r="2" fill="#EE8509" />
+
+            <path d="M1320 550 L1340 550 L1345 555 L1340 560 L1320 560 Z" strokeWidth="1.5" />
+            <circle cx="1325" cy="555" r="2" fill="#EE8509" />
+          </g>
+
+          {/* Decorative border elements - corners */}
+          <g opacity="0.04" stroke="#2D3748" fill="none">
+            <path d="M30 30 L60 30 M30 30 L30 60" strokeWidth="2" strokeLinecap="round" />
+            <path d="M1410 30 L1380 30 M1410 30 L1410 60" strokeWidth="2" strokeLinecap="round" />
+            <path d="M30 870 L60 870 M30 870 L30 840" strokeWidth="2" strokeLinecap="round" />
+            <path d="M1410 870 L1380 870 M1410 870 L1410 840" strokeWidth="2" strokeLinecap="round" />
+          </g>
+        </svg>
+      </div>
+
+      <div className="container mx-auto px-4 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto mb-12">
           <div className="flex items-center justify-center gap-3 mb-6">

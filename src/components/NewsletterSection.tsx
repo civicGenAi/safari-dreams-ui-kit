@@ -27,8 +27,67 @@ export const NewsletterSection = () => {
   const staffAvatars = [staffCaudence, staffBrenda, staffAbel, staffHuruma];
 
   return (
-    <section className="py-16 lg:py-20 bg-[#f5f3ef]">
-      <div className="container mx-auto px-4 lg:px-8">
+    <section className="py-16 lg:py-20 bg-[#f5f3ef] relative overflow-hidden">
+      {/* Animated SVG Nature Background */}
+      <div className="absolute inset-0 pointer-events-none">
+        <svg className="w-full h-full" viewBox="0 0 1200 300" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          {/* Grass at bottom */}
+          <g opacity="0.06" fill="#EE8509">
+            {[...Array(40)].map((_, i) => (
+              <line
+                key={`grass-${i}`}
+                x1={i * 30}
+                y1="280"
+                x2={i * 30 + (i % 2 === 0 ? -5 : 5)}
+                y2="250"
+                stroke="#2D3748"
+                strokeWidth="2"
+                strokeLinecap="round"
+                style={{ animation: `sway ${3 + (i % 3)}s ease-in-out infinite`, animationDelay: `${i * 0.1}s` }}
+              />
+            ))}
+          </g>
+
+          {/* Safari horizon line */}
+          <path d="M0 240 Q300 230 600 235 T1200 240" stroke="#EE8509" strokeWidth="1" fill="none" opacity="0.04" strokeDasharray="8 8" />
+
+          {/* Floating birds - top right */}
+          <g opacity="0.05" fill="#2D3748">
+            <path d="M950 40 Q955 35 960 40" stroke="#2D3748" strokeWidth="1.5" fill="none">
+              <animateTransform attributeName="transform" type="translate" values="0,0; 20,-10; 0,0" dur="8s" repeatCount="indefinite" />
+            </path>
+            <path d="M920 60 Q925 55 930 60" stroke="#2D3748" strokeWidth="1.5" fill="none">
+              <animateTransform attributeName="transform" type="translate" values="0,0; 15,-8; 0,0" dur="10s" repeatCount="indefinite" />
+            </path>
+            <path d="M980 50 Q985 45 990 50" stroke="#2D3748" strokeWidth="1.5" fill="none">
+              <animateTransform attributeName="transform" type="translate" values="0,0; 18,-12; 0,0" dur="12s" repeatCount="indefinite" />
+            </path>
+          </g>
+
+          {/* Subtle sun rays - top left */}
+          <g opacity="0.03" stroke="#EE8509" strokeWidth="2" fill="none">
+            <line x1="100" y1="60" x2="100" y2="100" strokeDasharray="4 4">
+              <animate attributeName="opacity" values="0.03;0.05;0.03" dur="4s" repeatCount="indefinite" />
+            </line>
+            <line x1="140" y1="80" x2="160" y2="110" strokeDasharray="4 4">
+              <animate attributeName="opacity" values="0.03;0.05;0.03" dur="5s" repeatCount="indefinite" />
+            </line>
+            <line x1="60" y1="80" x2="40" y2="110" strokeDasharray="4 4">
+              <animate attributeName="opacity" values="0.03;0.05;0.03" dur="6s" repeatCount="indefinite" />
+            </line>
+          </g>
+
+          {/* Decorative dots pattern */}
+          <g opacity="0.04" fill="#EE8509">
+            <circle cx="200" cy="150" r="2" />
+            <circle cx="400" cy="120" r="1.5" />
+            <circle cx="700" cy="180" r="2" />
+            <circle cx="1000" cy="140" r="1.5" />
+          </g>
+        </svg>
+      </div>
+
+      <div className="container mx-auto px-4 lg:px-8 relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left Column - Newsletter Signup */}
           <div>
