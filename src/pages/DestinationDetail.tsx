@@ -378,25 +378,33 @@ Overall, Jordan is a diverse country that offers something for everyone, from an
       )}
 
       {/* Popular Destinations */}
-      <div className="py-24 bg-white">
+      <div className="py-24 bg-gradient-to-b from-muted/20 to-white">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="text-center mb-12">
-            <h2 className="font-display text-4xl md:text-5xl font-bold mb-2">Must See Destinations</h2>
+          <div className="text-center mb-16">
+            <p className="text-primary font-heading font-semibold text-sm uppercase tracking-wider mb-3">
+              Explore More
+            </p>
+            <h2 className="font-display text-4xl md:text-5xl font-bold mb-4">Must See Destinations</h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+              Discover the wonders of East Africa's most captivating locations
+            </p>
           </div>
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4">
-            {otherDestinations.map((dest) => (
-              <Link key={dest.slug} to={`/destinations/${dest.slug}`} className="group relative h-64 rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all">
-                <img src={dest.image} alt={dest.name} className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110" />
-                <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/70 to-transparent" />
-                <div className="absolute bottom-4 left-4 right-4">
-                  <h3 className="font-display text-lg font-bold text-white mb-1">{dest.name}</h3>
-                  <p className="text-white/80 text-sm mb-2">{dest.tours} Tours</p>
-                  <Button variant="secondary" size="sm" className="text-xs px-3 py-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                    Explore <ArrowRight className="w-3 h-3" />
-                  </Button>
-                </div>
-              </Link>
-            ))}
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 justify-items-center">
+              {otherDestinations.map((dest) => (
+                <Link key={dest.slug} to={`/destinations/${dest.slug}`} className="group relative w-full max-w-[280px] h-80 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105">
+                  <img src={dest.image} alt={dest.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/95 via-charcoal/60 to-transparent" />
+                  <div className="absolute inset-0 flex flex-col justify-end p-6">
+                    <h3 className="font-display text-2xl font-bold text-white mb-2">{dest.name}</h3>
+                    <p className="text-white/90 text-sm mb-4">{dest.tours} Tours Available</p>
+                    <Button variant="secondary" size="sm" className="text-xs px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 gap-2">
+                      Explore Now <ArrowRight className="w-3 h-3" />
+                    </Button>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
         </div>
       </div>
@@ -405,20 +413,56 @@ Overall, Jordan is a diverse country that offers something for everyone, from an
       <TestimonialsSection />
 
       {/* CTA */}
-      <div className="py-32 bg-white">
-        <div className="container mx-auto px-4 lg:px-8 text-center">
-          <h2 className="font-display text-5xl md:text-6xl font-bold text-foreground mb-6">
-            Welcome to Your Destination
-          </h2>
-          <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-10">
-            Ready to embark on your {destination.name} adventure? Let us help you plan the perfect journey.
-          </p>
-          <Link to="/contact">
-            <Button variant="primary" size="xl" className="gap-2 shadow-2xl">
-              Plan Your Trip
-              <ArrowRight className="w-5 h-5" />
-            </Button>
-          </Link>
+      <div className="relative py-40 overflow-hidden">
+        {/* Animated Background */}
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/80 to-secondary"></div>
+
+          {/* Decorative Circles */}
+          <div className="absolute top-10 left-10 w-72 h-72 bg-white/5 rounded-full blur-3xl animate-pulse"></div>
+          <div className="absolute bottom-10 right-10 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-white/10 rounded-full blur-2xl"></div>
+
+          {/* Dotted Pattern Overlay */}
+          <div className="absolute inset-0 opacity-10">
+            <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <pattern id="cta-dots" width="40" height="40" patternUnits="userSpaceOnUse">
+                  <circle cx="20" cy="20" r="2" fill="white" />
+                </pattern>
+              </defs>
+              <rect width="100%" height="100%" fill="url(#cta-dots)" />
+            </svg>
+          </div>
+        </div>
+
+        <div className="container mx-auto px-4 lg:px-8 text-center relative z-10">
+          <div className="max-w-4xl mx-auto">
+            <p className="text-white/90 font-heading font-semibold text-sm uppercase tracking-wider mb-4">
+              Start Your Adventure
+            </p>
+            <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
+              Welcome to Your <span className="font-script text-6xl md:text-7xl lg:text-8xl block mt-2">Destination</span>
+            </h2>
+            <p className="text-xl text-white/95 max-w-2xl mx-auto mb-12 leading-relaxed">
+              Ready to embark on your {destination.name} adventure? Let us help you plan the perfect journey.
+            </p>
+
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link to="/contact">
+                <Button variant="gold" size="xl" className="gap-3 shadow-2xl hover:shadow-3xl transition-all duration-300 px-10 py-8 text-lg">
+                  Plan Your Trip
+                  <ArrowRight className="w-6 h-6" />
+                </Button>
+              </Link>
+              <Link to="/tours">
+                <Button variant="outline" size="xl" className="gap-3 border-2 border-white text-white hover:bg-white/10 px-10 py-8 text-lg">
+                  Browse Tours
+                  <ArrowRight className="w-6 h-6" />
+                </Button>
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
 
