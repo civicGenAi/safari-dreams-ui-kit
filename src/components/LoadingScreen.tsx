@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import logo from '@/assets/RCGP_Logo_Small-removebg-preview-1.webp';
 
 const safariStages = [
   { icon: 'binoculars', text: 'Spotting Wildlife...' },
@@ -10,6 +11,7 @@ const safariStages = [
 export const LoadingScreen = ({ onLoadComplete }: { onLoadComplete: () => void }) => {
   const [currentStage, setCurrentStage] = useState(0);
   const [fadeOut, setFadeOut] = useState(false);
+  const [progress, setProgress] = useState(0);
   const [jeepPosition, setJeepPosition] = useState(-20);
   const [showAnimals, setShowAnimals] = useState([false, false, false, false, false]);
   const [pathProgress, setPathProgress] = useState(0);
