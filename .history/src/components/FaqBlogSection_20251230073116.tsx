@@ -226,7 +226,7 @@ export const FaqBlogSection = () => {
 
             <div className="mt-8">
               <Link
-                to="/wild-tales"
+                to="/blog"
                 className="flex items-center justify-center gap-2 w-full h-14 bg-gradient-to-r from-secondary to-secondary/80 text-white font-heading font-semibold rounded-xl hover:shadow-lg hover:shadow-secondary/25 transition-all duration-300"
               >
                 <Newspaper className="w-5 h-5" />
