@@ -94,8 +94,8 @@ export const HeroSection = () => {
             className="absolute inset-0 w-full h-full object-cover"
           />
           {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-r from-charcoal/80 via-charcoal/50 to-transparent" />
-          <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-transparent to-charcoal/20" />
+          <div className="absolute inset-0 bg-gradient-to-r from-charcoal/40 via-charcoal/20 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-t from-charcoal/30 via-transparent to-transparent" />
         </div>
       ))}
 

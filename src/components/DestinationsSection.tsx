@@ -7,9 +7,6 @@ const destinations = [
   { name: 'Rwanda', slug: 'rwanda', tours: 6, coordinates: { x: '52%', y: '51%' } },
   { name: 'Tanzania', slug: 'tanzania', tours: 29, coordinates: { x: '54%', y: '53%' } },
   { name: 'Uganda', slug: 'uganda', tours: 8, coordinates: { x: '53%', y: '48%' } },
-  { name: 'Israel', slug: 'israel', tours: 5, coordinates: { x: '54%', y: '40%' } },
-  { name: 'Egypt', slug: 'egypt', tours: 7, coordinates: { x: '52%', y: '38%' } },
-  { name: 'Jordan', slug: 'jordan', tours: 6, coordinates: { x: '55%', y: '40%' } },
 ];
 
 export const DestinationsSection = () => {

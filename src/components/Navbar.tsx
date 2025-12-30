@@ -16,9 +16,6 @@ const destinations: Destination[] = [
   { name: 'Kenya', slug: 'kenya', tours: 4, flag: '🇰🇪' },
   { name: 'Rwanda', slug: 'rwanda', tours: 6, flag: '🇷🇼' },
   { name: 'Uganda', slug: 'uganda', tours: 4, flag: '🇺🇬' },
-  { name: 'Israel', slug: 'israel', tours: 2, flag: '🇮🇱' },
-  { name: 'Egypt', slug: 'egypt', tours: 2, flag: '🇪🇬' },
-  { name: 'Jordan', slug: 'jordan', tours: 1, flag: '🇯🇴' },
 ];
 
 interface TravelIdea {
