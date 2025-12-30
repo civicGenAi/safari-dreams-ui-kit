@@ -123,7 +123,9 @@ export const HeroSection = () => {
             }`}
           >
             <Link to={slides[currentSlide].buttonLink}>
-              <button className="px-8 py-4 border-2 border-white text-white font-heading font-semibold text-lg uppercase tracking-wider hover:bg-white/10 transition-all duration-300 backdrop-blur-sm">
+              <button className={`px-8 py-4 border-2 ${
+                currentSlide === 0 ? 'border-primary' : currentSlide === 1 ? 'border-black' : 'border-white'
+              } text-white font-heading font-semibold text-lg uppercase tracking-wider hover:bg-white/10 transition-all duration-300 backdrop-blur-sm`}>
                 {slides[currentSlide].buttonText}
               </button>
             </Link>
