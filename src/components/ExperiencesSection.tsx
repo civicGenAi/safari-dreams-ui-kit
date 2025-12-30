@@ -78,7 +78,7 @@ const experiences = [
     count: '12+',
     description: 'Thrilling expeditions for the bold traveler.',
     color: 'bg-orange-500/10 text-orange-600',
-    image: '/src/assets/hero/revslider_adventure04.jpg',
+    image: '/src/assets/tours_daytours_arusha_national_park2.webp',
   },
   {
     icon: CrossBorderIcon,
@@ -86,7 +86,7 @@ const experiences = [
     count: '8+',
     description: 'Multi-country safari adventures.',
     color: 'bg-emerald-500/10 text-emerald-600',
-    image: '/src/assets/hero-safari-1.jpg',
+    image: '/src/assets/idea_crossborder_elephants.webp',
   },
   {
     icon: DayTourIcon,
@@ -94,7 +94,7 @@ const experiences = [
     count: '15+',
     description: 'Perfect short excursions and city tours.',
     color: 'bg-amber-500/10 text-amber-600',
-    image: '/src/assets/home_fastbooking_cheetah.webp',
+    image: '/src/assets/ideas_daytour_leopardkill.webp',
   },
   {
     icon: LuxuryIcon,
@@ -102,7 +102,7 @@ const experiences = [
     count: '6+',
     description: 'Premium experiences with exclusive lodges.',
     color: 'bg-purple-500/10 text-purple-600',
-    image: '/src/assets/hero/revslider_luxury05.jpg',
+    image: '/src/assets/idea_luxury_poolside.webp',
   },
   {
     icon: MigrationIcon,
@@ -110,7 +110,7 @@ const experiences = [
     count: '5+',
     description: 'Witness the Great Wildebeest Migration.',
     color: 'bg-blue-500/10 text-blue-600',
-    image: '/src/assets/hero/revslider_migration02.jpg',
+    image: '/src/assets/ideas_migration_wildebeast.jpg',
   },
   {
     icon: GorillaIcon,
@@ -118,7 +118,7 @@ const experiences = [
     count: '7+',
     description: 'Encounter our closest relatives in the wild.',
     color: 'bg-green-500/10 text-green-600',
-    image: '/src/assets/hero-safari-2.jpg',
+    image: '/src/assets/idea_gorilla_chimp_trek.webp',
   },
 ];
 
