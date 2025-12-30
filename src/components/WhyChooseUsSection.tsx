@@ -2,11 +2,11 @@ import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import cheetahImage from '@/assets/home_fastbooking_cheetah.webp';
 import beachLadyImage from '@/assets/home_fastbooking_beach_lady.webp';
-import baptismSiteImage from '@/assets/tour_pilgrimage_jordan_baptism_site.jpg';
+import dayTourImage from '@/assets/ideas_daytour_leopardkill.webp';
 
 export const WhyChooseUsSection = () => {
   return (
-    <section className="py-24 lg:py-32 bg-gradient-to-br from-muted/50 to-background relative overflow-hidden">
+    <section className="py-24 lg:py-32 bg-white relative overflow-hidden">
       <div className="container mx-auto px-4 lg:px-8 relative">
         <div className="text-center max-w-3xl mx-auto mb-16">
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-4">
@@ -17,86 +17,94 @@ export const WhyChooseUsSection = () => {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {/* Card 1: Well Crafted Itineraries */}
-          <div className="group relative rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 h-96">
+        {/* Creative Asymmetric Layout */}
+        <div className="grid md:grid-cols-12 gap-6 lg:gap-8 auto-rows-[280px]">
+          {/* Large Card - Left Top (Well Crafted Itineraries) */}
+          <div className="group relative rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 md:col-span-7 md:row-span-2 border-2 border-primary/10">
             <div className="absolute inset-0">
               <img
                 src={cheetahImage}
                 alt="Safari itinerary"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-charcoal/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-charcoal/30 to-transparent" />
             </div>
 
-            <div className="relative h-full flex flex-col items-center justify-center text-center p-8">
-              <h3 className="font-display text-2xl font-bold text-white mb-4">
-                Well Crafted Itineraries
-              </h3>
+            <div className="relative h-full flex flex-col justify-end p-8 lg:p-10">
+              <div className="transform transition-all duration-500 group-hover:-translate-y-2">
+                <h3 className="font-display text-3xl lg:text-4xl font-bold text-white mb-4">
+                  Well Crafted Itineraries
+                </h3>
 
-              <p className="text-white/90 mb-6 line-clamp-2">
-                With our presence across 7 countries in East Africa and the Holy Land, we craft personalized journeys.
-              </p>
+                <p className="text-white/90 text-base lg:text-lg mb-6 max-w-md">
+                  With our presence across 4 countries in East Africa, we craft personalized journeys that create unforgettable memories.
+                </p>
 
-              <Link to="/destinations" className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <Button variant="primary" className="shadow-lg">
-                  Find Your Choice
-                </Button>
-              </Link>
+                <Link to="/destinations" className="inline-block">
+                  <Button variant="primary" className="shadow-lg hover:shadow-xl transform hover:scale-105 transition-all">
+                    Find Your Choice
+                  </Button>
+                </Link>
+              </div>
+            </div>
+
+            {/* Decorative badge */}
+            <div className="absolute top-6 right-6 bg-primary/90 backdrop-blur-sm text-white px-4 py-2 rounded-full text-sm font-heading font-semibold">
+              POPULAR
             </div>
           </div>
 
-          {/* Card 2: Take a Break */}
-          <div className="group relative rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 h-96">
+          {/* Medium Card - Right Top (Take a Break) */}
+          <div className="group relative rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 md:col-span-5 md:row-span-1 border-2 border-secondary/10">
             <div className="absolute inset-0">
               <img
                 src={beachLadyImage}
                 alt="Relaxation"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-charcoal/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-charcoal/30 to-transparent" />
             </div>
 
-            <div className="relative h-full flex flex-col items-center justify-center text-center p-8">
-              <h3 className="font-display text-2xl font-bold text-white mb-4">
+            <div className="relative h-full flex flex-col justify-end p-6 lg:p-8">
+              <h3 className="font-display text-2xl lg:text-3xl font-bold text-white mb-3">
                 Take a Break
               </h3>
 
-              <p className="text-white/90 mb-6 line-clamp-2">
+              <p className="text-white/90 text-sm lg:text-base mb-4 line-clamp-2">
                 Discover ultimate relaxation and rejuvenation. From pristine beaches to luxury lodges.
               </p>
 
-              <Link to="/travel-ideas" className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <Button variant="secondary" className="shadow-lg">
-                  Take a Break
+              <Link to="/travel-ideas" className="inline-block">
+                <Button variant="secondary" size="sm" className="shadow-lg hover:shadow-xl transform hover:scale-105 transition-all">
+                  Explore
                 </Button>
               </Link>
             </div>
           </div>
 
-          {/* Card 3: Pilgrimage Tours */}
-          <div className="group relative rounded-3xl overflow-hidden hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 h-96">
+          {/* Medium Card - Right Bottom (Day Tours) */}
+          <div className="group relative rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-3 md:col-span-5 md:row-span-1 border-2 border-[#D4AF37]/10">
             <div className="absolute inset-0">
               <img
-                src={baptismSiteImage}
-                alt="Pilgrimage"
+                src={dayTourImage}
+                alt="Day Tours"
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 via-charcoal/40 to-transparent" />
+              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-charcoal/30 to-transparent" />
             </div>
 
-            <div className="relative h-full flex flex-col items-center justify-center text-center p-8">
-              <h3 className="font-display text-2xl font-bold text-white mb-4">
-                Pilgrimage Tours
+            <div className="relative h-full flex flex-col justify-end p-6 lg:p-8">
+              <h3 className="font-display text-2xl lg:text-3xl font-bold text-white mb-3">
+                Day Tours
               </h3>
 
-              <p className="text-white/90 mb-6 line-clamp-2">
-                Embark on spiritual journeys to sacred sites in Egypt, Jordan, and Israel.
+              <p className="text-white/90 text-sm lg:text-base mb-4 line-clamp-2">
+                Perfect short excursions and city tours for those with limited time but unlimited curiosity.
               </p>
 
-              <Link to="/travel-ideas/pilgrimages" className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <Button variant="gold" className="shadow-lg">
-                  Take the Journey
+              <Link to="/travel-ideas/day-tours" className="inline-block">
+                <Button variant="gold" size="sm" className="shadow-lg hover:shadow-xl transform hover:scale-105 transition-all">
+                  Discover Tours
                 </Button>
               </Link>
             </div>
