@@ -25,7 +25,8 @@ export const WhyChooseUsSection = () => {
               <img
                 src={cheetahImage}
                 alt="Safari itinerary"
-                className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                style={{ objectPosition: '50% 40%' }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-charcoal/30 to-transparent" />
             </div>
@@ -60,7 +61,8 @@ export const WhyChooseUsSection = () => {
               <img
                 src={beachLadyImage}
                 alt="Relaxation"
-                className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                style={{ objectPosition: '50% 30%' }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-charcoal/30 to-transparent" />
             </div>
@@ -88,7 +90,8 @@ export const WhyChooseUsSection = () => {
               <img
                 src={dayTourImage}
                 alt="Day Tours"
-                className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                style={{ objectPosition: '50% 35%' }}
               />
               <div className="absolute inset-0 bg-gradient-to-t from-charcoal/70 via-charcoal/30 to-transparent" />
             </div>
