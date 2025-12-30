@@ -108,10 +108,10 @@ export const HeroSection = () => {
               isAnimating ? 'opacity-0 translate-y-8' : 'opacity-100 translate-y-0'
             }`}
           >
-            <span className="font-heading font-semibold block mb-4 animate-fade-in-up">
+            <span className="font-script font-normal block mb-4 text-5xl md:text-6xl lg:text-7xl xl:text-8xl animate-fade-in-up">
               {slides[currentSlide].titleFirstPart}
             </span>
-            <span className="font-script font-normal block text-6xl md:text-7xl lg:text-8xl xl:text-9xl leading-tight">
+            <span className="font-display font-semibold block text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight">
               {slides[currentSlide].titleSecondPart}
             </span>
           </h1>
