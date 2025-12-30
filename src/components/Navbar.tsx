@@ -34,7 +34,6 @@ const travelIdeas: TravelIdea[] = [
   { name: 'Gorilla and Chimp Trekking', slug: 'gorilla-chimp-trekking', tours: 5, icon: '🦍' },
   { name: 'Cross Border Safaris', slug: 'cross-border-safaris', tours: 9, icon: '🌍' },
   { name: 'Day Tours', slug: 'day-tours', tours: 8, icon: '🚙' },
-  { name: 'Pilgrimages', slug: 'pilgrimages', tours: 4, icon: '⛪' },
 ];
 
 interface NavbarProps {
