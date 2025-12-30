@@ -1,10 +1,10 @@
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
-import { Calendar, Phone, Mail, ArrowRight } from 'lucide-react';
+import { Calendar, Phone, ArrowRight } from 'lucide-react';
 
 export const CtaBookingSection = () => {
   return (
-    <section className="py-20 lg:py-28 bg-gradient-to-br from-primary/5 via-background to-secondary/5 relative overflow-hidden">
+    <section className="py-16 lg:py-20 bg-gradient-to-br from-primary/5 via-background to-secondary/5 relative overflow-hidden">
       {/* Background Decorative Elements */}
       <div className="absolute inset-0 opacity-5">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
@@ -20,7 +20,7 @@ export const CtaBookingSection = () => {
       <div className="container mx-auto px-4 lg:px-8 relative z-10">
         <div className="max-w-5xl mx-auto">
           {/* Main Heading */}
-          <div className="text-center mb-12">
+          <div className="text-center mb-8">
             <h2 className="font-display text-3xl md:text-5xl lg:text-6xl font-bold text-foreground mb-4">
               At Demi Tours and Travel
             </h2>
@@ -30,7 +30,7 @@ export const CtaBookingSection = () => {
           </div>
 
           {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-12">
+          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
             <Link to="/booking" className="w-full sm:w-auto">
               <Button
                 variant="gold"
@@ -53,69 +53,6 @@ export const CtaBookingSection = () => {
                 Speak to an Expert
               </Button>
             </Link>
-          </div>
-
-          {/* Trust Indicators */}
-          <div className="grid md:grid-cols-3 gap-6 mt-16">
-            <div className="bg-background/80 backdrop-blur-sm rounded-2xl p-6 border border-border hover:border-primary/50 transition-all duration-300 text-center">
-              <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <Calendar className="w-8 h-8 text-primary" />
-              </div>
-              <h3 className="font-display text-lg font-bold text-foreground mb-2">
-                Free Consultation
-              </h3>
-              <p className="text-muted-foreground text-sm">
-                No obligations, just expert advice tailored to your dreams
-              </p>
-            </div>
-
-            <div className="bg-background/80 backdrop-blur-sm rounded-2xl p-6 border border-border hover:border-secondary/50 transition-all duration-300 text-center">
-              <div className="w-16 h-16 bg-secondary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <Phone className="w-8 h-8 text-secondary" />
-              </div>
-              <h3 className="font-display text-lg font-bold text-foreground mb-2">
-                24/7 Support
-              </h3>
-              <p className="text-muted-foreground text-sm">
-                We're here for you before, during, and after your journey
-              </p>
-            </div>
-
-            <div className="bg-background/80 backdrop-blur-sm rounded-2xl p-6 border border-border hover:border-primary/50 transition-all duration-300 text-center">
-              <div className="w-16 h-16 bg-primary/10 rounded-2xl flex items-center justify-center mx-auto mb-4">
-                <Mail className="w-8 h-8 text-primary" />
-              </div>
-              <h3 className="font-display text-lg font-bold text-foreground mb-2">
-                Quick Response
-              </h3>
-              <p className="text-muted-foreground text-sm">
-                Custom itinerary delivered within 24 hours
-              </p>
-            </div>
-          </div>
-
-          {/* Contact Info */}
-          <div className="mt-12 text-center">
-            <p className="text-muted-foreground mb-4">
-              Prefer to talk? Call us directly
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 text-foreground font-heading">
-              <a
-                href="tel:+255123456789"
-                className="flex items-center gap-2 text-lg hover:text-primary transition-colors"
-              >
-                <Phone className="w-5 h-5" />
-                +255 123 456 789
-              </a>
-              <span className="hidden sm:block text-muted-foreground">|</span>
-              <a
-                href="mailto:info@demitoursandtravel.com"
-                className="flex items-center gap-2 text-lg hover:text-primary transition-colors"
-              >
-                <Mail className="w-5 h-5" />
-                info@demitoursandtravel.com
-              </a>
-            </div>
           </div>
         </div>
       </div>
