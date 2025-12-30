@@ -24,8 +24,8 @@ const Index = () => {
         <ToursSection />
         <ExperiencesSection />
         <TestimonialsSection />
-         <ClientFamilySection />
         <BookingForm />
+        <ClientFamilySection />
         <NewsletterSection />
       </main>
       <Footer />
