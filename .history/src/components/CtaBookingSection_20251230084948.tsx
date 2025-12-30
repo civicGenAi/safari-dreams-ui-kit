@@ -47,7 +47,7 @@ export const CtaBookingSection = () => {
                 <ArrowRight className="w-5 h-5" />
               </Button>
 
-              <Link to="/contact" className="w-full sm:w-auto">
+              <Link to="/tours" className="w-full sm:w-auto">
                 <Button
                   variant="outline"
                   size="xl"
