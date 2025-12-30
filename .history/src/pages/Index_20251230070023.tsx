@@ -7,7 +7,7 @@ import { ToursSection } from '@/components/ToursSection';
 import { ExperiencesSection } from '@/components/ExperiencesSection';
 import { ClientFamilySection } from '@/components/ClientFamilySection';
 import { TestimonialsSection } from '@/components/TestimonialsSection';
-import { FaqBlogSection } from '@/components/FaqBlogSection';
+import { BookingForm } from '@/components/BookingForm';
 import { NewsletterSection } from '@/components/NewsletterSection';
 import { Footer } from '@/components/Footer';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
@@ -24,7 +24,8 @@ const Index = () => {
         <ToursSection />
         <ExperiencesSection />
         <TestimonialsSection />
-        <FaqBlogSection />
+        <BookingForm />
+        <ClientFamilySection />
         <NewsletterSection />
       </main>
       <Footer />
