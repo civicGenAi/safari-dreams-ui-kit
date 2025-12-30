@@ -254,8 +254,75 @@ const OurStory = () => {
       <TestimonialsSection />
 
       {/* CTA */}
-      <div className="py-32 bg-muted/20">
-        <div className="container mx-auto px-4 lg:px-8 text-center">
+      <div className="py-32 bg-white relative overflow-hidden">
+        {/* Animated SVG Background */}
+        <div className="absolute inset-0 pointer-events-none opacity-[0.04]">
+          <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
+            {/* Safari footprints trail */}
+            <g fill="currentColor" className="text-primary">
+              {[...Array(8)].map((_, i) => (
+                <g key={i} opacity={0.6}>
+                  <ellipse cx={100 + i * 180} cy={100 + (i % 2) * 80} rx="15" ry="25" transform={`rotate(${25 + i * 10} ${100 + i * 180} ${100 + (i % 2) * 80})`}>
+                    <animateTransform attributeName="transform" type="translate" values="0,0; 0,-10; 0,0" dur={`${3 + i * 0.3}s`} repeatCount="indefinite" />
+                  </ellipse>
+                  <ellipse cx={120 + i * 180} cy={130 + (i % 2) * 80} rx="15" ry="25" transform={`rotate(${-25 - i * 10} ${120 + i * 180} ${130 + (i % 2) * 80})`}>
+                    <animateTransform attributeName="transform" type="translate" values="0,0; 0,-10; 0,0" dur={`${3.5 + i * 0.3}s`} repeatCount="indefinite" />
+                  </ellipse>
+                </g>
+              ))}
+            </g>
+
+            {/* Floating compass elements */}
+            <g stroke="currentColor" strokeWidth="2" fill="none" className="text-secondary">
+              {[...Array(6)].map((_, i) => (
+                <g key={i}>
+                  <circle cx={200 + i * 250} cy={300 + (i % 3) * 100} r="40">
+                    <animate attributeName="opacity" values="0.3;0.7;0.3" dur={`${4 + i * 0.5}s`} repeatCount="indefinite" />
+                  </circle>
+                  <line x1={200 + i * 250} y1={260 + (i % 3) * 100} x2={200 + i * 250} y2={280 + (i % 3) * 100}>
+                    <animateTransform attributeName="transform" type="rotate" values={`0 ${200 + i * 250} ${300 + (i % 3) * 100}; 360 ${200 + i * 250} ${300 + (i % 3) * 100}`} dur={`${20 + i * 2}s`} repeatCount="indefinite" />
+                  </line>
+                  <line x1={200 + i * 250} y1={320 + (i % 3) * 100} x2={200 + i * 250} y2={340 + (i % 3) * 100}>
+                    <animateTransform attributeName="transform" type="rotate" values={`0 ${200 + i * 250} ${300 + (i % 3) * 100}; 360 ${200 + i * 250} ${300 + (i % 3) * 100}`} dur={`${20 + i * 2}s`} repeatCount="indefinite" />
+                  </line>
+                </g>
+              ))}
+            </g>
+
+            {/* Safari vehicle paths */}
+            <g stroke="currentColor" strokeWidth="3" fill="none" className="text-primary" strokeDasharray="10,15">
+              <path d="M 0 250 Q 400 200 800 250 T 1600 250">
+                <animate attributeName="stroke-dashoffset" values="0;100" dur="15s" repeatCount="indefinite" />
+              </path>
+              <path d="M 0 450 Q 400 400 800 450 T 1600 450">
+                <animate attributeName="stroke-dashoffset" values="100;0" dur="18s" repeatCount="indefinite" />
+              </path>
+            </g>
+
+            {/* Acacia tree silhouettes */}
+            <g fill="currentColor" className="text-secondary" opacity="0.5">
+              {[...Array(5)].map((_, i) => (
+                <g key={i}>
+                  <ellipse cx={150 + i * 350} cy={500} rx="50" ry="15">
+                    <animateTransform attributeName="transform" type="scale" values="1,1; 1.1,0.9; 1,1" dur={`${5 + i * 0.7}s`} repeatCount="indefinite" additive="sum" />
+                  </ellipse>
+                  <rect x={145 + i * 350} y={500} width="10" height="80" />
+                </g>
+              ))}
+            </g>
+
+            {/* Flying birds */}
+            <g stroke="currentColor" strokeWidth="2" fill="none" className="text-primary">
+              {[...Array(4)].map((_, i) => (
+                <path key={i} d={`M ${100 + i * 80} ${150 + i * 50} Q ${110 + i * 80} ${145 + i * 50} ${120 + i * 80} ${150 + i * 50} Q ${130 + i * 80} ${145 + i * 50} ${140 + i * 80} ${150 + i * 50}`}>
+                  <animateTransform attributeName="transform" type="translate" values={`0,0; ${1400 + i * 100},-${200 + i * 50}`} dur={`${25 + i * 3}s`} repeatCount="indefinite" />
+                </path>
+              ))}
+            </g>
+          </svg>
+        </div>
+
+        <div className="container mx-auto px-4 lg:px-8 text-center relative z-10">
           <h2 className="font-display text-5xl md:text-6xl font-bold text-foreground mb-6">
             Your Trip. Our Responsibility.
           </h2>
