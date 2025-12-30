@@ -266,7 +266,7 @@ const OurStory = () => {
         </div>
 
         {/* Animated SVG Background */}
-        <div className="absolute inset-0 pointer-events-none opacity-[0.08]">
+        <div className="absolute inset-0 pointer-events-none">
           <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
             {/* Safari footprints trail */}
             <g fill="white">
