@@ -14,11 +14,10 @@ export default {
     },
     extend: {
       fontFamily: {
-        display: ["Playfair Display", "Georgia", "serif"],
-        heading: ["Montserrat", "system-ui", "sans-serif"],
+        display: ["Cormorant Garamond", "Playfair Display", "Georgia", "serif"],
+        heading: ["Poppins", "system-ui", "sans-serif"],
         sans: ["Inter", "system-ui", "sans-serif"],
-        allura: ["Allura", "cursive"],
-        caveat: ["Caveat", "cursive"],
+        luxury: ["Cormorant Garamond", "Georgia", "serif"],
       },
       colors: {
         border: "hsl(var(--border))",
