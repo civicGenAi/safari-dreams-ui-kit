@@ -11,7 +11,7 @@ interface BookingFormModalProps {
 }
 
 const destinations = [
-  'Tanzania', 'Kenya', 'Rwanda', 'Uganda', 'Egypt', 'Israel', 'Jordan'
+  'Tanzania', 'Kenya', 'Rwanda', 'Uganda'
 ];
 
 const travelStyles = [

@@ -12,9 +12,6 @@ const Destinations = () => {
     { name: 'Rwanda', slug: 'rwanda', tours: 6, image: '/src/assets/dest_rwanda.jpg' },
     { name: 'Tanzania', slug: 'tanzania', tours: 29, image: '/src/assets/dest_tanzania.jpg' },
     { name: 'Uganda', slug: 'uganda', tours: 4, image: '/src/assets/dest_uganda.jpg' },
-    { name: 'Egypt', slug: 'egypt', tours: 2, image: '/src/assets/dest_egypt.jpg' },
-    { name: 'Israel', slug: 'israel', tours: 2, image: '/src/assets/dest_israel.jpg' },
-    { name: 'Jordan', slug: 'jordan', tours: 1, image: '/src/assets/dest_jordan.jpg' }
   ];
 
   return (
@@ -51,13 +48,13 @@ const Destinations = () => {
 
           <div className="max-w-4xl mx-auto space-y-4 text-muted-foreground leading-relaxed text-center">
             <p>
-              Travel Destinations. Looking for an unforgettable travel experience in East Africa or a spiritual pilgrimage to Egypt, Israel, and Jordan? Look no further than DeMi Tours and Travel.
+              Travel Destinations. Looking for an unforgettable travel experience in East Africa? Look no further than DeMi Tours and Travel.
             </p>
             <p>
-              Our travel destinations to Kenya, Uganda, Tanzania, Rwanda, Egypt, Israel, and Jordan offer a unique blend of adventure, cultural immersion, and spiritual exploration.
+              Our travel destinations to Kenya, Uganda, Tanzania, and Rwanda offer a unique blend of adventure, cultural immersion, and wildlife exploration.
             </p>
             <p>
-              Whether you're seeking a safari in the Savannah, a trek through the Rainforest, or a journey to some of the world's most sacred sites, we have the expertise and passion to make your visit unforgettable. Book with DeMi Tours and Travel today and embark on the "adventure of a lifetime".
+              Whether you're seeking a safari in the Savannah, a trek through the Rainforest to see mountain gorillas, or an exploration of vibrant cultures, we have the expertise and passion to make your visit unforgettable. Book with DeMi Tours and Travel today and embark on the "adventure of a lifetime".
             </p>
           </div>
         </div>
@@ -68,12 +65,36 @@ const Destinations = () => {
         <div className="container mx-auto px-4 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             {/* Map - Left */}
-            <div>
+            <div className="relative">
               <img
                 src="/src/assets/world-map.webp"
                 alt="World Map"
                 className="w-full h-auto rounded-2xl shadow-lg"
               />
+
+              {/* Destination Markers */}
+              {destinations.map((dest) => (
+                <div
+                  key={dest.name}
+                  className="absolute transform -translate-x-1/2 -translate-y-1/2 group cursor-pointer"
+                  style={{ left: dest.slug === 'kenya' ? '60.5%' : dest.slug === 'rwanda' ? '58.3%' : dest.slug === 'tanzania' ? '59.7%' : '59.0%',
+                           top: dest.slug === 'kenya' ? '50.0%' : dest.slug === 'rwanda' ? '51.1%' : dest.slug === 'tanzania' ? '53.5%' : '49.2%' }}
+                >
+                  {/* Pulse ring */}
+                  <span className="absolute inset-0 w-6 h-6 -m-1 rounded-full bg-primary/30 animate-pulse" />
+
+                  {/* Marker dot */}
+                  <span className="relative flex items-center justify-center w-4 h-4 rounded-full border-2 border-background shadow-lg bg-primary group-hover:scale-150 transition-transform duration-300">
+                    <span className="w-1.5 h-1.5 rounded-full bg-background" />
+                  </span>
+
+                  {/* Tooltip */}
+                  <span className="absolute left-1/2 -translate-x-1/2 -top-10 bg-secondary text-secondary-foreground text-xs font-heading font-medium px-3 py-1.5 rounded-lg whitespace-nowrap shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
+                    {dest.name}
+                    <span className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-secondary" />
+                  </span>
+                </div>
+              ))}
             </div>
 
             {/* Destinations List - Right */}
@@ -127,7 +148,7 @@ const Destinations = () => {
         </div>
         <div className="relative container mx-auto px-4 lg:px-8 text-center">
           <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white tracking-tight leading-tight">
-            <span className="inline-block font-allura font-normal text-6xl md:text-7xl lg:text-8xl transform hover:scale-105 transition-transform duration-300">
+            <span className="inline-block font-script font-normal text-6xl md:text-7xl lg:text-8xl transform hover:scale-105 transition-transform duration-300">
               Curated
             </span>
             <br />
@@ -150,113 +171,62 @@ const Destinations = () => {
             Unforgettable Experiences
           </h2>
 
-          <div className="space-y-8">
-            {/* First Row - 2 cards */}
-            <div className="grid md:grid-cols-2 gap-8">
-              <Link to="/destinations/egypt" className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 h-80">
-                <img
-                  src="/src/assets/dest_egypt.jpg"
-                  alt="Egypt"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent flex items-end">
-                  <div className="p-8 w-full">
-                    <h3 className="font-display text-3xl font-bold text-white mb-2">Egypt</h3>
-                    <p className="text-white/90 text-sm">Explore ancient wonders</p>
-                  </div>
+          <div className="grid md:grid-cols-2 gap-8">
+            <Link to="/destinations/kenya" className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 h-80">
+              <img
+                src="/src/assets/dest_kenya.jpg"
+                alt="Kenya"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent flex items-end">
+                <div className="p-8 w-full">
+                  <h3 className="font-display text-3xl font-bold text-white mb-2">Kenya</h3>
+                  <p className="text-white/90 text-sm">Witness the great migration</p>
                 </div>
-              </Link>
+              </div>
+            </Link>
 
-              <Link to="/destinations/israel" className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 h-80">
-                <img
-                  src="/src/assets/dest_israel.jpg"
-                  alt="Israel"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent flex items-end">
-                  <div className="p-8 w-full">
-                    <h3 className="font-display text-3xl font-bold text-white mb-2">Israel</h3>
-                    <p className="text-white/90 text-sm">Walk the holy lands</p>
-                  </div>
+            <Link to="/destinations/rwanda" className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 h-80">
+              <img
+                src="/src/assets/dest_rwanda.jpg"
+                alt="Rwanda"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent flex items-end">
+                <div className="p-8 w-full">
+                  <h3 className="font-display text-3xl font-bold text-white mb-2">Rwanda</h3>
+                  <p className="text-white/90 text-sm">Trek with mountain gorillas</p>
                 </div>
-              </Link>
-            </div>
+              </div>
+            </Link>
 
-            {/* Second Row - 3 cards */}
-            <div className="grid md:grid-cols-3 gap-8">
-              <Link to="/destinations/jordan" className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 h-80">
-                <img
-                  src="/src/assets/dest_jordan.jpg"
-                  alt="Jordan"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent flex items-end">
-                  <div className="p-8 w-full">
-                    <h3 className="font-display text-3xl font-bold text-white mb-2">Jordan</h3>
-                    <p className="text-white/90 text-sm">Discover Petra's mysteries</p>
-                  </div>
+            <Link to="/destinations/tanzania" className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 h-80">
+              <img
+                src="/src/assets/dest_tanzania.jpg"
+                alt="Tanzania"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent flex items-end">
+                <div className="p-8 w-full">
+                  <h3 className="font-display text-3xl font-bold text-white mb-2">Tanzania</h3>
+                  <p className="text-white/90 text-sm">Serengeti & Kilimanjaro await</p>
                 </div>
-              </Link>
+              </div>
+            </Link>
 
-              <Link to="/destinations/kenya" className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 h-80">
-                <img
-                  src="/src/assets/dest_kenya.jpg"
-                  alt="Kenya"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent flex items-end">
-                  <div className="p-8 w-full">
-                    <h3 className="font-display text-3xl font-bold text-white mb-2">Kenya</h3>
-                    <p className="text-white/90 text-sm">Witness the great migration</p>
-                  </div>
+            <Link to="/destinations/uganda" className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 h-80">
+              <img
+                src="/src/assets/dest_uganda.jpg"
+                alt="Uganda"
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent flex items-end">
+                <div className="p-8 w-full">
+                  <h3 className="font-display text-3xl font-bold text-white mb-2">Uganda</h3>
+                  <p className="text-white/90 text-sm">Pearl of Africa adventure</p>
                 </div>
-              </Link>
-
-              <Link to="/destinations/rwanda" className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 h-80">
-                <img
-                  src="/src/assets/dest_rwanda.jpg"
-                  alt="Rwanda"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent flex items-end">
-                  <div className="p-8 w-full">
-                    <h3 className="font-display text-3xl font-bold text-white mb-2">Rwanda</h3>
-                    <p className="text-white/90 text-sm">Trek with mountain gorillas</p>
-                  </div>
-                </div>
-              </Link>
-            </div>
-
-            {/* Third Row - 2 cards */}
-            <div className="grid md:grid-cols-2 gap-8">
-              <Link to="/destinations/tanzania" className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 h-80">
-                <img
-                  src="/src/assets/dest_tanzania.jpg"
-                  alt="Tanzania"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent flex items-end">
-                  <div className="p-8 w-full">
-                    <h3 className="font-display text-3xl font-bold text-white mb-2">Tanzania</h3>
-                    <p className="text-white/90 text-sm">Serengeti & Kilimanjaro await</p>
-                  </div>
-                </div>
-              </Link>
-
-              <Link to="/destinations/uganda" className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 h-80">
-                <img
-                  src="/src/assets/dest_uganda.jpg"
-                  alt="Uganda"
-                  className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent flex items-end">
-                  <div className="p-8 w-full">
-                    <h3 className="font-display text-3xl font-bold text-white mb-2">Uganda</h3>
-                    <p className="text-white/90 text-sm">Pearl of Africa adventure</p>
-                  </div>
-                </div>
-              </Link>
-            </div>
+              </div>
+            </Link>
           </div>
         </div>
       </div>

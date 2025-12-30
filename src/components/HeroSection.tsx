@@ -3,7 +3,6 @@ import { Link } from 'react-router-dom';
 import { ChevronLeft, ChevronRight, Star } from 'lucide-react';
 import warrior01 from '@/assets/hero/revslider_welcome_warrior01.webp';
 import migration02 from '@/assets/hero/revslider_migration02.jpg';
-import pilgrimage03 from '@/assets/hero/revslider_pilgrimage_dome03.jpg';
 import adventure04 from '@/assets/hero/revslider_adventure04.jpg';
 import luxury05 from '@/assets/hero/revslider_luxury05.jpg';
 
@@ -21,7 +20,7 @@ const slides: Slide[] = [
     titleFirstPart: 'An Epic & Pulsating',
     titleSecondPart: 'adventure',
     buttonText: 'Take Me There',
-    buttonLink: '/travel-ideas/pilgrimages',
+    buttonLink: '/travel-ideas/adventure-seekers',
   },
   {
     image: migration02,
@@ -29,13 +28,6 @@ const slides: Slide[] = [
     titleSecondPart: 'leap of faith',
     buttonText: 'Take Me There',
     buttonLink: '/travel-ideas/migration-safaris',
-  },
-  {
-    image: pilgrimage03,
-    titleFirstPart: 'Holy Land',
-    titleSecondPart: 'pilgrimage',
-    buttonText: 'Take Me There',
-    buttonLink: '/travel-ideas/pilgrimages',
   },
   {
     image: adventure04,
