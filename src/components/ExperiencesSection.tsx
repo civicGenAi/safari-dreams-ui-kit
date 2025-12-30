@@ -79,7 +79,6 @@ const experiences = [
     description: 'Thrilling expeditions for the bold traveler.',
     color: 'bg-orange-500/10 text-orange-600',
     image: '/src/assets/hero/revslider_adventure04.jpg',
-    gradient: 'from-orange-600/90 to-orange-800/90',
   },
   {
     icon: CrossBorderIcon,
@@ -88,7 +87,6 @@ const experiences = [
     description: 'Multi-country safari adventures.',
     color: 'bg-emerald-500/10 text-emerald-600',
     image: '/src/assets/hero-safari-1.jpg',
-    gradient: 'from-emerald-600/90 to-emerald-800/90',
   },
   {
     icon: DayTourIcon,
@@ -97,7 +95,6 @@ const experiences = [
     description: 'Perfect short excursions and city tours.',
     color: 'bg-amber-500/10 text-amber-600',
     image: '/src/assets/home_fastbooking_cheetah.webp',
-    gradient: 'from-amber-600/90 to-amber-800/90',
   },
   {
     icon: LuxuryIcon,
@@ -106,7 +103,6 @@ const experiences = [
     description: 'Premium experiences with exclusive lodges.',
     color: 'bg-purple-500/10 text-purple-600',
     image: '/src/assets/hero/revslider_luxury05.jpg',
-    gradient: 'from-purple-600/90 to-purple-800/90',
   },
   {
     icon: MigrationIcon,
@@ -115,7 +111,6 @@ const experiences = [
     description: 'Witness the Great Wildebeest Migration.',
     color: 'bg-blue-500/10 text-blue-600',
     image: '/src/assets/hero/revslider_migration02.jpg',
-    gradient: 'from-blue-600/90 to-blue-800/90',
   },
   {
     icon: GorillaIcon,
@@ -124,7 +119,6 @@ const experiences = [
     description: 'Encounter our closest relatives in the wild.',
     color: 'bg-green-500/10 text-green-600',
     image: '/src/assets/hero-safari-2.jpg',
-    gradient: 'from-green-600/90 to-green-800/90',
   },
 ];
 
@@ -176,7 +170,7 @@ export const ExperiencesSection = () => {
               alt={experiences[0].title}
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
-            <div className={`absolute inset-0 bg-gradient-to-br ${experiences[0].gradient} transition-opacity duration-300 group-hover:opacity-75`} />
+            <div className="absolute inset-0 bg-primary/30 backdrop-blur-sm transition-all duration-500 group-hover:bg-primary/10 group-hover:backdrop-blur-none" />
 
             <div className="relative h-full flex flex-col justify-between p-8">
               <div className="flex items-start justify-between">
@@ -214,7 +208,7 @@ export const ExperiencesSection = () => {
               alt={experiences[1].title}
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
-            <div className={`absolute inset-0 bg-gradient-to-br ${experiences[1].gradient} transition-opacity duration-300 group-hover:opacity-75`} />
+            <div className="absolute inset-0 bg-secondary/35 backdrop-blur-sm transition-all duration-500 group-hover:bg-secondary/10 group-hover:backdrop-blur-none" />
 
             <div className="relative h-full flex flex-col justify-between p-6">
               <div className="flex items-start justify-between">
@@ -252,7 +246,7 @@ export const ExperiencesSection = () => {
               alt={experiences[3].title}
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
-            <div className={`absolute inset-0 bg-gradient-to-br ${experiences[3].gradient} transition-opacity duration-300 group-hover:opacity-75`} />
+            <div className="absolute inset-0 bg-primary/35 backdrop-blur-sm transition-all duration-500 group-hover:bg-primary/10 group-hover:backdrop-blur-none" />
 
             <div className="relative h-full flex flex-col justify-between p-6">
               <div className="flex items-start justify-between">
@@ -290,7 +284,7 @@ export const ExperiencesSection = () => {
               alt={experiences[2].title}
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
-            <div className={`absolute inset-0 bg-gradient-to-br ${experiences[2].gradient} transition-opacity duration-300 group-hover:opacity-75`} />
+            <div className="absolute inset-0 bg-secondary/30 backdrop-blur-sm transition-all duration-500 group-hover:bg-secondary/10 group-hover:backdrop-blur-none" />
 
             <div className="relative h-full flex flex-col justify-between p-6">
               <div className="flex items-start justify-between">
@@ -328,7 +322,7 @@ export const ExperiencesSection = () => {
               alt={experiences[4].title}
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
-            <div className={`absolute inset-0 bg-gradient-to-br ${experiences[4].gradient} transition-opacity duration-300 group-hover:opacity-75`} />
+            <div className="absolute inset-0 bg-primary/30 backdrop-blur-sm transition-all duration-500 group-hover:bg-primary/10 group-hover:backdrop-blur-none" />
 
             <div className="relative h-full flex flex-col justify-between p-6">
               <div className="flex items-start justify-between">
@@ -366,7 +360,7 @@ export const ExperiencesSection = () => {
               alt={experiences[5].title}
               className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
             />
-            <div className={`absolute inset-0 bg-gradient-to-br ${experiences[5].gradient} transition-opacity duration-300 group-hover:opacity-75`} />
+            <div className="absolute inset-0 bg-secondary/35 backdrop-blur-sm transition-all duration-500 group-hover:bg-secondary/10 group-hover:backdrop-blur-none" />
 
             <div className="relative h-full flex flex-col justify-between p-6">
               <div className="flex items-start justify-between">
