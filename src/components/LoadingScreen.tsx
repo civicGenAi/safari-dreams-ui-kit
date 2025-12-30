@@ -1,10 +1,59 @@
 import { useEffect, useState } from 'react';
-import logo from '@/assets/RCGP_Logo_Small-removebg-preview-1.webp';
+
+const safariStages = [
+  { icon: 'binoculars', text: 'Spotting Wildlife...' },
+  { icon: 'compass', text: 'Planning Route...' },
+  { icon: 'jeep', text: 'Starting Engine...' },
+  { icon: 'camera', text: 'Ready for Adventure!' },
+];
 
 export const LoadingScreen = ({ onLoadComplete }: { onLoadComplete: () => void }) => {
-  const [progress, setProgress] = useState(0);
+  const [currentStage, setCurrentStage] = useState(0);
   const [fadeOut, setFadeOut] = useState(false);
+  const [jeepPosition, setJeepPosition] = useState(-20);
+  const [showAnimals, setShowAnimals] = useState([false, false, false, false, false]);
+  const [pathProgress, setPathProgress] = useState(0);
+  const [dustParticles, setDustParticles] = useState<Array<{ id: number; x: number; y: number; size: number; opacity: number }>>([]);
 
+  // Animate jeep across screen
+  useEffect(() => {
+    const jeepInterval = setInterval(() => {
+      setJeepPosition((prev) => {
+        if (prev >= 120) return 120;
+        return prev + 1.5;
+      });
+    }, 50);
+
+    return () => clearInterval(jeepInterval);
+  }, []);
+
+  // Generate dust particles behind jeep
+  useEffect(() => {
+    if (jeepPosition > 0 && jeepPosition < 100) {
+      const newParticle = {
+        id: Date.now(),
+        x: jeepPosition - 5,
+        y: 55 + Math.random() * 10,
+        size: Math.random() * 8 + 4,
+        opacity: Math.random() * 0.5 + 0.3,
+      };
+      setDustParticles((prev) => [...prev.slice(-15), newParticle]);
+    }
+  }, [jeepPosition]);
+
+  // Animate path drawing
+  useEffect(() => {
+    const pathInterval = setInterval(() => {
+      setPathProgress((prev) => {
+        if (prev >= 100) return 100;
+        return prev + 2;
+      });
+    }, 60);
+
+    return () => clearInterval(pathInterval);
+  }, []);
+
+  // Reveal animals at different points
   useEffect(() => {
     // Simulate loading progress
     const progressInterval = setInterval(() => {
@@ -158,6 +207,7 @@ export const LoadingScreen = ({ onLoadComplete }: { onLoadComplete: () => void }
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="w-48 h-48 rounded-full bg-primary/10 blur-2xl" style={{ animation: 'pulse 2s ease-in-out infinite' }} />
           </div>
+        </div>
 
           {/* Logo container */}
           <div className="relative bg-white/95 backdrop-blur-sm rounded-3xl p-10 shadow-2xl border border-primary/20">
@@ -227,7 +277,6 @@ export const LoadingScreen = ({ onLoadComplete }: { onLoadComplete: () => void }
                 </svg>
               </div>
             </div>
-          </div>
 
           {/* Progress Text */}
           <div className="flex justify-between items-center mt-4">
@@ -301,3 +350,5 @@ export const LoadingScreen = ({ onLoadComplete }: { onLoadComplete: () => void }
     </div>
   );
 };
+
+export default LoadingScreen;

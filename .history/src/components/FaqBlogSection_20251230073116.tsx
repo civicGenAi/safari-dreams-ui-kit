@@ -72,65 +72,8 @@ export const FaqBlogSection = () => {
   };
 
   return (
-    <section className="py-24 lg:py-32 bg-gradient-to-b from-white to-muted/30 relative overflow-hidden">
-      {/* Animated SVG Nature Background */}
-      <div className="absolute inset-0 pointer-events-none">
-        <svg className="w-full h-full" viewBox="0 0 1440 800" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-          {/* Question mark decorative dots - left side */}
-          <g opacity="0.04" fill="#EE8509">
-            <circle cx="80" cy="150" r="3" />
-            <circle cx="75" cy="165" r="2" />
-            <circle cx="85" cy="165" r="2" />
-            <circle cx="80" cy="175" r="1.5" />
-            <circle cx="80" cy="185" r="2.5" />
-          </g>
-
-          {/* Book/page turn elements - right side */}
-          <g opacity="0.05" stroke="#2D3748" fill="none">
-            <path d="M1360 200 Q1370 210 1360 220" strokeWidth="2" strokeLinecap="round">
-              <animate attributeName="d" values="M1360 200 Q1370 210 1360 220;M1360 200 Q1365 210 1360 220;M1360 200 Q1370 210 1360 220" dur="6s" repeatCount="indefinite" />
-            </path>
-            <path d="M1370 200 Q1380 210 1370 220" strokeWidth="2" strokeLinecap="round">
-              <animate attributeName="d" values="M1370 200 Q1380 210 1370 220;M1370 200 Q1375 210 1370 220;M1370 200 Q1380 210 1370 220" dur="7s" repeatCount="indefinite" />
-            </path>
-          </g>
-
-          {/* Subtle path lines - journey theme */}
-          <g opacity="0.03" stroke="#EE8509" fill="none">
-            <path d="M100 600 Q300 580 500 600 T900 600" strokeWidth="2" strokeDasharray="8 12">
-              <animate attributeName="stroke-dashoffset" values="0;20;0" dur="10s" repeatCount="indefinite" />
-            </path>
-          </g>
-
-          {/* Small wildlife footprints */}
-          <g opacity="0.04" fill="#2D3748">
-            <ellipse cx="200" cy="450" rx="4" ry="3" transform="rotate(20 200 450)" />
-            <ellipse cx="210" cy="460" rx="4" ry="3" transform="rotate(20 210 460)" />
-            <ellipse cx="220" cy="470" rx="4" ry="3" transform="rotate(20 220 470)" />
-
-            <ellipse cx="1200" cy="350" rx="3" ry="2.5" transform="rotate(-15 1200 350)" />
-            <ellipse cx="1210" cy="358" rx="3" ry="2.5" transform="rotate(-15 1210 358)" />
-            <ellipse cx="1220" cy="366" rx="3" ry="2.5" transform="rotate(-15 1220 366)" />
-          </g>
-
-          {/* Compass rose - exploration theme */}
-          <g opacity="0.04" stroke="#EE8509" fill="none">
-            <circle cx="1300" cy="650" r="20" strokeWidth="1" />
-            <path d="M1300 630 L1300 670 M1280 650 L1320 650" strokeWidth="1.5" strokeLinecap="round" />
-            <path d="M1312 638 L1300 650 L1312 662 M1288 638 L1300 650 L1288 662" strokeWidth="1" strokeLinecap="round" />
-          </g>
-
-          {/* Decorative plant leaves - bottom corners */}
-          <g opacity="0.05" fill="#2D3748">
-            <path d="M50 750 Q60 740 70 750" />
-            <path d="M40 760 Q50 750 60 760" />
-            <path d="M1380 750 Q1370 740 1360 750" />
-            <path d="M1390 760 Q1380 750 1370 760" />
-          </g>
-        </svg>
-      </div>
-
-      <div className="container mx-auto px-4 lg:px-8 relative z-10">
+    <section className="py-24 lg:py-32 bg-gradient-to-b from-white to-muted/30">
+      <div className="container mx-auto px-4 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
           {/* FAQ Section */}
           <div>
@@ -283,7 +226,7 @@ export const FaqBlogSection = () => {
 
             <div className="mt-8">
               <Link
-                to="/wild-tales"
+                to="/blog"
                 className="flex items-center justify-center gap-2 w-full h-14 bg-gradient-to-r from-secondary to-secondary/80 text-white font-heading font-semibold rounded-xl hover:shadow-lg hover:shadow-secondary/25 transition-all duration-300"
               >
                 <Newspaper className="w-5 h-5" />
