@@ -105,7 +105,7 @@ const TravelIdeas = () => {
       {/* Hero Section */}
       <div className="relative h-[300px] md:h-[400px]">
         <img
-          src="/src/assets/header_bg_new4.gif"
+          src="/src/assets/zebras-gd702c488e_1920.webp"
           alt="Travel Ideas"
           className="w-full h-full object-cover"
         />
@@ -380,7 +380,7 @@ const TravelIdeas = () => {
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
-            src="/src/assets/zebras-gd702c488e_1920.webp"
+            src="/src/assets/header_bg_new4.gif"
             alt="Background"
             className="w-full h-full object-cover"
           />
