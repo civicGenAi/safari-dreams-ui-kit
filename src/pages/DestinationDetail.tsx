@@ -389,10 +389,10 @@ Overall, Jordan is a diverse country that offers something for everyone, from an
               Discover the wonders of East Africa's most captivating locations
             </p>
           </div>
-          <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 justify-items-center">
+          <div className="flex justify-center">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl">
               {otherDestinations.map((dest) => (
-                <Link key={dest.slug} to={`/destinations/${dest.slug}`} className="group relative w-full max-w-[280px] h-80 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105">
+                <Link key={dest.slug} to={`/destinations/${dest.slug}`} className="group relative w-full h-80 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105">
                   <img src={dest.image} alt={dest.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
                   <div className="absolute inset-0 bg-gradient-to-t from-charcoal/95 via-charcoal/60 to-transparent" />
                   <div className="absolute inset-0 flex flex-col justify-end p-6">
@@ -413,38 +413,94 @@ Overall, Jordan is a diverse country that offers something for everyone, from an
       <TestimonialsSection />
 
       {/* CTA */}
-      <div className="relative py-40 overflow-hidden">
-        {/* Animated Background */}
+      <div className="relative py-40 overflow-hidden bg-white">
+        {/* Nature SVG Background */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-br from-primary via-primary/80 to-secondary"></div>
+          <svg className="w-full h-full" viewBox="0 0 1440 600" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+            <defs>
+              <linearGradient id="skyGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                <stop offset="0%" style={{ stopColor: '#FFA500', stopOpacity: 0.15 }} />
+                <stop offset="100%" style={{ stopColor: '#FF8C00', stopOpacity: 0.08 }} />
+              </linearGradient>
+            </defs>
 
-          {/* Decorative Circles */}
-          <div className="absolute top-10 left-10 w-72 h-72 bg-white/5 rounded-full blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-10 right-10 w-96 h-96 bg-white/5 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-          <div className="absolute top-1/2 left-1/3 w-64 h-64 bg-white/10 rounded-full blur-2xl"></div>
+            {/* Sky background */}
+            <rect width="1440" height="600" fill="url(#skyGradient)" />
 
-          {/* Dotted Pattern Overlay */}
-          <div className="absolute inset-0 opacity-10">
-            <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-              <defs>
-                <pattern id="cta-dots" width="40" height="40" patternUnits="userSpaceOnUse">
-                  <circle cx="20" cy="20" r="2" fill="white" />
-                </pattern>
-              </defs>
-              <rect width="100%" height="100%" fill="url(#cta-dots)" />
-            </svg>
-          </div>
+            {/* Mountains - Background layer */}
+            <path d="M0 400 L200 250 L400 350 L600 200 L800 300 L1000 150 L1200 280 L1440 200 L1440 600 L0 600 Z" fill="#EE8509" opacity="0.05" />
+
+            {/* Mountains - Middle layer */}
+            <path d="M0 450 L150 320 L350 400 L550 280 L750 380 L950 240 L1150 350 L1350 280 L1440 320 L1440 600 L0 600 Z" fill="#EE8509" opacity="0.08" />
+
+            {/* Trees - Left side */}
+            <g opacity="0.12" fill="#2D3748">
+              <ellipse cx="150" cy="480" rx="30" ry="70" />
+              <ellipse cx="200" cy="490" rx="25" ry="60" />
+              <ellipse cx="250" cy="485" rx="28" ry="65" />
+            </g>
+
+            {/* Trees - Right side */}
+            <g opacity="0.12" fill="#2D3748">
+              <ellipse cx="1250" cy="490" rx="30" ry="70" />
+              <ellipse cx="1300" cy="480" rx="25" ry="60" />
+              <ellipse cx="1350" cy="495" rx="28" ry="65" />
+            </g>
+
+            {/* Wildlife silhouettes - Giraffes */}
+            <g opacity="0.08" fill="#EE8509">
+              <path d="M100 450 L105 400 L110 450 L108 480 L102 480 Z" />
+              <circle cx="105" cy="395" r="8" />
+
+              <path d="M1100 460 L1105 410 L1110 460 L1108 490 L1102 490 Z" />
+              <circle cx="1105" cy="405" r="8" />
+            </g>
+
+            {/* Acacia trees */}
+            <g opacity="0.1" fill="#2D3748">
+              <path d="M500 500 L505 450 L510 500" stroke="#2D3748" strokeWidth="3" fill="none" />
+              <ellipse cx="505" cy="445" rx="35" ry="25" />
+
+              <path d="M900 510 L905 460 L910 510" stroke="#2D3748" strokeWidth="3" fill="none" />
+              <ellipse cx="905" cy="455" rx="35" ry="25" />
+            </g>
+
+            {/* Decorative dots pattern */}
+            <g opacity="0.06" fill="#EE8509">
+              <circle cx="300" cy="150" r="3" />
+              <circle cx="450" cy="200" r="2" />
+              <circle cx="650" cy="100" r="3" />
+              <circle cx="850" cy="180" r="2" />
+              <circle cx="1050" cy="120" r="3" />
+              <circle cx="1200" cy="160" r="2" />
+
+              <circle cx="350" cy="250" r="2" />
+              <circle cx="550" cy="220" r="3" />
+              <circle cx="750" cy="280" r="2" />
+              <circle cx="950" cy="240" r="3" />
+              <circle cx="1150" cy="200" r="2" />
+            </g>
+
+            {/* Sun rays */}
+            <g opacity="0.05" stroke="#EE8509" strokeWidth="2" fill="none">
+              <line x1="720" y1="50" x2="720" y2="100" />
+              <line x1="780" y1="80" x2="810" y2="120" />
+              <line x1="660" y1="80" x2="630" y2="120" />
+              <line x1="790" y1="140" x2="830" y2="160" />
+              <line x1="650" y1="140" x2="610" y2="160" />
+            </g>
+          </svg>
         </div>
 
         <div className="container mx-auto px-4 lg:px-8 text-center relative z-10">
           <div className="max-w-4xl mx-auto">
-            <p className="text-white/90 font-heading font-semibold text-sm uppercase tracking-wider mb-4">
+            <p className="text-primary font-heading font-semibold text-sm uppercase tracking-wider mb-4">
               Start Your Adventure
             </p>
-            <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-white mb-6 leading-tight">
-              Welcome to Your <span className="font-script text-6xl md:text-7xl lg:text-8xl block mt-2">Destination</span>
+            <h2 className="font-display text-5xl md:text-6xl lg:text-7xl font-bold text-foreground mb-6 leading-tight">
+              Welcome to Your <span className="font-script text-6xl md:text-7xl lg:text-8xl block mt-2 text-primary">Destination</span>
             </h2>
-            <p className="text-xl text-white/95 max-w-2xl mx-auto mb-12 leading-relaxed">
+            <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-12 leading-relaxed">
               Ready to embark on your {destination.name} adventure? Let us help you plan the perfect journey.
             </p>
 
@@ -456,7 +512,7 @@ Overall, Jordan is a diverse country that offers something for everyone, from an
                 </Button>
               </Link>
               <Link to="/tours">
-                <Button variant="outline" size="xl" className="gap-3 border-2 border-white text-white hover:bg-white/10 px-10 py-8 text-lg">
+                <Button variant="outline" size="xl" className="gap-3 border-2 hover:bg-muted/50 px-10 py-8 text-lg">
                   Browse Tours
                   <ArrowRight className="w-6 h-6" />
                 </Button>
