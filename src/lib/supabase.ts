@@ -28,6 +28,8 @@ export interface Package {
     day: number;
     title: string;
     description: string;
+    activities?: string[];
+    images?: string[];
   }[];
   created_at: string;
   updated_at: string;

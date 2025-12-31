@@ -93,21 +93,25 @@ export const PackageForm = ({ package: editPackage, onSuccess, onCancel }: Packa
     return [];
   });
 
-  const [itineraryDays, setItineraryDays] = useState<Array<{ day: number; title: string; description: string }>>(() => {
+  const [itineraryDays, setItineraryDays] = useState<Array<{ day: number; title: string; description: string; activities?: string[]; images?: string[] }>>(() => {
     if (editPackage) {
       const itinerary = Array.isArray(editPackage.itinerary) && editPackage.itinerary.length > 0
-        ? editPackage.itinerary
-        : [{ day: 1, title: '', description: '' }];
+        ? editPackage.itinerary.map(day => ({
+            ...day,
+            activities: day.activities || [],
+            images: day.images || []
+          }))
+        : [{ day: 1, title: '', description: '', activities: [], images: [] }];
       return itinerary;
     }
     const stored = localStorage.getItem('packageFormItinerary');
     if (stored) {
       try {
         const parsed = JSON.parse(stored);
-        return parsed.length > 0 ? parsed : [{ day: 1, title: '', description: '' }];
+        return parsed.length > 0 ? parsed : [{ day: 1, title: '', description: '', activities: [], images: [] }];
       } catch {}
     }
-    return [{ day: 1, title: '', description: '' }];
+    return [{ day: 1, title: '', description: '', activities: [], images: [] }];
   });
 
   // Save form data to localStorage (only for new packages)
@@ -202,7 +206,7 @@ export const PackageForm = ({ package: editPackage, onSuccess, onCancel }: Packa
   const addItineraryDay = () => {
     setItineraryDays([
       ...itineraryDays,
-      { day: itineraryDays.length + 1, title: '', description: '' }
+      { day: itineraryDays.length + 1, title: '', description: '', activities: [], images: [] }
     ]);
   };
 
@@ -728,25 +732,150 @@ export const PackageForm = ({ package: editPackage, onSuccess, onCancel }: Packa
                   </div>
                 </CardHeader>
                 <CardContent className="space-y-3">
-                  <Input
-                    value={day.title}
-                    onChange={(e) => {
-                      const newDays = [...itineraryDays];
-                      newDays[index].title = e.target.value;
-                      setItineraryDays(newDays);
-                    }}
-                    placeholder="e.g., Arrival in Arusha"
-                  />
-                  <Textarea
-                    value={day.description}
-                    onChange={(e) => {
-                      const newDays = [...itineraryDays];
-                      newDays[index].description = e.target.value;
-                      setItineraryDays(newDays);
-                    }}
-                    rows={3}
-                    placeholder="Describe the day's activities..."
-                  />
+                  <div>
+                    <Label>Day Title *</Label>
+                    <Input
+                      value={day.title}
+                      onChange={(e) => {
+                        const newDays = [...itineraryDays];
+                        newDays[index].title = e.target.value;
+                        setItineraryDays(newDays);
+                      }}
+                      placeholder="e.g., Arrival in Arusha"
+                    />
+                  </div>
+                  <div>
+                    <Label>Description *</Label>
+                    <Textarea
+                      value={day.description}
+                      onChange={(e) => {
+                        const newDays = [...itineraryDays];
+                        newDays[index].description = e.target.value;
+                        setItineraryDays(newDays);
+                      }}
+                      rows={3}
+                      placeholder="Describe the day's activities..."
+                    />
+                  </div>
+
+                  {/* Activities List */}
+                  <div>
+                    <Label>Activities</Label>
+                    <div className="space-y-2">
+                      {(day.activities || []).map((activity, actIndex) => (
+                        <div key={actIndex} className="flex gap-2">
+                          <Input
+                            value={activity}
+                            onChange={(e) => {
+                              const newDays = [...itineraryDays];
+                              if (!newDays[index].activities) newDays[index].activities = [];
+                              newDays[index].activities![actIndex] = e.target.value;
+                              setItineraryDays(newDays);
+                            }}
+                            placeholder="e.g., Airport pickup & transfer"
+                          />
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => {
+                              const newDays = [...itineraryDays];
+                              newDays[index].activities = newDays[index].activities?.filter((_, i) => i !== actIndex) || [];
+                              setItineraryDays(newDays);
+                            }}
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      ))}
+                      <Button
+                        type="button"
+                        variant="outline"
+                        size="sm"
+                        onClick={() => {
+                          const newDays = [...itineraryDays];
+                          if (!newDays[index].activities) newDays[index].activities = [];
+                          newDays[index].activities!.push('');
+                          setItineraryDays(newDays);
+                        }}
+                      >
+                        <Plus className="w-4 h-4 mr-1" />
+                        Add Activity
+                      </Button>
+                    </div>
+                  </div>
+
+                  {/* Day Images Upload */}
+                  <div>
+                    <Label>Day Images (Max 2)</Label>
+                    <div className="space-y-2">
+                      {(day.images || []).map((img, imgIndex) => (
+                        <div key={imgIndex} className="flex gap-2 items-center">
+                          <img src={img} alt={`Day ${day.day} image ${imgIndex + 1}`} className="w-20 h-20 object-cover rounded" />
+                          <Button
+                            type="button"
+                            variant="ghost"
+                            size="sm"
+                            onClick={() => {
+                              const newDays = [...itineraryDays];
+                              newDays[index].images = newDays[index].images?.filter((_, i) => i !== imgIndex) || [];
+                              setItineraryDays(newDays);
+                            }}
+                          >
+                            <X className="w-4 h-4" />
+                          </Button>
+                        </div>
+                      ))}
+                      {(!day.images || day.images.length < 2) && (
+                        <div>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={async (e) => {
+                              const file = e.target.files?.[0];
+                              if (!file) return;
+
+                              setLoading(true);
+                              try {
+                                const fileExt = file.name.split('.').pop();
+                                const fileName = `${Math.random().toString(36).substring(2)}-${Date.now()}.${fileExt}`;
+                                const filePath = `itinerary/${fileName}`;
+
+                                const { error: uploadError } = await supabase.storage
+                                  .from('package-images')
+                                  .upload(filePath, file);
+
+                                if (uploadError) throw uploadError;
+
+                                const { data: { publicUrl } } = supabase.storage
+                                  .from('package-images')
+                                  .getPublicUrl(filePath);
+
+                                const newDays = [...itineraryDays];
+                                if (!newDays[index].images) newDays[index].images = [];
+                                newDays[index].images!.push(publicUrl);
+                                setItineraryDays(newDays);
+
+                                toast({
+                                  title: 'Success',
+                                  description: 'Image uploaded successfully',
+                                });
+                              } catch (error: any) {
+                                toast({
+                                  title: 'Upload Error',
+                                  description: error.message,
+                                  variant: 'destructive',
+                                });
+                              } finally {
+                                setLoading(false);
+                              }
+                            }}
+                            className="text-sm"
+                          />
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 </CardContent>
               </Card>
             ))}
