@@ -5,6 +5,8 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { LoadingScreen } from "@/components/LoadingScreen";
+import { AuthProvider } from "@/contexts/AuthContext";
+import { ProtectedRoute } from "@/components/ProtectedRoute";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Tours from "./pages/Tours";
@@ -21,6 +23,8 @@ import Contact from "./pages/Contact";
 import TermsConditions from "./pages/TermsConditions";
 import CookiePreferences from "./pages/CookiePreferences";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
+import AdminLogin from "./pages/AdminLogin";
+import AdminDashboard from "./pages/AdminDashboard";
 
 const queryClient = new QueryClient();
 
@@ -57,25 +61,33 @@ const App = () => {
         <Toaster />
         <Sonner />
         <BrowserRouter>
-          <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/tours" element={<Tours />} />
-            <Route path="/tours/:slug" element={<TourDetail />} />
-            <Route path="/destinations" element={<Destinations />} />
-            <Route path="/destinations/:slug" element={<DestinationDetail />} />
-            <Route path="/booking/:slug" element={<Booking />} />
-            <Route path="/travel-ideas" element={<TravelIdeas />} />
-            <Route path="/travel-ideas/:slug" element={<TravelIdeaDetail />} />
-            <Route path="/wild-tales" element={<WildTales />} />
-            <Route path="/wild-tales/:slug" element={<WildTaleDetail />} />
-            <Route path="/our-story" element={<OurStory />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/terms-conditions" element={<TermsConditions />} />
-            <Route path="/cookie-preferences" element={<CookiePreferences />} />
-            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-            {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
-            <Route path="*" element={<NotFound />} />
-          </Routes>
+          <AuthProvider>
+            <Routes>
+              <Route path="/" element={<Index />} />
+              <Route path="/tours" element={<Tours />} />
+              <Route path="/tours/:slug" element={<TourDetail />} />
+              <Route path="/destinations" element={<Destinations />} />
+              <Route path="/destinations/:slug" element={<DestinationDetail />} />
+              <Route path="/booking/:slug" element={<Booking />} />
+              <Route path="/travel-ideas" element={<TravelIdeas />} />
+              <Route path="/travel-ideas/:slug" element={<TravelIdeaDetail />} />
+              <Route path="/wild-tales" element={<WildTales />} />
+              <Route path="/wild-tales/:slug" element={<WildTaleDetail />} />
+              <Route path="/our-story" element={<OurStory />} />
+              <Route path="/contact" element={<Contact />} />
+              <Route path="/terms-conditions" element={<TermsConditions />} />
+              <Route path="/cookie-preferences" element={<CookiePreferences />} />
+              <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+              <Route path="/admin/login" element={<AdminLogin />} />
+              <Route path="/admin/dashboard" element={
+                <ProtectedRoute>
+                  <AdminDashboard />
+                </ProtectedRoute>
+              } />
+              {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </AuthProvider>
         </BrowserRouter>
       </TooltipProvider>
     </QueryClientProvider>

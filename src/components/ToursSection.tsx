@@ -1,18 +1,40 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Clock, Users, Star, MapPin, ArrowRight } from 'lucide-react';
-import { mockTours } from '@/data/mockData';
+import { supabase, Package } from '@/lib/supabase';
 
 export const ToursSection = () => {
   const [activeFilter, setActiveFilter] = useState('All');
   const [sortBy, setSortBy] = useState('popular');
+  const [packages, setPackages] = useState<Package[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const filters = ['All', 'Safari', 'Trekking', 'Beach', 'Wildlife'];
+  const filters = ['All', 'Safari', 'Trekking', 'Beach', 'Wildlife', 'Luxury', 'Adventure'];
+
+  useEffect(() => {
+    fetchPackages();
+  }, []);
+
+  const fetchPackages = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('packages')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setPackages(data || []);
+    } catch (error) {
+      console.error('Error fetching packages:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const filteredTours = activeFilter === 'All'
-    ? mockTours
-    : mockTours.filter(tour => tour.category.toLowerCase() === activeFilter.toLowerCase());
+    ? packages
+    : packages.filter(pkg => pkg.category.toLowerCase() === activeFilter.toLowerCase());
 
   const sortedTours = [...filteredTours].sort((a, b) => {
     switch (sortBy) {
@@ -20,12 +42,10 @@ export const ToursSection = () => {
         return a.price - b.price;
       case 'price-high':
         return b.price - a.price;
-      case 'rating':
-        return b.rating - a.rating;
       case 'duration':
-        return parseInt(a.duration) - parseInt(b.duration);
+        return a.duration - b.duration;
       default:
-        return b.popular ? 1 : -1;
+        return 0;
     }
   });
 
@@ -172,86 +192,87 @@ export const ToursSection = () => {
 
         {/* Tours Grid */}
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {toursToShow.map((tour, index) => (
-            <article
-              key={tour.id}
-              className="group bg-background rounded-2xl border border-border overflow-hidden hover:border-primary/50 hover:shadow-xl transition-all duration-300"
-              style={{ animationDelay: `${index * 100}ms` }}
-            >
-              {/* Tour Image */}
-              <Link to={`/tours/${tour.slug}`} className="block relative h-56 overflow-hidden">
-                <img
-                  src={tour.image}
-                  alt={tour.title}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+          {loading ? (
+            <div className="col-span-full flex items-center justify-center py-12">
+              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
+            </div>
+          ) : toursToShow.length === 0 ? (
+            <div className="col-span-full text-center py-12">
+              <p className="text-muted-foreground">No packages available yet.</p>
+            </div>
+          ) : (
+            toursToShow.map((pkg, index) => (
+              <article
+                key={pkg.id}
+                className="group bg-background rounded-2xl border border-border overflow-hidden hover:border-primary/50 hover:shadow-xl transition-all duration-300"
+                style={{ animationDelay: `${index * 100}ms` }}
+              >
+                {/* Tour Image */}
+                <Link to={`/tours/${pkg.slug}`} className="block relative h-56 overflow-hidden">
+                  <img
+                    src={pkg.image}
+                    alt={pkg.title}
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
 
-                {/* Popular Badge */}
-                {tour.popular && (
+                  {/* Category Badge */}
                   <div className="absolute top-4 left-4 bg-secondary text-white px-3 py-1 rounded-full text-xs font-heading font-semibold">
-                    POPULAR
+                    {pkg.category}
                   </div>
-                )}
 
-                {/* Category Badge */}
-                <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm text-foreground px-3 py-1 rounded-full text-xs font-heading font-medium">
-                  {tour.category}
-                </div>
-              </Link>
-
-              {/* Tour Content */}
-              <div className="p-6">
-                {/* Location */}
-                <div className="flex items-center gap-1.5 text-muted-foreground text-sm mb-3">
-                  <MapPin className="w-4 h-4" />
-                  <span className="font-heading">{tour.location}</span>
-                </div>
-
-                {/* Title */}
-                <Link to={`/tours/${tour.slug}`}>
-                  <h3 className="font-display text-xl font-bold text-foreground mb-3 line-clamp-2 group-hover:text-primary transition-colors">
-                    {tour.title}
-                  </h3>
+                  {/* Difficulty Badge */}
+                  <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm text-foreground px-3 py-1 rounded-full text-xs font-heading font-medium">
+                    {pkg.difficulty}
+                  </div>
                 </Link>
 
-                {/* Tour Details */}
-                <div className="flex items-center gap-4 text-muted-foreground text-sm mb-4 pb-4 border-b border-border">
-                  <div className="flex items-center gap-1.5">
-                    <Clock className="w-4 h-4" />
-                    <span className="font-heading">{tour.duration}</span>
+                {/* Tour Content */}
+                <div className="p-6">
+                  {/* Location */}
+                  <div className="flex items-center gap-1.5 text-muted-foreground text-sm mb-3">
+                    <MapPin className="w-4 h-4" />
+                    <span className="font-heading">{pkg.destination}</span>
                   </div>
-                  <div className="flex items-center gap-1.5">
-                    <Users className="w-4 h-4" />
-                    <span className="font-heading">{tour.groupSize}</span>
-                  </div>
-                  <div className="flex items-center gap-1">
-                    <Star className="w-4 h-4 fill-secondary text-secondary" />
-                    <span className="font-heading font-semibold text-foreground">{tour.rating}</span>
-                  </div>
-                </div>
 
-                {/* Price and CTA */}
-                <div className="flex items-center justify-between">
-                  <div>
-                    <div className="flex items-baseline gap-1">
-                      <span className="font-display text-2xl font-bold text-foreground">${tour.price}</span>
-                      <span className="text-sm text-muted-foreground">/person</span>
-                    </div>
-                    {tour.originalPrice && (
-                      <span className="text-xs text-muted-foreground line-through">${tour.originalPrice}</span>
-                    )}
-                  </div>
-                  <Link to={`/tours/${tour.slug}`}>
-                    <Button variant="primary" size="sm" className="gap-1.5 group-hover:gap-2.5 transition-all">
-                      View Details
-                      <ArrowRight className="w-4 h-4" />
-                    </Button>
+                  {/* Title */}
+                  <Link to={`/tours/${pkg.slug}`}>
+                    <h3 className="font-display text-xl font-bold text-foreground mb-3 line-clamp-2 group-hover:text-primary transition-colors">
+                      {pkg.title}
+                    </h3>
                   </Link>
+
+                  {/* Tour Details */}
+                  <div className="flex items-center gap-4 text-muted-foreground text-sm mb-4 pb-4 border-b border-border">
+                    <div className="flex items-center gap-1.5">
+                      <Clock className="w-4 h-4" />
+                      <span className="font-heading">{pkg.duration} days</span>
+                    </div>
+                    <div className="flex items-center gap-1">
+                      <Star className="w-4 h-4 fill-secondary text-secondary" />
+                      <span className="font-heading font-semibold text-foreground">4.8</span>
+                    </div>
+                  </div>
+
+                  {/* Price and CTA */}
+                  <div className="flex items-center justify-between">
+                    <div>
+                      <div className="flex items-baseline gap-1">
+                        <span className="font-display text-2xl font-bold text-foreground">${pkg.price}</span>
+                        <span className="text-sm text-muted-foreground">/person</span>
+                      </div>
+                    </div>
+                    <Link to={`/tours/${pkg.slug}`}>
+                      <Button variant="primary" size="sm" className="gap-1.5 group-hover:gap-2.5 transition-all">
+                        View Details
+                        <ArrowRight className="w-4 h-4" />
+                      </Button>
+                    </Link>
+                  </div>
                 </div>
-              </div>
-            </article>
-          ))}
+              </article>
+            ))
+          )}
         </div>
 
         {/* Show All Tours Button */}

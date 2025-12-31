@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
-import { mockTours } from '@/data/mockData';
+import { supabase, Package } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -26,23 +26,45 @@ const Tours = () => {
   const [priceRange, setPriceRange] = useState([0, 5000]);
   const [durationRange, setDurationRange] = useState([1, 15]);
   const [sortBy, setSortBy] = useState('popular');
+  const [packages, setPackages] = useState<Package[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetchPackages();
+  }, []);
+
+  const fetchPackages = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('packages')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) throw error;
+      setPackages(data || []);
+    } catch (error) {
+      console.error('Error fetching packages:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   // Extract unique values for filters
-  const categories = Array.from(new Set(mockTours.map((t) => t.category)));
-  const destinations = Array.from(new Set(mockTours.map((t) => t.location)));
-  const difficulties = Array.from(new Set(mockTours.map((t) => t.difficulty)));
+  const categories = Array.from(new Set(packages.map((t) => t.category)));
+  const destinations = Array.from(new Set(packages.map((t) => t.destination)));
+  const difficulties = Array.from(new Set(packages.map((t) => t.difficulty)));
 
   // Filter tours
-  let filteredTours = mockTours.filter((tour) => {
+  let filteredTours = packages.filter((pkg) => {
     const matchesCategory =
-      selectedCategories.length === 0 || selectedCategories.includes(tour.category);
+      selectedCategories.length === 0 || selectedCategories.includes(pkg.category);
     const matchesDestination =
-      selectedDestinations.length === 0 || selectedDestinations.includes(tour.location);
+      selectedDestinations.length === 0 || selectedDestinations.includes(pkg.destination);
     const matchesDifficulty =
-      selectedDifficulty.length === 0 || selectedDifficulty.includes(tour.difficulty);
-    const matchesPrice = tour.price >= priceRange[0] && tour.price <= priceRange[1];
+      selectedDifficulty.length === 0 || selectedDifficulty.includes(pkg.difficulty);
+    const matchesPrice = pkg.price >= priceRange[0] && pkg.price <= priceRange[1];
     const matchesDuration =
-      tour.durationDays >= durationRange[0] && tour.durationDays <= durationRange[1];
+      pkg.duration >= durationRange[0] && pkg.duration <= durationRange[1];
 
     return (
       matchesCategory &&
@@ -60,12 +82,10 @@ const Tours = () => {
         return a.price - b.price;
       case 'price-high':
         return b.price - a.price;
-      case 'rating':
-        return b.rating - a.rating;
       case 'duration':
-        return a.durationDays - b.durationDays;
+        return a.duration - b.duration;
       default: // popular
-        return (b.reviews - a.reviews) * b.rating - (a.reviews - a.reviews) * a.rating;
+        return 0;
     }
   });
 
@@ -163,7 +183,7 @@ const Tours = () => {
                         />
                         <span className="text-sm">{category}</span>
                         <span className="text-xs text-muted-foreground ml-auto">
-                          ({mockTours.filter((t) => t.category === category).length})
+                          ({packages.filter((t) => t.category === category).length})
                         </span>
                       </label>
                     ))}
@@ -185,7 +205,7 @@ const Tours = () => {
                         />
                         <span className="text-sm">{destination}</span>
                         <span className="text-xs text-muted-foreground ml-auto">
-                          ({mockTours.filter((t) => t.location === destination).length})
+                          ({packages.filter((t) => t.destination === destination).length})
                         </span>
                       </label>
                     ))}
@@ -312,7 +332,11 @@ const Tours = () => {
             )}
 
             {/* Tours Grid */}
-            {filteredTours.length === 0 ? (
+            {loading ? (
+              <div className="text-center py-12">
+                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
+              </div>
+            ) : filteredTours.length === 0 ? (
               <div className="text-center py-12">
                 <p className="text-muted-foreground text-lg mb-4">
                   No tours match your current filters
@@ -323,39 +347,32 @@ const Tours = () => {
               </div>
             ) : (
               <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-6">
-                {filteredTours.map((tour) => (
+                {filteredTours.map((pkg) => (
                   <article
-                    key={tour.id}
+                    key={pkg.id}
                     className="group bg-card rounded-2xl overflow-hidden shadow-md card-hover border border-border"
                   >
                     {/* Image */}
-                    <Link to={`/tours/${tour.slug}`} className="block relative h-56 img-zoom">
+                    <Link to={`/tours/${pkg.slug}`} className="block relative h-56 img-zoom">
                       <img
-                        src={tour.image}
-                        alt={tour.title}
+                        src={pkg.image}
+                        alt={pkg.title}
                         className="w-full h-full object-cover"
                       />
                       <div className="absolute inset-0 bg-gradient-card opacity-60" />
 
-                      {/* Badges */}
-                      {tour.popular && (
-                        <div className="absolute top-3 left-3 bg-sunset text-white px-2 py-1 rounded-full text-xs font-heading font-semibold uppercase">
-                          Popular
-                        </div>
-                      )}
+                      {/* Difficulty Badge */}
+                      <div className="absolute top-3 left-3 bg-sunset text-white px-2 py-1 rounded-full text-xs font-heading font-semibold uppercase">
+                        {pkg.difficulty}
+                      </div>
 
                       {/* Price */}
                       <div className="absolute top-3 right-3 glass text-primary-foreground px-3 py-1.5 rounded-lg">
                         <div className="flex items-baseline gap-1">
                           <span className="font-display text-lg font-bold">
-                            ${tour.price}
+                            ${pkg.price}
                           </span>
                         </div>
-                        {tour.originalPrice && (
-                          <span className="text-xs line-through opacity-60">
-                            ${tour.originalPrice}
-                          </span>
-                        )}
                       </div>
 
                       {/* Favorite */}
@@ -365,22 +382,22 @@ const Tours = () => {
 
                       {/* Category */}
                       <div className="absolute bottom-3 left-3 glass-dark text-primary-foreground px-2 py-1 rounded-full text-xs font-heading uppercase">
-                        {tour.category}
+                        {pkg.category}
                       </div>
                     </Link>
 
                     {/* Content */}
                     <div className="p-5">
                       <span className="text-secondary font-heading text-sm uppercase tracking-wider">
-                        {tour.location}
+                        {pkg.destination}
                       </span>
 
                       <Link
-                        to={`/tours/${tour.slug}`}
+                        to={`/tours/${pkg.slug}`}
                         className="block mt-2 mb-3"
                       >
                         <h3 className="font-display text-lg font-bold text-foreground group-hover:text-primary transition-colors line-clamp-2">
-                          {tour.title}
+                          {pkg.title}
                         </h3>
                       </Link>
 
@@ -388,28 +405,18 @@ const Tours = () => {
                       <div className="flex items-center gap-3 text-muted-foreground text-sm mb-3">
                         <div className="flex items-center gap-1">
                           <Clock className="w-4 h-4" />
-                          <span>{tour.durationDays}D</span>
+                          <span>{pkg.duration}D</span>
                         </div>
                         <div className="flex items-center gap-1">
-                          <Users className="w-4 h-4" />
-                          <span>{tour.groupSize}</span>
+                          <Star className="w-4 h-4 fill-secondary text-secondary" />
+                          <span className="font-heading font-semibold">4.8</span>
                         </div>
                       </div>
 
-                      {/* Rating & CTA */}
+                      {/* CTA */}
                       <div className="flex items-center justify-between pt-3 border-t border-border">
-                        <div className="flex items-center gap-2">
-                          <div className="flex items-center gap-1">
-                            <Star className="w-4 h-4 fill-secondary text-secondary" />
-                            <span className="font-heading font-semibold">
-                              {tour.rating}
-                            </span>
-                          </div>
-                          <span className="text-muted-foreground text-sm">
-                            ({tour.reviews})
-                          </span>
-                        </div>
-                        <Link to={`/tours/${tour.slug}`}>
+                        <p className="text-sm text-muted-foreground">/person</p>
+                        <Link to={`/tours/${pkg.slug}`}>
                           <Button
                             variant="ghost"
                             size="sm"
