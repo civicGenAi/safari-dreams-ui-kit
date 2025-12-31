@@ -35,7 +35,7 @@ const WildTales = () => {
       {/* Hero Section */}
       <div className="relative h-[500px] md:h-[600px]">
         <img
-          src="/src/assets/header_bg_wildbeest.jpg"
+          src="/header_bg_wildbeest.jpg"
           alt="Wild Tales"
           className="w-full h-full object-cover"
         />

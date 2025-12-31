@@ -63,7 +63,7 @@ export const Navbar = ({ activeCategory, activeDestination }: NavbarProps = {}) 
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center">
               <img
-                src="/src/assets/RCGP_Logo_Small-removebg-preview-1.webp"
+                src="/RCGP_Logo_Small-removebg-preview-1.webp"
                 alt="Logo"
                 className="h-12 md:h-14 w-auto"
               />
@@ -187,7 +187,7 @@ export const Navbar = ({ activeCategory, activeDestination }: NavbarProps = {}) 
         <div className={`absolute right-0 top-0 h-full w-[85%] max-w-sm bg-background shadow-lift transition-transform duration-500 ${isMobileMenuOpen ? 'translate-x-0' : 'translate-x-full'}`}>
           <div className="p-6">
             <div className="flex items-center justify-between mb-8">
-              <img src="/src/assets/RCGP_Logo_Small-removebg-preview-1.webp" alt="Logo" className="h-10 w-auto" />
+              <img src="/RCGP_Logo_Small-removebg-preview-1.webp" alt="Logo" className="h-10 w-auto" />
               <button onClick={() => setIsMobileMenuOpen(false)} className="p-2 text-foreground"><X className="w-6 h-6" /></button>
             </div>
             <Button

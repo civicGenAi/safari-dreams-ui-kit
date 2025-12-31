@@ -20,7 +20,7 @@ const TravelIdeas = () => {
       slug: 'migration-safaris',
       tours: '6+',
       price: '1,520',
-      image: '/src/assets/idea/ideas_migration_wildebeast.webp',
+      image: 'ideas_migration_wildebeast.webp',
       description: 'Witness the great wildebeest migration'
     },
     {
@@ -28,7 +28,7 @@ const TravelIdeas = () => {
       slug: 'romantic-holidays',
       tours: '8+',
       price: '2,100',
-      image: '/src/assets/idea/ideas_romantic_holiday.webp',
+      image: 'ideas_romantic_holiday.webp',
       description: 'Perfect getaways for couples'
     },
     {
@@ -36,7 +36,7 @@ const TravelIdeas = () => {
       slug: 'safari-beach-holidays',
       tours: '10+',
       price: '1,850',
-      image: '/src/assets/idea/ideas_safari_beach.webp',
+      image: 'ideas_safari_beach.webp',
       description: 'Best of both worlds: safari and beach'
     },
     {
@@ -44,7 +44,7 @@ const TravelIdeas = () => {
       slug: 'adventure-seekers',
       tours: '12+',
       price: '980',
-      image: '/src/assets/idea/idea_adventure_kilimanjaro.webp',
+      image: 'idea_adventure_kilimanjaro.webp',
       description: 'Thrilling experiences for adventurers'
     },
     {
@@ -52,7 +52,7 @@ const TravelIdeas = () => {
       slug: 'luxury-tours',
       tours: '7+',
       price: '3,500',
-      image: '/src/assets/idea/idea_luxury_poolside.webp',
+      image: 'idea_luxury_poolside.webp',
       description: 'Premium safari experiences'
     },
     {
@@ -60,7 +60,7 @@ const TravelIdeas = () => {
       slug: 'gorilla-chimp-trekking',
       tours: '5+',
       price: '2,800',
-      image: '/src/assets/idea/idea_gorilla_chimp_trek.webp',
+      image: 'idea_gorilla_chimp_trek.webp',
       description: 'Encounter mountain gorillas and chimps'
     },
     {
@@ -68,7 +68,7 @@ const TravelIdeas = () => {
       slug: 'cross-border-safaris',
       tours: '9+',
       price: '2,200',
-      image: '/src/assets/idea/idea_crossborder_elephants.webp',
+      image: 'idea_crossborder_elephants.webp',
       description: 'Explore multiple East African countries'
     },
     {
@@ -76,7 +76,7 @@ const TravelIdeas = () => {
       slug: 'day-tours',
       tours: '8+',
       price: '255',
-      image: '/src/assets/idea/tour_daytour_mandarahut_hike.webp',
+      image: 'tour_daytour_mandarahut_hike.webp',
       description: 'Short excursions and day trips'
     },
   ];
@@ -88,7 +88,7 @@ const TravelIdeas = () => {
       {/* Hero Section */}
       <div className="relative h-[300px] md:h-[400px]">
         <img
-          src="/src/assets/header_bg_new4.gif"
+          src="/header_bg_new4.gif"
           alt="Travel Ideas"
           className="w-full h-full object-cover"
         />
@@ -300,7 +300,7 @@ const TravelIdeas = () => {
               {/* Early Booking Offer */}
               <div className="group relative overflow-hidden rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 border-4 border-primary/60 hover:border-primary">
                 <img
-                  src="/src/assets/idea/ideas_home_discount.webp"
+                  src="ideas_home_discount.webp"
                   alt="Early Booking Special Offer"
                   className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
                 />
@@ -322,7 +322,7 @@ const TravelIdeas = () => {
               {/* Holiday Season Offer */}
               <div className="group relative overflow-hidden rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 border-4 border-primary/60 hover:border-primary">
                 <img
-                  src="/src/assets/idea/ideas_home_discount2.webp"
+                  src="ideas_home_discount2.webp"
                   alt="Holiday Season Special Offer"
                   className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
                 />
@@ -405,7 +405,7 @@ const TravelIdeas = () => {
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
-            src="/src/assets/header_bg_new4.gif"
+            src="/header_bg_new4.gif"
             alt="Background"
             className="w-full h-full object-cover"
           />
