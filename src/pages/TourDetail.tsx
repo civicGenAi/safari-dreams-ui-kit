@@ -1,3 +1,4 @@
+import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
@@ -10,12 +11,59 @@ import { TourFAQ } from '@/components/tour-detail/TourFAQ';
 import { TourBookingWidget } from '@/components/tour-detail/TourBookingWidget';
 import { SimilarTours } from '@/components/tour-detail/SimilarTours';
 import { TourReviews } from '@/components/tour-detail/TourReviews';
-import { mockTours } from '@/data/mockData';
+import { supabase, Package } from '@/lib/supabase';
 import { ChevronRight, Home } from 'lucide-react';
 
 const TourDetail = () => {
   const { slug } = useParams<{ slug: string }>();
-  const tour = mockTours.find((t) => t.slug === slug);
+  const [tour, setTour] = useState<Package | null>(null);
+  const [similarTours, setSimilarTours] = useState<Package[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchTour = async () => {
+      try {
+        // Fetch the tour by slug
+        const { data: tourData, error: tourError } = await supabase
+          .from('packages')
+          .select('*')
+          .eq('slug', slug)
+          .single();
+
+        if (tourError) throw tourError;
+        setTour(tourData);
+
+        // Fetch similar tours
+        if (tourData) {
+          const { data: similarData, error: similarError } = await supabase
+            .from('packages')
+            .select('*')
+            .neq('id', tourData.id)
+            .or(`category.eq.${tourData.category},destination.eq.${tourData.destination}`)
+            .limit(3);
+
+          if (similarError) throw similarError;
+          setSimilarTours(similarData || []);
+        }
+      } catch (error) {
+        console.error('Error fetching tour:', error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    if (slug) {
+      fetchTour();
+    }
+  }, [slug]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
 
   if (!tour) {
     return (
@@ -29,11 +77,6 @@ const TourDetail = () => {
       </div>
     );
   }
-
-  // Get similar tours (same category or destination, excluding current)
-  const similarTours = mockTours
-    .filter((t) => t.id !== tour.id && (t.category === tour.category || t.destination === tour.destination))
-    .slice(0, 3);
 
   return (
     <div className="min-h-screen bg-background">
@@ -51,8 +94,8 @@ const TourDetail = () => {
             Tours
           </Link>
           <ChevronRight className="w-4 h-4" />
-          <Link to={`/destinations/${tour.destination}`} className="hover:text-primary transition-colors">
-            {tour.location}
+          <Link to={`/destinations/${tour.destination.toLowerCase()}`} className="hover:text-primary transition-colors">
+            {tour.destination}
           </Link>
           <ChevronRight className="w-4 h-4" />
           <span className="text-foreground">{tour.title}</span>
@@ -60,7 +103,7 @@ const TourDetail = () => {
       </div>
 
       {/* Gallery */}
-      <TourGallery images={tour.gallery} title={tour.title} />
+      <TourGallery images={[tour.image]} title={tour.title} />
 
       {/* Main Content */}
       <div className="container mx-auto px-4 lg:px-8 py-12">
@@ -68,10 +111,10 @@ const TourDetail = () => {
           {/* Left Column - Main Content */}
           <div className="lg:col-span-2 space-y-12">
             <TourOverview tour={tour} />
-            <TourItinerary itinerary={tour.itinerary} />
-            <TourInclusions included={tour.included} excluded={tour.excluded} />
-            <TourFAQ faqs={tour.faqs} />
-            <TourReviews tourId={tour.id} rating={tour.rating} totalReviews={tour.reviews} />
+            <TourItinerary itinerary={Array.isArray(tour.itinerary) ? tour.itinerary : []} />
+            <TourInclusions included={Array.isArray(tour.included) ? tour.included : []} excluded={Array.isArray(tour.excluded) ? tour.excluded : []} />
+            <TourFAQ faqs={[]} />
+            <TourReviews tourId={tour.id} rating={4.8} totalReviews={120} />
           </div>
 
           {/* Right Column - Booking Widget (Sticky) */}

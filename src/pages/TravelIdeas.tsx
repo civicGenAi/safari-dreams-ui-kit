@@ -309,8 +309,13 @@ const TravelIdeas = () => {
                   Special Offer
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-                  <h4 className="font-display text-xl font-bold mb-1 drop-shadow-lg">Early Booking Discount</h4>
-                  <p className="text-sm text-white/90 drop-shadow">Book in advance and save up to 20%</p>
+                  <h4 className="font-display text-xl font-bold mb-2 drop-shadow-lg">Early Booking Discount</h4>
+                  <p className="text-sm text-white/90 drop-shadow mb-3">Book in advance and save up to 20%</p>
+                  <Link to="/contact">
+                    <Button variant="primary" size="sm" className="w-full">
+                      Get Offer
+                    </Button>
+                  </Link>
                 </div>
               </div>
 
@@ -326,8 +331,13 @@ const TravelIdeas = () => {
                   Limited Time
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
-                  <h4 className="font-display text-xl font-bold mb-1 drop-shadow-lg">Holiday Season Special</h4>
-                  <p className="text-sm text-white/90 drop-shadow">Exclusive holiday packages available</p>
+                  <h4 className="font-display text-xl font-bold mb-2 drop-shadow-lg">Holiday Season Special</h4>
+                  <p className="text-sm text-white/90 drop-shadow mb-3">Exclusive holiday packages available</p>
+                  <Link to="/contact">
+                    <Button variant="primary" size="sm" className="w-full">
+                      Get Offer
+                    </Button>
+                  </Link>
                 </div>
               </div>
             </div>
