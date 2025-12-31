@@ -122,6 +122,63 @@ export const PackageForm = ({ package: editPackage, onSuccess, onCancel }: Packa
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Validation
+    if (!formData.title.trim()) {
+      toast({
+        title: 'Error',
+        description: 'Package title is required',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    if (!formData.destination) {
+      toast({
+        title: 'Error',
+        description: 'Please select a destination',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    if (!formData.category) {
+      toast({
+        title: 'Error',
+        description: 'Please select a category',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    const price = parseFloat(formData.price);
+    if (isNaN(price) || price <= 0) {
+      toast({
+        title: 'Error',
+        description: 'Please enter a valid price greater than 0',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    const duration = parseInt(formData.duration);
+    if (isNaN(duration) || duration <= 0) {
+      toast({
+        title: 'Error',
+        description: 'Please enter a valid duration greater than 0',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    if (!formData.description.trim()) {
+      toast({
+        title: 'Error',
+        description: 'Package description is required',
+        variant: 'destructive',
+      });
+      return;
+    }
+
     if (uploadedImages.length === 0) {
       toast({
         title: 'Error',
@@ -135,11 +192,11 @@ export const PackageForm = ({ package: editPackage, onSuccess, onCancel }: Packa
 
     try {
       const packageData = {
-        title: formData.title,
+        title: formData.title.trim(),
         slug: formData.slug,
-        description: formData.description,
-        price: parseFloat(formData.price),
-        duration: parseInt(formData.duration),
+        description: formData.description.trim(),
+        price: price,
+        duration: duration,
         image: uploadedImages[0], // Primary image
         destination: formData.destination,
         category: formData.category,
