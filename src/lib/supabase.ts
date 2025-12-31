@@ -34,3 +34,29 @@ export interface Package {
   created_at: string;
   updated_at: string;
 }
+
+export interface Article {
+  id: string;
+  title: string;
+  slug: string;
+  excerpt: string;
+  content: string;
+  featured_image?: string;
+  images?: string[];
+  author_name: string;
+  category: string;
+  tags?: string[];
+  read_time: number;
+  is_featured: boolean;
+  status: 'draft' | 'published';
+  published_date?: string;
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ArticleCategory {
+  id: string;
+  name: string;
+  slug: string;
+  created_at: string;
+}

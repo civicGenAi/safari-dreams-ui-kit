@@ -6,6 +6,7 @@ import {
   LayoutDashboard,
   Package,
   Upload,
+  FileText,
   Settings,
   LogOut,
   Menu,
@@ -50,6 +51,12 @@ export const AdminLayout = ({ children }: AdminLayoutProps) => {
       label: 'Bulk Import',
       path: '/admin/bulk-import',
       description: 'Upload Word documents'
+    },
+    {
+      icon: FileText,
+      label: 'Articles',
+      path: '/admin/articles',
+      description: 'Manage Wild Tales blog'
     },
   ];
 

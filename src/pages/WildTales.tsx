@@ -1,32 +1,116 @@
-import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useState, useEffect } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
-import { mockBlogPosts } from '@/data/mockData';
+import { Article, supabase } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Input } from '@/components/ui/input';
 import { Clock, User, Calendar, ArrowRight, Search, TrendingUp, BookOpen, Heart } from 'lucide-react';
 
 const WildTales = () => {
+  const navigate = useNavigate();
+  const [articles, setArticles] = useState<Article[]>([]);
+  const [displayedArticles, setDisplayedArticles] = useState<Article[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [loadingMore, setLoadingMore] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedTag, setSelectedTag] = useState('All');
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [categories, setCategories] = useState<string[]>([]);
+  const [articlesPerPage] = useState(9);
+  const [currentPage, setCurrentPage] = useState(1);
 
-  // Extract all unique tags
-  const allTags = ['All', ...Array.from(new Set(mockBlogPosts.flatMap(p => p.tags)))];
+  useEffect(() => {
+    loadArticles();
+  }, []);
 
-  // Filter posts based on search and tag
-  const filteredPosts = mockBlogPosts.filter(post => {
-    const matchesSearch = post.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-                         post.excerpt.toLowerCase().includes(searchQuery.toLowerCase());
-    const matchesTag = selectedTag === 'All' || post.tags.includes(selectedTag);
-    return matchesSearch && matchesTag;
-  });
+  useEffect(() => {
+    filterAndPaginateArticles();
+  }, [articles, searchQuery, selectedCategory, currentPage]);
 
-  const featuredPost = mockBlogPosts.find(p => p.featured);
-  const recentPosts = mockBlogPosts.slice(0, 3);
-  const popularTags = ['Safari', 'Wildlife', 'Tanzania', 'Great Migration', 'Trekking'];
+  const loadArticles = async () => {
+    setLoading(true);
+    try {
+      const { data, error } = await supabase
+        .from('articles')
+        .select('*')
+        .eq('status', 'published')
+        .order('published_date', { ascending: false });
+
+      if (error) throw error;
+
+      setArticles(data || []);
+
+      const uniqueCategories = Array.from(
+        new Set(data?.map(article => article.category) || [])
+      );
+      setCategories(uniqueCategories);
+    } catch (error) {
+      console.error('Error loading articles:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const filterAndPaginateArticles = () => {
+    let filtered = [...articles];
+
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      filtered = filtered.filter(
+        article =>
+          article.title.toLowerCase().includes(query) ||
+          article.content.toLowerCase().includes(query) ||
+          article.excerpt.toLowerCase().includes(query)
+      );
+    }
+
+    if (selectedCategory !== 'All') {
+      filtered = filtered.filter(article => article.category === selectedCategory);
+    }
+
+    const totalToShow = currentPage * articlesPerPage;
+    setDisplayedArticles(filtered.slice(0, totalToShow));
+  };
+
+  const handleLoadMore = () => {
+    setLoadingMore(true);
+    setTimeout(() => {
+      setCurrentPage(prev => prev + 1);
+      setLoadingMore(false);
+    }, 300);
+  };
+
+  const getTotalFiltered = () => {
+    let filtered = [...articles];
+    if (searchQuery) {
+      const query = searchQuery.toLowerCase();
+      filtered = filtered.filter(
+        article =>
+          article.title.toLowerCase().includes(query) ||
+          article.content.toLowerCase().includes(query) ||
+          article.excerpt.toLowerCase().includes(query)
+      );
+    }
+    if (selectedCategory !== 'All') {
+      filtered = filtered.filter(article => article.category === selectedCategory);
+    }
+    return filtered.length;
+  };
+
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    });
+  };
+
+  const hasMore = displayedArticles.length < getTotalFiltered();
+  const featuredArticle = articles.find(a => a.is_featured) || articles[0];
+  const recentArticles = articles.slice(0, 3);
+  const allCategories = ['All', ...categories];
 
   return (
     <div className="min-h-screen bg-background">
@@ -93,7 +177,7 @@ const WildTales = () => {
       </div>
 
       {/* Featured Story */}
-      {featuredPost && (
+      {!loading && featuredArticle && (
         <div className="bg-muted/30 py-16">
           <div className="container mx-auto px-4 lg:px-8">
             <div className="text-center mb-8">
@@ -103,8 +187,8 @@ const WildTales = () => {
             <div className="relative rounded-3xl overflow-hidden group shadow-2xl">
               <div className="absolute inset-0">
                 <img
-                  src={featuredPost.image}
-                  alt={featuredPost.title}
+                  src={featuredArticle.featured_image || '/header_bg_wildbeest.jpg'}
+                  alt={featuredArticle.title}
                   className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/70 to-charcoal/30" />
@@ -117,29 +201,29 @@ const WildTales = () => {
                 </Badge>
 
                 <h3 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-4 max-w-3xl">
-                  {featuredPost.title}
+                  {featuredArticle.title}
                 </h3>
 
                 <p className="text-white/90 text-lg mb-6 max-w-2xl leading-relaxed">
-                  {featuredPost.excerpt}
+                  {featuredArticle.excerpt}
                 </p>
 
                 <div className="flex flex-wrap items-center gap-6 text-white/90 text-sm mb-6">
                   <div className="flex items-center gap-2">
                     <User className="w-4 h-4" />
-                    <span>{featuredPost.author}</span>
+                    <span>{featuredArticle.author_name}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Calendar className="w-4 h-4" />
-                    <span>{new Date(featuredPost.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}</span>
+                    <span>{formatDate(featuredArticle.published_date || featuredArticle.created_at)}</span>
                   </div>
                   <div className="flex items-center gap-2">
                     <Clock className="w-4 h-4" />
-                    <span>{featuredPost.readTime}</span>
+                    <span>{featuredArticle.read_time} min read</span>
                   </div>
                 </div>
 
-                <Link to={`/wild-tales/${featuredPost.slug}`}>
+                <Link to={`/wild-tales/${featuredArticle.slug}`}>
                   <Button variant="gold" size="lg" className="group shadow-2xl">
                     Read Full Story
                     <ArrowRight className="w-4 h-4 ml-2 transition-transform group-hover:translate-x-1" />
@@ -156,30 +240,50 @@ const WildTales = () => {
           <div className="grid lg:grid-cols-3 gap-8">
             {/* Main Content - Blog Posts */}
             <div className="lg:col-span-2">
-              {/* Tag Filter */}
+              {/* Category Filter */}
               <div className="mb-10">
                 <h3 className="font-display text-2xl font-bold mb-6">
                   Filter by Topic
                 </h3>
                 <div className="flex flex-wrap gap-3">
-                  {allTags.map(tag => (
+                  {allCategories.map(category => (
                     <button
-                      key={tag}
-                      onClick={() => setSelectedTag(tag)}
+                      key={category}
+                      onClick={() => {
+                        setSelectedCategory(category);
+                        setCurrentPage(1);
+                      }}
                       className={`px-5 py-2.5 rounded-full text-sm font-semibold transition-all shadow-sm ${
-                        selectedTag === tag
+                        selectedCategory === category
                           ? 'bg-primary text-primary-foreground shadow-md scale-105'
                           : 'bg-card border border-border text-foreground hover:bg-muted hover:scale-105'
                       }`}
                     >
-                      {tag}
+                      {category}
                     </button>
                   ))}
                 </div>
               </div>
 
             {/* Blog Posts Grid */}
-            {filteredPosts.length === 0 ? (
+            {loading ? (
+              <div className="space-y-8">
+                {[...Array(3)].map((_, i) => (
+                  <div key={i} className="bg-card rounded-2xl overflow-hidden border border-border animate-pulse">
+                    <div className="grid md:grid-cols-5 gap-6">
+                      <div className="md:col-span-2 h-64 bg-muted" />
+                      <div className="md:col-span-3 p-6 space-y-4">
+                        <div className="h-6 bg-muted rounded w-3/4" />
+                        <div className="space-y-2">
+                          <div className="h-4 bg-muted rounded" />
+                          <div className="h-4 bg-muted rounded" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : displayedArticles.length === 0 ? (
               <div className="text-center py-16 bg-muted/30 rounded-2xl">
                 <BookOpen className="w-16 h-16 mx-auto mb-4 text-muted-foreground" />
                 <p className="text-muted-foreground text-lg mb-2">No stories found</p>
@@ -187,21 +291,21 @@ const WildTales = () => {
               </div>
             ) : (
               <div className="space-y-8">
-                {filteredPosts.map((post, index) => (
+                {displayedArticles.map((article, index) => (
                   <article
-                    key={post.id}
+                    key={article.id}
                     className="group bg-card rounded-2xl overflow-hidden border border-border hover:shadow-lift transition-all duration-300 animate-fade-up"
                     style={{ animationDelay: `${index * 0.1}s` }}
                   >
                     <div className="grid md:grid-cols-5 gap-6">
                       {/* Image */}
                       <Link
-                        to={`/wild-tales/${post.slug}`}
+                        to={`/wild-tales/${article.slug}`}
                         className="md:col-span-2 relative h-64 md:h-auto overflow-hidden"
                       >
                         <img
-                          src={post.image}
-                          alt={post.title}
+                          src={article.featured_image || '/header_bg_wildbeest.jpg'}
+                          alt={article.title}
                           className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
                         />
                         <div className="absolute inset-0 bg-gradient-to-t from-charcoal/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
@@ -211,48 +315,50 @@ const WildTales = () => {
                       <div className="md:col-span-3 p-6 flex flex-col justify-between">
                         <div>
                           <div className="flex items-center gap-3 mb-3">
-                            <Badge variant="secondary">{post.category}</Badge>
+                            <Badge variant="secondary">{article.category}</Badge>
                             <div className="flex items-center gap-2 text-xs text-muted-foreground">
                               <Calendar className="w-3 h-3" />
-                              <span>{new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
+                              <span>{new Date(article.published_date || article.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
                             </div>
                           </div>
 
-                          <Link to={`/wild-tales/${post.slug}`}>
+                          <Link to={`/wild-tales/${article.slug}`}>
                             <h3 className="font-display text-2xl font-bold mb-3 group-hover:text-primary transition-colors line-clamp-2">
-                              {post.title}
+                              {article.title}
                             </h3>
                           </Link>
 
                           <p className="text-muted-foreground leading-relaxed line-clamp-3 mb-4">
-                            {post.excerpt}
+                            {article.excerpt}
                           </p>
 
                           {/* Tags */}
-                          <div className="flex flex-wrap gap-2 mb-4">
-                            {post.tags.slice(0, 3).map(tag => (
-                              <span
-                                key={tag}
-                                className="text-xs bg-muted px-2 py-1 rounded-full text-muted-foreground"
-                              >
-                                #{tag}
-                              </span>
-                            ))}
-                          </div>
+                          {article.tags && article.tags.length > 0 && (
+                            <div className="flex flex-wrap gap-2 mb-4">
+                              {article.tags.slice(0, 3).map(tag => (
+                                <span
+                                  key={tag}
+                                  className="text-xs bg-muted px-2 py-1 rounded-full text-muted-foreground"
+                                >
+                                  #{tag}
+                                </span>
+                              ))}
+                            </div>
+                          )}
                         </div>
 
                         <div className="flex items-center justify-between pt-4 border-t border-border">
                           <div className="flex items-center gap-3">
                             <div className="w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-semibold text-sm">
-                              {post.author.charAt(0)}
+                              {article.author_name.charAt(0)}
                             </div>
                             <div>
-                              <div className="text-sm font-medium">{post.author}</div>
-                              <div className="text-xs text-muted-foreground">{post.readTime}</div>
+                              <div className="text-sm font-medium">{article.author_name}</div>
+                              <div className="text-xs text-muted-foreground">{article.read_time} min read</div>
                             </div>
                           </div>
 
-                          <Link to={`/wild-tales/${post.slug}`}>
+                          <Link to={`/wild-tales/${article.slug}`}>
                             <Button
                               variant="ghost"
                               size="sm"
@@ -271,11 +377,19 @@ const WildTales = () => {
             )}
 
             {/* Load More Button */}
-            {filteredPosts.length > 0 && (
+            {!loading && hasMore && (
               <div className="text-center mt-12">
-                <Button variant="outline" size="lg">
-                  Load More Stories
+                <Button
+                  variant="outline"
+                  size="lg"
+                  onClick={handleLoadMore}
+                  disabled={loadingMore}
+                >
+                  {loadingMore ? 'Loading...' : 'Load More Stories'}
                 </Button>
+                <p className="text-sm text-muted-foreground mt-4">
+                  Showing {displayedArticles.length} of {getTotalFiltered()} articles
+                </p>
               </div>
             )}
           </div>
@@ -309,24 +423,24 @@ const WildTales = () => {
                   Recent Stories
                 </h3>
                 <div className="space-y-4">
-                  {recentPosts.map(post => (
+                  {recentArticles.map(article => (
                     <Link
-                      key={post.id}
-                      to={`/wild-tales/${post.slug}`}
+                      key={article.id}
+                      to={`/wild-tales/${article.slug}`}
                       className="flex gap-3 group pb-4 border-b border-border last:border-0 last:pb-0"
                     >
                       <img
-                        src={post.image}
-                        alt={post.title}
+                        src={article.featured_image || '/header_bg_wildbeest.jpg'}
+                        alt={article.title}
                         className="w-20 h-20 rounded-xl object-cover flex-shrink-0 shadow-sm"
                       />
                       <div className="flex-1 min-w-0 overflow-hidden">
                         <h4 className="font-semibold text-sm line-clamp-2 group-hover:text-primary transition-colors mb-2 break-words">
-                          {post.title}
+                          {article.title}
                         </h4>
                         <div className="flex items-center gap-2 text-xs text-muted-foreground">
                           <Calendar className="w-3 h-3 flex-shrink-0" />
-                          <span className="truncate">{new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
+                          <span className="truncate">{new Date(article.published_date || article.created_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}</span>
                         </div>
                       </div>
                     </Link>
@@ -334,17 +448,20 @@ const WildTales = () => {
                 </div>
               </div>
 
-              {/* Popular Tags */}
+              {/* Popular Topics */}
               <div className="bg-card rounded-2xl p-6 border border-border shadow-md">
                 <h3 className="font-heading font-bold text-lg mb-4">Popular Topics</h3>
                 <div className="flex flex-wrap gap-2">
-                  {popularTags.map(tag => (
+                  {categories.slice(0, 5).map(category => (
                     <button
-                      key={tag}
-                      onClick={() => setSelectedTag(tag)}
+                      key={category}
+                      onClick={() => {
+                        setSelectedCategory(category);
+                        setCurrentPage(1);
+                      }}
                       className="px-4 py-2 rounded-full text-xs font-semibold bg-muted hover:bg-primary hover:text-primary-foreground transition-all shadow-sm"
                     >
-                      #{tag}
+                      #{category}
                     </button>
                   ))}
                 </div>
