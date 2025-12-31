@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Compass, Heart, Palmtree, Mountain, Crown, Footprints, MapPin, Clock, ChevronDown, ArrowRight } from 'lucide-react';
+import { ChevronDown, ArrowRight } from 'lucide-react';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
@@ -18,7 +18,6 @@ const TravelIdeas = () => {
     {
       name: 'Migration Safaris',
       slug: 'migration-safaris',
-      icon: Compass,
       tours: '6+',
       price: '1,520',
       image: '/src/assets/idea/ideas_migration_wildebeast.webp',
@@ -27,7 +26,6 @@ const TravelIdeas = () => {
     {
       name: 'Romantic Holidays',
       slug: 'romantic-holidays',
-      icon: Heart,
       tours: '8+',
       price: '2,100',
       image: '/src/assets/idea/ideas_romantic_holiday.webp',
@@ -36,7 +34,6 @@ const TravelIdeas = () => {
     {
       name: 'Safari Beach Holidays',
       slug: 'safari-beach-holidays',
-      icon: Palmtree,
       tours: '10+',
       price: '1,850',
       image: '/src/assets/idea/ideas_safari_beach.webp',
@@ -45,7 +42,6 @@ const TravelIdeas = () => {
     {
       name: 'Adventure Seekers',
       slug: 'adventure-seekers',
-      icon: Mountain,
       tours: '12+',
       price: '980',
       image: '/src/assets/idea/idea_adventure_kilimanjaro.webp',
@@ -54,7 +50,6 @@ const TravelIdeas = () => {
     {
       name: 'Luxury Tours',
       slug: 'luxury-tours',
-      icon: Crown,
       tours: '7+',
       price: '3,500',
       image: '/src/assets/idea/idea_luxury_poolside.webp',
@@ -63,7 +58,6 @@ const TravelIdeas = () => {
     {
       name: 'Gorilla and Chimp Trekking',
       slug: 'gorilla-chimp-trekking',
-      icon: Footprints,
       tours: '5+',
       price: '2,800',
       image: '/src/assets/idea/idea_gorilla_chimp_trek.webp',
@@ -72,7 +66,6 @@ const TravelIdeas = () => {
     {
       name: 'Cross Border Safaris',
       slug: 'cross-border-safaris',
-      icon: MapPin,
       tours: '9+',
       price: '2,200',
       image: '/src/assets/idea/idea_crossborder_elephants.webp',
@@ -81,7 +74,6 @@ const TravelIdeas = () => {
     {
       name: 'Day Tours',
       slug: 'day-tours',
-      icon: Clock,
       tours: '8+',
       price: '255',
       image: '/src/assets/idea/tour_daytour_mandarahut_hike.webp',
@@ -154,40 +146,49 @@ const TravelIdeas = () => {
 
           <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {travelIdeas.map((idea) => {
-              const IconComponent = idea.icon;
               return (
                 <Link
                   key={idea.slug}
                   to={`/travel-ideas/${idea.slug}`}
-                  className="group relative overflow-hidden rounded-2xl bg-white shadow-lg hover:shadow-2xl transition-all duration-500"
+                  className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 h-[400px]"
                 >
-                  {/* Hover Image */}
-                  <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500">
-                    <img
-                      src={idea.image}
-                      alt={idea.name}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/60 to-charcoal/30" />
+                  {/* Background Image */}
+                  <img
+                    src={idea.image}
+                    alt={idea.name}
+                    className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                  />
+
+                  {/* Curved Gradient Overlay - disappears on hover */}
+                  <div className="absolute inset-0 transition-opacity duration-500 group-hover:opacity-0">
+                    <svg className="absolute inset-0 w-full h-full" preserveAspectRatio="none">
+                      <defs>
+                        <linearGradient id={`gradient-${idea.slug}`} x1="0%" y1="0%" x2="0%" y2="100%">
+                          <stop offset="0%" stopColor="rgb(28, 28, 30)" stopOpacity="0" />
+                          <stop offset="40%" stopColor="rgb(28, 28, 30)" stopOpacity="0.3" />
+                          <stop offset="100%" stopColor="rgb(28, 28, 30)" stopOpacity="0.95" />
+                        </linearGradient>
+                      </defs>
+                      <path
+                        d="M 0,200 Q 160,180 320,200 T 640,200 L 640,400 L 0,400 Z"
+                        fill={`url(#gradient-${idea.slug})`}
+                      />
+                    </svg>
                   </div>
 
                   {/* Content */}
-                  <div className="relative p-8 flex flex-col items-center text-center min-h-[320px] justify-center group-hover:text-white transition-colors duration-500">
-                    <div className="w-20 h-20 rounded-full bg-primary/10 group-hover:bg-white/20 flex items-center justify-center mb-6 transition-colors duration-500">
-                      <IconComponent className="w-10 h-10 text-primary group-hover:text-white transition-colors duration-500" />
-                    </div>
-
-                    <h3 className="font-display text-xl font-bold mb-4 group-hover:text-white">
+                  <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
+                    <h3 className="font-display text-2xl font-bold mb-3 text-white drop-shadow-lg">
                       {idea.name}
                     </h3>
 
-                    <div className="space-y-2">
-                      <p className="text-sm text-muted-foreground group-hover:text-white/90">
+                    <div className="flex items-center justify-between text-white">
+                      <p className="text-sm text-white/90">
                         {idea.tours} Tours+
                       </p>
                       <p className="font-heading font-semibold">
-                        <span className="text-sm group-hover:text-white/90">from</span>
-                        <span className="text-2xl ml-1 text-primary group-hover:text-white">${idea.price}</span>
+                        <span className="text-sm text-white/90">from</span>
+                        <span className="text-2xl ml-1 text-primary drop-shadow-lg">${idea.price}</span>
                       </p>
                     </div>
                   </div>
