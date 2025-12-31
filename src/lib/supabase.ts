@@ -35,6 +35,31 @@ export interface Package {
   updated_at: string;
 }
 
+export interface TravelIdea {
+  id: string;
+  title: string;
+  slug: string;
+  description: string;
+  price: number;
+  duration: number;
+  image: string;
+  images?: string[];
+  destination: string;
+  category: string;
+  difficulty: 'Easy' | 'Moderate' | 'Challenging';
+  included: string[];
+  excluded: string[];
+  itinerary: {
+    day: number;
+    title: string;
+    description: string;
+    activities?: string[];
+    images?: string[];
+  }[];
+  created_at: string;
+  updated_at: string;
+}
+
 export interface Article {
   id: string;
   title: string;

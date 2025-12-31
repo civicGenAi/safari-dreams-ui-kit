@@ -1,12 +1,13 @@
 import { useState, useEffect } from 'react';
 import { AdminLayout } from '@/components/admin/AdminLayout';
-import { supabase, Package, Article } from '@/lib/supabase';
+import { supabase, Package, Article, TravelIdea } from '@/lib/supabase';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { LoadingScreen } from '@/components/ui/loading';
-import { Package as PackageIcon, TrendingUp, MapPin, Tag, DollarSign, Calendar, FileText, Eye, FileCog } from 'lucide-react';
+import { Package as PackageIcon, TrendingUp, MapPin, Tag, DollarSign, Calendar, FileText, Eye, FileCog, Lightbulb } from 'lucide-react';
 
 const AdminDashboard = () => {
   const [packages, setPackages] = useState<Package[]>([]);
+  const [travelIdeas, setTravelIdeas] = useState<TravelIdea[]>([]);
   const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
 
@@ -16,15 +17,18 @@ const AdminDashboard = () => {
 
   const fetchData = async () => {
     try {
-      const [packagesResult, articlesResult] = await Promise.all([
+      const [packagesResult, travelIdeasResult, articlesResult] = await Promise.all([
         supabase.from('packages').select('*').order('created_at', { ascending: false }),
+        supabase.from('travel_ideas').select('*').order('created_at', { ascending: false }),
         supabase.from('articles').select('*').order('created_at', { ascending: false }),
       ]);
 
       if (packagesResult.error) throw packagesResult.error;
+      if (travelIdeasResult.error) throw travelIdeasResult.error;
       if (articlesResult.error) throw articlesResult.error;
 
       setPackages(packagesResult.data || []);
+      setTravelIdeas(travelIdeasResult.data || []);
       setArticles(articlesResult.data || []);
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -35,6 +39,7 @@ const AdminDashboard = () => {
 
   const stats = {
     totalPackages: packages.length,
+    totalTravelIdeas: travelIdeas.length,
     destinations: new Set(packages.map(p => p.destination)).size,
     categories: new Set(packages.map(p => p.category)).size,
     avgPrice: Math.round(packages.reduce((sum, p) => sum + p.price, 0) / packages.length || 0),
@@ -84,6 +89,17 @@ const AdminDashboard = () => {
             <CardContent>
               <div className="text-2xl font-bold">{stats.totalPackages}</div>
               <p className="text-xs text-muted-foreground">Active tour packages</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Travel Ideas</CardTitle>
+              <Lightbulb className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stats.totalTravelIdeas}</div>
+              <p className="text-xs text-muted-foreground">Specialized experiences</p>
             </CardContent>
           </Card>
 
