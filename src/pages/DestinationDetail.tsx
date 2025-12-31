@@ -191,7 +191,7 @@ Overall, Jordan is a diverse country that offers something for everyone, from an
 
       {/* Hero */}
       <div className="relative h-[400px] md:h-[500px]">
-        <img src="/src/assets/header_bg_new4.gif" alt={destination.name} className="w-full h-full object-cover" />
+        <img src="/header_bg_new4.gif" alt={destination.name} className="w-full h-full object-cover" />
         <div className="absolute inset-0 flex items-center">
           <div className="container mx-auto px-4 lg:px-8">
             <div className="text-white mb-4">

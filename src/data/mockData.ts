@@ -791,7 +791,7 @@ export const mockDestinations: Destination[] = [
     description: 'Home to Serengeti, Kilimanjaro, and Zanzibar beaches.',
     longDescription: 'Tanzania is the ultimate safari destination, home to Africa\'s highest mountain, the vast Serengeti plains, the magnificent Ngorongoro Crater, and the exotic Spice Islands of Zanzibar. Experience the Great Migration, climb to Uhuru Peak, or relax on pristine beaches.',
     coordinates: { x: '54%', y: '58%' },
-    image: '/src/assets/dest/tanzania.jpg',
+    image: '/dest/tanzania.jpg',
     gallery: [
       'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=800',
       'https://images.unsplash.com/photo-1534177616064-ef1a5c91e6e8?w=800',
@@ -838,7 +838,7 @@ export const mockDestinations: Destination[] = [
     description: 'Experience the Masai Mara and witness the Great Migration.',
     longDescription: 'Kenya is synonymous with safari. The Masai Mara, Amboseli, and Tsavo offer unparalleled wildlife viewing opportunities. Witness the dramatic Mara River crossings during the Great Migration, see elephants against the backdrop of Mount Kilimanjaro, and experience vibrant Maasai culture.',
     coordinates: { x: '55%', y: '52%' },
-    image: '/src/assets/dest/kenya.jpg',
+    image: '/dest/kenya.jpg',
     gallery: [
       'https://images.unsplash.com/photo-1547471080-7cc2caa01a7e?w=800',
       'https://images.unsplash.com/photo-1489392191049-fc10c97e64b6?w=800',
@@ -872,7 +872,7 @@ export const mockDestinations: Destination[] = [
     description: 'Trek with mountain gorillas in lush volcanic forests.',
     longDescription: 'Rwanda offers one of the world\'s most extraordinary wildlife experiences - mountain gorilla trekking in Volcanoes National Park. This beautiful "Land of a Thousand Hills" combines primate encounters with stunning scenery, vibrant culture, and a remarkable recovery story.',
     coordinates: { x: '52%', y: '54%' },
-    image: '/src/assets/dest/rwanda.jpg',
+    image: '/dest/rwanda.jpg',
     gallery: [
       'https://images.unsplash.com/photo-1583867095486-3e0e2e66cf44?w=800',
       'https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=800',
@@ -906,7 +906,7 @@ export const mockDestinations: Destination[] = [
     description: 'The Pearl of Africa - primates, adventure, and natural beauty.',
     longDescription: 'Uganda, known as the Pearl of Africa, boasts an abundance of natural beauty and cultural heritage. Home to mountain gorillas, chimpanzees, the source of the Nile, and diverse wildlife across stunning national parks.',
     coordinates: { x: '51%', y: '51%' },
-    image: '/src/assets/dest/uganda.jpg',
+    image: '/dest/uganda.jpg',
     gallery: [
       'https://images.unsplash.com/photo-1612504508838-e9c04e1eabfe?w=800',
       'https://images.unsplash.com/photo-1611348524140-53c9a25263d6?w=800',

@@ -240,7 +240,7 @@ const TravelIdeaDetail = () => {
       {/* Hero Section */}
       <div className="relative h-[300px] md:h-[400px]">
         <img
-          src="/src/assets/header_bg_new4.gif"
+          src="/header_bg_new4.gif"
           alt={idea.name}
           className="w-full h-full object-cover"
         />
@@ -481,12 +481,12 @@ const TravelIdeaDetail = () => {
             {/* Images */}
             <div className="space-y-6">
               <img
-                src="/src/assets/faq_safari1.jpg"
+                src="/faq_safari1.jpg"
                 alt="Safari Wildlife"
                 className="w-full h-64 object-cover rounded-2xl shadow-lg"
               />
               <img
-                src="/src/assets/faq_safari2.jpg"
+                src="/faq_safari2.jpg"
                 alt="Safari Experience"
                 className="w-full h-64 object-cover rounded-2xl shadow-lg"
               />

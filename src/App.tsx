@@ -32,28 +32,12 @@ const queryClient = new QueryClient();
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const [hasLoadedBefore, setHasLoadedBefore] = useState(false);
-
-  useEffect(() => {
-    // Check if the user has loaded the site before in this session
-    const loaded = sessionStorage.getItem('siteLoaded');
-
-    if (loaded) {
-      // Site was already loaded in this session, skip loading screen
-      setHasLoadedBefore(true);
-      setIsLoading(false);
-    } else {
-      // First load in this session, show loading screen
-      sessionStorage.setItem('siteLoaded', 'true');
-    }
-  }, []);
 
   const handleLoadComplete = () => {
     setIsLoading(false);
   };
 
-  // Show loading screen only on first load or refresh
-  if (isLoading && !hasLoadedBefore) {
+  if (isLoading) {
     return <LoadingScreen onLoadComplete={handleLoadComplete} />;
   }
 

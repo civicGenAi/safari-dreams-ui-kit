@@ -58,7 +58,7 @@ const OurStory = () => {
 
       {/* Hero */}
       <div className="relative h-[300px] md:h-[400px]">
-        <img src="/src/assets/header_bg_new4.gif" alt="Our Story" className="w-full h-full object-cover" />
+        <img src="/header_bg_new4.gif" alt="Our Story" className="w-full h-full object-cover" />
         <div className="absolute inset-0 flex items-center">
           <div className="container mx-auto px-4 lg:px-8">
             <div className="text-white mb-4">
@@ -80,7 +80,7 @@ const OurStory = () => {
             {/* Left - Image */}
             <div className="space-y-8">
               <div className="relative rounded-3xl overflow-hidden shadow-2xl">
-                <img src="/src/assets/our_story.jpeg" alt="Our Story" className="w-full h-auto" />
+                <img src="/our_story.jpeg" alt="Our Story" className="w-full h-auto" />
               </div>
             </div>
 
@@ -258,7 +258,7 @@ const OurStory = () => {
         {/* Background Image */}
         <div className="absolute inset-0">
           <img
-            src="/src/assets/destination_home.webp"
+            src="/header_bg_new4.gif"
             alt="Background"
             className="w-full h-full object-cover"
           />

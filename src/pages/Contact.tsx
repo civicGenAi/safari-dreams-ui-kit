@@ -21,7 +21,7 @@ const Contact = () => {
       {/* Hero Section */}
       <div className="relative h-[400px] md:h-[500px]">
         <img
-          src="/src/assets/header_bg_new4.gif"
+          src="/header_bg_new4.gif"
           alt="Contact Us"
           className="w-full h-full object-cover"
         />
