@@ -56,7 +56,7 @@ const Destinations = () => {
     {
       name: 'Namibia',
       slug: 'namibia',
-      image: '/src/assets/dest/namibia-giraffe-drinking-wildlife-scaled.webp',
+      image: '/src/assets/dest/namibia.jpeg',
       description: 'Desert landscapes & wildlife',
       badge: 'Coming Soon'
     },

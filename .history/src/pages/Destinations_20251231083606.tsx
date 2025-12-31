@@ -31,7 +31,7 @@ const Destinations = () => {
       name: 'Rwanda',
       slug: 'rwanda',
       tours: 6,
-      image: '/src/assets/dest/rwanda.jpg',
+      image: '/src/assets/dest/rwanda.jpeg',
       description: 'Trek with mountain gorillas',
       badge: 'Wildlife'
     },
@@ -56,7 +56,7 @@ const Destinations = () => {
     {
       name: 'Namibia',
       slug: 'namibia',
-      image: '/src/assets/dest/namibia-giraffe-drinking-wildlife-scaled.webp',
+      image: '/src/assets/dest/namibia.jpeg',
       description: 'Desert landscapes & wildlife',
       badge: 'Coming Soon'
     },
