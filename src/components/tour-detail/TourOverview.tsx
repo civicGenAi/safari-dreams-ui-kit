@@ -3,7 +3,7 @@ import { MapPin, Calendar, Users, Star, Clock, Gauge, Globe, CheckCircle } from 
 import { Badge } from '@/components/ui/badge';
 
 interface TourOverviewProps {
-  tour: Tour;
+  tour: Tour | any; // Allow any to handle Package type
 }
 
 export const TourOverview = ({ tour }: TourOverviewProps) => {
@@ -27,7 +27,7 @@ export const TourOverview = ({ tour }: TourOverviewProps) => {
         </h1>
         <div className="flex items-center gap-2 text-muted-foreground">
           <MapPin className="w-5 h-5 text-primary" />
-          <span className="text-lg">{tour.location}</span>
+          <span className="text-lg">{tour.location || tour.destination}</span>
         </div>
       </div>
 
@@ -37,16 +37,18 @@ export const TourOverview = ({ tour }: TourOverviewProps) => {
           <Calendar className="w-5 h-5 text-primary" />
           <div>
             <div className="text-xs text-muted-foreground">Duration</div>
-            <div className="font-heading font-semibold">{tour.duration}</div>
+            <div className="font-heading font-semibold">{typeof tour.duration === 'number' ? `${tour.duration} days` : tour.duration}</div>
           </div>
         </div>
-        <div className="flex items-center gap-3 p-4 rounded-xl bg-muted/50">
-          <Users className="w-5 h-5 text-primary" />
-          <div>
-            <div className="text-xs text-muted-foreground">Group Size</div>
-            <div className="font-heading font-semibold">{tour.groupSize} people</div>
+        {tour.groupSize && (
+          <div className="flex items-center gap-3 p-4 rounded-xl bg-muted/50">
+            <Users className="w-5 h-5 text-primary" />
+            <div>
+              <div className="text-xs text-muted-foreground">Group Size</div>
+              <div className="font-heading font-semibold">{tour.groupSize} people</div>
+            </div>
           </div>
-        </div>
+        )}
         <div className="flex items-center gap-3 p-4 rounded-xl bg-muted/50">
           <Gauge className="w-5 h-5 text-primary" />
           <div>
@@ -54,27 +56,31 @@ export const TourOverview = ({ tour }: TourOverviewProps) => {
             <div className="font-heading font-semibold">{tour.difficulty}</div>
           </div>
         </div>
-        <div className="flex items-center gap-3 p-4 rounded-xl bg-muted/50">
-          <Globe className="w-5 h-5 text-primary" />
-          <div>
-            <div className="text-xs text-muted-foreground">Languages</div>
-            <div className="font-heading font-semibold">{tour.languages.join(', ')}</div>
+        {tour.languages && Array.isArray(tour.languages) && tour.languages.length > 0 && (
+          <div className="flex items-center gap-3 p-4 rounded-xl bg-muted/50">
+            <Globe className="w-5 h-5 text-primary" />
+            <div>
+              <div className="text-xs text-muted-foreground">Languages</div>
+              <div className="font-heading font-semibold">{tour.languages.join(', ')}</div>
+            </div>
           </div>
-        </div>
+        )}
       </div>
 
       {/* Rating */}
-      <div className="flex items-center gap-4 p-5 rounded-xl bg-muted/30 border border-border">
-        <div className="flex items-center gap-2">
-          <Star className="w-6 h-6 fill-secondary text-secondary" />
-          <span className="text-3xl font-display font-bold">{tour.rating}</span>
+      {tour.rating && tour.reviews && (
+        <div className="flex items-center gap-4 p-5 rounded-xl bg-muted/30 border border-border">
+          <div className="flex items-center gap-2">
+            <Star className="w-6 h-6 fill-secondary text-secondary" />
+            <span className="text-3xl font-display font-bold">{tour.rating}</span>
+          </div>
+          <div className="h-12 w-px bg-border" />
+          <div>
+            <div className="font-heading font-semibold text-foreground">Exceptional</div>
+            <div className="text-sm text-muted-foreground">{tour.reviews} verified reviews</div>
+          </div>
         </div>
-        <div className="h-12 w-px bg-border" />
-        <div>
-          <div className="font-heading font-semibold text-foreground">Exceptional</div>
-          <div className="text-sm text-muted-foreground">{tour.reviews} verified reviews</div>
-        </div>
-      </div>
+      )}
 
       {/* Description */}
       <div>
@@ -83,26 +89,30 @@ export const TourOverview = ({ tour }: TourOverviewProps) => {
       </div>
 
       {/* Highlights */}
-      <div>
-        <h2 className="text-2xl font-display font-bold mb-4">Highlights</h2>
-        <div className="grid md:grid-cols-2 gap-3">
-          {tour.highlights.map((highlight, index) => (
-            <div key={index} className="flex items-start gap-3">
-              <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-              <span className="text-muted-foreground">{highlight}</span>
-            </div>
-          ))}
+      {tour.highlights && Array.isArray(tour.highlights) && tour.highlights.length > 0 && (
+        <div>
+          <h2 className="text-2xl font-display font-bold mb-4">Highlights</h2>
+          <div className="grid md:grid-cols-2 gap-3">
+            {tour.highlights.map((highlight, index) => (
+              <div key={index} className="flex items-start gap-3">
+                <CheckCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                <span className="text-muted-foreground">{highlight}</span>
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Best Time to Visit */}
-      <div className="p-5 rounded-xl bg-primary/5 border border-primary/20">
-        <div className="flex items-center gap-2 mb-2">
-          <Clock className="w-5 h-5 text-primary" />
-          <h3 className="font-heading font-semibold text-foreground">Best Time to Visit</h3>
+      {tour.bestTime && (
+        <div className="p-5 rounded-xl bg-primary/5 border border-primary/20">
+          <div className="flex items-center gap-2 mb-2">
+            <Clock className="w-5 h-5 text-primary" />
+            <h3 className="font-heading font-semibold text-foreground">Best Time to Visit</h3>
+          </div>
+          <p className="text-muted-foreground">{tour.bestTime}</p>
         </div>
-        <p className="text-muted-foreground">{tour.bestTime}</p>
-      </div>
+      )}
     </div>
   );
 };

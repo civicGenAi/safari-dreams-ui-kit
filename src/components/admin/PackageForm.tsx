@@ -198,6 +198,11 @@ export const PackageForm = ({ package: editPackage, onSuccess, onCancel }: Packa
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Only allow submission on step 4
+    if (currentStep !== 4) {
+      return;
+    }
+
     // Validation
     if (!formData.title.trim()) {
       toast({
@@ -261,6 +266,19 @@ export const PackageForm = ({ package: editPackage, onSuccess, onCancel }: Packa
         description: 'Please upload at least one image',
         variant: 'destructive',
       });
+      setCurrentStep(2);
+      return;
+    }
+
+    // Validate itinerary
+    const validItinerary = itineraryDays.filter(day => day.title.trim() && day.description.trim());
+    if (validItinerary.length === 0) {
+      toast({
+        title: 'Error',
+        description: 'Please add at least one day to the itinerary with title and description',
+        variant: 'destructive',
+      });
+      setCurrentStep(4);
       return;
     }
 
@@ -279,7 +297,7 @@ export const PackageForm = ({ package: editPackage, onSuccess, onCancel }: Packa
         difficulty: formData.difficulty,
         included: includedItems.filter(item => item.trim()),
         excluded: excludedItems.filter(item => item.trim()),
-        itinerary: itineraryDays.filter(day => day.title.trim()),
+        itinerary: validItinerary, // Use validated itinerary
       };
 
       if (editPackage) {
@@ -330,8 +348,15 @@ export const PackageForm = ({ package: editPackage, onSuccess, onCancel }: Packa
   // Check if there's saved draft data
   const hasDraft = !editPackage && localStorage.getItem('packageFormData');
 
+  // Prevent Enter key from submitting form on steps 1-3
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLFormElement>) => {
+    if (e.key === 'Enter' && currentStep !== 4 && (e.target as HTMLElement).tagName !== 'TEXTAREA') {
+      e.preventDefault();
+    }
+  };
+
   return (
-    <form onSubmit={handleSubmit} className="space-y-6">
+    <form onSubmit={handleSubmit} onKeyDown={handleKeyDown} className="space-y-6">
       {/* Draft notification */}
       {hasDraft && (
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-start justify-between">
