@@ -5,7 +5,9 @@ import { Footer } from '@/components/Footer';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { NewsletterSection } from '@/components/NewsletterSection';
 import { TestimonialsSection } from '@/components/TestimonialsSection';
-import { mockDestinations, mockTours } from '@/data/mockData';
+import { mockDestinations } from '@/data/mockData';
+import { supabase, Package } from '@/lib/supabase';
+import { LoadingCards } from '@/components/ui/loading';
 import { Button } from '@/components/ui/button';
 import {
   MapPin,
@@ -16,7 +18,8 @@ import {
   ArrowRight,
   ChevronLeft,
   ChevronRight,
-  Star
+  Star,
+  Clock
 } from 'lucide-react';
 
 const travelIdeasCards = [
@@ -32,12 +35,38 @@ const DestinationDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const destination = mockDestinations.find((d) => d.slug === slug);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [destinationTours, setDestinationTours] = useState<Package[]>([]);
+  const [loadingTours, setLoadingTours] = useState(true);
   const autoScrollRef = useRef<NodeJS.Timeout>();
 
   const otherDestinations = mockDestinations
     .filter((d) => d.slug !== slug && !['egypt', 'israel', 'jordan'].includes(d.slug))
     .slice(0, 6);
-  const destinationTours = mockTours.filter((t) => t.destination === slug);
+
+  // Fetch packages for this destination
+  useEffect(() => {
+    const fetchDestinationTours = async () => {
+      if (!destination) return;
+
+      setLoadingTours(true);
+      try {
+        const { data, error } = await supabase
+          .from('packages')
+          .select('*')
+          .ilike('destination', destination.name) // Case-insensitive match
+          .order('created_at', { ascending: false });
+
+        if (error) throw error;
+        setDestinationTours(data || []);
+      } catch (error) {
+        console.error('Error fetching destination tours:', error);
+      } finally {
+        setLoadingTours(false);
+      }
+    };
+
+    fetchDestinationTours();
+  }, [destination]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -345,37 +374,62 @@ Overall, Jordan is a diverse country that offers something for everyone, from an
       </div>
 
       {/* Tours in Country */}
-      {destinationTours.length > 0 && (
-        <div className="py-24 bg-muted/20">
-          <div className="container mx-auto px-4 lg:px-8">
-            <h2 className="font-display text-4xl md:text-5xl font-bold text-center mb-12">
-              Explore {destination.name}
-            </h2>
+      <div className="py-24 bg-muted/20">
+        <div className="container mx-auto px-4 lg:px-8">
+          <h2 className="font-display text-4xl md:text-5xl font-bold text-center mb-12">
+            Explore {destination.name}
+          </h2>
+
+          {loadingTours ? (
+            <LoadingCards count={6} />
+          ) : destinationTours.length === 0 ? (
+            <div className="text-center py-12">
+              <p className="text-muted-foreground text-lg">No packages available for {destination.name} yet.</p>
+              <Link to="/tours" className="inline-block mt-4">
+                <Button variant="primary">Browse All Tours</Button>
+              </Link>
+            </div>
+          ) : (
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {destinationTours.map((tour) => (
-                <Link key={tour.id} to={`/tours/${tour.slug}`} className="group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all">
+              {destinationTours.map((pkg) => (
+                <Link key={pkg.id} to={`/tours/${pkg.slug}`} className="group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all">
                   <div className="relative h-64">
-                    <img src={tour.image} alt={tour.title} className="w-full h-full object-cover transition-transform group-hover:scale-105" />
+                    <img src={pkg.image} alt={pkg.title} className="w-full h-full object-cover transition-transform group-hover:scale-105" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+
+                    {/* Price Badge */}
                     <div className="absolute top-4 right-4 bg-white px-4 py-2 rounded-xl shadow-lg">
-                      <span className="font-display text-xl font-bold text-primary">${tour.price}</span>
+                      <span className="font-display text-xl font-bold text-primary">${pkg.price}</span>
+                    </div>
+
+                    {/* Category Badge */}
+                    <div className="absolute top-4 left-4 bg-secondary text-white px-3 py-1 rounded-full text-xs font-heading font-semibold">
+                      {pkg.category}
                     </div>
                   </div>
                   <div className="p-6">
                     <h3 className="font-display text-xl font-bold mb-2 group-hover:text-primary transition-colors line-clamp-2">
-                      {tour.title}
+                      {pkg.title}
                     </h3>
-                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
-                      <Star className="w-4 h-4 fill-secondary text-secondary" />
-                      <span className="font-semibold">{tour.rating}</span>
-                      <span>({tour.reviews} reviews)</span>
+                    <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
+                      {pkg.description}
+                    </p>
+                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
+                      <div className="flex items-center gap-1">
+                        <Clock className="w-4 h-4" />
+                        <span>{pkg.duration} days</span>
+                      </div>
+                      <div className="px-2 py-1 bg-muted rounded-full text-xs font-semibold">
+                        {pkg.difficulty}
+                      </div>
                     </div>
                   </div>
                 </Link>
               ))}
             </div>
-          </div>
+          )}
         </div>
-      )}
+      </div>
 
       {/* Popular Destinations */}
       <div className="py-24 bg-gradient-to-b from-muted/20 to-white">

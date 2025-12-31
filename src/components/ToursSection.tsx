@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
+import { LoadingCards } from '@/components/ui/loading';
 import { Clock, Users, Star, MapPin, ArrowRight } from 'lucide-react';
 import { supabase, Package } from '@/lib/supabase';
 
@@ -191,17 +192,15 @@ export const ToursSection = () => {
         </div>
 
         {/* Tours Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-          {loading ? (
-            <div className="col-span-full flex items-center justify-center py-12">
-              <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div>
-            </div>
-          ) : toursToShow.length === 0 ? (
-            <div className="col-span-full text-center py-12">
-              <p className="text-muted-foreground">No packages available yet.</p>
-            </div>
-          ) : (
-            toursToShow.map((pkg, index) => (
+        {loading ? (
+          <LoadingCards count={6} />
+        ) : toursToShow.length === 0 ? (
+          <div className="text-center py-12">
+            <p className="text-muted-foreground">No packages available yet.</p>
+          </div>
+        ) : (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            {toursToShow.map((pkg, index) => (
               <article
                 key={pkg.id}
                 className="group bg-background rounded-2xl border border-border overflow-hidden hover:border-primary/50 hover:shadow-xl transition-all duration-300"
@@ -271,9 +270,9 @@ export const ToursSection = () => {
                   </div>
                 </div>
               </article>
-            ))
-          )}
-        </div>
+            ))}
+          </div>
+        )}
 
         {/* Show All Tours Button */}
         <div className="text-center">

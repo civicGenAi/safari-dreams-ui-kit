@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { AdminLayout } from '@/components/admin/AdminLayout';
 import { supabase, Package } from '@/lib/supabase';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { LoadingScreen } from '@/components/ui/loading';
 import { Package as PackageIcon, TrendingUp, MapPin, Tag, DollarSign, Calendar } from 'lucide-react';
 
 const AdminDashboard = () => {
@@ -52,9 +53,7 @@ const AdminDashboard = () => {
   if (loading) {
     return (
       <AdminLayout>
-        <div className="flex items-center justify-center h-96">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary"></div>
-        </div>
+        <LoadingScreen message="Loading dashboard..." fullScreen={false} />
       </AdminLayout>
     );
   }
