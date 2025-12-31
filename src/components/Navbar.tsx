@@ -86,9 +86,6 @@ export const Navbar = ({ activeCategory, activeDestination }: NavbarProps = {}) 
                   isDestinationsOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
                 }`}>
                   <div className="bg-background rounded-2xl shadow-lift p-4 min-w-[240px] border border-border">
-                    <div className="mb-3 pb-3 border-b border-border">
-                      <span className="font-display text-base font-semibold">Destinations</span>
-                    </div>
                     <div className="space-y-1">
                       {destinations.map((dest, index) => (
                         <div key={dest.name}>
@@ -125,9 +122,6 @@ export const Navbar = ({ activeCategory, activeDestination }: NavbarProps = {}) 
                   isTravelIdeasOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
                 }`}>
                   <div className="bg-background rounded-2xl shadow-lift p-4 min-w-[260px] border border-border">
-                    <div className="mb-3 pb-3 border-b border-border">
-                      <span className="font-display text-base font-semibold">Travel Ideas</span>
-                    </div>
                     <div className="space-y-1 max-h-[350px] overflow-y-auto">
                       {travelIdeas.map((idea, index) => (
                         <div key={idea.name}>
