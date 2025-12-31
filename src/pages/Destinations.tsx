@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import { ArrowRight } from 'lucide-react';
+import { useState } from 'react';
+import { ArrowRight, Sparkles, Clock } from 'lucide-react';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
@@ -7,12 +8,73 @@ import { NewsletterSection } from '@/components/NewsletterSection';
 import { Button } from '@/components/ui/button';
 
 const Destinations = () => {
-  const destinations = [
-    { name: 'Kenya', slug: 'kenya', tours: 4, image: '/src/assets/dest_kenya.jpg' },
-    { name: 'Rwanda', slug: 'rwanda', tours: 6, image: '/src/assets/dest_rwanda.jpg' },
-    { name: 'Tanzania', slug: 'tanzania', tours: 29, image: '/src/assets/dest_tanzania.jpg' },
-    { name: 'Uganda', slug: 'uganda', tours: 4, image: '/src/assets/dest_uganda.jpg' },
+  const [showComingSoon, setShowComingSoon] = useState<string | null>(null);
+
+  const activeDestinations = [
+    {
+      name: 'Tanzania',
+      slug: 'tanzania',
+      tours: 29,
+      image: '/src/assets/dest/tanzania.jpg',
+      description: 'Serengeti & Kilimanjaro await',
+      badge: 'Popular'
+    },
+    {
+      name: 'Kenya',
+      slug: 'kenya',
+      tours: 4,
+      image: '/src/assets/dest/kenya.jpg',
+      description: 'Witness the great migration',
+      badge: 'Hot Deal'
+    },
+    {
+      name: 'Rwanda',
+      slug: 'rwanda',
+      tours: 6,
+      image: '/src/assets/dest/rwanda.jpg',
+      description: 'Trek with mountain gorillas',
+      badge: 'Wildlife'
+    },
+    {
+      name: 'Uganda',
+      slug: 'uganda',
+      tours: 4,
+      image: '/src/assets/dest/uganda.jpg',
+      description: 'Pearl of Africa adventure',
+      badge: 'Adventure'
+    },
   ];
+
+  const comingSoonDestinations = [
+    {
+      name: 'South Africa',
+      slug: 'south-africa',
+      image: '/src/assets/dest/south-africa.jpg',
+      description: 'Safari meets sophistication',
+      badge: 'Coming Soon'
+    },
+    {
+      name: 'Namibia',
+      slug: 'namibia',
+      image: '/src/assets/dest/namibia.jpg',
+      description: 'Desert landscapes & wildlife',
+      badge: 'Coming Soon'
+    },
+    {
+      name: 'Botswana',
+      slug: 'botswana',
+      image: '/src/assets/dest/botswana.jpg',
+      description: 'Pristine wilderness & delta',
+      badge: 'Coming Soon'
+    },
+  ];
+
+  const allDestinations = [...activeDestinations, ...comingSoonDestinations];
+
+  const handleComingSoonClick = (name: string) => {
+    setShowComingSoon(name);
+    setTimeout(() => setShowComingSoon(null), 3000);
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -60,78 +122,58 @@ const Destinations = () => {
         </div>
       </div>
 
-      {/* Map Section */}
+      {/* Why Choose Our Destinations */}
       <div className="py-16 md:py-24 bg-muted/20">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            {/* Map - Left */}
-            <div className="relative">
-              <img
-                src="/src/assets/world-map.webp"
-                alt="World Map"
-                className="w-full h-auto rounded-2xl shadow-lg"
-              />
+          <div className="text-center mb-12">
+            <p className="text-primary font-heading font-semibold text-sm uppercase tracking-wider mb-2">
+              Escape the ordinary
+            </p>
+            <h2 className="font-display text-3xl md:text-4xl font-bold mb-6">
+              Why Choose Our Destinations
+            </h2>
+          </div>
 
-              {/* Destination Markers */}
-              {destinations.map((dest) => (
-                <div
-                  key={dest.name}
-                  className="absolute transform -translate-x-1/2 -translate-y-1/2 group cursor-pointer"
-                  style={{ left: dest.slug === 'kenya' ? '60.5%' : dest.slug === 'rwanda' ? '58.3%' : dest.slug === 'tanzania' ? '59.7%' : '59.0%',
-                           top: dest.slug === 'kenya' ? '50.0%' : dest.slug === 'rwanda' ? '51.1%' : dest.slug === 'tanzania' ? '53.5%' : '49.2%' }}
-                >
-                  {/* Pulse ring */}
-                  <span className="absolute inset-0 w-6 h-6 -m-1 rounded-full bg-primary/30 animate-pulse" />
-
-                  {/* Marker dot */}
-                  <span className="relative flex items-center justify-center w-4 h-4 rounded-full border-2 border-background shadow-lg bg-primary group-hover:scale-150 transition-transform duration-300">
-                    <span className="w-1.5 h-1.5 rounded-full bg-background" />
-                  </span>
-
-                  {/* Tooltip */}
-                  <span className="absolute left-1/2 -translate-x-1/2 -top-10 bg-secondary text-secondary-foreground text-xs font-heading font-medium px-3 py-1.5 rounded-lg whitespace-nowrap shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-300">
-                    {dest.name}
-                    <span className="absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-secondary" />
-                  </span>
-                </div>
-              ))}
-            </div>
-
-            {/* Destinations List - Right */}
-            <div>
-              <p className="text-primary font-heading font-semibold text-sm uppercase tracking-wider mb-2">
-                Escape the ordinary
+          <div className="grid md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+            <div className="text-center p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+              <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <Sparkles className="w-8 h-8 text-primary" />
+              </div>
+              <h3 className="font-display text-xl font-bold mb-3">Expert Guides</h3>
+              <p className="text-muted-foreground text-sm">
+                Local professionals with deep knowledge of wildlife and culture
               </p>
-              <h2 className="font-display text-3xl md:text-4xl font-bold mb-6">
-                Our Travel Destinations
-              </h2>
-
-              <blockquote className="text-lg italic text-muted-foreground mb-8 border-l-4 border-primary pl-4">
-                "Traveling – it leaves you speechless, then turns you into a storyteller." – Ibn Battuta
-              </blockquote>
-
-              <ul className="space-y-3 mb-8">
-                {destinations.map((dest) => (
-                  <li key={dest.slug} className="flex items-center justify-between group">
-                    <Link 
-                      to={`/destinations/${dest.slug}`}
-                      className="flex items-center gap-3 text-foreground hover:text-primary transition-colors"
-                    >
-                      <span className="w-2 h-2 rounded-full bg-primary"></span>
-                      <span className="font-heading font-medium">{dest.name}</span>
-                    </Link>
-                    <span className="text-sm text-muted-foreground">({dest.tours})</span>
-                  </li>
-                ))}
-              </ul>
-
-              <Link to="#unforgettable">
-                <Button variant="primary" size="lg" className="gap-2">
-                  Check Our Destinations
-                  <ArrowRight className="w-5 h-5" />
-                </Button>
-              </Link>
             </div>
+
+            <div className="text-center p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+              <div className="w-16 h-16 bg-secondary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-secondary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A13.916 13.916 0 008 11a4 4 0 118 0c0 1.017-.07 2.019-.203 3m-2.118 6.844A21.88 21.88 0 0015.171 17m3.839 1.132c.645-2.266.99-4.659.99-7.132A8 8 0 008 4.07M3 15.364c.64-1.319 1-2.8 1-4.364 0-1.457.39-2.823 1.07-4" />
+                </svg>
+              </div>
+              <h3 className="font-display text-xl font-bold mb-3">Sustainable Travel</h3>
+              <p className="text-muted-foreground text-sm">
+                Eco-friendly practices supporting local communities
+              </p>
+            </div>
+
+            <div className="text-center p-6 bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow">
+              <div className="w-16 h-16 bg-[#D4AF37]/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                <svg className="w-8 h-8 text-[#D4AF37]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z" />
+                </svg>
+              </div>
+              <h3 className="font-display text-xl font-bold mb-3">Best Value</h3>
+              <p className="text-muted-foreground text-sm">
+                Competitive prices with exceptional quality and service
+              </p>
+            </div>
+          </div>
+
+          <div className="text-center mt-12">
+            <blockquote className="text-lg italic text-muted-foreground max-w-2xl mx-auto border-l-4 border-primary pl-6">
+              "Traveling – it leaves you speechless, then turns you into a storyteller." – Ibn Battuta
+            </blockquote>
           </div>
         </div>
       </div>
@@ -164,75 +206,136 @@ const Destinations = () => {
         </div>
       </div>
 
-      {/* Unforgettable Experiences */}
-      <div id="unforgettable" className="py-16 md:py-24">
+      {/* Unforgettable Experiences - Redesigned Grid */}
+      <div id="unforgettable" className="py-16 md:py-24 bg-white">
         <div className="container mx-auto px-4 lg:px-8">
           <h2 className="font-display text-3xl md:text-4xl font-bold text-center mb-16">
-            Unforgettable Experiences
+            Discover Africa With Us
           </h2>
 
-          <div className="grid md:grid-cols-2 gap-8">
-            <Link to="/destinations/kenya" className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 h-80">
-              <img
-                src="/src/assets/dest_kenya.jpg"
-                alt="Kenya"
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent flex items-end">
-                <div className="p-8 w-full">
-                  <h3 className="font-display text-3xl font-bold text-white mb-2">Kenya</h3>
-                  <p className="text-white/90 text-sm">Witness the great migration</p>
-                </div>
-              </div>
-            </Link>
+          {/* Grid Layout with Creative Arrangement */}
+          <div className="grid md:grid-cols-12 gap-6 lg:gap-8 max-w-7xl mx-auto">
+            {allDestinations.map((dest, index) => {
+              const isComingSoon = comingSoonDestinations.some(d => d.name === dest.name);
+              const gridClass =
+                index === 0 ? 'md:col-span-8 md:row-span-2' :
+                index === 1 ? 'md:col-span-4 md:row-span-1' :
+                index === 2 ? 'md:col-span-4 md:row-span-1' :
+                index === 3 ? 'md:col-span-4 md:row-span-1' :
+                index === 4 ? 'md:col-span-4 md:row-span-1' :
+                'md:col-span-4 md:row-span-1';
 
-            <Link to="/destinations/rwanda" className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 h-80">
-              <img
-                src="/src/assets/dest_rwanda.jpg"
-                alt="Rwanda"
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent flex items-end">
-                <div className="p-8 w-full">
-                  <h3 className="font-display text-3xl font-bold text-white mb-2">Rwanda</h3>
-                  <p className="text-white/90 text-sm">Trek with mountain gorillas</p>
-                </div>
-              </div>
-            </Link>
+              const heightClass = index === 0 ? 'h-[600px]' : 'h-[290px]';
 
-            <Link to="/destinations/tanzania" className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 h-80">
-              <img
-                src="/src/assets/dest_tanzania.jpg"
-                alt="Tanzania"
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent flex items-end">
-                <div className="p-8 w-full">
-                  <h3 className="font-display text-3xl font-bold text-white mb-2">Tanzania</h3>
-                  <p className="text-white/90 text-sm">Serengeti & Kilimanjaro await</p>
-                </div>
-              </div>
-            </Link>
+              return isComingSoon ? (
+                <button
+                  key={dest.name}
+                  onClick={() => handleComingSoonClick(dest.name)}
+                  className={`group relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 ${gridClass} ${heightClass}`}
+                  style={{
+                    animation: `slideInUp 0.8s ease-out ${index * 0.15}s both`,
+                  }}
+                >
+                  <img
+                    src={dest.image}
+                    alt={dest.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/50 via-charcoal/20 to-transparent" />
 
-            <Link to="/destinations/uganda" className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 h-80">
-              <img
-                src="/src/assets/dest_uganda.jpg"
-                alt="Uganda"
-                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent flex items-end">
-                <div className="p-8 w-full">
-                  <h3 className="font-display text-3xl font-bold text-white mb-2">Uganda</h3>
-                  <p className="text-white/90 text-sm">Pearl of Africa adventure</p>
-                </div>
-              </div>
-            </Link>
+                  {/* Coming Soon Overlay */}
+                  <div className="absolute inset-0 bg-charcoal/60 backdrop-blur-sm flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <div className="text-center px-6">
+                      <Clock className="w-16 h-16 text-primary mx-auto mb-4 animate-pulse" />
+                      <h4 className="font-display text-2xl font-bold text-white mb-2">Coming Soon</h4>
+                      <p className="text-white/90 text-sm">
+                        We're curating exceptional experiences for {dest.name}. Stay tuned!
+                      </p>
+                    </div>
+                  </div>
+
+                  {/* Content */}
+                  <div className="absolute inset-0 flex flex-col justify-end p-6 lg:p-8">
+                    <div className="transform transition-all duration-500 group-hover:-translate-y-2">
+                      <div className="inline-flex items-center gap-2 bg-primary/90 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-heading font-semibold uppercase tracking-wider mb-3">
+                        <Clock className="w-3 h-3" />
+                        {dest.badge}
+                      </div>
+                      <h3 className="font-display text-2xl lg:text-3xl font-bold text-white mb-2">
+                        {dest.name}
+                      </h3>
+                      <p className="text-white/90 text-sm">{dest.description}</p>
+                    </div>
+                  </div>
+
+                  {/* Notification Toast */}
+                  {showComingSoon === dest.name && (
+                    <div className="absolute top-4 left-1/2 -translate-x-1/2 bg-white rounded-full px-6 py-3 shadow-2xl z-50 animate-in slide-in-from-top-4 fade-in duration-300">
+                      <div className="flex items-center gap-2">
+                        <Clock className="w-5 h-5 text-primary" />
+                        <p className="font-heading font-semibold text-sm">
+                          {dest.name} tours launching soon!
+                        </p>
+                      </div>
+                    </div>
+                  )}
+                </button>
+              ) : (
+                <Link
+                  key={dest.name}
+                  to={`/destinations/${dest.slug}`}
+                  className={`group relative overflow-hidden rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 ${gridClass} ${heightClass}`}
+                  style={{
+                    animation: `slideInUp 0.8s ease-out ${index * 0.15}s both`,
+                  }}
+                >
+                  <img
+                    src={dest.image}
+                    alt={dest.name}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/50 via-charcoal/20 to-transparent" />
+
+                  {/* Content */}
+                  <div className="absolute inset-0 flex flex-col justify-end p-6 lg:p-8">
+                    <div className="transform transition-all duration-500 group-hover:-translate-y-2">
+                      <div className="inline-flex items-center gap-2 bg-primary/90 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-heading font-semibold uppercase tracking-wider mb-3">
+                        {dest.badge}
+                      </div>
+                      <h3 className="font-display text-2xl lg:text-3xl font-bold text-white mb-2">
+                        {dest.name}
+                      </h3>
+                      <p className="text-white/90 text-sm mb-4">{dest.description}</p>
+                      <div className="flex items-center gap-2 text-white/80 text-sm">
+                        <span>{dest.tours}+ Tours Available</span>
+                        <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Hover Accent Line */}
+                  <div className="absolute bottom-0 left-0 right-0 h-1 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+                </Link>
+              );
+            })}
           </div>
         </div>
       </div>
 
-      {/* Testimonials would go here */}
-      
+      {/* Custom Animations */}
+      <style>{`
+        @keyframes slideInUp {
+          from {
+            opacity: 0;
+            transform: translateY(40px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
+
       <NewsletterSection />
       <Footer />
       <WhatsAppButton />
