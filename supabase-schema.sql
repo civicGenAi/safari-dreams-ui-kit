@@ -58,8 +58,40 @@ $$ language 'plpgsql';
 CREATE TRIGGER update_packages_updated_at BEFORE UPDATE ON packages
   FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
--- Insert sample admin user (password: admin123)
--- Note: In production, use proper password hashing
-INSERT INTO admin_users (email, password_hash)
-VALUES ('admin@demitours.com', '$2a$10$YourHashedPasswordHere')
-ON CONFLICT (email) DO NOTHING;
+-- Create Storage Bucket for Package Images
+-- Run this in Supabase Dashboard > Storage
+-- Or use the dashboard to create a bucket named 'package-images'
+
+-- STORAGE BUCKET SETUP INSTRUCTIONS:
+-- 1. Go to Storage in Supabase Dashboard
+-- 2. Create new bucket named: package-images
+-- 3. Make it public
+-- 4. Set the following policies:
+
+-- Storage policies (run after creating bucket)
+-- Allow public read access
+CREATE POLICY "Public Access"
+ON storage.objects FOR SELECT
+USING ( bucket_id = 'package-images' );
+
+-- Allow authenticated users to upload
+CREATE POLICY "Authenticated users can upload"
+ON storage.objects FOR INSERT
+WITH CHECK ( bucket_id = 'package-images' AND auth.role() = 'authenticated' );
+
+-- Allow authenticated users to update
+CREATE POLICY "Authenticated users can update"
+ON storage.objects FOR UPDATE
+USING ( bucket_id = 'package-images' AND auth.role() = 'authenticated' );
+
+-- Allow authenticated users to delete
+CREATE POLICY "Authenticated users can delete"
+ON storage.objects FOR DELETE
+USING ( bucket_id = 'package-images' AND auth.role() = 'authenticated' );
+
+-- Note: Admin users are created through Supabase Auth, not the admin_users table
+-- To create an admin user:
+-- 1. Go to Authentication > Users in Supabase Dashboard
+-- 2. Click "Add User"
+-- 3. Enter email and password
+-- 4. User can then login at /admin/login
