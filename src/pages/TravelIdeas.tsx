@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Compass, Heart, Palmtree, Mountain, Crown, Footprints, MapPin, Clock, Church, ChevronDown, ArrowRight } from 'lucide-react';
+import { Compass, Heart, Palmtree, Mountain, Crown, Footprints, MapPin, Clock, ChevronDown, ArrowRight } from 'lucide-react';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
@@ -21,7 +21,7 @@ const TravelIdeas = () => {
       icon: Compass,
       tours: '6+',
       price: '1,520',
-      image: '/src/assets/ideas_migration.jpg',
+      image: '/src/assets/idea/ideas_migration_wildebeast.webp',
       description: 'Witness the great wildebeest migration'
     },
     {
@@ -30,7 +30,7 @@ const TravelIdeas = () => {
       icon: Heart,
       tours: '8+',
       price: '2,100',
-      image: '/src/assets/ideas_romantic.jpg',
+      image: '/src/assets/idea/ideas_romantic_holiday.webp',
       description: 'Perfect getaways for couples'
     },
     {
@@ -39,7 +39,7 @@ const TravelIdeas = () => {
       icon: Palmtree,
       tours: '10+',
       price: '1,850',
-      image: '/src/assets/ideas_beach.jpg',
+      image: '/src/assets/idea/ideas_safari_beach.webp',
       description: 'Best of both worlds: safari and beach'
     },
     {
@@ -48,7 +48,7 @@ const TravelIdeas = () => {
       icon: Mountain,
       tours: '12+',
       price: '980',
-      image: '/src/assets/ideas_adventure.jpg',
+      image: '/src/assets/idea/idea_adventure_kilimanjaro.webp',
       description: 'Thrilling experiences for adventurers'
     },
     {
@@ -57,7 +57,7 @@ const TravelIdeas = () => {
       icon: Crown,
       tours: '7+',
       price: '3,500',
-      image: '/src/assets/ideas_luxury.jpg',
+      image: '/src/assets/idea/idea_luxury_poolside.webp',
       description: 'Premium safari experiences'
     },
     {
@@ -66,7 +66,7 @@ const TravelIdeas = () => {
       icon: Footprints,
       tours: '5+',
       price: '2,800',
-      image: '/src/assets/ideas_gorilla.jpg',
+      image: '/src/assets/idea/idea_gorilla_chimp_trek.webp',
       description: 'Encounter mountain gorillas and chimps'
     },
     {
@@ -75,7 +75,7 @@ const TravelIdeas = () => {
       icon: MapPin,
       tours: '9+',
       price: '2,200',
-      image: '/src/assets/ideas_crossborder.jpg',
+      image: '/src/assets/idea/idea_crossborder_elephants.webp',
       description: 'Explore multiple East African countries'
     },
     {
@@ -84,18 +84,9 @@ const TravelIdeas = () => {
       icon: Clock,
       tours: '8+',
       price: '255',
-      image: '/src/assets/ideas_daytour.jpg',
+      image: '/src/assets/idea/tour_daytour_mandarahut_hike.webp',
       description: 'Short excursions and day trips'
     },
-    {
-      name: 'Pilgrimages',
-      slug: 'pilgrimages',
-      icon: Church,
-      tours: '4+',
-      price: '3,200',
-      image: '/src/assets/ideas_pilgrimage.jpg',
-      description: 'Spiritual journeys to the Holy Land'
-    }
   ];
 
   return (
@@ -306,12 +297,12 @@ const TravelIdeas = () => {
             {/* Images - Right */}
             <div className="space-y-6">
               <img
-                src="/src/assets/faq_safari1.jpg"
+                src="/src/assets/idea/ideas_home_discount.webp"
                 alt="Safari Wildlife"
                 className="w-full h-64 object-cover rounded-2xl shadow-lg"
               />
               <img
-                src="/src/assets/faq_safari2.jpg"
+                src="/src/assets/idea/ideas_home_discount2.webp"
                 alt="Safari Experience"
                 className="w-full h-64 object-cover rounded-2xl shadow-lg"
               />
