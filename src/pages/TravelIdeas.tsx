@@ -295,18 +295,41 @@ const TravelIdeas = () => {
               </div>
             </div>
 
-            {/* Images - Right */}
+            {/* Promotional Offers - Right */}
             <div className="space-y-6">
-              <img
-                src="/src/assets/idea/ideas_home_discount.webp"
-                alt="Safari Wildlife"
-                className="w-full h-64 object-cover rounded-2xl shadow-lg"
-              />
-              <img
-                src="/src/assets/idea/ideas_home_discount2.webp"
-                alt="Safari Experience"
-                className="w-full h-64 object-cover rounded-2xl shadow-lg"
-              />
+              {/* Early Booking Offer */}
+              <div className="group relative overflow-hidden rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 border-4 border-primary/60 hover:border-primary">
+                <img
+                  src="/src/assets/idea/ideas_home_discount.webp"
+                  alt="Early Booking Special Offer"
+                  className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent" />
+                <div className="absolute top-4 right-4 bg-primary text-white px-4 py-2 rounded-full font-bold text-sm shadow-lg animate-pulse">
+                  Special Offer
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                  <h4 className="font-display text-xl font-bold mb-1 drop-shadow-lg">Early Booking Discount</h4>
+                  <p className="text-sm text-white/90 drop-shadow">Book in advance and save up to 20%</p>
+                </div>
+              </div>
+
+              {/* Holiday Season Offer */}
+              <div className="group relative overflow-hidden rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 border-4 border-primary/60 hover:border-primary">
+                <img
+                  src="/src/assets/idea/ideas_home_discount2.webp"
+                  alt="Holiday Season Special Offer"
+                  className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/40 to-transparent" />
+                <div className="absolute top-4 right-4 bg-primary text-white px-4 py-2 rounded-full font-bold text-sm shadow-lg animate-pulse">
+                  Limited Time
+                </div>
+                <div className="absolute bottom-0 left-0 right-0 p-4 text-white">
+                  <h4 className="font-display text-xl font-bold mb-1 drop-shadow-lg">Holiday Season Special</h4>
+                  <p className="text-sm text-white/90 drop-shadow">Exclusive holiday packages available</p>
+                </div>
+              </div>
             </div>
           </div>
 
