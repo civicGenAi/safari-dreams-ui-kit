@@ -10,7 +10,8 @@ import {
   Settings,
   LogOut,
   Menu,
-  X
+  X,
+  Lightbulb
 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -45,6 +46,12 @@ export const AdminLayout = ({ children }: AdminLayoutProps) => {
       label: 'Packages',
       path: '/admin/packages',
       description: 'Manage tour packages'
+    },
+    {
+      icon: Lightbulb,
+      label: 'Travel Ideas',
+      path: '/admin/travel-ideas',
+      description: 'Specialized experiences'
     },
     {
       icon: Upload,

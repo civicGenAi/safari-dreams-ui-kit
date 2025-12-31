@@ -12,11 +12,12 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 
 interface PackageFormProps {
   package?: Package;
+  tableName?: 'packages' | 'travel_ideas';
   onSuccess: () => void;
   onCancel: () => void;
 }
 
-export const PackageForm = ({ package: editPackage, onSuccess, onCancel }: PackageFormProps) => {
+export const PackageForm = ({ package: editPackage, tableName = 'packages', onSuccess, onCancel }: PackageFormProps) => {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
   const [currentStep, setCurrentStep] = useState(1);
@@ -318,26 +319,28 @@ export const PackageForm = ({ package: editPackage, onSuccess, onCancel }: Packa
 
       if (editPackage) {
         const { error } = await supabase
-          .from('packages')
+          .from(tableName)
           .update(packageData)
           .eq('id', editPackage.id);
 
         if (error) throw error;
 
+        const itemType = tableName === 'travel_ideas' ? 'Travel Idea' : 'Package';
         toast({
           title: 'Success',
-          description: 'Package updated successfully',
+          description: `${itemType} updated successfully`,
         });
       } else {
         const { error } = await supabase
-          .from('packages')
+          .from(tableName)
           .insert([packageData]);
 
         if (error) throw error;
 
+        const itemType = tableName === 'travel_ideas' ? 'Travel Idea' : 'Package';
         toast({
           title: 'Success',
-          description: 'Package created successfully',
+          description: `${itemType} created successfully`,
         });
         clearFormStorage(); // Clear saved form data on successful creation
       }

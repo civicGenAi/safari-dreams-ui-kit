@@ -27,6 +27,7 @@ import PrivacyPolicy from "./pages/PrivacyPolicy";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminPackages from "./pages/AdminPackages";
+import AdminTravelIdeas from "./pages/AdminTravelIdeas";
 import AdminBulkImport from "./pages/AdminBulkImport";
 import { AdminArticles } from "./components/admin/AdminArticles";
 import { ArticleForm } from "./components/admin/ArticleForm";
@@ -109,6 +110,11 @@ const App = () => {
               <Route path="/admin/packages" element={
                 <ProtectedRoute>
                   <AdminPackages />
+                </ProtectedRoute>
+              } />
+              <Route path="/admin/travel-ideas" element={
+                <ProtectedRoute>
+                  <AdminTravelIdeas />
                 </ProtectedRoute>
               } />
               <Route path="/admin/bulk-import" element={

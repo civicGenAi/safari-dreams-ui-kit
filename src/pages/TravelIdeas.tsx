@@ -1,85 +1,99 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { ChevronDown, ArrowRight } from 'lucide-react';
+import { ChevronDown, ArrowRight, Filter } from 'lucide-react';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { NewsletterSection } from '@/components/NewsletterSection';
 import { Button } from '@/components/ui/button';
+import { supabase, TravelIdea, Article } from '@/lib/supabase';
+import { Card, CardContent } from '@/components/ui/card';
+import { LoadingScreen } from '@/components/ui/loading';
 
 const TravelIdeas = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
+  const [travelIdeas, setTravelIdeas] = useState<TravelIdea[]>([]);
+  const [recentArticles, setRecentArticles] = useState<Article[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [showFilters, setShowFilters] = useState(false);
+
+  // Filter states
+  const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [selectedDestination, setSelectedDestination] = useState<string>('all');
+  const [priceRange, setPriceRange] = useState<string>('all');
+  const [durationRange, setDurationRange] = useState<string>('all');
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+
+  const fetchData = async () => {
+    try {
+      const [ideasResult, articlesResult] = await Promise.all([
+        supabase
+          .from('travel_ideas')
+          .select('*')
+          .order('created_at', { ascending: false })
+          .limit(9),
+        supabase
+          .from('articles')
+          .select('*')
+          .eq('status', 'published')
+          .order('published_date', { ascending: false })
+          .limit(4)
+      ]);
+
+      if (ideasResult.error) throw ideasResult.error;
+      if (articlesResult.error) throw articlesResult.error;
+
+      setTravelIdeas(ideasResult.data || []);
+      setRecentArticles(articlesResult.data || []);
+    } catch (error) {
+      console.error('Error fetching data:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
   };
 
-  const travelIdeas = [
-    {
-      name: 'Migration Safaris',
-      slug: 'migration-safaris',
-      tours: '6+',
-      price: '1,520',
-      image: 'ideas_migration_wildebeast.webp',
-      description: 'Witness the great wildebeest migration'
-    },
-    {
-      name: 'Romantic Holidays',
-      slug: 'romantic-holidays',
-      tours: '8+',
-      price: '2,100',
-      image: 'ideas_romantic_holiday.webp',
-      description: 'Perfect getaways for couples'
-    },
-    {
-      name: 'Safari Beach Holidays',
-      slug: 'safari-beach-holidays',
-      tours: '10+',
-      price: '1,850',
-      image: 'ideas_safari_beach.webp',
-      description: 'Best of both worlds: safari and beach'
-    },
-    {
-      name: 'Adventure Seekers',
-      slug: 'adventure-seekers',
-      tours: '12+',
-      price: '980',
-      image: 'idea_adventure_kilimanjaro.webp',
-      description: 'Thrilling experiences for adventurers'
-    },
-    {
-      name: 'Luxury Tours',
-      slug: 'luxury-tours',
-      tours: '7+',
-      price: '3,500',
-      image: 'idea_luxury_poolside.webp',
-      description: 'Premium safari experiences'
-    },
-    {
-      name: 'Gorilla and Chimp Trekking',
-      slug: 'gorilla-chimp-trekking',
-      tours: '5+',
-      price: '2,800',
-      image: 'idea_gorilla_chimp_trek.webp',
-      description: 'Encounter mountain gorillas and chimps'
-    },
-    {
-      name: 'Cross Border Safaris',
-      slug: 'cross-border-safaris',
-      tours: '9+',
-      price: '2,200',
-      image: 'idea_crossborder_elephants.webp',
-      description: 'Explore multiple East African countries'
-    },
-    {
-      name: 'Day Tours',
-      slug: 'day-tours',
-      tours: '8+',
-      price: '255',
-      image: 'tour_daytour_mandarahut_hike.webp',
-      description: 'Short excursions and day trips'
-    },
-  ];
+  // Get unique values for filters
+  const categories = Array.from(new Set(travelIdeas.map(idea => idea.category)));
+  const destinations = Array.from(new Set(travelIdeas.map(idea => idea.destination)));
+
+  // Apply filters
+  const filteredIdeas = travelIdeas.filter(idea => {
+    if (selectedCategory !== 'all' && idea.category !== selectedCategory) return false;
+    if (selectedDestination !== 'all' && idea.destination !== selectedDestination) return false;
+
+    if (priceRange !== 'all') {
+      const price = idea.price;
+      if (priceRange === 'budget' && price > 1000) return false;
+      if (priceRange === 'mid' && (price < 1000 || price > 2500)) return false;
+      if (priceRange === 'luxury' && price < 2500) return false;
+    }
+
+    if (durationRange !== 'all') {
+      const duration = idea.duration;
+      if (durationRange === 'short' && duration > 3) return false;
+      if (durationRange === 'medium' && (duration < 4 || duration > 7)) return false;
+      if (durationRange === 'long' && duration < 8) return false;
+    }
+
+    return true;
+  });
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-background">
+        <Navbar />
+        <LoadingScreen message="Loading travel ideas..." fullScreen={false} />
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-background">
@@ -137,15 +151,107 @@ const TravelIdeas = () => {
         </div>
       </div>
 
+      {/* Filters Section */}
+      <div className="py-8 bg-muted/10 border-y border-border">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="flex items-center justify-between mb-4">
+            <h3 className="font-heading font-bold text-lg">Filter Travel Ideas</h3>
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={() => setShowFilters(!showFilters)}
+              className="gap-2"
+            >
+              <Filter className="w-4 h-4" />
+              {showFilters ? 'Hide Filters' : 'Show Filters'}
+            </Button>
+          </div>
+
+          {showFilters && (
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 animate-in fade-in slide-in-from-top-2 duration-300">
+              {/* Category Filter */}
+              <div>
+                <label className="block text-sm font-medium mb-2">Category</label>
+                <select
+                  value={selectedCategory}
+                  onChange={(e) => setSelectedCategory(e.target.value)}
+                  className="w-full px-3 py-2 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary"
+                >
+                  <option value="all">All Categories</option>
+                  {categories.map(cat => (
+                    <option key={cat} value={cat}>{cat}</option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Destination Filter */}
+              <div>
+                <label className="block text-sm font-medium mb-2">Destination</label>
+                <select
+                  value={selectedDestination}
+                  onChange={(e) => setSelectedDestination(e.target.value)}
+                  className="w-full px-3 py-2 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary"
+                >
+                  <option value="all">All Destinations</option>
+                  {destinations.map(dest => (
+                    <option key={dest} value={dest}>{dest}</option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Price Range Filter */}
+              <div>
+                <label className="block text-sm font-medium mb-2">Price Range</label>
+                <select
+                  value={priceRange}
+                  onChange={(e) => setPriceRange(e.target.value)}
+                  className="w-full px-3 py-2 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary"
+                >
+                  <option value="all">All Prices</option>
+                  <option value="budget">Budget (Under $1,000)</option>
+                  <option value="mid">Mid-Range ($1,000 - $2,500)</option>
+                  <option value="luxury">Luxury ($2,500+)</option>
+                </select>
+              </div>
+
+              {/* Duration Filter */}
+              <div>
+                <label className="block text-sm font-medium mb-2">Duration</label>
+                <select
+                  value={durationRange}
+                  onChange={(e) => setDurationRange(e.target.value)}
+                  className="w-full px-3 py-2 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary"
+                >
+                  <option value="all">All Durations</option>
+                  <option value="short">Short (1-3 days)</option>
+                  <option value="medium">Medium (4-7 days)</option>
+                  <option value="long">Long (8+ days)</option>
+                </select>
+              </div>
+            </div>
+          )}
+        </div>
+      </div>
+
       {/* Experience Our Travel Ideas */}
       <div className="py-16 md:py-24 bg-muted/20">
         <div className="container mx-auto px-4 lg:px-8">
-          <h2 className="font-display text-3xl md:text-4xl font-bold text-center mb-16">
-            Experience Our Travel Ideas
-          </h2>
+          <div className="flex items-center justify-between mb-16">
+            <h2 className="font-display text-3xl md:text-4xl font-bold">
+              Experience Our Travel Ideas
+            </h2>
+            <p className="text-muted-foreground">
+              Showing {filteredIdeas.length} {filteredIdeas.length === 1 ? 'idea' : 'ideas'}
+            </p>
+          </div>
 
           <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
-            {travelIdeas.map((idea) => {
+            {filteredIdeas.length === 0 ? (
+              <div className="col-span-3 text-center py-12">
+                <p className="text-muted-foreground">No travel ideas match your filters. Try adjusting your selection.</p>
+              </div>
+            ) : (
+              filteredIdeas.map((idea) => {
               return (
                 <Link
                   key={idea.slug}
@@ -155,7 +261,7 @@ const TravelIdeas = () => {
                   {/* Background Image */}
                   <img
                     src={idea.image}
-                    alt={idea.name}
+                    alt={idea.title}
                     className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
                   />
 
@@ -179,28 +285,78 @@ const TravelIdeas = () => {
                   {/* Content */}
                   <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
                     <h3 className="font-display text-2xl font-bold mb-3 text-white drop-shadow-lg">
-                      {idea.name}
+                      {idea.title}
                     </h3>
 
                     <div className="flex items-center justify-between text-white">
                       <p className="text-sm text-white/90">
-                        {idea.tours} Tours+
+                        {idea.duration} {idea.duration === 1 ? 'Day' : 'Days'}
                       </p>
                       <p className="font-heading font-semibold">
                         <span className="text-sm text-white/90">from</span>
-                        <span className="text-2xl ml-1 text-primary drop-shadow-lg">${idea.price}</span>
+                        <span className="text-2xl ml-1 text-primary drop-shadow-lg">${idea.price.toLocaleString()}</span>
                       </p>
                     </div>
+
+                    <p className="text-sm text-white/80 mt-2 line-clamp-2">{idea.description}</p>
                   </div>
                 </Link>
               );
-            })}
+            })
+          )}
           </div>
         </div>
       </div>
 
+      {/* Last Minute Deals - Recent Blog Articles */}
+      {recentArticles.length > 0 && (
+        <div className="py-16 md:py-24">
+          <div className="container mx-auto px-4 lg:px-8">
+            <h2 className="font-display text-3xl md:text-4xl font-bold text-center mb-16">
+              Last Minute Deals & Travel Stories
+            </h2>
+
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+              {recentArticles.map((article) => (
+                <Link
+                  key={article.id}
+                  to={`/wild-tales/${article.slug}`}
+                  className="group"
+                >
+                  <Card className="overflow-hidden hover:shadow-xl transition-all duration-300">
+                    {article.featured_image && (
+                      <div className="relative h-48 overflow-hidden">
+                        <img
+                          src={article.featured_image}
+                          alt={article.title}
+                          className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                        />
+                      </div>
+                    )}
+                    <CardContent className="p-6">
+                      <div className="flex items-center gap-2 text-xs text-muted-foreground mb-3">
+                        <span className="bg-primary/10 text-primary px-2 py-1 rounded">
+                          {article.category}
+                        </span>
+                        <span>{article.read_time} min read</span>
+                      </div>
+                      <h3 className="font-heading font-bold text-lg mb-2 line-clamp-2 group-hover:text-primary transition-colors">
+                        {article.title}
+                      </h3>
+                      <p className="text-sm text-muted-foreground line-clamp-3">
+                        {article.excerpt}
+                      </p>
+                    </CardContent>
+                  </Card>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* FAQs Section */}
-      <div className="py-16 md:py-24">
+      <div className="py-16 md:py-24 bg-muted/20">
         <div className="container mx-auto px-4 lg:px-8">
           <h2 className="font-display text-3xl md:text-4xl font-bold mb-12">
             FAQs On Our Travel Ideas

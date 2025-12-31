@@ -21,6 +21,26 @@ CREATE TABLE IF NOT EXISTS packages (
 -- Add images column to existing packages table (if upgrading)
 ALTER TABLE packages ADD COLUMN IF NOT EXISTS images JSONB DEFAULT '[]'::jsonb;
 
+-- Create travel_ideas table (specialized packages)
+CREATE TABLE IF NOT EXISTS travel_ideas (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  title TEXT NOT NULL,
+  slug TEXT NOT NULL UNIQUE,
+  description TEXT NOT NULL,
+  price NUMERIC NOT NULL,
+  duration INTEGER NOT NULL,
+  image TEXT NOT NULL,
+  images JSONB DEFAULT '[]'::jsonb,
+  destination TEXT NOT NULL,
+  category TEXT NOT NULL,
+  difficulty TEXT NOT NULL CHECK (difficulty IN ('Easy', 'Moderate', 'Challenging')),
+  included JSONB DEFAULT '[]'::jsonb,
+  excluded JSONB DEFAULT '[]'::jsonb,
+  itinerary JSONB DEFAULT '[]'::jsonb,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
+);
+
 -- Create articles table for Wild Tales blog
 CREATE TABLE IF NOT EXISTS articles (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -68,6 +88,7 @@ CREATE TABLE IF NOT EXISTS admin_users (
 
 -- Enable Row Level Security
 ALTER TABLE packages ENABLE ROW LEVEL SECURITY;
+ALTER TABLE travel_ideas ENABLE ROW LEVEL SECURITY;
 ALTER TABLE admin_users ENABLE ROW LEVEL SECURITY;
 ALTER TABLE articles ENABLE ROW LEVEL SECURITY;
 ALTER TABLE article_categories ENABLE ROW LEVEL SECURITY;
@@ -83,6 +104,19 @@ CREATE POLICY "Allow authenticated update" ON packages
   FOR UPDATE USING (auth.role() = 'authenticated');
 
 CREATE POLICY "Allow authenticated delete" ON packages
+  FOR DELETE USING (auth.role() = 'authenticated');
+
+-- Create policies for travel_ideas (allow public read, authenticated write)
+CREATE POLICY "Allow public read access" ON travel_ideas
+  FOR SELECT USING (true);
+
+CREATE POLICY "Allow authenticated insert" ON travel_ideas
+  FOR INSERT WITH CHECK (auth.role() = 'authenticated');
+
+CREATE POLICY "Allow authenticated update" ON travel_ideas
+  FOR UPDATE USING (auth.role() = 'authenticated');
+
+CREATE POLICY "Allow authenticated delete" ON travel_ideas
   FOR DELETE USING (auth.role() = 'authenticated');
 
 -- Create policies for articles
@@ -113,6 +147,9 @@ END;
 $$ language 'plpgsql';
 
 CREATE TRIGGER update_packages_updated_at BEFORE UPDATE ON packages
+  FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+CREATE TRIGGER update_travel_ideas_updated_at BEFORE UPDATE ON travel_ideas
   FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
 CREATE TRIGGER update_articles_updated_at BEFORE UPDATE ON articles
