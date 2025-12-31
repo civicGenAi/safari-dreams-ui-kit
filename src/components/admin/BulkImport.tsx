@@ -36,9 +36,18 @@ export const BulkImport = () => {
       const result = await mammoth.extractRawText({ arrayBuffer });
       const text = result.value;
 
+      if (!text || text.trim().length === 0) {
+        throw new Error('Document appears to be empty or could not be read');
+      }
+
       // Parse the document - looking for package sections
       const packages: ParsedPackage[] = [];
-      const packageSections = text.split(/Package \d+:|PACKAGE \d+:/i);
+      // More flexible pattern matching
+      const packageSections = text.split(/(?:Package|PACKAGE)\s*\d+\s*[:]/i);
+
+      if (packageSections.length <= 1) {
+        throw new Error('No packages found. Make sure your document starts sections with "Package 1:", "Package 2:", etc.');
+      }
 
       for (let i = 1; i < packageSections.length; i++) {
         const section = packageSections[i];
@@ -76,12 +85,26 @@ export const BulkImport = () => {
             });
           }
 
-          if (titleMatch) {
+          if (titleMatch && titleMatch[1].trim()) {
+            const price = priceMatch ? parseFloat(priceMatch[1].replace(/,/g, '')) : 0;
+            const duration = durationMatch ? parseInt(durationMatch[1]) : 1;
+
+            // Validate required fields
+            if (price <= 0) {
+              console.warn(`Package "${titleMatch[1].trim()}" has invalid price, skipping`);
+              continue;
+            }
+
+            if (duration <= 0) {
+              console.warn(`Package "${titleMatch[1].trim()}" has invalid duration, skipping`);
+              continue;
+            }
+
             const pkg: ParsedPackage = {
               title: titleMatch[1].trim(),
               description: descMatch ? descMatch[1].trim() : '',
-              price: priceMatch ? parseFloat(priceMatch[1].replace(/,/g, '')) : 0,
-              duration: durationMatch ? parseInt(durationMatch[1]) : 1,
+              price: price,
+              duration: duration,
               destination: destinationMatch ? destinationMatch[1] : 'Tanzania',
               category: categoryMatch ? categoryMatch[1] : 'Safari',
               difficulty: (difficultyMatch ? difficultyMatch[1] : 'Moderate') as 'Easy' | 'Moderate' | 'Challenging',
@@ -118,7 +141,7 @@ export const BulkImport = () => {
       if (allPackages.length === 0) {
         toast({
           title: 'No Packages Found',
-          description: 'Could not find any package data in the document(s). Please check the format.',
+          description: 'Could not find any valid package data. Make sure your document follows the format guide and includes required fields (Title, Price, Duration).',
           variant: 'destructive',
         });
       } else {
@@ -129,9 +152,10 @@ export const BulkImport = () => {
         });
       }
     } catch (error: any) {
+      console.error('Document parsing error:', error);
       toast({
         title: 'Parse Error',
-        description: error.message,
+        description: error.message || 'Failed to read document. Make sure it is a valid .docx file.',
         variant: 'destructive',
       });
     } finally {
@@ -161,15 +185,20 @@ export const BulkImport = () => {
         // Generate slug
         const slug = pkg.title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 
+        // Validate data before inserting
+        if (!pkg.title || !pkg.price || !pkg.duration) {
+          throw new Error('Missing required fields');
+        }
+
         const { error } = await supabase
           .from('packages')
           .insert([{
             title: pkg.title,
             slug,
-            description: pkg.description,
+            description: pkg.description || 'No description provided',
             price: pkg.price,
             duration: pkg.duration,
-            image: '/src/assets/tours/placeholder.jpg', // Default image
+            image: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=800', // Safari placeholder
             destination: pkg.destination,
             category: pkg.category,
             difficulty: pkg.difficulty,

@@ -1,4 +1,4 @@
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 import { useDropzone } from 'react-dropzone';
 import { supabase, Package } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
@@ -19,29 +19,105 @@ interface PackageFormProps {
 export const PackageForm = ({ package: editPackage, onSuccess, onCancel }: PackageFormProps) => {
   const { toast } = useToast();
   const [loading, setLoading] = useState(false);
-  const [uploadedImages, setUploadedImages] = useState<string[]>(editPackage ? [editPackage.image] : []);
   const [currentStep, setCurrentStep] = useState(1);
 
-  const [formData, setFormData] = useState({
-    title: editPackage?.title || '',
-    slug: editPackage?.slug || '',
-    description: editPackage?.description || '',
-    price: editPackage?.price.toString() || '',
-    duration: editPackage?.duration.toString() || '',
-    destination: editPackage?.destination || '',
-    category: editPackage?.category || '',
-    difficulty: editPackage?.difficulty || 'Easy' as 'Easy' | 'Moderate' | 'Challenging',
+  // Get stored form data or use editPackage data
+  const getInitialFormData = () => {
+    if (editPackage) {
+      return {
+        title: editPackage.title,
+        slug: editPackage.slug,
+        description: editPackage.description,
+        price: editPackage.price.toString(),
+        duration: editPackage.duration.toString(),
+        destination: editPackage.destination,
+        category: editPackage.category,
+        difficulty: editPackage.difficulty,
+      };
+    }
+    const stored = localStorage.getItem('packageFormData');
+    if (stored) {
+      try {
+        return JSON.parse(stored);
+      } catch {}
+    }
+    return {
+      title: '',
+      slug: '',
+      description: '',
+      price: '',
+      duration: '',
+      destination: '',
+      category: '',
+      difficulty: 'Easy' as 'Easy' | 'Moderate' | 'Challenging',
+    };
+  };
+
+  const [formData, setFormData] = useState(getInitialFormData());
+
+  const [uploadedImages, setUploadedImages] = useState<string[]>(() => {
+    if (editPackage) return [editPackage.image];
+    const stored = localStorage.getItem('packageFormImages');
+    if (stored) {
+      try {
+        return JSON.parse(stored);
+      } catch {}
+    }
+    return [];
   });
 
-  const [includedItems, setIncludedItems] = useState<string[]>(
-    Array.isArray(editPackage?.included) ? editPackage.included : []
-  );
-  const [excludedItems, setExcludedItems] = useState<string[]>(
-    Array.isArray(editPackage?.excluded) ? editPackage.excluded : []
-  );
-  const [itineraryDays, setItineraryDays] = useState<Array<{ day: number; title: string; description: string }>>(
-    Array.isArray(editPackage?.itinerary) ? editPackage.itinerary : [{ day: 1, title: '', description: '' }]
-  );
+  const [includedItems, setIncludedItems] = useState<string[]>(() => {
+    if (editPackage) return Array.isArray(editPackage.included) ? editPackage.included : [];
+    const stored = localStorage.getItem('packageFormIncluded');
+    if (stored) {
+      try {
+        return JSON.parse(stored);
+      } catch {}
+    }
+    return [];
+  });
+
+  const [excludedItems, setExcludedItems] = useState<string[]>(() => {
+    if (editPackage) return Array.isArray(editPackage.excluded) ? editPackage.excluded : [];
+    const stored = localStorage.getItem('packageFormExcluded');
+    if (stored) {
+      try {
+        return JSON.parse(stored);
+      } catch {}
+    }
+    return [];
+  });
+
+  const [itineraryDays, setItineraryDays] = useState<Array<{ day: number; title: string; description: string }>>(() => {
+    if (editPackage) return Array.isArray(editPackage.itinerary) ? editPackage.itinerary : [{ day: 1, title: '', description: '' }];
+    const stored = localStorage.getItem('packageFormItinerary');
+    if (stored) {
+      try {
+        return JSON.parse(stored);
+      } catch {}
+    }
+    return [{ day: 1, title: '', description: '' }];
+  });
+
+  // Save form data to localStorage (only for new packages)
+  useEffect(() => {
+    if (!editPackage) {
+      localStorage.setItem('packageFormData', JSON.stringify(formData));
+      localStorage.setItem('packageFormImages', JSON.stringify(uploadedImages));
+      localStorage.setItem('packageFormIncluded', JSON.stringify(includedItems));
+      localStorage.setItem('packageFormExcluded', JSON.stringify(excludedItems));
+      localStorage.setItem('packageFormItinerary', JSON.stringify(itineraryDays));
+    }
+  }, [formData, uploadedImages, includedItems, excludedItems, itineraryDays, editPackage]);
+
+  // Clear localStorage on successful submission
+  const clearFormStorage = () => {
+    localStorage.removeItem('packageFormData');
+    localStorage.removeItem('packageFormImages');
+    localStorage.removeItem('packageFormIncluded');
+    localStorage.removeItem('packageFormExcluded');
+    localStorage.removeItem('packageFormItinerary');
+  };
 
   // Auto-generate slug from title
   const handleTitleChange = (value: string) => {
@@ -122,6 +198,63 @@ export const PackageForm = ({ package: editPackage, onSuccess, onCancel }: Packa
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
 
+    // Validation
+    if (!formData.title.trim()) {
+      toast({
+        title: 'Error',
+        description: 'Package title is required',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    if (!formData.destination) {
+      toast({
+        title: 'Error',
+        description: 'Please select a destination',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    if (!formData.category) {
+      toast({
+        title: 'Error',
+        description: 'Please select a category',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    const price = parseFloat(formData.price);
+    if (isNaN(price) || price <= 0) {
+      toast({
+        title: 'Error',
+        description: 'Please enter a valid price greater than 0',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    const duration = parseInt(formData.duration);
+    if (isNaN(duration) || duration <= 0) {
+      toast({
+        title: 'Error',
+        description: 'Please enter a valid duration greater than 0',
+        variant: 'destructive',
+      });
+      return;
+    }
+
+    if (!formData.description.trim()) {
+      toast({
+        title: 'Error',
+        description: 'Package description is required',
+        variant: 'destructive',
+      });
+      return;
+    }
+
     if (uploadedImages.length === 0) {
       toast({
         title: 'Error',
@@ -135,11 +268,11 @@ export const PackageForm = ({ package: editPackage, onSuccess, onCancel }: Packa
 
     try {
       const packageData = {
-        title: formData.title,
+        title: formData.title.trim(),
         slug: formData.slug,
-        description: formData.description,
-        price: parseFloat(formData.price),
-        duration: parseInt(formData.duration),
+        description: formData.description.trim(),
+        price: price,
+        duration: duration,
         image: uploadedImages[0], // Primary image
         destination: formData.destination,
         category: formData.category,
@@ -172,6 +305,7 @@ export const PackageForm = ({ package: editPackage, onSuccess, onCancel }: Packa
           title: 'Success',
           description: 'Package created successfully',
         });
+        clearFormStorage(); // Clear saved form data on successful creation
       }
 
       onSuccess();
@@ -193,8 +327,38 @@ export const PackageForm = ({ package: editPackage, onSuccess, onCancel }: Packa
     { number: 4, title: 'Itinerary', description: 'Day-by-day schedule' },
   ];
 
+  // Check if there's saved draft data
+  const hasDraft = !editPackage && localStorage.getItem('packageFormData');
+
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {/* Draft notification */}
+      {hasDraft && (
+        <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 flex items-start justify-between">
+          <div className="flex items-start gap-3">
+            <div className="w-5 h-5 rounded-full bg-blue-500 text-white flex items-center justify-center text-xs font-bold flex-shrink-0 mt-0.5">
+              ℹ️
+            </div>
+            <div>
+              <p className="font-semibold text-blue-900">Draft Restored</p>
+              <p className="text-sm text-blue-700">Your previous work has been automatically restored. Continue where you left off or start fresh.</p>
+            </div>
+          </div>
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            onClick={() => {
+              clearFormStorage();
+              window.location.reload();
+            }}
+            className="flex-shrink-0"
+          >
+            Clear Draft
+          </Button>
+        </div>
+      )}
+
       {/* Step Indicator */}
       <div className="flex items-center justify-between mb-8">
         {steps.map((step, index) => (
