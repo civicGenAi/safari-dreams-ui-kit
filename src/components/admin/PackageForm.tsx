@@ -56,7 +56,12 @@ export const PackageForm = ({ package: editPackage, onSuccess, onCancel }: Packa
   const [formData, setFormData] = useState(getInitialFormData());
 
   const [uploadedImages, setUploadedImages] = useState<string[]>(() => {
-    if (editPackage) return [editPackage.image];
+    if (editPackage) {
+      if (editPackage.images && Array.isArray(editPackage.images) && editPackage.images.length > 0) {
+        return editPackage.images;
+      }
+      return editPackage.image ? [editPackage.image] : [];
+    }
     const stored = localStorage.getItem('packageFormImages');
     if (stored) {
       try {
@@ -89,11 +94,17 @@ export const PackageForm = ({ package: editPackage, onSuccess, onCancel }: Packa
   });
 
   const [itineraryDays, setItineraryDays] = useState<Array<{ day: number; title: string; description: string }>>(() => {
-    if (editPackage) return Array.isArray(editPackage.itinerary) ? editPackage.itinerary : [{ day: 1, title: '', description: '' }];
+    if (editPackage) {
+      const itinerary = Array.isArray(editPackage.itinerary) && editPackage.itinerary.length > 0
+        ? editPackage.itinerary
+        : [{ day: 1, title: '', description: '' }];
+      return itinerary;
+    }
     const stored = localStorage.getItem('packageFormItinerary');
     if (stored) {
       try {
-        return JSON.parse(stored);
+        const parsed = JSON.parse(stored);
+        return parsed.length > 0 ? parsed : [{ day: 1, title: '', description: '' }];
       } catch {}
     }
     return [{ day: 1, title: '', description: '' }];
@@ -292,6 +303,7 @@ export const PackageForm = ({ package: editPackage, onSuccess, onCancel }: Packa
         price: price,
         duration: duration,
         image: uploadedImages[0], // Primary image
+        images: uploadedImages, // All images
         destination: formData.destination,
         category: formData.category,
         difficulty: formData.difficulty,

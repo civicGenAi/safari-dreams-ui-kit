@@ -100,7 +100,7 @@ const TourDetail = () => {
       </div>
 
       {/* Gallery */}
-      <TourGallery images={[tour.image]} title={tour.title} />
+      <TourGallery images={tour.images && tour.images.length > 0 ? tour.images : [tour.image]} title={tour.title} />
 
       {/* Main Content */}
       <div className="container mx-auto px-4 lg:px-8 py-12">
