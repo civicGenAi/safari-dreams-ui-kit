@@ -21,6 +21,43 @@ CREATE TABLE IF NOT EXISTS packages (
 -- Add images column to existing packages table (if upgrading)
 ALTER TABLE packages ADD COLUMN IF NOT EXISTS images JSONB DEFAULT '[]'::jsonb;
 
+-- Create articles table for Wild Tales blog
+CREATE TABLE IF NOT EXISTS articles (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  title TEXT NOT NULL,
+  slug TEXT NOT NULL UNIQUE,
+  excerpt TEXT NOT NULL,
+  content TEXT NOT NULL,
+  featured_image TEXT,
+  images JSONB DEFAULT '[]'::jsonb,
+  author_name TEXT NOT NULL DEFAULT 'DeMi Tours Team',
+  category TEXT NOT NULL,
+  tags JSONB DEFAULT '[]'::jsonb,
+  read_time INTEGER DEFAULT 5,
+  is_featured BOOLEAN DEFAULT false,
+  status TEXT NOT NULL DEFAULT 'draft' CHECK (status IN ('draft', 'published')),
+  published_date TIMESTAMP WITH TIME ZONE,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL,
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
+);
+
+-- Create article_categories table
+CREATE TABLE IF NOT EXISTS article_categories (
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  name TEXT NOT NULL UNIQUE,
+  slug TEXT NOT NULL UNIQUE,
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
+);
+
+-- Insert predefined categories
+INSERT INTO article_categories (name, slug) VALUES
+  ('Travel Tips', 'travel-tips'),
+  ('Safari Guides', 'safari-guides'),
+  ('Wildlife Facts', 'wildlife-facts'),
+  ('Cultural Experiences', 'cultural-experiences'),
+  ('Destination Guides', 'destination-guides')
+ON CONFLICT (slug) DO NOTHING;
+
 -- Create admin users table for authentication
 CREATE TABLE IF NOT EXISTS admin_users (
   id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
@@ -32,6 +69,8 @@ CREATE TABLE IF NOT EXISTS admin_users (
 -- Enable Row Level Security
 ALTER TABLE packages ENABLE ROW LEVEL SECURITY;
 ALTER TABLE admin_users ENABLE ROW LEVEL SECURITY;
+ALTER TABLE articles ENABLE ROW LEVEL SECURITY;
+ALTER TABLE article_categories ENABLE ROW LEVEL SECURITY;
 
 -- Create policies for packages (allow public read, authenticated write)
 CREATE POLICY "Allow public read access" ON packages
@@ -45,6 +84,20 @@ CREATE POLICY "Allow authenticated update" ON packages
 
 CREATE POLICY "Allow authenticated delete" ON packages
   FOR DELETE USING (auth.role() = 'authenticated');
+
+-- Create policies for articles
+CREATE POLICY "Allow public read published articles" ON articles
+  FOR SELECT USING (status = 'published');
+
+CREATE POLICY "Allow authenticated all on articles" ON articles
+  FOR ALL USING (auth.role() = 'authenticated');
+
+-- Create policies for article_categories
+CREATE POLICY "Allow public read categories" ON article_categories
+  FOR SELECT USING (true);
+
+CREATE POLICY "Allow authenticated all on categories" ON article_categories
+  FOR ALL USING (auth.role() = 'authenticated');
 
 -- Create policies for admin_users (only authenticated can read their own data)
 CREATE POLICY "Users can read own data" ON admin_users
@@ -60,6 +113,9 @@ END;
 $$ language 'plpgsql';
 
 CREATE TRIGGER update_packages_updated_at BEFORE UPDATE ON packages
+  FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
+
+CREATE TRIGGER update_articles_updated_at BEFORE UPDATE ON articles
   FOR EACH ROW EXECUTE FUNCTION update_updated_at_column();
 
 -- Create Storage Bucket for Package Images

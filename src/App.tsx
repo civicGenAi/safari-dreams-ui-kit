@@ -3,7 +3,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { Toaster as Sonner } from "@/components/ui/sonner";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useParams } from "react-router-dom";
 import { LoadingScreen } from "@/components/LoadingScreen";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ProtectedRoute } from "@/components/ProtectedRoute";
@@ -18,6 +18,7 @@ import TravelIdeas from "./pages/TravelIdeas";
 import TravelIdeaDetail from "./pages/TravelIdeaDetail";
 import WildTales from "./pages/WildTales";
 import WildTaleDetail from "./pages/WildTaleDetail";
+import ArticleDetail from "./pages/ArticleDetail";
 import OurStory from "./pages/OurStory";
 import Contact from "./pages/Contact";
 import TermsConditions from "./pages/TermsConditions";
@@ -27,8 +28,43 @@ import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
 import AdminPackages from "./pages/AdminPackages";
 import AdminBulkImport from "./pages/AdminBulkImport";
+import { AdminArticles } from "./components/admin/AdminArticles";
+import { ArticleForm } from "./components/admin/ArticleForm";
 
 const queryClient = new QueryClient();
+
+// Wrapper component for editing articles
+const ArticleFormWrapper = () => {
+  const { id } = useParams<{ id: string }>();
+  const [article, setArticle] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    if (id) {
+      loadArticle();
+    }
+  }, [id]);
+
+  const loadArticle = async () => {
+    const { supabase } = await import('@/lib/supabase');
+    const { data, error } = await supabase
+      .from('articles')
+      .select('*')
+      .eq('id', id)
+      .single();
+
+    if (!error && data) {
+      setArticle(data);
+    }
+    setLoading(false);
+  };
+
+  if (loading) {
+    return <div className="flex items-center justify-center min-h-screen">Loading...</div>;
+  }
+
+  return <ArticleForm article={article} />;
+};
 
 const App = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -78,6 +114,21 @@ const App = () => {
               <Route path="/admin/bulk-import" element={
                 <ProtectedRoute>
                   <AdminBulkImport />
+                </ProtectedRoute>
+              } />
+              <Route path="/admin/articles" element={
+                <ProtectedRoute>
+                  <AdminArticles />
+                </ProtectedRoute>
+              } />
+              <Route path="/admin/articles/new" element={
+                <ProtectedRoute>
+                  <ArticleForm />
+                </ProtectedRoute>
+              } />
+              <Route path="/admin/articles/edit/:id" element={
+                <ProtectedRoute>
+                  <ArticleFormWrapper />
                 </ProtectedRoute>
               } />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
