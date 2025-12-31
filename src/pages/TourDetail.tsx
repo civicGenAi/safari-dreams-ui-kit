@@ -12,6 +12,7 @@ import { TourBookingWidget } from '@/components/tour-detail/TourBookingWidget';
 import { SimilarTours } from '@/components/tour-detail/SimilarTours';
 import { TourReviews } from '@/components/tour-detail/TourReviews';
 import { supabase, Package } from '@/lib/supabase';
+import { LoadingScreen } from '@/components/ui/loading';
 import { ChevronRight, Home } from 'lucide-react';
 
 const TourDetail = () => {
@@ -58,11 +59,7 @@ const TourDetail = () => {
   }, [slug]);
 
   if (loading) {
-    return (
-      <div className="min-h-screen bg-background flex items-center justify-center">
-        <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary"></div>
-      </div>
-    );
+    return <LoadingScreen message="Loading tour details..." />;
   }
 
   if (!tour) {

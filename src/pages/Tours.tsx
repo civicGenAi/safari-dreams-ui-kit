@@ -4,6 +4,7 @@ import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { supabase, Package } from '@/lib/supabase';
+import { LoadingCards } from '@/components/ui/loading';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import {
@@ -333,9 +334,7 @@ const Tours = () => {
 
             {/* Tours Grid */}
             {loading ? (
-              <div className="text-center py-12">
-                <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-              </div>
+              <LoadingCards count={6} />
             ) : filteredTours.length === 0 ? (
               <div className="text-center py-12">
                 <p className="text-muted-foreground text-lg mb-4">

@@ -6,6 +6,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from '@/components/ui/dialog';
 import { useToast } from '@/hooks/use-toast';
+import { LoadingScreen } from '@/components/ui/loading';
 import { Plus, Edit, Trash2, Search, Eye } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 
@@ -87,9 +88,7 @@ const AdminPackages = () => {
   if (loading) {
     return (
       <AdminLayout>
-        <div className="flex items-center justify-center h-96">
-          <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-primary"></div>
-        </div>
+        <LoadingScreen message="Loading packages..." fullScreen={false} />
       </AdminLayout>
     );
   }
