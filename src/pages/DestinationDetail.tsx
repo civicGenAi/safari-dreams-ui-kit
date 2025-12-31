@@ -389,25 +389,79 @@ Overall, Jordan is a diverse country that offers something for everyone, from an
               Discover the wonders of East Africa's most captivating locations
             </p>
           </div>
-          <div className="flex justify-center">
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl">
-              {otherDestinations.map((dest) => (
-                <Link key={dest.slug} to={`/destinations/${dest.slug}`} className="group relative w-full h-80 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105">
-                  <img src={dest.image} alt={dest.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/95 via-charcoal/60 to-transparent" />
-                  <div className="absolute inset-0 flex flex-col justify-end p-6">
-                    <h3 className="font-display text-2xl font-bold text-white mb-2">{dest.name}</h3>
-                    <p className="text-white/90 text-sm mb-4">{dest.tours} Tours Available</p>
-                    <Button variant="secondary" size="sm" className="text-xs px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 gap-2">
-                      Explore Now <ArrowRight className="w-3 h-3" />
-                    </Button>
-                  </div>
-                </Link>
-              ))}
+
+          {/* Creative Staggered Grid Layout */}
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
+              {otherDestinations.map((dest, index) => {
+                const isFirst = index === 0;
+                const heightClass = isFirst ? 'md:row-span-2 h-[500px]' : 'h-[240px]';
+
+                return (
+                  <Link
+                    key={dest.slug}
+                    to={`/destinations/${dest.slug}`}
+                    className={`group relative rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 ${heightClass}`}
+                    style={{
+                      animation: `slideInUp 0.8s ease-out ${index * 0.1}s both`,
+                    }}
+                  >
+                    <img
+                      src={dest.image}
+                      alt={dest.name}
+                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-charcoal/50 via-charcoal/20 to-transparent" />
+
+                    {/* Hover Shine Effect */}
+                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
+
+                    <div className="absolute inset-0 flex flex-col justify-end p-6 lg:p-8">
+                      <div className="transform transition-all duration-500 group-hover:-translate-y-2">
+                        {/* Badge */}
+                        <div className="inline-flex items-center gap-2 bg-primary/90 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-heading font-semibold uppercase tracking-wider mb-3">
+                          <Star className="w-3 h-3 fill-current" />
+                          Popular
+                        </div>
+
+                        <h3 className="font-display text-2xl lg:text-3xl font-bold text-white mb-2">
+                          {dest.name}
+                        </h3>
+                        <p className="text-white/90 text-sm mb-4">{dest.tours} Tours Available</p>
+
+                        <Button
+                          variant="secondary"
+                          size="sm"
+                          className="text-xs px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 gap-2"
+                        >
+                          Explore Now <ArrowRight className="w-3 h-3" />
+                        </Button>
+                      </div>
+                    </div>
+
+                    {/* Bottom Accent Line */}
+                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
+                  </Link>
+                );
+              })}
             </div>
           </div>
         </div>
       </div>
+
+      {/* Custom Animations */}
+      <style>{`
+        @keyframes slideInUp {
+          from {
+            opacity: 0;
+            transform: translateY(40px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+      `}</style>
 
       {/* Testimonials */}
       <TestimonialsSection />
