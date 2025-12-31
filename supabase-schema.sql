@@ -7,6 +7,7 @@ CREATE TABLE IF NOT EXISTS packages (
   price NUMERIC NOT NULL,
   duration INTEGER NOT NULL,
   image TEXT NOT NULL,
+  images JSONB DEFAULT '[]'::jsonb,
   destination TEXT NOT NULL,
   category TEXT NOT NULL,
   difficulty TEXT NOT NULL CHECK (difficulty IN ('Easy', 'Moderate', 'Challenging')),
@@ -16,6 +17,9 @@ CREATE TABLE IF NOT EXISTS packages (
   created_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL,
   updated_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc'::text, NOW()) NOT NULL
 );
+
+-- Add images column to existing packages table (if upgrading)
+ALTER TABLE packages ADD COLUMN IF NOT EXISTS images JSONB DEFAULT '[]'::jsonb;
 
 -- Create admin users table for authentication
 CREATE TABLE IF NOT EXISTS admin_users (

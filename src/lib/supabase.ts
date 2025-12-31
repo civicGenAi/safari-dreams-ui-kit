@@ -18,6 +18,7 @@ export interface Package {
   price: number;
   duration: number;
   image: string;
+  images?: string[];
   destination: string;
   category: string;
   difficulty: 'Easy' | 'Moderate' | 'Challenging';
