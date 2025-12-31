@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { AdminLayout } from '@/components/admin/AdminLayout';
-import { PackageForm } from '@/components/admin/PackageForm';
+import { TravelIdeaForm } from '@/components/admin/TravelIdeaForm';
 import { supabase, TravelIdea } from '@/lib/supabase';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
@@ -81,7 +81,6 @@ const AdminTravelIdeas = () => {
 
   const filteredIdeas = travelIdeas.filter(idea =>
     idea.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-    idea.destination.toLowerCase().includes(searchQuery.toLowerCase()) ||
     idea.category.toLowerCase().includes(searchQuery.toLowerCase())
   );
 
@@ -124,7 +123,7 @@ const AdminTravelIdeas = () => {
               <Input
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
-                placeholder="Search travel ideas by title, destination, or category..."
+                placeholder="Search travel ideas by title or category..."
                 className="pl-10"
               />
             </div>
@@ -142,17 +141,17 @@ const AdminTravelIdeas = () => {
           <Card>
             <CardContent className="pt-6">
               <div className="text-2xl font-bold">
-                {new Set(travelIdeas.map(p => p.destination)).size}
+                {new Set(travelIdeas.map(p => p.category)).size}
               </div>
-              <div className="text-sm text-muted-foreground">Destinations</div>
+              <div className="text-sm text-muted-foreground">Categories</div>
             </CardContent>
           </Card>
           <Card>
             <CardContent className="pt-6">
               <div className="text-2xl font-bold">
-                {new Set(travelIdeas.map(p => p.category)).size}
+                {new Set(travelIdeas.map(p => p.category_type).filter(Boolean)).size}
               </div>
-              <div className="text-sm text-muted-foreground">Categories</div>
+              <div className="text-sm text-muted-foreground">Experience Types</div>
             </CardContent>
           </Card>
           <Card>
@@ -196,11 +195,13 @@ const AdminTravelIdeas = () => {
                           </h3>
                           <div className="flex flex-wrap gap-2 text-sm text-muted-foreground mb-2">
                             <span className="inline-flex items-center gap-1 bg-muted px-2 py-0.5 rounded">
-                              {idea.destination}
-                            </span>
-                            <span className="inline-flex items-center gap-1 bg-muted px-2 py-0.5 rounded">
                               {idea.category}
                             </span>
+                            {idea.category_type && (
+                              <span className="inline-flex items-center gap-1 bg-muted px-2 py-0.5 rounded">
+                                {idea.category_type}
+                              </span>
+                            )}
                             <span className="inline-flex items-center gap-1 bg-muted px-2 py-0.5 rounded">
                               {idea.difficulty}
                             </span>
@@ -284,9 +285,8 @@ const AdminTravelIdeas = () => {
               {editingIdea ? 'Edit Travel Idea' : 'Add New Travel Idea'}
             </DialogTitle>
           </DialogHeader>
-          <PackageForm
-            package={editingIdea || undefined}
-            tableName="travel_ideas"
+          <TravelIdeaForm
+            travelIdea={editingIdea || undefined}
             onSuccess={handleSuccess}
             onCancel={() => {
               setDialogOpen(false);

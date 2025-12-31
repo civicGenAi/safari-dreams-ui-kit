@@ -44,8 +44,9 @@ export interface TravelIdea {
   duration: number;
   image: string;
   images?: string[];
-  destination: string;
-  category: string;
+  destination?: string;
+  category: 'Migration Safaris' | 'Romantic Holidays' | 'Safari Beach Holidays' | 'Adventure Seekers' | 'Luxury Tours' | 'Gorilla and Chimp Trekking' | 'Cross Border Safaris' | 'Day Tours' | 'Pilgrimage Tours';
+  category_type?: string;
   difficulty: 'Easy' | 'Moderate' | 'Challenging';
   included: string[];
   excluded: string[];
