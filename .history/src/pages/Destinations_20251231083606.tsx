@@ -31,7 +31,7 @@ const Destinations = () => {
       name: 'Rwanda',
       slug: 'rwanda',
       tours: 6,
-      image: '/src/assets/dest/rwanda.jpg',
+      image: '/src/assets/dest/rwanda.jpeg',
       description: 'Trek with mountain gorillas',
       badge: 'Wildlife'
     },
@@ -56,7 +56,7 @@ const Destinations = () => {
     {
       name: 'Namibia',
       slug: 'namibia',
-      image: '/src/assets/dest/namibia-giraffe-drinking-wildlife-scaled.webp',
+      image: '/src/assets/dest/namibia.jpeg',
       description: 'Desert landscapes & wildlife',
       badge: 'Coming Soon'
     },
@@ -83,7 +83,7 @@ const Destinations = () => {
       {/* Hero Section */}
       <div className="relative h-[300px] md:h-[400px]">
         <img
-          src="/header_bg_new4.gif"
+          src="/src/assets/header_bg_new4.gif"
           alt="Destinations"
           className="w-full h-full object-cover"
         />
@@ -182,7 +182,7 @@ const Destinations = () => {
       <div className="relative py-32 md:py-40 overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="/header_bg_new4.gif"
+            src="/src/assets/destination_home.webp"
             alt="Curated Destinations"
             className="w-full h-full object-cover"
           />

@@ -15,7 +15,7 @@ const Destinations = () => {
       name: 'Tanzania',
       slug: 'tanzania',
       tours: 29,
-      image: '/src/assets/dest/Tanzania-Landmarks-Mount-Kilimanjaro.jpg',
+      image: '/src/assets/dest/tanzania.jpg',
       description: 'Serengeti & Kilimanjaro await',
       badge: 'Popular'
     },
@@ -49,21 +49,21 @@ const Destinations = () => {
     {
       name: 'South Africa',
       slug: 'south-africa',
-      image: '/src/assets/dest/sa.jpg',
+      image: '/src/assets/dest/south-africa.jpg',
       description: 'Safari meets sophistication',
       badge: 'Coming Soon'
     },
     {
       name: 'Namibia',
       slug: 'namibia',
-      image: '/src/assets/dest/namibia-giraffe-drinking-wildlife-scaled.webp',
+      image: '/src/assets/dest/namibia.jpg',
       description: 'Desert landscapes & wildlife',
       badge: 'Coming Soon'
     },
     {
       name: 'Botswana',
       slug: 'botswana',
-      image: '/src/assets/dest/Botswana-Okavango-Delta-10.jpg',
+      image: '/src/assets/dest/botswana.jpg',
       description: 'Pristine wilderness & delta',
       badge: 'Coming Soon'
     },
@@ -83,7 +83,7 @@ const Destinations = () => {
       {/* Hero Section */}
       <div className="relative h-[300px] md:h-[400px]">
         <img
-          src="/header_bg_new4.gif"
+          src="/src/assets/destination_home.webp"
           alt="Destinations"
           className="w-full h-full object-cover"
         />
@@ -182,7 +182,7 @@ const Destinations = () => {
       <div className="relative py-32 md:py-40 overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="/header_bg_new4.gif"
+            src="/src/assets/header_bg_new4.gif"
             alt="Curated Destinations"
             className="w-full h-full object-cover"
           />

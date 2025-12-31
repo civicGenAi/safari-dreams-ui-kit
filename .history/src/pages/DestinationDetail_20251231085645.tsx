@@ -5,9 +5,7 @@ import { Footer } from '@/components/Footer';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { NewsletterSection } from '@/components/NewsletterSection';
 import { TestimonialsSection } from '@/components/TestimonialsSection';
-import { mockDestinations } from '@/data/mockData';
-import { supabase, Package } from '@/lib/supabase';
-import { LoadingCards } from '@/components/ui/loading';
+import { mockDestinations, mockTours } from '@/data/mockData';
 import { Button } from '@/components/ui/button';
 import {
   MapPin,
@@ -18,8 +16,7 @@ import {
   ArrowRight,
   ChevronLeft,
   ChevronRight,
-  Star,
-  Clock
+  Star
 } from 'lucide-react';
 
 const travelIdeasCards = [
@@ -35,38 +32,12 @@ const DestinationDetail = () => {
   const { slug } = useParams<{ slug: string }>();
   const destination = mockDestinations.find((d) => d.slug === slug);
   const [currentSlide, setCurrentSlide] = useState(0);
-  const [destinationTours, setDestinationTours] = useState<Package[]>([]);
-  const [loadingTours, setLoadingTours] = useState(true);
   const autoScrollRef = useRef<NodeJS.Timeout>();
 
   const otherDestinations = mockDestinations
     .filter((d) => d.slug !== slug && !['egypt', 'israel', 'jordan'].includes(d.slug))
     .slice(0, 6);
-
-  // Fetch packages for this destination
-  useEffect(() => {
-    const fetchDestinationTours = async () => {
-      if (!destination) return;
-
-      setLoadingTours(true);
-      try {
-        const { data, error } = await supabase
-          .from('packages')
-          .select('*')
-          .ilike('destination', destination.name) // Case-insensitive match
-          .order('created_at', { ascending: false });
-
-        if (error) throw error;
-        setDestinationTours(data || []);
-      } catch (error) {
-        console.error('Error fetching destination tours:', error);
-      } finally {
-        setLoadingTours(false);
-      }
-    };
-
-    fetchDestinationTours();
-  }, [destination]);
+  const destinationTours = mockTours.filter((t) => t.destination === slug);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -92,7 +63,7 @@ const DestinationDetail = () => {
   const destinationContent: Record<string, { title: string; content: string; heroImage: string }> = {
     tanzania: {
       title: 'Adventure full Tanzania',
-      heroImage: '/src/assets/dest/222901-Muyuni-Beach.webp',
+      heroImage: '/src/assets/dest/tanzania.jpg',
       content: `Tanzania is a beautiful country located in East Africa, boasting a wealth of tourist attractions that cater to different interests. One of the most popular destinations is the Serengeti National Park, which is a world-renowned wildlife sanctuary and the site of the famous wildebeest migration. Visitors can witness vast herds of wildebeest, zebras, and gazelles as they cross the park's plains in search of water and grazing land. It is also home to the "Big Five" – lions, elephants, buffaloes, leopards, and rhinos.
 
 Another natural wonder is Mount Kilimanjaro, the highest peak in Africa, which attracts thousands of hikers and mountaineers from around the world every year. The climb to the summit is a once-in-a-lifetime experience that provides breathtaking views of the surrounding landscape.
@@ -191,7 +162,7 @@ Overall, Jordan is a diverse country that offers something for everyone, from an
 
       {/* Hero */}
       <div className="relative h-[400px] md:h-[500px]">
-        <img src="/header_bg_new4.gif" alt={destination.name} className="w-full h-full object-cover" />
+        <img src="/src/assets/header_bg_new4.gif" alt={destination.name} className="w-full h-full object-cover" />
         <div className="absolute inset-0 flex items-center">
           <div className="container mx-auto px-4 lg:px-8">
             <div className="text-white mb-4">
@@ -374,62 +345,37 @@ Overall, Jordan is a diverse country that offers something for everyone, from an
       </div>
 
       {/* Tours in Country */}
-      <div className="py-24 bg-muted/20">
-        <div className="container mx-auto px-4 lg:px-8">
-          <h2 className="font-display text-4xl md:text-5xl font-bold text-center mb-12">
-            Explore {destination.name}
-          </h2>
-
-          {loadingTours ? (
-            <LoadingCards count={6} />
-          ) : destinationTours.length === 0 ? (
-            <div className="text-center py-12">
-              <p className="text-muted-foreground text-lg">No packages available for {destination.name} yet.</p>
-              <Link to="/tours" className="inline-block mt-4">
-                <Button variant="primary">Browse All Tours</Button>
-              </Link>
-            </div>
-          ) : (
+      {destinationTours.length > 0 && (
+        <div className="py-24 bg-muted/20">
+          <div className="container mx-auto px-4 lg:px-8">
+            <h2 className="font-display text-4xl md:text-5xl font-bold text-center mb-12">
+              Explore {destination.name}
+            </h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {destinationTours.map((pkg) => (
-                <Link key={pkg.id} to={`/tours/${pkg.slug}`} className="group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all">
+              {destinationTours.map((tour) => (
+                <Link key={tour.id} to={`/tours/${tour.slug}`} className="group bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-2xl transition-all">
                   <div className="relative h-64">
-                    <img src={pkg.image} alt={pkg.title} className="w-full h-full object-cover transition-transform group-hover:scale-105" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-
-                    {/* Price Badge */}
+                    <img src={tour.image} alt={tour.title} className="w-full h-full object-cover transition-transform group-hover:scale-105" />
                     <div className="absolute top-4 right-4 bg-white px-4 py-2 rounded-xl shadow-lg">
-                      <span className="font-display text-xl font-bold text-primary">${pkg.price}</span>
-                    </div>
-
-                    {/* Category Badge */}
-                    <div className="absolute top-4 left-4 bg-secondary text-white px-3 py-1 rounded-full text-xs font-heading font-semibold">
-                      {pkg.category}
+                      <span className="font-display text-xl font-bold text-primary">${tour.price}</span>
                     </div>
                   </div>
                   <div className="p-6">
                     <h3 className="font-display text-xl font-bold mb-2 group-hover:text-primary transition-colors line-clamp-2">
-                      {pkg.title}
+                      {tour.title}
                     </h3>
-                    <p className="text-sm text-muted-foreground line-clamp-2 mb-3">
-                      {pkg.description}
-                    </p>
-                    <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                      <div className="flex items-center gap-1">
-                        <Clock className="w-4 h-4" />
-                        <span>{pkg.duration} days</span>
-                      </div>
-                      <div className="px-2 py-1 bg-muted rounded-full text-xs font-semibold">
-                        {pkg.difficulty}
-                      </div>
+                    <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <Star className="w-4 h-4 fill-secondary text-secondary" />
+                      <span className="font-semibold">{tour.rating}</span>
+                      <span>({tour.reviews} reviews)</span>
                     </div>
                   </div>
                 </Link>
               ))}
             </div>
-          )}
+          </div>
         </div>
-      </div>
+      )}
 
       {/* Popular Destinations */}
       <div className="py-24 bg-gradient-to-b from-muted/20 to-white">
@@ -443,79 +389,25 @@ Overall, Jordan is a diverse country that offers something for everyone, from an
               Discover the wonders of East Africa's most captivating locations
             </p>
           </div>
-
-          {/* Creative Staggered Grid Layout */}
-          <div className="max-w-6xl mx-auto">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 lg:gap-8">
-              {otherDestinations.map((dest, index) => {
-                const isFirst = index === 0;
-                const heightClass = isFirst ? 'md:row-span-2 h-[500px]' : 'h-[240px]';
-
-                return (
-                  <Link
-                    key={dest.slug}
-                    to={`/destinations/${dest.slug}`}
-                    className={`group relative rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 ${heightClass}`}
-                    style={{
-                      animation: `slideInUp 0.8s ease-out ${index * 0.1}s both`,
-                    }}
-                  >
-                    <img
-                      src={dest.image}
-                      alt={dest.name}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-charcoal/50 via-charcoal/20 to-transparent" />
-
-                    {/* Hover Shine Effect */}
-                    <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white/10 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000" />
-
-                    <div className="absolute inset-0 flex flex-col justify-end p-6 lg:p-8">
-                      <div className="transform transition-all duration-500 group-hover:-translate-y-2">
-                        {/* Badge */}
-                        <div className="inline-flex items-center gap-2 bg-primary/90 backdrop-blur-sm text-white px-3 py-1 rounded-full text-xs font-heading font-semibold uppercase tracking-wider mb-3">
-                          <Star className="w-3 h-3 fill-current" />
-                          Popular
-                        </div>
-
-                        <h3 className="font-display text-2xl lg:text-3xl font-bold text-white mb-2">
-                          {dest.name}
-                        </h3>
-                        <p className="text-white/90 text-sm mb-4">{dest.tours} Tours Available</p>
-
-                        <Button
-                          variant="secondary"
-                          size="sm"
-                          className="text-xs px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 gap-2"
-                        >
-                          Explore Now <ArrowRight className="w-3 h-3" />
-                        </Button>
-                      </div>
-                    </div>
-
-                    {/* Bottom Accent Line */}
-                    <div className="absolute bottom-0 left-0 right-0 h-1 bg-primary transform scale-x-0 group-hover:scale-x-100 transition-transform duration-500" />
-                  </Link>
-                );
-              })}
+          <div className="flex justify-center">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-6xl">
+              {otherDestinations.map((dest) => (
+                <Link key={dest.slug} to={`/destinations/${dest.slug}`} className="group relative w-full h-80 rounded-3xl overflow-hidden shadow-xl hover:shadow-2xl transition-all duration-500 hover:scale-105">
+                  <img src={dest.image} alt={dest.name} className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/95 via-charcoal/60 to-transparent" />
+                  <div className="absolute inset-0 flex flex-col justify-end p-6">
+                    <h3 className="font-display text-2xl font-bold text-white mb-2">{dest.name}</h3>
+                    <p className="text-white/90 text-sm mb-4">{dest.tours} Tours Available</p>
+                    <Button variant="secondary" size="sm" className="text-xs px-4 py-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 gap-2">
+                      Explore Now <ArrowRight className="w-3 h-3" />
+                    </Button>
+                  </div>
+                </Link>
+              ))}
             </div>
           </div>
         </div>
       </div>
-
-      {/* Custom Animations */}
-      <style>{`
-        @keyframes slideInUp {
-          from {
-            opacity: 0;
-            transform: translateY(40px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
 
       {/* Testimonials */}
       <TestimonialsSection />
