@@ -1,101 +1,97 @@
 import { useState } from 'react';
-import { ItineraryDay } from '@/data/types';
-import { ChevronDown, MapPin, Utensils, Hotel } from 'lucide-react';
+import { ChevronDown, Clock } from 'lucide-react';
+
+interface ItineraryDay {
+  day: number;
+  title: string;
+  description: string;
+  activities?: string[];
+  images?: string[];
+}
 
 interface TourItineraryProps {
   itinerary: ItineraryDay[];
 }
 
 export const TourItinerary = ({ itinerary }: TourItineraryProps) => {
-  const [expandedDays, setExpandedDays] = useState<number[]>([1]); // First day expanded by default
+  const [expandedDay, setExpandedDay] = useState<number | null>(null);
 
-  const toggleDay = (day: number) => {
-    setExpandedDays((prev) =>
-      prev.includes(day) ? prev.filter((d) => d !== day) : [...prev, day]
-    );
-  };
+  if (!itinerary || itinerary.length === 0) {
+    return null;
+  }
 
   return (
-    <div>
-      <h2 className="text-2xl font-display font-bold mb-6">Detailed Itinerary</h2>
-      <div className="space-y-3">
-        {itinerary.map((day) => {
-          const isExpanded = expandedDays.includes(day.day);
+    <div className="space-y-6">
+      <div>
+        <h2 className="text-3xl font-display font-bold mb-2">Day-by-Day Itinerary</h2>
+        <p className="text-muted-foreground">Detailed schedule of activities for each day</p>
+      </div>
 
-          return (
-            <div
-              key={day.day}
-              className="rounded-xl border border-border bg-card overflow-hidden transition-all"
+      <div className="space-y-4">
+        {itinerary.map((day) => (
+          <div
+            key={day.day}
+            className="border border-border rounded-xl overflow-hidden bg-card hover:shadow-md transition-shadow"
+          >
+            <button
+              onClick={() => setExpandedDay(expandedDay === day.day ? null : day.day)}
+              className="w-full p-6 flex items-center justify-between text-left hover:bg-muted/30 transition-colors"
             >
-              {/* Day Header - Clickable */}
-              <button
-                onClick={() => toggleDay(day.day)}
-                className="w-full p-5 flex items-center justify-between hover:bg-muted/50 transition-colors text-left"
-              >
-                <div className="flex items-center gap-4">
-                  <div className="flex-shrink-0 w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center">
-                    <span className="font-display font-bold text-primary">
-                      {day.day}
-                    </span>
-                  </div>
+              <div className="flex items-center gap-4 flex-1">
+                <div className="w-12 h-12 rounded-full bg-primary/10 flex items-center justify-center flex-shrink-0">
+                  <span className="font-heading font-bold text-primary">{day.day}</span>
+                </div>
+                <div className="flex-1">
+                  <h3 className="font-heading font-bold text-lg mb-1">{day.title}</h3>
+                  <p className="text-sm text-muted-foreground line-clamp-1">{day.description}</p>
+                </div>
+              </div>
+              <ChevronDown
+                className={`w-5 h-5 text-muted-foreground transition-transform ${
+                  expandedDay === day.day ? 'rotate-180' : ''
+                }`}
+              />
+            </button>
+
+            {expandedDay === day.day && (
+              <div className="px-6 pb-6 space-y-4 border-t">
+                <p className="text-muted-foreground pt-4">{day.description}</p>
+
+                {/* Activities List */}
+                {day.activities && day.activities.length > 0 && (
                   <div>
-                    <h3 className="font-display font-bold text-lg text-foreground">
-                      Day {day.day}: {day.title}
-                    </h3>
-                    {day.accommodation && (
-                      <div className="flex items-center gap-2 mt-1 text-sm text-muted-foreground">
-                        <Hotel className="w-4 h-4" />
-                        <span>{day.accommodation}</span>
-                      </div>
-                    )}
+                    <h4 className="font-heading font-semibold mb-3 flex items-center gap-2">
+                      <Clock className="w-4 h-4 text-primary" />
+                      Activities
+                    </h4>
+                    <ul className="space-y-2">
+                      {day.activities.map((activity, index) => (
+                        <li key={index} className="flex items-start gap-2 text-sm">
+                          <span className="text-primary mt-0.5">•</span>
+                          <span className="text-muted-foreground">{activity}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                </div>
-                <ChevronDown
-                  className={`w-5 h-5 text-muted-foreground transition-transform ${
-                    isExpanded ? 'rotate-180' : ''
-                  }`}
-                />
-              </button>
+                )}
 
-              {/* Day Content - Expandable */}
-              {isExpanded && (
-                <div className="px-5 pb-5 pt-2 space-y-4 border-t border-border">
-                  <p className="text-muted-foreground leading-relaxed">
-                    {day.description}
-                  </p>
-
-                  {/* Activities */}
-                  {day.activities && day.activities.length > 0 && (
-                    <div>
-                      <div className="flex items-center gap-2 mb-2">
-                        <MapPin className="w-4 h-4 text-primary" />
-                        <span className="font-heading font-semibold text-sm">Activities</span>
-                      </div>
-                      <ul className="space-y-1 ml-6">
-                        {day.activities.map((activity, index) => (
-                          <li key={index} className="text-sm text-muted-foreground list-disc">
-                            {activity}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  )}
-
-                  {/* Meals */}
-                  {day.meals && day.meals.length > 0 && (
-                    <div className="flex items-center gap-2">
-                      <Utensils className="w-4 h-4 text-primary" />
-                      <span className="font-heading font-semibold text-sm">Meals:</span>
-                      <span className="text-sm text-muted-foreground">
-                        {day.meals.join(', ')}
-                      </span>
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-          );
-        })}
+                {/* Day Images */}
+                {day.images && day.images.length > 0 && (
+                  <div className="grid grid-cols-2 gap-3 pt-2">
+                    {day.images.map((image, index) => (
+                      <img
+                        key={index}
+                        src={image}
+                        alt={`${day.title} - Image ${index + 1}`}
+                        className="w-full h-40 object-cover rounded-lg"
+                      />
+                    ))}
+                  </div>
+                )}
+              </div>
+            )}
+          </div>
+        ))}
       </div>
     </div>
   );
