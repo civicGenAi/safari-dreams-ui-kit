@@ -25,6 +25,8 @@ import CookiePreferences from "./pages/CookiePreferences";
 import PrivacyPolicy from "./pages/PrivacyPolicy";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
+import AdminPackages from "./pages/AdminPackages";
+import AdminBulkImport from "./pages/AdminBulkImport";
 
 const queryClient = new QueryClient();
 
@@ -82,6 +84,16 @@ const App = () => {
               <Route path="/admin/dashboard" element={
                 <ProtectedRoute>
                   <AdminDashboard />
+                </ProtectedRoute>
+              } />
+              <Route path="/admin/packages" element={
+                <ProtectedRoute>
+                  <AdminPackages />
+                </ProtectedRoute>
+              } />
+              <Route path="/admin/bulk-import" element={
+                <ProtectedRoute>
+                  <AdminBulkImport />
                 </ProtectedRoute>
               } />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
