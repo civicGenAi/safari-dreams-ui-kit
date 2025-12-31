@@ -420,15 +420,53 @@ export const ArticleForm = ({ article }: ArticleFormProps) => {
                 <FileText className="w-5 h-5" />
                 Article Content *
               </CardTitle>
-              <p className="text-sm text-muted-foreground">
-                Use HTML tags for formatting: &lt;h2&gt;, &lt;h3&gt;, &lt;p&gt;, &lt;strong&gt;, &lt;em&gt;, &lt;ul&gt;, &lt;li&gt;
+              <p className="text-sm text-muted-foreground mb-3">
+                Write your content below using simple HTML formatting. If you're copying from MS Word, paste the text first, then add formatting.
               </p>
+
+              {/* Formatting Help */}
+              <div className="bg-muted/50 rounded-lg p-4 space-y-3 text-sm">
+                <p className="font-semibold">Quick Formatting Guide:</p>
+
+                <div className="grid md:grid-cols-2 gap-3">
+                  <div>
+                    <p className="text-muted-foreground mb-1">Headings:</p>
+                    <code className="text-xs bg-background px-2 py-1 rounded block">&lt;h2&gt;Main Section Title&lt;/h2&gt;</code>
+                    <code className="text-xs bg-background px-2 py-1 rounded block mt-1">&lt;h3&gt;Sub-section&lt;/h3&gt;</code>
+                  </div>
+
+                  <div>
+                    <p className="text-muted-foreground mb-1">Paragraphs:</p>
+                    <code className="text-xs bg-background px-2 py-1 rounded block">&lt;p&gt;Your paragraph text here&lt;/p&gt;</code>
+                  </div>
+
+                  <div>
+                    <p className="text-muted-foreground mb-1">Bold & Italic:</p>
+                    <code className="text-xs bg-background px-2 py-1 rounded block">&lt;strong&gt;Bold text&lt;/strong&gt;</code>
+                    <code className="text-xs bg-background px-2 py-1 rounded block mt-1">&lt;em&gt;Italic text&lt;/em&gt;</code>
+                  </div>
+
+                  <div>
+                    <p className="text-muted-foreground mb-1">Lists:</p>
+                    <code className="text-xs bg-background px-2 py-1 rounded block">&lt;ul&gt;</code>
+                    <code className="text-xs bg-background px-2 py-1 rounded block mt-1 ml-2">&lt;li&gt;Item 1&lt;/li&gt;</code>
+                    <code className="text-xs bg-background px-2 py-1 rounded block ml-2">&lt;li&gt;Item 2&lt;/li&gt;</code>
+                    <code className="text-xs bg-background px-2 py-1 rounded block">&lt;/ul&gt;</code>
+                  </div>
+                </div>
+
+                <div className="pt-2 border-t border-border">
+                  <p className="text-xs text-muted-foreground">
+                    💡 <strong>Tip:</strong> Each paragraph needs &lt;p&gt; tags. Each heading needs &lt;h2&gt; or &lt;h3&gt; tags. Always close tags with &lt;/p&gt;, &lt;/h2&gt;, etc.
+                  </p>
+                </div>
+              </div>
             </CardHeader>
             <CardContent className="space-y-4">
               <textarea
                 value={formData.content}
                 onChange={(e) => handleContentChange(e.target.value)}
-                placeholder="<h2>Introduction</h2>&#10;<p>Start writing your article here...</p>&#10;&#10;<h3>Section Title</h3>&#10;<p>Your content with <strong>bold</strong> and <em>italic</em> text.</p>&#10;&#10;<ul>&#10;  <li>List item 1</li>&#10;  <li>List item 2</li>&#10;</ul>"
+                placeholder="<h2>Introduction</h2>&#10;<p>Welcome to this amazing safari guide! In this article, we'll explore the wonders of Tanzania.</p>&#10;&#10;<h2>Why Visit Tanzania</h2>&#10;<p>Tanzania offers <strong>incredible wildlife experiences</strong> and <em>breathtaking landscapes</em>.</p>&#10;&#10;<h3>Top Attractions</h3>&#10;<ul>&#10;  <li>Serengeti National Park</li>&#10;  <li>Ngorongoro Crater</li>&#10;  <li>Mount Kilimanjaro</li>&#10;</ul>&#10;&#10;<p>Start planning your adventure today!</p>"
                 className="w-full px-4 py-3 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary resize-none font-mono text-sm"
                 rows={20}
                 required
