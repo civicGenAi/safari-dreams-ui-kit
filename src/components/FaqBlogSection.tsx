@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ChevronDown, Calendar, Clock, ArrowRight, HelpCircle, Newspaper } from 'lucide-react';
+import { Article, supabase } from '@/lib/supabase';
 
 // FAQ Data
 const faqs = [
@@ -30,42 +31,40 @@ const faqs = [
   },
 ];
 
-// Blog Posts Data
-const blogPosts = [
-  {
-    id: 1,
-    title: 'The Great Wildebeest Migration: A Complete Guide',
-    excerpt: 'Witness one of nature\'s most spectacular events. Learn when and where to see the Great Migration in all its glory.',
-    image: '/src/assets/hero/revslider_migration02.jpg',
-    category: 'Wildlife',
-    date: 'Dec 15, 2024',
-    readTime: '8 min read',
-    slug: 'great-wildebeest-migration-guide',
-  },
-  {
-    id: 2,
-    title: 'Top 10 Safari Destinations in Tanzania',
-    excerpt: 'From Serengeti to Ngorongoro Crater, discover the most breathtaking safari destinations Tanzania has to offer.',
-    image: '/src/assets/hero/revslider_adventure04.jpg',
-    category: 'Destinations',
-    date: 'Dec 10, 2024',
-    readTime: '6 min read',
-    slug: 'top-safari-destinations-tanzania',
-  },
-  {
-    id: 3,
-    title: 'Gorilla Trekking in Rwanda: What to Expect',
-    excerpt: 'Everything you need to know about gorilla trekking permits, best time to visit, and how to prepare for this once-in-a-lifetime experience.',
-    image: '/src/assets/hero-safari-2.jpg',
-    category: 'Adventure',
-    date: 'Dec 5, 2024',
-    readTime: '7 min read',
-    slug: 'gorilla-trekking-rwanda-guide',
-  },
-];
-
 export const FaqBlogSection = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(0);
+  const [recentArticles, setRecentArticles] = useState<Article[]>([]);
+  const [loadingArticles, setLoadingArticles] = useState(true);
+
+  useEffect(() => {
+    loadRecentArticles();
+  }, []);
+
+  const loadRecentArticles = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('articles')
+        .select('*')
+        .eq('status', 'published')
+        .order('published_date', { ascending: false })
+        .limit(3);
+
+      if (error) throw error;
+      setRecentArticles(data || []);
+    } catch (error) {
+      console.error('Error loading recent articles:', error);
+    } finally {
+      setLoadingArticles(false);
+    }
+  };
+
+  const formatDate = (dateString: string) => {
+    return new Date(dateString).toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+    });
+  };
 
   const toggleFaq = (index: number) => {
     setOpenFaq(openFaq === index ? null : index);
@@ -228,57 +227,83 @@ export const FaqBlogSection = () => {
             </p>
 
             <div className="space-y-6">
-              {blogPosts.map((post, index) => (
-                <Link
-                  key={post.id}
-                  to={`/blog/${post.slug}`}
-                  className="group block bg-background rounded-2xl overflow-hidden border border-border hover:border-secondary/50 transition-all duration-300 card-hover"
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
-                  <div className="grid sm:grid-cols-3 gap-0">
-                    <div className="relative sm:col-span-1 h-48 sm:h-auto overflow-hidden">
-                      <img
-                        src={post.image}
-                        alt={post.title}
-                        className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
-                      />
-                      <div className="absolute top-4 left-4">
-                        <span className="inline-block px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-heading font-semibold text-foreground">
-                          {post.category}
-                        </span>
-                      </div>
-                    </div>
-
-                    <div className="sm:col-span-2 p-6 flex flex-col justify-between">
-                      <div>
-                        <h3 className="font-display text-xl font-bold text-foreground mb-3 group-hover:text-secondary transition-colors">
-                          {post.title}
-                        </h3>
-                        <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
-                          {post.excerpt}
-                        </p>
-                      </div>
-
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-4 text-muted-foreground text-xs">
-                          <div className="flex items-center gap-1">
-                            <Calendar className="w-3.5 h-3.5" />
-                            <span>{post.date}</span>
-                          </div>
-                          <div className="flex items-center gap-1">
-                            <Clock className="w-3.5 h-3.5" />
-                            <span>{post.readTime}</span>
-                          </div>
-                        </div>
-                        <div className="flex items-center gap-2 text-secondary font-heading text-xs uppercase tracking-wider group-hover:gap-3 transition-all">
-                          Read More
-                          <ArrowRight className="w-4 h-4" />
-                        </div>
+              {loadingArticles ? (
+                // Loading skeleton
+                [...Array(3)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="bg-background rounded-2xl overflow-hidden border border-border animate-pulse"
+                  >
+                    <div className="grid sm:grid-cols-3 gap-0">
+                      <div className="sm:col-span-1 h-48 bg-muted" />
+                      <div className="sm:col-span-2 p-6 space-y-4">
+                        <div className="h-6 bg-muted rounded w-3/4" />
+                        <div className="h-4 bg-muted rounded" />
+                        <div className="h-4 bg-muted rounded w-2/3" />
                       </div>
                     </div>
                   </div>
-                </Link>
-              ))}
+                ))
+              ) : recentArticles.length === 0 ? (
+                // No articles message
+                <div className="text-center py-12 bg-background rounded-2xl border border-border">
+                  <Newspaper className="w-12 h-12 mx-auto mb-4 text-muted-foreground" />
+                  <p className="text-muted-foreground">No articles available yet</p>
+                </div>
+              ) : (
+                // Display articles
+                recentArticles.map((article, index) => (
+                  <Link
+                    key={article.id}
+                    to={`/wild-tales/${article.slug}`}
+                    className="group block bg-background rounded-2xl overflow-hidden border border-border hover:border-secondary/50 transition-all duration-300 card-hover"
+                    style={{ animationDelay: `${index * 100}ms` }}
+                  >
+                    <div className="grid sm:grid-cols-3 gap-0">
+                      <div className="relative sm:col-span-1 h-48 sm:h-auto overflow-hidden">
+                        <img
+                          src={article.featured_image || '/header_bg_wildbeest.jpg'}
+                          alt={article.title}
+                          className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                        />
+                        <div className="absolute top-4 left-4">
+                          <span className="inline-block px-3 py-1 bg-white/90 backdrop-blur-sm rounded-full text-xs font-heading font-semibold text-foreground">
+                            {article.category}
+                          </span>
+                        </div>
+                      </div>
+
+                      <div className="sm:col-span-2 p-6 flex flex-col justify-between">
+                        <div>
+                          <h3 className="font-display text-xl font-bold text-foreground mb-3 group-hover:text-secondary transition-colors">
+                            {article.title}
+                          </h3>
+                          <p className="text-muted-foreground text-sm mb-4 line-clamp-2">
+                            {article.excerpt}
+                          </p>
+                        </div>
+
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center gap-4 text-muted-foreground text-xs">
+                            <div className="flex items-center gap-1">
+                              <Calendar className="w-3.5 h-3.5" />
+                              <span>{formatDate(article.published_date || article.created_at)}</span>
+                            </div>
+                            <div className="flex items-center gap-1">
+                              <Clock className="w-3.5 h-3.5" />
+                              <span>{article.read_time} min read</span>
+                            </div>
+                          </div>
+                          <div className="flex items-center gap-2 text-secondary font-heading text-xs uppercase tracking-wider group-hover:gap-3 transition-all">
+                            Read More
+                            <ArrowRight className="w-4 h-4" />
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                ))
+              )}
             </div>
 
             <div className="mt-8">
