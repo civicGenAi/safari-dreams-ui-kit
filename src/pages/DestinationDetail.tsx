@@ -63,7 +63,7 @@ const DestinationDetail = () => {
   const destinationContent: Record<string, { title: string; content: string; heroImage: string }> = {
     tanzania: {
       title: 'Adventure full Tanzania',
-      heroImage: 'https://images.unsplash.com/photo-1568602471122-7832951cc4c5?w=1920',
+      heroImage: '/src/assets/dest/tanzania.jpg',
       content: `Tanzania is a beautiful country located in East Africa, boasting a wealth of tourist attractions that cater to different interests. One of the most popular destinations is the Serengeti National Park, which is a world-renowned wildlife sanctuary and the site of the famous wildebeest migration. Visitors can witness vast herds of wildebeest, zebras, and gazelles as they cross the park's plains in search of water and grazing land. It is also home to the "Big Five" – lions, elephants, buffaloes, leopards, and rhinos.
 
 Another natural wonder is Mount Kilimanjaro, the highest peak in Africa, which attracts thousands of hikers and mountaineers from around the world every year. The climb to the summit is a once-in-a-lifetime experience that provides breathtaking views of the surrounding landscape.
@@ -76,7 +76,7 @@ In conclusion, Tanzania offers a diverse range of attractions that are sure to s
     },
     kenya: {
       title: 'Incredible Kenya - Open and ready to welcome you',
-      heroImage: 'https://images.unsplash.com/photo-1523805009345-7448845a9e53?w=1920',
+      heroImage: '/src/assets/dest/kenya.jpg',
       content: `Kenya boasts a range of natural and cultural attractions that offer travelers a host of exciting experiences. The Masai Mara National Reserve is an iconic destination, famous for its incredible wildlife and thrilling safari experiences. Visitors can experience the great wildebeest migration, spot the Big Five game animals, and explore the reserve's diverse landscapes.
 
 Amboseli National Park is another must-see attraction. It provides stunning views of Mount Kilimanjaro and is home to large herds of elephants. Visitors can go on game drives, nature walks, and cultural tours while learning about the traditions and customs of the Maasai people.
@@ -91,7 +91,7 @@ Whether you're interested in wildlife, culture, history, or beach activities, Ke
     },
     rwanda: {
       title: 'Rwanda: From Gorilla Trekking to Historical Sites',
-      heroImage: 'https://images.unsplash.com/photo-1609198092357-f7c14a0902c8?w=1920',
+      heroImage: '/src/assets/dest/rwanda.jpg',
       content: `Rwanda is a country located in East Africa and has plenty of tourist attractions that are worth visiting. One of the most popular tourist destinations is Volcanoes National Park, which is home to the endangered mountain gorillas. Visitors can enjoy gorilla trekking in the park, which provides an unforgettable experience.
 
 Another must-visit attraction is the Nyungwe Forest National Park, which is a vast rainforest that offers various activities such as chimpanzee tracking, canopy walks, and birdwatching. Akagera National Park is another notable attraction, which is the only park in Rwanda where visitors can spot the big five animals.
@@ -102,7 +102,7 @@ Other attractions include Lake Kivu, which is perfect for relaxing and enjoying 
     },
     uganda: {
       title: 'The Pearl of Africa',
-      heroImage: 'https://images.unsplash.com/photo-1612504508838-e9c04e1eabfe?w=1920',
+      heroImage: '/src/assets/dest/uganda.jpg',
       content: `Uganda, known as the Pearl of Africa, boasts an abundance of natural beauty and cultural heritage. One of the top attractions is the Bwindi Impenetrable National Park, a UNESCO World Heritage Site that hosts nearly half of the world's mountain gorillas. Visitors can embark on gorilla trekking expeditions to witness these magnificent creatures in their natural habitat.
 
 Queen Elizabeth National Park is another must-visit attraction with its diverse range of wildlife, including elephants, lions, hippos, and over 600 bird species. Tourists can indulge in game drives, bird watching tours, and boat safaris while enjoying the scenic views and landscapes.
