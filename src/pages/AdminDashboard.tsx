@@ -1,29 +1,33 @@
 import { useState, useEffect } from 'react';
 import { AdminLayout } from '@/components/admin/AdminLayout';
-import { supabase, Package } from '@/lib/supabase';
+import { supabase, Package, Article } from '@/lib/supabase';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
 import { LoadingScreen } from '@/components/ui/loading';
-import { Package as PackageIcon, TrendingUp, MapPin, Tag, DollarSign, Calendar } from 'lucide-react';
+import { Package as PackageIcon, TrendingUp, MapPin, Tag, DollarSign, Calendar, FileText, Eye, FileCog } from 'lucide-react';
 
 const AdminDashboard = () => {
   const [packages, setPackages] = useState<Package[]>([]);
+  const [articles, setArticles] = useState<Article[]>([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    fetchPackages();
+    fetchData();
   }, []);
 
-  const fetchPackages = async () => {
+  const fetchData = async () => {
     try {
-      const { data, error } = await supabase
-        .from('packages')
-        .select('*')
-        .order('created_at', { ascending: false });
+      const [packagesResult, articlesResult] = await Promise.all([
+        supabase.from('packages').select('*').order('created_at', { ascending: false }),
+        supabase.from('articles').select('*').order('created_at', { ascending: false }),
+      ]);
 
-      if (error) throw error;
-      setPackages(data || []);
+      if (packagesResult.error) throw packagesResult.error;
+      if (articlesResult.error) throw articlesResult.error;
+
+      setPackages(packagesResult.data || []);
+      setArticles(articlesResult.data || []);
     } catch (error) {
-      console.error('Error fetching packages:', error);
+      console.error('Error fetching data:', error);
     } finally {
       setLoading(false);
     }
@@ -36,6 +40,10 @@ const AdminDashboard = () => {
     avgPrice: Math.round(packages.reduce((sum, p) => sum + p.price, 0) / packages.length || 0),
     totalRevenue: packages.reduce((sum, p) => sum + p.price, 0),
     avgDuration: Math.round(packages.reduce((sum, p) => sum + p.duration, 0) / packages.length || 0),
+    totalArticles: articles.length,
+    publishedArticles: articles.filter(a => a.status === 'published').length,
+    draftArticles: articles.filter(a => a.status === 'draft').length,
+    articleCategories: new Set(articles.map(a => a.category)).size,
   };
 
   const destinationBreakdown = packages.reduce((acc, pkg) => {
@@ -63,7 +71,7 @@ const AdminDashboard = () => {
       <div className="space-y-6">
         <div>
           <h1 className="text-3xl font-display font-bold">Dashboard</h1>
-          <p className="text-muted-foreground">Overview of your tour packages</p>
+          <p className="text-muted-foreground">Overview of your tour packages and blog content</p>
         </div>
 
         {/* Stats Grid */}
@@ -131,6 +139,40 @@ const AdminDashboard = () => {
             <CardContent>
               <div className="text-2xl font-bold">{stats.avgDuration} days</div>
               <p className="text-xs text-muted-foreground">Average tour length</p>
+            </CardContent>
+          </Card>
+
+          {/* Article Stats */}
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Total Articles</CardTitle>
+              <FileText className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stats.totalArticles}</div>
+              <p className="text-xs text-muted-foreground">Blog articles</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Published</CardTitle>
+              <Eye className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stats.publishedArticles}</div>
+              <p className="text-xs text-muted-foreground">Live articles</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
+              <CardTitle className="text-sm font-medium">Drafts</CardTitle>
+              <FileCog className="h-4 w-4 text-muted-foreground" />
+            </CardHeader>
+            <CardContent>
+              <div className="text-2xl font-bold">{stats.draftArticles}</div>
+              <p className="text-xs text-muted-foreground">Unpublished drafts</p>
             </CardContent>
           </Card>
         </div>
