@@ -10,7 +10,7 @@ import { TourInclusions } from '@/components/tour-detail/TourInclusions';
 import { TourFAQ } from '@/components/tour-detail/TourFAQ';
 import { TourBookingWidget } from '@/components/tour-detail/TourBookingWidget';
 import { SimilarTours } from '@/components/tour-detail/SimilarTours';
-import { TourReviews } from '@/components/tour-detail/TourReviews';
+import { TravelConfidence } from '@/components/tour-detail/TravelConfidence';
 import { supabase, Package } from '@/lib/supabase';
 import { LoadingScreen } from '@/components/ui/loading';
 import { ChevronRight, Home } from 'lucide-react';
@@ -110,8 +110,8 @@ const TourDetail = () => {
             <TourOverview tour={tour} />
             <TourItinerary itinerary={Array.isArray(tour.itinerary) ? tour.itinerary : []} />
             <TourInclusions included={Array.isArray(tour.included) ? tour.included : []} excluded={Array.isArray(tour.excluded) ? tour.excluded : []} />
+            <TravelConfidence />
             <TourFAQ faqs={[]} />
-            <TourReviews tourId={tour.id} rating={4.8} totalReviews={120} />
           </div>
 
           {/* Right Column - Booking Widget (Sticky) */}
