@@ -307,7 +307,7 @@ const Destinations = () => {
                       </h3>
                       <p className="text-white/90 text-sm mb-4">{dest.description}</p>
                       <div className="flex items-center gap-2 text-white/80 text-sm">
-                        <span>{'tours' in dest ? `${dest.tours}+ Tours Available` : 'Coming Soon'}</span>
+                        <span>{dest.tours}+ Tours Available</span>
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                       </div>
                     </div>

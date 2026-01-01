@@ -9,8 +9,6 @@ import { Button } from '@/components/ui/button';
 import { supabase, TravelIdea, Article } from '@/lib/supabase';
 import { Card, CardContent } from '@/components/ui/card';
 import { LoadingScreen } from '@/components/ui/loading';
-import offer1 from "@/assets/ideas_home_discount.webp";
-import offer2 from "@/assets/ideas_home_discount2.webp";
 
 const TravelIdeas = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -21,6 +19,7 @@ const TravelIdeas = () => {
 
   // Filter states
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [selectedDestination, setSelectedDestination] = useState<string>('all');
   const [priceRange, setPriceRange] = useState<string>('all');
   const [durationRange, setDurationRange] = useState<string>('all');
 
@@ -62,10 +61,12 @@ const TravelIdeas = () => {
 
   // Get unique values for filters
   const categories = Array.from(new Set(travelIdeas.map(idea => idea.category)));
+  const destinations = Array.from(new Set(travelIdeas.map(idea => idea.destination)));
 
   // Apply filters
   const filteredIdeas = travelIdeas.filter(idea => {
     if (selectedCategory !== 'all' && idea.category !== selectedCategory) return false;
+    if (selectedDestination !== 'all' && idea.destination !== selectedDestination) return false;
 
     if (priceRange !== 'all') {
       const price = idea.price;
@@ -167,7 +168,7 @@ const TravelIdeas = () => {
           </div>
 
           {showFilters && (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 animate-in fade-in slide-in-from-top-2 duration-300">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 animate-in fade-in slide-in-from-top-2 duration-300">
               {/* Category Filter */}
               <div>
                 <label className="block text-sm font-medium mb-2">Category</label>
@@ -179,6 +180,21 @@ const TravelIdeas = () => {
                   <option value="all">All Categories</option>
                   {categories.map(cat => (
                     <option key={cat} value={cat}>{cat}</option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Destination Filter */}
+              <div>
+                <label className="block text-sm font-medium mb-2">Destination</label>
+                <select
+                  value={selectedDestination}
+                  onChange={(e) => setSelectedDestination(e.target.value)}
+                  className="w-full px-3 py-2 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary"
+                >
+                  <option value="all">All Destinations</option>
+                  {destinations.map(dest => (
+                    <option key={dest} value={dest}>{dest}</option>
                   ))}
                 </select>
               </div>
@@ -220,18 +236,18 @@ const TravelIdeas = () => {
       {/* Experience Our Travel Ideas */}
       <div className="py-16 md:py-24 bg-muted/20">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-12 sm:mb-16">
-            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold">
+          <div className="flex items-center justify-between mb-16">
+            <h2 className="font-display text-3xl md:text-4xl font-bold">
               Experience Our Travel Ideas
             </h2>
-            <p className="text-sm sm:text-base text-muted-foreground">
+            <p className="text-muted-foreground">
               Showing {filteredIdeas.length} {filteredIdeas.length === 1 ? 'idea' : 'ideas'}
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
             {filteredIdeas.length === 0 ? (
-              <div className="col-span-full text-center py-12">
+              <div className="col-span-3 text-center py-12">
                 <p className="text-muted-foreground">No travel ideas match your filters. Try adjusting your selection.</p>
               </div>
             ) : (
@@ -240,7 +256,7 @@ const TravelIdeas = () => {
                 <Link
                   key={idea.slug}
                   to={`/travel-ideas/${idea.slug}`}
-                  className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 h-[350px] sm:h-[400px]"
+                  className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 h-[400px]"
                 >
                   {/* Background Image */}
                   <img
@@ -267,22 +283,22 @@ const TravelIdeas = () => {
                   </div>
 
                   {/* Content */}
-                  <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 z-10">
-                    <h3 className="font-display text-xl sm:text-2xl font-bold mb-2 sm:mb-3 text-white drop-shadow-lg line-clamp-2">
+                  <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
+                    <h3 className="font-display text-2xl font-bold mb-3 text-white drop-shadow-lg">
                       {idea.title}
                     </h3>
 
-                    <div className="flex items-center justify-between text-white mb-2">
-                      <p className="text-xs sm:text-sm text-white/90">
+                    <div className="flex items-center justify-between text-white">
+                      <p className="text-sm text-white/90">
                         {idea.duration} {idea.duration === 1 ? 'Day' : 'Days'}
                       </p>
                       <p className="font-heading font-semibold">
-                        <span className="text-xs sm:text-sm text-white/90">from</span>
-                        <span className="text-xl sm:text-2xl ml-1 text-primary drop-shadow-lg">${idea.price.toLocaleString()}</span>
+                        <span className="text-sm text-white/90">from</span>
+                        <span className="text-2xl ml-1 text-primary drop-shadow-lg">${idea.price.toLocaleString()}</span>
                       </p>
                     </div>
 
-                    <p className="text-xs sm:text-sm text-white/80 mt-1 sm:mt-2 line-clamp-2">{idea.description}</p>
+                    <p className="text-sm text-white/80 mt-2 line-clamp-2">{idea.description}</p>
                   </div>
                 </Link>
               );
@@ -440,7 +456,7 @@ const TravelIdeas = () => {
               {/* Early Booking Offer */}
               <div className="group relative overflow-hidden rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 border-4 border-primary/60 hover:border-primary">
                 <img
-                   src={offer1}
+                  src="ideas_home_discount.webp"
                   alt="Early Booking Special Offer"
                   className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
                 />
@@ -462,7 +478,7 @@ const TravelIdeas = () => {
               {/* Holiday Season Offer */}
               <div className="group relative overflow-hidden rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 border-4 border-primary/60 hover:border-primary">
                 <img
-                  src={offer2}
+                  src="ideas_home_discount2.webp"
                   alt="Holiday Season Special Offer"
                   className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
                 />
@@ -541,65 +557,58 @@ const TravelIdeas = () => {
       </div>
 
       {/* CTA Section */}
-      <div className="py-24 md:py-32 relative overflow-hidden bg-gradient-to-br from-amber-50 via-yellow-50 to-orange-100">
-        {/* Decorative Pattern Background */}
-        <div className="absolute inset-0 opacity-50">
-          <div className="absolute inset-0" style={{
-            backgroundImage: `
-              radial-gradient(circle at 25% 30%, rgba(251, 146, 60, 0.4) 0%, transparent 50%),
-              radial-gradient(circle at 75% 70%, rgba(249, 115, 22, 0.5) 0%, transparent 50%),
-              radial-gradient(circle at 50% 50%, rgba(245, 158, 11, 0.35) 0%, transparent 50%)
-            `
-          }} />
+      <div className="py-24 md:py-32 relative overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <img
+            src="/header_bg_new4.gif"
+            alt="Background"
+            className="w-full h-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-charcoal/85 via-charcoal/75 to-charcoal/85" />
         </div>
 
         {/* Animated SVG Background */}
         <div className="absolute inset-0 pointer-events-none">
           <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
             {/* Safari map pins */}
-            <g fill="#DC2626" opacity={0.7}>
+            <g fill="white">
               {[...Array(12)].map((_, i) => (
                 <g key={i}>
-                  <circle cx={100 + i * 150} cy={100 + (i % 4) * 120} r="8">
-                    <animate attributeName="opacity" values="0.5;1;0.5" dur={`${3 + i * 0.4}s`} repeatCount="indefinite" />
-                  </circle>
+                  <circle cx={100 + i * 150} cy={100 + (i % 4) * 120} r="8" />
                   <path d={`M ${100 + i * 150} ${100 + (i % 4) * 120} L ${100 + i * 150} ${120 + (i % 4) * 120} L ${95 + i * 150} ${115 + (i % 4) * 120} Z`}>
                     <animate attributeName="opacity" values="0.5;1;0.5" dur={`${3 + i * 0.4}s`} repeatCount="indefinite" />
-                    <animateTransform attributeName="transform" type="translate" values="0,0; 0,-10; 0,0" dur={`${2.5 + i * 0.3}s`} repeatCount="indefinite" />
+                    <animateTransform attributeName="transform" type="translate" values="0,0; 0,-8; 0,0" dur={`${2.5 + i * 0.3}s`} repeatCount="indefinite" />
                   </path>
                 </g>
               ))}
             </g>
 
             {/* Travel routes - curved paths */}
-            <g stroke="#F59E0B" strokeWidth="4" fill="none" strokeDasharray="8,12" opacity={0.7}>
+            <g stroke="white" strokeWidth="2" fill="none" strokeDasharray="8,12">
               <path d="M 0 200 Q 200 150 400 200 T 800 200 Q 1000 150 1200 200 T 1600 200">
                 <animate attributeName="stroke-dashoffset" values="0;80" dur="12s" repeatCount="indefinite" />
-                <animate attributeName="opacity" values="0.5;0.9;0.5" dur="4s" repeatCount="indefinite" />
               </path>
               <path d="M 0 350 Q 200 300 400 350 T 800 350 Q 1000 300 1200 350 T 1600 350">
                 <animate attributeName="stroke-dashoffset" values="80;0" dur="14s" repeatCount="indefinite" />
-                <animate attributeName="opacity" values="0.5;0.9;0.5" dur="5s" repeatCount="indefinite" />
               </path>
               <path d="M 0 500 Q 200 450 400 500 T 800 500 Q 1000 450 1200 500 T 1600 500">
                 <animate attributeName="stroke-dashoffset" values="0;80" dur="16s" repeatCount="indefinite" />
-                <animate attributeName="opacity" values="0.5;0.9;0.5" dur="6s" repeatCount="indefinite" />
               </path>
             </g>
 
             {/* Idea lightbulbs */}
-            <g stroke="#FBBF24" strokeWidth="3" fill="#FEF3C7" opacity={0.8}>
+            <g stroke="white" strokeWidth="2" fill="none">
               {[...Array(6)].map((_, i) => (
                 <g key={i}>
                   <circle cx={180 + i * 280} cy={280 + (i % 3) * 100} r="20">
-                    <animate attributeName="opacity" values="0.5;1;0.5" dur={`${4 + i * 0.6}s`} repeatCount="indefinite" />
-                    <animate attributeName="r" values="20;24;20" dur={`${4 + i * 0.6}s`} repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0.4;0.9;0.4" dur={`${4 + i * 0.6}s`} repeatCount="indefinite" />
                   </circle>
-                  <rect x={175 + i * 280} y={300 + (i % 3) * 100} width="10" height="15" rx="2" fill="#F59E0B" />
-                  <line x1={165 + i * 280} y1={280 + (i % 3) * 100} x2={155 + i * 280} y2={280 + (i % 3) * 100} stroke="#FCD34D" strokeWidth="3">
+                  <rect x={175 + i * 280} y={300 + (i % 3) * 100} width="10" height="15" rx="2" />
+                  <line x1={165 + i * 280} y1={280 + (i % 3) * 100} x2={155 + i * 280} y2={280 + (i % 3) * 100}>
                     <animate attributeName="opacity" values="0;1;0" dur={`${3 + i * 0.5}s`} repeatCount="indefinite" />
                   </line>
-                  <line x1={195 + i * 280} y1={280 + (i % 3) * 100} x2={205 + i * 280} y2={280 + (i % 3) * 100} stroke="#FCD34D" strokeWidth="3">
+                  <line x1={195 + i * 280} y1={280 + (i % 3) * 100} x2={205 + i * 280} y2={280 + (i % 3) * 100}>
                     <animate attributeName="opacity" values="0;1;0" dur={`${3 + i * 0.5}s`} repeatCount="indefinite" begin={`${0.5 + i * 0.2}s`} />
                   </line>
                 </g>
@@ -607,51 +616,40 @@ const TravelIdeas = () => {
             </g>
 
             {/* Experience stars */}
-            <g fill="#F97316" opacity={0.7}>
+            <g fill="white">
               {[...Array(15)].map((_, i) => (
                 <polygon
                   key={i}
                   points={`${120 + i * 120},${50 + (i % 5) * 110} ${125 + i * 120},${60 + (i % 5) * 110} ${135 + i * 120},${60 + (i % 5) * 110} ${128 + i * 120},${67 + (i % 5) * 110} ${132 + i * 120},${77 + (i % 5) * 110} ${120 + i * 120},${70 + (i % 5) * 110} ${108 + i * 120},${77 + (i % 5) * 110} ${112 + i * 120},${67 + (i % 5) * 110} ${105 + i * 120},${60 + (i % 5) * 110} ${115 + i * 120},${60 + (i % 5) * 110}`}
                 >
-                  <animate attributeName="opacity" values="0.4;0.9;0.4" dur={`${4 + i * 0.4}s`} repeatCount="indefinite" />
+                  <animate attributeName="opacity" values="0.3;0.8;0.3" dur={`${4 + i * 0.4}s`} repeatCount="indefinite" />
                   <animateTransform attributeName="transform" type="rotate" values={`0 ${120 + i * 120} ${60 + (i % 5) * 110}; 360 ${120 + i * 120} ${60 + (i % 5) * 110}`} dur={`${15 + i * 2}s`} repeatCount="indefinite" />
                 </polygon>
               ))}
             </g>
 
             {/* Compass decorations */}
-            <g stroke="#EA580C" strokeWidth="3" fill="none" opacity={0.8}>
+            <g stroke="white" strokeWidth="2" fill="none">
               {[...Array(4)].map((_, i) => (
                 <g key={i}>
                   <circle cx={300 + i * 400} cy={400 + (i % 2) * 150} r="35">
-                    <animate attributeName="opacity" values="0.5;1;0.5" dur={`${5 + i * 0.8}s`} repeatCount="indefinite" />
-                    <animate attributeName="r" values="35;40;35" dur={`${5 + i * 0.8}s`} repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0.4;0.7;0.4" dur={`${5 + i * 0.8}s`} repeatCount="indefinite" />
                   </circle>
-                  <line x1={300 + i * 400} y1={365 + (i % 2) * 150} x2={300 + i * 400} y2={380 + (i % 2) * 150} stroke="#DC2626" strokeWidth="4">
+                  <line x1={300 + i * 400} y1={365 + (i % 2) * 150} x2={300 + i * 400} y2={380 + (i % 2) * 150}>
                     <animateTransform attributeName="transform" type="rotate" values={`0 ${300 + i * 400} ${400 + (i % 2) * 150}; 360 ${300 + i * 400} ${400 + (i % 2) * 150}`} dur={`${18 + i * 3}s`} repeatCount="indefinite" />
                   </line>
                 </g>
-              ))}
-            </g>
-
-            {/* Glowing orbs */}
-            <g opacity={0.5}>
-              {[...Array(8)].map((_, i) => (
-                <circle key={i} cx={200 + i * 200} cy={150 + (i % 3) * 150} r="15" fill="#FCD34D">
-                  <animate attributeName="opacity" values="0.3;0.8;0.3" dur={`${3 + i * 0.5}s`} repeatCount="indefinite" />
-                  <animate attributeName="r" values="15;20;15" dur={`${3 + i * 0.5}s`} repeatCount="indefinite" />
-                </circle>
               ))}
             </g>
           </svg>
         </div>
 
         <div className="container mx-auto px-4 lg:px-8 text-center relative z-10">
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-8 drop-shadow-sm">
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 drop-shadow-lg">
             Exceptional Curated Travel Ideas & Experiences !
           </h2>
           <Link to="/contact">
-            <Button variant="primary" size="xl" className="gap-2 shadow-lg hover:shadow-2xl transition-shadow">
+            <Button variant="primary" size="xl" className="gap-2 shadow-2xl">
               Start Exploring
               <ArrowRight className="w-5 h-5" />
             </Button>
