@@ -41,61 +41,139 @@ export const LoadingScreen = ({ message = 'Loading...', fullScreen = true }: Loa
       fullScreen ? 'min-h-screen' : 'py-12'
     )}>
       <div className="relative">
-        {/* Animated safari jeep icon */}
+        {/* Animated compass and globe */}
         <div className="mb-8 relative">
           <svg
-            className="w-24 h-24 text-primary"
-            viewBox="0 0 100 100"
+            className="w-32 h-32"
+            viewBox="0 0 120 120"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            {/* Safari vehicle body */}
-            <rect x="20" y="50" width="60" height="25" rx="3" fill="currentColor" className="animate-pulse" />
+            {/* Rotating globe/world */}
+            <circle cx="60" cy="60" r="45" stroke="#FF6B00" strokeWidth="2" fill="none" opacity="0.3">
+              <animate attributeName="opacity" values="0.2;0.5;0.2" dur="3s" repeatCount="indefinite" />
+            </circle>
 
-            {/* Windows */}
-            <rect x="25" y="40" width="15" height="12" rx="1" fill="currentColor" opacity="0.6" />
-            <rect x="45" y="40" width="15" height="12" rx="1" fill="currentColor" opacity="0.6" />
-            <rect x="65" y="40" width="10" height="12" rx="1" fill="currentColor" opacity="0.6" />
+            {/* Latitude lines */}
+            <ellipse cx="60" cy="60" rx="45" ry="15" stroke="#F59E0B" strokeWidth="1.5" fill="none" opacity="0.6">
+              <animate attributeName="opacity" values="0.4;0.8;0.4" dur="2s" repeatCount="indefinite" />
+            </ellipse>
+            <ellipse cx="60" cy="60" rx="45" ry="30" stroke="#F59E0B" strokeWidth="1.5" fill="none" opacity="0.5">
+              <animate attributeName="opacity" values="0.3;0.7;0.3" dur="2.5s" repeatCount="indefinite" />
+            </ellipse>
 
-            {/* Wheels */}
-            <circle cx="30" cy="75" r="8" fill="currentColor">
+            {/* Longitude line - rotating */}
+            <ellipse cx="60" cy="60" rx="15" ry="45" stroke="#EA580C" strokeWidth="1.5" fill="none" opacity="0.7">
               <animateTransform
                 attributeName="transform"
                 type="rotate"
-                from="0 30 75"
-                to="360 30 75"
-                dur="1s"
+                from="0 60 60"
+                to="360 60 60"
+                dur="4s"
                 repeatCount="indefinite"
               />
-            </circle>
-            <circle cx="70" cy="75" r="8" fill="currentColor">
+            </ellipse>
+
+            {/* Second longitude line */}
+            <ellipse cx="60" cy="60" rx="30" ry="45" stroke="#EA580C" strokeWidth="1.5" fill="none" opacity="0.6">
               <animateTransform
                 attributeName="transform"
                 type="rotate"
-                from="0 70 75"
-                to="360 70 75"
-                dur="1s"
+                from="0 60 60"
+                to="360 60 60"
+                dur="6s"
+                repeatCount="indefinite"
+              />
+            </ellipse>
+
+            {/* Compass outer ring */}
+            <circle cx="60" cy="60" r="52" stroke="#D97706" strokeWidth="2" fill="none" opacity="0.8" strokeDasharray="3,3">
+              <animateTransform
+                attributeName="transform"
+                type="rotate"
+                from="0 60 60"
+                to="360 60 60"
+                dur="20s"
                 repeatCount="indefinite"
               />
             </circle>
 
-            {/* Dust clouds */}
-            <circle cx="15" cy="78" r="3" fill="currentColor" opacity="0.3">
-              <animate attributeName="opacity" values="0.3;0;0.3" dur="1.5s" repeatCount="indefinite" />
-              <animate attributeName="r" values="3;5;3" dur="1.5s" repeatCount="indefinite" />
+            {/* Compass cardinal points */}
+            <g opacity="0.9">
+              {/* North */}
+              <path d="M 60 8 L 63 18 L 60 16 L 57 18 Z" fill="#DC2626">
+                <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite" />
+              </path>
+              {/* South */}
+              <path d="M 60 112 L 63 102 L 60 104 L 57 102 Z" fill="#F59E0B" opacity="0.8" />
+              {/* East */}
+              <circle cx="112" cy="60" r="3" fill="#EA580C" opacity="0.8" />
+              {/* West */}
+              <circle cx="8" cy="60" r="3" fill="#EA580C" opacity="0.8" />
+            </g>
+
+            {/* Animated compass needle */}
+            <g>
+              <path d="M 60 60 L 58 35 L 60 30 L 62 35 Z" fill="#DC2626">
+                <animateTransform
+                  attributeName="transform"
+                  type="rotate"
+                  values="0 60 60; 20 60 60; -20 60 60; 0 60 60"
+                  dur="3s"
+                  repeatCount="indefinite"
+                />
+                <animate attributeName="opacity" values="0.8;1;0.8" dur="1.5s" repeatCount="indefinite" />
+              </path>
+              <path d="M 60 60 L 58 85 L 60 90 L 62 85 Z" fill="#6B7280" opacity="0.7">
+                <animateTransform
+                  attributeName="transform"
+                  type="rotate"
+                  values="0 60 60; 20 60 60; -20 60 60; 0 60 60"
+                  dur="3s"
+                  repeatCount="indefinite"
+                />
+              </path>
+              <circle cx="60" cy="60" r="5" fill="#FF6B00">
+                <animate attributeName="r" values="5;6;5" dur="1.5s" repeatCount="indefinite" />
+              </circle>
+            </g>
+
+            {/* Orbiting location pins */}
+            <g>
+              <circle cx="60" cy="15" r="4" fill="#FBBF24">
+                <animateTransform
+                  attributeName="transform"
+                  type="rotate"
+                  from="0 60 60"
+                  to="360 60 60"
+                  dur="5s"
+                  repeatCount="indefinite"
+                />
+                <animate attributeName="opacity" values="0.6;1;0.6" dur="1s" repeatCount="indefinite" />
+              </circle>
+              <circle cx="60" cy="105" r="4" fill="#FCD34D">
+                <animateTransform
+                  attributeName="transform"
+                  type="rotate"
+                  from="180 60 60"
+                  to="540 60 60"
+                  dur="5s"
+                  repeatCount="indefinite"
+                />
+                <animate attributeName="opacity" values="0.6;1;0.6" dur="1s" repeatCount="indefinite" begin="0.5s" />
+              </circle>
+            </g>
+
+            {/* Pulsing travel waves */}
+            <circle cx="60" cy="60" r="45" stroke="#FCD34D" strokeWidth="2" fill="none" opacity="0">
+              <animate attributeName="r" values="45;55;65" dur="3s" repeatCount="indefinite" />
+              <animate attributeName="opacity" values="0.6;0.3;0" dur="3s" repeatCount="indefinite" />
             </circle>
-            <circle cx="85" cy="78" r="3" fill="currentColor" opacity="0.3">
-              <animate attributeName="opacity" values="0.3;0;0.3" dur="1.5s" repeatCount="indefinite" begin="0.5s" />
-              <animate attributeName="r" values="3;5;3" dur="1.5s" repeatCount="indefinite" begin="0.5s" />
+            <circle cx="60" cy="60" r="45" stroke="#FBBF24" strokeWidth="2" fill="none" opacity="0">
+              <animate attributeName="r" values="45;55;65" dur="3s" repeatCount="indefinite" begin="1s" />
+              <animate attributeName="opacity" values="0.6;0.3;0" dur="3s" repeatCount="indefinite" begin="1s" />
             </circle>
           </svg>
-
-          {/* Animated path/road */}
-          <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-            <div className="w-2 h-1 bg-primary/40 rounded animate-pulse" style={{ animationDelay: '0s' }}></div>
-            <div className="w-2 h-1 bg-primary/40 rounded animate-pulse" style={{ animationDelay: '0.2s' }}></div>
-            <div className="w-2 h-1 bg-primary/40 rounded animate-pulse" style={{ animationDelay: '0.4s' }}></div>
-          </div>
         </div>
 
         {/* Loading text with animated dots */}
@@ -113,7 +191,7 @@ export const LoadingScreen = ({ message = 'Loading...', fullScreen = true }: Loa
 
       {/* Animated progress hint */}
       <div className="mt-8 w-48 h-1 bg-muted rounded-full overflow-hidden">
-        <div className="h-full bg-gradient-to-r from-primary via-secondary to-primary bg-[length:200%_100%] animate-shimmer"></div>
+        <div className="h-full bg-gradient-to-r from-amber-500 via-orange-500 to-amber-500 bg-[length:200%_100%] animate-shimmer"></div>
       </div>
 
       <style>{`
