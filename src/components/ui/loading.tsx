@@ -84,7 +84,7 @@ export const LoadingScreen = ({ message = 'Loading your next adventure...', full
             <g transform="translate(240, 40)">
               <circle cx="0" cy="0" r="25" stroke="#F97316" strokeWidth="2" fill="none" opacity="0.6" strokeDasharray="3,3">
                 <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="20s" repeatCount="indefinite" />
-              </g>
+              </circle>
               <path d="M 0 -20 L 3 -5 L 0 -8 L -3 -5 Z" fill="#DC2626" opacity="0.9" />
               <path d="M 0 20 L 3 5 L 0 8 L -3 5 Z" fill="#6B7280" opacity="0.7" />
               <circle cx="0" cy="0" r="3" fill="#FF6B00" />
