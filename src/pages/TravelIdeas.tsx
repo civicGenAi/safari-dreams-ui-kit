@@ -218,18 +218,18 @@ const TravelIdeas = () => {
       {/* Experience Our Travel Ideas */}
       <div className="py-16 md:py-24 bg-muted/20">
         <div className="container mx-auto px-4 lg:px-8">
-          <div className="flex items-center justify-between mb-16">
-            <h2 className="font-display text-3xl md:text-4xl font-bold">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-12 sm:mb-16">
+            <h2 className="font-display text-2xl sm:text-3xl md:text-4xl font-bold">
               Experience Our Travel Ideas
             </h2>
-            <p className="text-muted-foreground">
+            <p className="text-sm sm:text-base text-muted-foreground">
               Showing {filteredIdeas.length} {filteredIdeas.length === 1 ? 'idea' : 'ideas'}
             </p>
           </div>
 
-          <div className="grid md:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          <div className="grid sm:grid-cols-2 md:grid-cols-3 gap-6 sm:gap-8 max-w-7xl mx-auto">
             {filteredIdeas.length === 0 ? (
-              <div className="col-span-3 text-center py-12">
+              <div className="col-span-full text-center py-12">
                 <p className="text-muted-foreground">No travel ideas match your filters. Try adjusting your selection.</p>
               </div>
             ) : (
@@ -238,7 +238,7 @@ const TravelIdeas = () => {
                 <Link
                   key={idea.slug}
                   to={`/travel-ideas/${idea.slug}`}
-                  className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 h-[400px]"
+                  className="group relative overflow-hidden rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 h-[350px] sm:h-[400px]"
                 >
                   {/* Background Image */}
                   <img
@@ -265,22 +265,22 @@ const TravelIdeas = () => {
                   </div>
 
                   {/* Content */}
-                  <div className="absolute bottom-0 left-0 right-0 p-6 z-10">
-                    <h3 className="font-display text-2xl font-bold mb-3 text-white drop-shadow-lg">
+                  <div className="absolute bottom-0 left-0 right-0 p-4 sm:p-6 z-10">
+                    <h3 className="font-display text-xl sm:text-2xl font-bold mb-2 sm:mb-3 text-white drop-shadow-lg line-clamp-2">
                       {idea.title}
                     </h3>
 
-                    <div className="flex items-center justify-between text-white">
-                      <p className="text-sm text-white/90">
+                    <div className="flex items-center justify-between text-white mb-2">
+                      <p className="text-xs sm:text-sm text-white/90">
                         {idea.duration} {idea.duration === 1 ? 'Day' : 'Days'}
                       </p>
                       <p className="font-heading font-semibold">
-                        <span className="text-sm text-white/90">from</span>
-                        <span className="text-2xl ml-1 text-primary drop-shadow-lg">${idea.price.toLocaleString()}</span>
+                        <span className="text-xs sm:text-sm text-white/90">from</span>
+                        <span className="text-xl sm:text-2xl ml-1 text-primary drop-shadow-lg">${idea.price.toLocaleString()}</span>
                       </p>
                     </div>
 
-                    <p className="text-sm text-white/80 mt-2 line-clamp-2">{idea.description}</p>
+                    <p className="text-xs sm:text-sm text-white/80 mt-1 sm:mt-2 line-clamp-2">{idea.description}</p>
                   </div>
                 </Link>
               );
