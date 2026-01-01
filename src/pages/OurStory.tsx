@@ -5,20 +5,9 @@ import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { TestimonialsSection } from '@/components/TestimonialsSection';
 import { NewsletterSection } from '@/components/NewsletterSection';
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Facebook, Twitter, Linkedin, Instagram } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 
 const OurStory = () => {
-  const team = [
-    { name: 'Caudence Ayoti', role: 'CEO, Founder', image: '/src/assets/staff/staff_caudence_ceo-1.webp' },
-    { name: 'Lynn Mackanja', role: 'Legal Consultant', image: '/src/assets/staff/staff_lynn_legal.webp' },
-    { name: 'Johns Tenga', role: 'Director of Operations', image: '/src/assets/staff/staff_tenga_operations.webp' },
-    { name: 'Brenda Richard', role: 'Safaris & reservations consultant', image: '/src/assets/staff/staff_brenda_reservation.webp' },
-    { name: 'Juma Habibu', role: 'Finance Director', image: '/src/assets/staff/staff_juma_finance.webp' },
-    { name: 'Huruma Mpanda', role: 'tour guide', image: '/src/assets/staff/staff_huruma_guide.webp' },
-    { name: 'Abdulrahaman Abel', role: 'Marketing Manager', image: '/src/assets/staff/staff_abel_marketing.webp' },
-    { name: 'Raheli Festo Ochieng', role: 'tour guide', image: '/src/assets/staff/staff_rachel_guide.webp' },
-  ];
-
   const rates = [
     {
       number: '01',
@@ -183,95 +172,29 @@ const OurStory = () => {
         </div>
       </div>
 
-      {/* Meet The FAM */}
-      <div className="py-24 bg-white">
-        <div className="container mx-auto px-4 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="font-display text-4xl md:text-5xl font-bold mb-2">Meet The FAM</h2>
-            <p className="text-xl text-muted-foreground">Putting A Name To The Face</p>
-          </div>
-
-          {/* First Row */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-8">
-            {team.slice(0, 4).map((member, index) => (
-              <div key={index} className="text-center group">
-                <div className="relative mb-4 overflow-hidden rounded-2xl shadow-lg bg-muted/20">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full aspect-square object-contain transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
-                    <div className="flex gap-3">
-                      <a href="#" className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors">
-                        <Facebook className="w-4 h-4 text-white" />
-                      </a>
-                      <a href="#" className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors">
-                        <Linkedin className="w-4 h-4 text-white" />
-                      </a>
-                      <a href="#" className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors">
-                        <Instagram className="w-4 h-4 text-white" />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <h3 className="font-heading font-bold text-base mb-1">{member.name}</h3>
-                <p className="text-sm text-primary">{member.role}</p>
-              </div>
-            ))}
-          </div>
-
-          {/* Second Row */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
-            {team.slice(4, 8).map((member, index) => (
-              <div key={index} className="text-center group">
-                <div className="relative mb-4 overflow-hidden rounded-2xl shadow-lg bg-muted/20">
-                  <img
-                    src={member.image}
-                    alt={member.name}
-                    className="w-full aspect-square object-contain transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end justify-center pb-6">
-                    <div className="flex gap-3">
-                      <a href="#" className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors">
-                        <Facebook className="w-4 h-4 text-white" />
-                      </a>
-                      <a href="#" className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center hover:bg-white/30 transition-colors">
-                        <Instagram className="w-4 h-4 text-white" />
-                      </a>
-                    </div>
-                  </div>
-                </div>
-                <h3 className="font-heading font-bold text-base mb-1">{member.name}</h3>
-                <p className="text-sm text-primary">{member.role}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-
       {/* Testimonials */}
       <TestimonialsSection />
 
       {/* CTA */}
-      <div className="py-32 relative overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <img
-            src="/header_bg_new4.gif"
-            alt="Background"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-charcoal/85 via-charcoal/75 to-charcoal/85" />
+      <div className="py-32 relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-primary/10">
+        {/* Decorative Pattern Background */}
+        <div className="absolute inset-0 opacity-30">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `
+              radial-gradient(circle at 20% 50%, rgba(255, 107, 0, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 80% 80%, rgba(255, 107, 0, 0.15) 0%, transparent 50%),
+              radial-gradient(circle at 40% 20%, rgba(255, 107, 0, 0.08) 0%, transparent 50%)
+            `
+          }} />
         </div>
 
         {/* Animated SVG Background */}
-        <div className="absolute inset-0 pointer-events-none">
+        <div className="absolute inset-0 pointer-events-none opacity-40">
           <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
             {/* Safari footprints trail */}
-            <g fill="white">
+            <g fill="currentColor" className="text-primary">
               {[...Array(8)].map((_, i) => (
-                <g key={i} opacity={0.7}>
+                <g key={i} opacity={0.3}>
                   <ellipse cx={100 + i * 180} cy={100 + (i % 2) * 80} rx="15" ry="25" transform={`rotate(${25 + i * 10} ${100 + i * 180} ${100 + (i % 2) * 80})`}>
                     <animateTransform attributeName="transform" type="translate" values="0,0; 0,-10; 0,0" dur={`${3 + i * 0.3}s`} repeatCount="indefinite" />
                   </ellipse>
@@ -283,11 +206,11 @@ const OurStory = () => {
             </g>
 
             {/* Floating compass elements */}
-            <g stroke="white" strokeWidth="2" fill="none">
+            <g stroke="currentColor" className="text-primary" strokeWidth="2" fill="none" opacity={0.4}>
               {[...Array(6)].map((_, i) => (
                 <g key={i}>
                   <circle cx={200 + i * 250} cy={300 + (i % 3) * 100} r="40">
-                    <animate attributeName="opacity" values="0.4;0.8;0.4" dur={`${4 + i * 0.5}s`} repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0.2;0.5;0.2" dur={`${4 + i * 0.5}s`} repeatCount="indefinite" />
                   </circle>
                   <line x1={200 + i * 250} y1={260 + (i % 3) * 100} x2={200 + i * 250} y2={280 + (i % 3) * 100}>
                     <animateTransform attributeName="transform" type="rotate" values={`0 ${200 + i * 250} ${300 + (i % 3) * 100}; 360 ${200 + i * 250} ${300 + (i % 3) * 100}`} dur={`${20 + i * 2}s`} repeatCount="indefinite" />
@@ -300,7 +223,7 @@ const OurStory = () => {
             </g>
 
             {/* Safari vehicle paths */}
-            <g stroke="white" strokeWidth="3" fill="none" strokeDasharray="10,15">
+            <g stroke="currentColor" className="text-primary" strokeWidth="3" fill="none" strokeDasharray="10,15" opacity={0.3}>
               <path d="M 0 250 Q 400 200 800 250 T 1600 250">
                 <animate attributeName="stroke-dashoffset" values="0;100" dur="15s" repeatCount="indefinite" />
               </path>
@@ -310,7 +233,7 @@ const OurStory = () => {
             </g>
 
             {/* Acacia tree silhouettes */}
-            <g fill="white" opacity="0.6">
+            <g fill="currentColor" className="text-primary/30" opacity="0.5">
               {[...Array(5)].map((_, i) => (
                 <g key={i}>
                   <ellipse cx={150 + i * 350} cy={500} rx="50" ry="15">
@@ -322,7 +245,7 @@ const OurStory = () => {
             </g>
 
             {/* Flying birds */}
-            <g stroke="white" strokeWidth="2" fill="none">
+            <g stroke="currentColor" className="text-primary" strokeWidth="2" fill="none" opacity={0.4}>
               {[...Array(4)].map((_, i) => (
                 <path key={i} d={`M ${100 + i * 80} ${150 + i * 50} Q ${110 + i * 80} ${145 + i * 50} ${120 + i * 80} ${150 + i * 50} Q ${130 + i * 80} ${145 + i * 50} ${140 + i * 80} ${150 + i * 50}`}>
                   <animateTransform attributeName="transform" type="translate" values={`0,0; ${1400 + i * 100},-${200 + i * 50}`} dur={`${25 + i * 3}s`} repeatCount="indefinite" />
@@ -333,11 +256,11 @@ const OurStory = () => {
         </div>
 
         <div className="container mx-auto px-4 lg:px-8 text-center relative z-10">
-          <h2 className="font-display text-5xl md:text-6xl font-bold text-white mb-6 drop-shadow-lg">
+          <h2 className="font-display text-5xl md:text-6xl font-bold text-foreground mb-6">
             Your Trip. Our Responsibility.
           </h2>
           <Link to="/contact">
-            <Button variant="primary" size="xl" className="gap-2 shadow-2xl">
+            <Button variant="primary" size="xl" className="gap-2 shadow-lg hover:shadow-2xl transition-shadow">
               Plan Your Trip
               <ArrowRight className="w-5 h-5" />
             </Button>

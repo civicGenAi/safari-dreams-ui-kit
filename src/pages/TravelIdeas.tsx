@@ -541,27 +541,28 @@ const TravelIdeas = () => {
       </div>
 
       {/* CTA Section */}
-      <div className="py-24 md:py-32 relative overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <img
-            src="/header_bg_new4.gif"
-            alt="Background"
-            className="w-full h-full object-cover"
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-charcoal/85 via-charcoal/75 to-charcoal/85" />
+      <div className="py-24 md:py-32 relative overflow-hidden bg-gradient-to-br from-primary/10 via-background to-primary/15">
+        {/* Decorative Pattern Background */}
+        <div className="absolute inset-0 opacity-20">
+          <div className="absolute inset-0" style={{
+            backgroundImage: `
+              radial-gradient(circle at 25% 30%, rgba(255, 107, 0, 0.15) 0%, transparent 50%),
+              radial-gradient(circle at 75% 70%, rgba(255, 107, 0, 0.2) 0%, transparent 50%),
+              radial-gradient(circle at 50% 50%, rgba(255, 107, 0, 0.1) 0%, transparent 50%)
+            `
+          }} />
         </div>
 
         {/* Animated SVG Background */}
         <div className="absolute inset-0 pointer-events-none">
           <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
             {/* Safari map pins */}
-            <g fill="white">
+            <g fill="currentColor" className="text-primary" opacity={0.5}>
               {[...Array(12)].map((_, i) => (
                 <g key={i}>
                   <circle cx={100 + i * 150} cy={100 + (i % 4) * 120} r="8" />
                   <path d={`M ${100 + i * 150} ${100 + (i % 4) * 120} L ${100 + i * 150} ${120 + (i % 4) * 120} L ${95 + i * 150} ${115 + (i % 4) * 120} Z`}>
-                    <animate attributeName="opacity" values="0.5;1;0.5" dur={`${3 + i * 0.4}s`} repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0.3;0.7;0.3" dur={`${3 + i * 0.4}s`} repeatCount="indefinite" />
                     <animateTransform attributeName="transform" type="translate" values="0,0; 0,-8; 0,0" dur={`${2.5 + i * 0.3}s`} repeatCount="indefinite" />
                   </path>
                 </g>
@@ -569,7 +570,7 @@ const TravelIdeas = () => {
             </g>
 
             {/* Travel routes - curved paths */}
-            <g stroke="white" strokeWidth="2" fill="none" strokeDasharray="8,12">
+            <g stroke="currentColor" className="text-primary" strokeWidth="2" fill="none" strokeDasharray="8,12" opacity={0.4}>
               <path d="M 0 200 Q 200 150 400 200 T 800 200 Q 1000 150 1200 200 T 1600 200">
                 <animate attributeName="stroke-dashoffset" values="0;80" dur="12s" repeatCount="indefinite" />
               </path>
@@ -582,42 +583,42 @@ const TravelIdeas = () => {
             </g>
 
             {/* Idea lightbulbs */}
-            <g stroke="white" strokeWidth="2" fill="none">
+            <g stroke="currentColor" className="text-primary" strokeWidth="2" fill="none" opacity={0.6}>
               {[...Array(6)].map((_, i) => (
                 <g key={i}>
                   <circle cx={180 + i * 280} cy={280 + (i % 3) * 100} r="20">
-                    <animate attributeName="opacity" values="0.4;0.9;0.4" dur={`${4 + i * 0.6}s`} repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0.3;0.8;0.3" dur={`${4 + i * 0.6}s`} repeatCount="indefinite" />
                   </circle>
                   <rect x={175 + i * 280} y={300 + (i % 3) * 100} width="10" height="15" rx="2" />
                   <line x1={165 + i * 280} y1={280 + (i % 3) * 100} x2={155 + i * 280} y2={280 + (i % 3) * 100}>
-                    <animate attributeName="opacity" values="0;1;0" dur={`${3 + i * 0.5}s`} repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0;0.8;0" dur={`${3 + i * 0.5}s`} repeatCount="indefinite" />
                   </line>
                   <line x1={195 + i * 280} y1={280 + (i % 3) * 100} x2={205 + i * 280} y2={280 + (i % 3) * 100}>
-                    <animate attributeName="opacity" values="0;1;0" dur={`${3 + i * 0.5}s`} repeatCount="indefinite" begin={`${0.5 + i * 0.2}s`} />
+                    <animate attributeName="opacity" values="0;0.8;0" dur={`${3 + i * 0.5}s`} repeatCount="indefinite" begin={`${0.5 + i * 0.2}s`} />
                   </line>
                 </g>
               ))}
             </g>
 
             {/* Experience stars */}
-            <g fill="white">
+            <g fill="currentColor" className="text-primary/40" opacity={0.5}>
               {[...Array(15)].map((_, i) => (
                 <polygon
                   key={i}
                   points={`${120 + i * 120},${50 + (i % 5) * 110} ${125 + i * 120},${60 + (i % 5) * 110} ${135 + i * 120},${60 + (i % 5) * 110} ${128 + i * 120},${67 + (i % 5) * 110} ${132 + i * 120},${77 + (i % 5) * 110} ${120 + i * 120},${70 + (i % 5) * 110} ${108 + i * 120},${77 + (i % 5) * 110} ${112 + i * 120},${67 + (i % 5) * 110} ${105 + i * 120},${60 + (i % 5) * 110} ${115 + i * 120},${60 + (i % 5) * 110}`}
                 >
-                  <animate attributeName="opacity" values="0.3;0.8;0.3" dur={`${4 + i * 0.4}s`} repeatCount="indefinite" />
+                  <animate attributeName="opacity" values="0.2;0.6;0.2" dur={`${4 + i * 0.4}s`} repeatCount="indefinite" />
                   <animateTransform attributeName="transform" type="rotate" values={`0 ${120 + i * 120} ${60 + (i % 5) * 110}; 360 ${120 + i * 120} ${60 + (i % 5) * 110}`} dur={`${15 + i * 2}s`} repeatCount="indefinite" />
                 </polygon>
               ))}
             </g>
 
             {/* Compass decorations */}
-            <g stroke="white" strokeWidth="2" fill="none">
+            <g stroke="currentColor" className="text-primary" strokeWidth="2" fill="none" opacity={0.5}>
               {[...Array(4)].map((_, i) => (
                 <g key={i}>
                   <circle cx={300 + i * 400} cy={400 + (i % 2) * 150} r="35">
-                    <animate attributeName="opacity" values="0.4;0.7;0.4" dur={`${5 + i * 0.8}s`} repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0.2;0.5;0.2" dur={`${5 + i * 0.8}s`} repeatCount="indefinite" />
                   </circle>
                   <line x1={300 + i * 400} y1={365 + (i % 2) * 150} x2={300 + i * 400} y2={380 + (i % 2) * 150}>
                     <animateTransform attributeName="transform" type="rotate" values={`0 ${300 + i * 400} ${400 + (i % 2) * 150}; 360 ${300 + i * 400} ${400 + (i % 2) * 150}`} dur={`${18 + i * 3}s`} repeatCount="indefinite" />
@@ -629,11 +630,11 @@ const TravelIdeas = () => {
         </div>
 
         <div className="container mx-auto px-4 lg:px-8 text-center relative z-10">
-          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-8 drop-shadow-lg">
+          <h2 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-foreground mb-8">
             Exceptional Curated Travel Ideas & Experiences !
           </h2>
           <Link to="/contact">
-            <Button variant="primary" size="xl" className="gap-2 shadow-2xl">
+            <Button variant="primary" size="xl" className="gap-2 shadow-lg hover:shadow-2xl transition-shadow">
               Start Exploring
               <ArrowRight className="w-5 h-5" />
             </Button>
