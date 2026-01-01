@@ -34,151 +34,170 @@ interface LoadingScreenProps {
   fullScreen?: boolean;
 }
 
-export const LoadingScreen = ({ message = 'Loading...', fullScreen = true }: LoadingScreenProps) => {
+export const LoadingScreen = ({ message = 'Loading your next adventure...', fullScreen = true }: LoadingScreenProps) => {
   return (
     <div className={cn(
-      'flex flex-col items-center justify-center',
+      'flex flex-col items-center justify-center bg-gradient-to-br from-amber-50 via-orange-50 to-background',
       fullScreen ? 'min-h-screen' : 'py-12'
     )}>
-      <div className="relative">
-        {/* Animated compass and globe */}
+      <div className="relative w-full max-w-md px-4">
+        {/* Animated East Africa Map/Globe */}
         <div className="mb-8 relative">
           <svg
-            className="w-32 h-32"
-            viewBox="0 0 120 120"
+            className="w-full h-auto max-w-[280px] sm:max-w-[320px] mx-auto"
+            viewBox="0 0 300 300"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
           >
-            {/* Rotating globe/world */}
-            <circle cx="60" cy="60" r="45" stroke="#FF6B00" strokeWidth="2" fill="none" opacity="0.3">
-              <animate attributeName="opacity" values="0.2;0.5;0.2" dur="3s" repeatCount="indefinite" />
+            {/* Rotating globe background */}
+            <circle cx="150" cy="150" r="120" fill="#FEF3C7" opacity="0.3">
+              <animate attributeName="opacity" values="0.2;0.4;0.2" dur="3s" repeatCount="indefinite" />
             </circle>
 
-            {/* Latitude lines */}
-            <ellipse cx="60" cy="60" rx="45" ry="15" stroke="#F59E0B" strokeWidth="1.5" fill="none" opacity="0.6">
-              <animate attributeName="opacity" values="0.4;0.8;0.4" dur="2s" repeatCount="indefinite" />
+            {/* Globe latitude lines */}
+            <ellipse cx="150" cy="150" rx="120" ry="40" stroke="#F59E0B" strokeWidth="1.5" fill="none" opacity="0.4">
+              <animate attributeName="opacity" values="0.3;0.6;0.3" dur="2s" repeatCount="indefinite" />
             </ellipse>
-            <ellipse cx="60" cy="60" rx="45" ry="30" stroke="#F59E0B" strokeWidth="1.5" fill="none" opacity="0.5">
-              <animate attributeName="opacity" values="0.3;0.7;0.3" dur="2.5s" repeatCount="indefinite" />
-            </ellipse>
-
-            {/* Longitude line - rotating */}
-            <ellipse cx="60" cy="60" rx="15" ry="45" stroke="#EA580C" strokeWidth="1.5" fill="none" opacity="0.7">
-              <animateTransform
-                attributeName="transform"
-                type="rotate"
-                from="0 60 60"
-                to="360 60 60"
-                dur="4s"
-                repeatCount="indefinite"
-              />
+            <ellipse cx="150" cy="150" rx="120" ry="80" stroke="#F59E0B" strokeWidth="1.5" fill="none" opacity="0.3">
+              <animate attributeName="opacity" values="0.2;0.5;0.2" dur="2.5s" repeatCount="indefinite" />
             </ellipse>
 
-            {/* Second longitude line */}
-            <ellipse cx="60" cy="60" rx="30" ry="45" stroke="#EA580C" strokeWidth="1.5" fill="none" opacity="0.6">
-              <animateTransform
-                attributeName="transform"
-                type="rotate"
-                from="0 60 60"
-                to="360 60 60"
-                dur="6s"
-                repeatCount="indefinite"
-              />
+            {/* Rotating longitude lines */}
+            <ellipse cx="150" cy="150" rx="40" ry="120" stroke="#EA580C" strokeWidth="1.5" fill="none" opacity="0.5">
+              <animateTransform attributeName="transform" type="rotate" from="0 150 150" to="360 150 150" dur="8s" repeatCount="indefinite" />
+            </ellipse>
+            <ellipse cx="150" cy="150" rx="80" ry="120" stroke="#EA580C" strokeWidth="1.5" fill="none" opacity="0.4">
+              <animateTransform attributeName="transform" type="rotate" from="0 150 150" to="360 150 150" dur="12s" repeatCount="indefinite" />
             </ellipse>
 
-            {/* Compass outer ring */}
-            <circle cx="60" cy="60" r="52" stroke="#D97706" strokeWidth="2" fill="none" opacity="0.8" strokeDasharray="3,3">
-              <animateTransform
-                attributeName="transform"
-                type="rotate"
-                from="0 60 60"
-                to="360 60 60"
-                dur="20s"
-                repeatCount="indefinite"
-              />
-            </circle>
-
-            {/* Compass cardinal points */}
-            <g opacity="0.9">
-              {/* North */}
-              <path d="M 60 8 L 63 18 L 60 16 L 57 18 Z" fill="#DC2626">
-                <animate attributeName="opacity" values="0.7;1;0.7" dur="2s" repeatCount="indefinite" />
+            {/* East Africa landmass (simplified) */}
+            <g fill="#D97706" opacity="0.6">
+              <path d="M 140 100 Q 145 95 155 100 L 160 120 Q 158 130 150 135 Q 142 130 140 120 Z">
+                <animate attributeName="opacity" values="0.5;0.8;0.5" dur="3s" repeatCount="indefinite" />
               </path>
-              {/* South */}
-              <path d="M 60 112 L 63 102 L 60 104 L 57 102 Z" fill="#F59E0B" opacity="0.8" />
-              {/* East */}
-              <circle cx="112" cy="60" r="3" fill="#EA580C" opacity="0.8" />
-              {/* West */}
-              <circle cx="8" cy="60" r="3" fill="#EA580C" opacity="0.8" />
+              <path d="M 155 140 Q 160 145 165 150 L 163 170 Q 158 175 150 172 L 148 155 Z">
+                <animate attributeName="opacity" values="0.5;0.8;0.5" dur="3.5s" repeatCount="indefinite" />
+              </path>
             </g>
 
-            {/* Animated compass needle */}
+            {/* Compass rose in corner */}
+            <g transform="translate(240, 40)">
+              <circle cx="0" cy="0" r="25" stroke="#F97316" strokeWidth="2" fill="none" opacity="0.6" strokeDasharray="3,3">
+                <animateTransform attributeName="transform" type="rotate" from="0 0 0" to="360 0 0" dur="20s" repeatCount="indefinite" />
+              </g>
+              <path d="M 0 -20 L 3 -5 L 0 -8 L -3 -5 Z" fill="#DC2626" opacity="0.9" />
+              <path d="M 0 20 L 3 5 L 0 8 L -3 5 Z" fill="#6B7280" opacity="0.7" />
+              <circle cx="0" cy="0" r="3" fill="#FF6B00" />
+            </g>
+
+            {/* Location pins with drop animation and ripples */}
+            {/* Tanzania pin */}
             <g>
-              <path d="M 60 60 L 58 35 L 60 30 L 62 35 Z" fill="#DC2626">
-                <animateTransform
-                  attributeName="transform"
-                  type="rotate"
-                  values="0 60 60; 20 60 60; -20 60 60; 0 60 60"
-                  dur="3s"
-                  repeatCount="indefinite"
-                />
-                <animate attributeName="opacity" values="0.8;1;0.8" dur="1.5s" repeatCount="indefinite" />
-              </path>
-              <path d="M 60 60 L 58 85 L 60 90 L 62 85 Z" fill="#6B7280" opacity="0.7">
-                <animateTransform
-                  attributeName="transform"
-                  type="rotate"
-                  values="0 60 60; 20 60 60; -20 60 60; 0 60 60"
-                  dur="3s"
-                  repeatCount="indefinite"
-                />
-              </path>
-              <circle cx="60" cy="60" r="5" fill="#FF6B00">
-                <animate attributeName="r" values="5;6;5" dur="1.5s" repeatCount="indefinite" />
+              <circle cx="150" cy="155" r="3" fill="#DC2626" opacity="0">
+                <animate attributeName="opacity" values="0;0.8;0" dur="2s" begin="0.5s" repeatCount="indefinite" />
+                <animate attributeName="r" values="3;20;30" dur="2s" begin="0.5s" repeatCount="indefinite" />
               </circle>
+              <g opacity="0">
+                <animate attributeName="opacity" values="0;1;1" dur="0.3s" begin="0.5s" fill="freeze" />
+                <circle cx="150" cy="155" r="5" fill="#DC2626" />
+                <path d="M 150 155 L 150 168 L 147 165 Z" fill="#DC2626">
+                  <animateTransform attributeName="transform" type="translate" values="0,-20; 0,0" dur="0.3s" begin="0.5s" fill="freeze" />
+                </path>
+              </g>
             </g>
 
-            {/* Orbiting location pins */}
+            {/* Kenya pin */}
             <g>
-              <circle cx="60" cy="15" r="4" fill="#FBBF24">
-                <animateTransform
-                  attributeName="transform"
-                  type="rotate"
-                  from="0 60 60"
-                  to="360 60 60"
-                  dur="5s"
-                  repeatCount="indefinite"
-                />
-                <animate attributeName="opacity" values="0.6;1;0.6" dur="1s" repeatCount="indefinite" />
+              <circle cx="155" cy="120" r="3" fill="#DC2626" opacity="0">
+                <animate attributeName="opacity" values="0;0.8;0" dur="2s" begin="1s" repeatCount="indefinite" />
+                <animate attributeName="r" values="3;20;30" dur="2s" begin="1s" repeatCount="indefinite" />
               </circle>
-              <circle cx="60" cy="105" r="4" fill="#FCD34D">
-                <animateTransform
-                  attributeName="transform"
-                  type="rotate"
-                  from="180 60 60"
-                  to="540 60 60"
-                  dur="5s"
-                  repeatCount="indefinite"
-                />
-                <animate attributeName="opacity" values="0.6;1;0.6" dur="1s" repeatCount="indefinite" begin="0.5s" />
-              </circle>
+              <g opacity="0">
+                <animate attributeName="opacity" values="0;1;1" dur="0.3s" begin="1s" fill="freeze" />
+                <circle cx="155" cy="120" r="5" fill="#DC2626" />
+                <path d="M 155 120 L 155 133 L 152 130 Z" fill="#DC2626">
+                  <animateTransform attributeName="transform" type="translate" values="0,-20; 0,0" dur="0.3s" begin="1s" fill="freeze" />
+                </path>
+              </g>
             </g>
 
-            {/* Pulsing travel waves */}
-            <circle cx="60" cy="60" r="45" stroke="#FCD34D" strokeWidth="2" fill="none" opacity="0">
-              <animate attributeName="r" values="45;55;65" dur="3s" repeatCount="indefinite" />
-              <animate attributeName="opacity" values="0.6;0.3;0" dur="3s" repeatCount="indefinite" />
-            </circle>
-            <circle cx="60" cy="60" r="45" stroke="#FBBF24" strokeWidth="2" fill="none" opacity="0">
-              <animate attributeName="r" values="45;55;65" dur="3s" repeatCount="indefinite" begin="1s" />
-              <animate attributeName="opacity" values="0.6;0.3;0" dur="3s" repeatCount="indefinite" begin="1s" />
-            </circle>
+            {/* Uganda pin */}
+            <g>
+              <circle cx="140" cy="130" r="3" fill="#DC2626" opacity="0">
+                <animate attributeName="opacity" values="0;0.8;0" dur="2s" begin="1.5s" repeatCount="indefinite" />
+                <animate attributeName="r" values="3;20;30" dur="2s" begin="1.5s" repeatCount="indefinite" />
+              </circle>
+              <g opacity="0">
+                <animate attributeName="opacity" values="0;1;1" dur="0.3s" begin="1.5s" fill="freeze" />
+                <circle cx="140" cy="130" r="5" fill="#DC2626" />
+                <path d="M 140 130 L 140 143 L 137 140 Z" fill="#DC2626">
+                  <animateTransform attributeName="transform" type="translate" values="0,-20; 0,0" dur="0.3s" begin="1.5s" fill="freeze" />
+                </path>
+              </g>
+            </g>
+
+            {/* Rwanda pin */}
+            <g>
+              <circle cx="145" cy="145" r="3" fill="#DC2626" opacity="0">
+                <animate attributeName="opacity" values="0;0.8;0" dur="2s" begin="2s" repeatCount="indefinite" />
+                <animate attributeName="r" values="3;20;30" dur="2s" begin="2s" repeatCount="indefinite" />
+              </circle>
+              <g opacity="0">
+                <animate attributeName="opacity" values="0;1;1" dur="0.3s" begin="2s" fill="freeze" />
+                <circle cx="145" cy="145" r="5" fill="#DC2626" />
+                <path d="M 145 145 L 145 158 L 142 155 Z" fill="#DC2626">
+                  <animateTransform attributeName="transform" type="translate" values="0,-20; 0,0" dur="0.3s" begin="2s" fill="freeze" />
+                </path>
+              </g>
+            </g>
+
+            {/* Connecting routes/paths animating in */}
+            <g stroke="#F59E0B" strokeWidth="2" fill="none" strokeDasharray="5,5" opacity="0">
+              <animate attributeName="opacity" values="0;0.7;0.7" dur="0.5s" begin="2.5s" fill="freeze" />
+
+              {/* Tanzania to Kenya */}
+              <path d="M 150 155 Q 152 137 155 120" strokeDashoffset="100">
+                <animate attributeName="stroke-dashoffset" values="100;0" dur="1s" begin="2.5s" fill="freeze" />
+              </path>
+
+              {/* Kenya to Uganda */}
+              <path d="M 155 120 Q 147 125 140 130" strokeDashoffset="100">
+                <animate attributeName="stroke-dashoffset" values="100;0" dur="1s" begin="3s" fill="freeze" />
+              </path>
+
+              {/* Uganda to Rwanda */}
+              <path d="M 140 130 Q 142 137 145 145" strokeDashoffset="100">
+                <animate attributeName="stroke-dashoffset" values="100;0" dur="1s" begin="3.5s" fill="freeze" />
+              </path>
+
+              {/* Rwanda to Tanzania */}
+              <path d="M 145 145 Q 147 150 150 155" strokeDashoffset="100">
+                <animate attributeName="stroke-dashoffset" values="100;0" dur="1s" begin="4s" fill="freeze" />
+              </path>
+            </g>
+
+            {/* Orbiting sparkles */}
+            <g>
+              {[0, 1, 2, 3, 4].map((i) => (
+                <circle key={i} cx="150" cy="30" r="2" fill="#FBBF24">
+                  <animateTransform
+                    attributeName="transform"
+                    type="rotate"
+                    from={`${i * 72} 150 150`}
+                    to={`${i * 72 + 360} 150 150`}
+                    dur="6s"
+                    repeatCount="indefinite"
+                  />
+                  <animate attributeName="opacity" values="0.3;1;0.3" dur={`${2 + i * 0.3}s`} repeatCount="indefinite" />
+                </circle>
+              ))}
+            </g>
           </svg>
         </div>
 
         {/* Loading text with animated dots */}
         <div className="text-center">
-          <p className="text-lg font-heading text-muted-foreground">
+          <p className="text-lg sm:text-xl font-heading text-foreground font-semibold">
             {message}
             <span className="inline-flex gap-1 ml-1">
               <span className="animate-bounce" style={{ animationDelay: '0s' }}>.</span>
@@ -189,8 +208,8 @@ export const LoadingScreen = ({ message = 'Loading...', fullScreen = true }: Loa
         </div>
       </div>
 
-      {/* Animated progress hint */}
-      <div className="mt-8 w-48 h-1 bg-muted rounded-full overflow-hidden">
+      {/* Animated progress bar */}
+      <div className="mt-8 w-64 sm:w-80 h-1.5 bg-muted rounded-full overflow-hidden">
         <div className="h-full bg-gradient-to-r from-amber-500 via-orange-500 to-amber-500 bg-[length:200%_100%] animate-shimmer"></div>
       </div>
 

@@ -69,7 +69,7 @@ export const HeroSection = () => {
   }, [nextSlide]);
 
   return (
-    <section className="relative h-screen min-h-[700px] overflow-hidden">
+    <section className="relative h-screen min-h-[500px] sm:min-h-[600px] md:min-h-[700px] overflow-hidden">
       {/* Slides */}
       {slides.map((slide, index) => (
         <div
@@ -93,17 +93,17 @@ export const HeroSection = () => {
 
       {/* Content */}
       <div className="relative h-full container mx-auto px-4 lg:px-8 flex items-center">
-        <div className="max-w-3xl pt-20">
+        <div className="max-w-3xl pt-16 sm:pt-20">
           {/* Title */}
           <h1
-            className={`text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-primary-foreground leading-tight mb-8 text-shadow-hero transition-all duration-700 delay-100 ${
+            className={`text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-primary-foreground leading-tight mb-6 sm:mb-8 text-shadow-hero transition-all duration-700 delay-100 ${
               isAnimating ? 'opacity-0 translate-y-8' : 'opacity-100 translate-y-0'
             }`}
           >
-            <span className="font-script font-normal block mb-4 text-5xl md:text-6xl lg:text-7xl xl:text-8xl animate-fade-in-up">
+            <span className="font-script font-normal block mb-3 sm:mb-4 text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl animate-fade-in-up">
               {slides[currentSlide].titleFirstPart}
             </span>
-            <span className="font-display font-semibold block text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight">
+            <span className="font-display font-semibold block text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl leading-tight">
               {slides[currentSlide].titleSecondPart}
             </span>
           </h1>
@@ -115,9 +115,9 @@ export const HeroSection = () => {
             }`}
           >
             <Link to={slides[currentSlide].buttonLink}>
-              <button className={`px-8 py-4 border-2 ${
+              <button className={`px-6 sm:px-8 py-3 sm:py-4 border-2 min-h-[48px] ${
                 currentSlide === 0 ? 'border-primary' : currentSlide === 1 ? 'border-black' : 'border-white'
-              } text-white font-heading font-semibold text-lg uppercase tracking-wider hover:bg-white/10 transition-all duration-300 backdrop-blur-sm`}>
+              } text-white font-heading font-semibold text-base sm:text-lg uppercase tracking-wider hover:bg-white/10 transition-all duration-300 backdrop-blur-sm`}>
                 {slides[currentSlide].buttonText}
               </button>
             </Link>
@@ -126,25 +126,25 @@ export const HeroSection = () => {
       </div>
 
       {/* Navigation Arrows */}
-      <div className="absolute bottom-1/2 translate-y-1/2 left-4 lg:left-8">
+      <div className="absolute bottom-1/2 translate-y-1/2 left-2 sm:left-4 lg:left-8">
         <button
           onClick={prevSlide}
-          className="group relative w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-primary-foreground hover:bg-white/20 hover:scale-110 transition-all duration-300"
+          className="group relative w-12 h-12 sm:w-14 sm:h-14 min-w-[48px] min-h-[48px] rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-primary-foreground hover:bg-white/20 hover:scale-110 transition-all duration-300"
           aria-label="Previous slide"
         >
-          <ChevronLeft className="w-6 h-6 relative z-10" />
+          <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6 relative z-10" />
           <div className="absolute inset-0 rounded-full border-2 border-white/40 scale-0 group-hover:scale-100 transition-transform duration-300"></div>
           <div className="absolute -top-1 -right-1 w-2 h-2 bg-secondary rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
           <div className="absolute -bottom-1 -left-1 w-2 h-2 bg-secondary rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
         </button>
       </div>
-      <div className="absolute bottom-1/2 translate-y-1/2 right-4 lg:right-8">
+      <div className="absolute bottom-1/2 translate-y-1/2 right-2 sm:right-4 lg:right-8">
         <button
           onClick={nextSlide}
-          className="group relative w-14 h-14 rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-primary-foreground hover:bg-white/20 hover:scale-110 transition-all duration-300"
+          className="group relative w-12 h-12 sm:w-14 sm:h-14 min-w-[48px] min-h-[48px] rounded-full bg-white/10 backdrop-blur-md border border-white/20 flex items-center justify-center text-primary-foreground hover:bg-white/20 hover:scale-110 transition-all duration-300"
           aria-label="Next slide"
         >
-          <ChevronRight className="w-6 h-6 relative z-10" />
+          <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6 relative z-10" />
           <div className="absolute inset-0 rounded-full border-2 border-white/40 scale-0 group-hover:scale-100 transition-transform duration-300"></div>
           <div className="absolute -top-1 -right-1 w-2 h-2 bg-secondary rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
           <div className="absolute -bottom-1 -left-1 w-2 h-2 bg-secondary rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
@@ -152,7 +152,7 @@ export const HeroSection = () => {
       </div>
 
       {/* Slide Indicators - Dotted with Expand on Hover */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-3">
+      <div className="absolute bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 flex items-center gap-2 sm:gap-3">
         {slides.map((_, index) => (
           <button
             key={index}
@@ -163,10 +163,10 @@ export const HeroSection = () => {
                 setTimeout(() => setIsAnimating(false), 800);
               }
             }}
-            className={`h-3 rounded-full transition-all duration-300 ${
+            className={`h-2.5 sm:h-3 rounded-full transition-all duration-300 min-w-[12px] min-h-[12px] ${
               index === currentSlide
-                ? 'w-12 bg-secondary'
-                : 'w-3 bg-primary-foreground/40 hover:w-8 hover:bg-primary-foreground/60'
+                ? 'w-10 sm:w-12 bg-secondary'
+                : 'w-2.5 sm:w-3 bg-primary-foreground/40 hover:w-6 sm:hover:w-8 hover:bg-primary-foreground/60'
             }`}
             aria-label={`Go to slide ${index + 1}`}
           />
