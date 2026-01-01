@@ -176,46 +176,49 @@ const OurStory = () => {
       <TestimonialsSection />
 
       {/* CTA */}
-      <div className="py-32 relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-primary/10">
+      <div className="py-32 relative overflow-hidden bg-gradient-to-br from-amber-50 via-orange-50 to-primary/20">
         {/* Decorative Pattern Background */}
-        <div className="absolute inset-0 opacity-30">
+        <div className="absolute inset-0 opacity-60">
           <div className="absolute inset-0" style={{
             backgroundImage: `
-              radial-gradient(circle at 20% 50%, rgba(255, 107, 0, 0.1) 0%, transparent 50%),
-              radial-gradient(circle at 80% 80%, rgba(255, 107, 0, 0.15) 0%, transparent 50%),
-              radial-gradient(circle at 40% 20%, rgba(255, 107, 0, 0.08) 0%, transparent 50%)
+              radial-gradient(circle at 20% 50%, rgba(255, 140, 0, 0.3) 0%, transparent 50%),
+              radial-gradient(circle at 80% 80%, rgba(255, 107, 0, 0.4) 0%, transparent 50%),
+              radial-gradient(circle at 40% 20%, rgba(245, 158, 11, 0.25) 0%, transparent 50%)
             `
           }} />
         </div>
 
         {/* Animated SVG Background */}
-        <div className="absolute inset-0 pointer-events-none opacity-40">
+        <div className="absolute inset-0 pointer-events-none">
           <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
             {/* Safari footprints trail */}
-            <g fill="currentColor" className="text-primary">
+            <g fill="#D97706" opacity={0.6}>
               {[...Array(8)].map((_, i) => (
-                <g key={i} opacity={0.3}>
+                <g key={i}>
                   <ellipse cx={100 + i * 180} cy={100 + (i % 2) * 80} rx="15" ry="25" transform={`rotate(${25 + i * 10} ${100 + i * 180} ${100 + (i % 2) * 80})`}>
                     <animateTransform attributeName="transform" type="translate" values="0,0; 0,-10; 0,0" dur={`${3 + i * 0.3}s`} repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0.4;0.8;0.4" dur={`${3 + i * 0.3}s`} repeatCount="indefinite" />
                   </ellipse>
                   <ellipse cx={120 + i * 180} cy={130 + (i % 2) * 80} rx="15" ry="25" transform={`rotate(${-25 - i * 10} ${120 + i * 180} ${130 + (i % 2) * 80})`}>
                     <animateTransform attributeName="transform" type="translate" values="0,0; 0,-10; 0,0" dur={`${3.5 + i * 0.3}s`} repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0.4;0.8;0.4" dur={`${3.5 + i * 0.3}s`} repeatCount="indefinite" />
                   </ellipse>
                 </g>
               ))}
             </g>
 
             {/* Floating compass elements */}
-            <g stroke="currentColor" className="text-primary" strokeWidth="2" fill="none" opacity={0.4}>
+            <g stroke="#EA580C" strokeWidth="3" fill="none" opacity={0.7}>
               {[...Array(6)].map((_, i) => (
                 <g key={i}>
                   <circle cx={200 + i * 250} cy={300 + (i % 3) * 100} r="40">
-                    <animate attributeName="opacity" values="0.2;0.5;0.2" dur={`${4 + i * 0.5}s`} repeatCount="indefinite" />
+                    <animate attributeName="opacity" values="0.5;1;0.5" dur={`${4 + i * 0.5}s`} repeatCount="indefinite" />
+                    <animate attributeName="r" values="40;45;40" dur={`${4 + i * 0.5}s`} repeatCount="indefinite" />
                   </circle>
-                  <line x1={200 + i * 250} y1={260 + (i % 3) * 100} x2={200 + i * 250} y2={280 + (i % 3) * 100}>
+                  <line x1={200 + i * 250} y1={260 + (i % 3) * 100} x2={200 + i * 250} y2={280 + (i % 3) * 100} stroke="#F97316" strokeWidth="4">
                     <animateTransform attributeName="transform" type="rotate" values={`0 ${200 + i * 250} ${300 + (i % 3) * 100}; 360 ${200 + i * 250} ${300 + (i % 3) * 100}`} dur={`${20 + i * 2}s`} repeatCount="indefinite" />
                   </line>
-                  <line x1={200 + i * 250} y1={320 + (i % 3) * 100} x2={200 + i * 250} y2={340 + (i % 3) * 100}>
+                  <line x1={200 + i * 250} y1={320 + (i % 3) * 100} x2={200 + i * 250} y2={340 + (i % 3) * 100} stroke="#FB923C" strokeWidth="3">
                     <animateTransform attributeName="transform" type="rotate" values={`0 ${200 + i * 250} ${300 + (i % 3) * 100}; 360 ${200 + i * 250} ${300 + (i % 3) * 100}`} dur={`${20 + i * 2}s`} repeatCount="indefinite" />
                   </line>
                 </g>
@@ -223,40 +226,56 @@ const OurStory = () => {
             </g>
 
             {/* Safari vehicle paths */}
-            <g stroke="currentColor" className="text-primary" strokeWidth="3" fill="none" strokeDasharray="10,15" opacity={0.3}>
+            <g stroke="#F59E0B" strokeWidth="4" fill="none" strokeDasharray="10,15" opacity={0.6}>
               <path d="M 0 250 Q 400 200 800 250 T 1600 250">
                 <animate attributeName="stroke-dashoffset" values="0;100" dur="15s" repeatCount="indefinite" />
+                <animate attributeName="opacity" values="0.4;0.8;0.4" dur="5s" repeatCount="indefinite" />
               </path>
               <path d="M 0 450 Q 400 400 800 450 T 1600 450">
                 <animate attributeName="stroke-dashoffset" values="100;0" dur="18s" repeatCount="indefinite" />
+                <animate attributeName="opacity" values="0.4;0.8;0.4" dur="6s" repeatCount="indefinite" />
               </path>
             </g>
 
             {/* Acacia tree silhouettes */}
-            <g fill="currentColor" className="text-primary/30" opacity="0.5">
+            <g fill="#D97706" opacity={0.5}>
               {[...Array(5)].map((_, i) => (
                 <g key={i}>
                   <ellipse cx={150 + i * 350} cy={500} rx="50" ry="15">
-                    <animateTransform attributeName="transform" type="scale" values="1,1; 1.1,0.9; 1,1" dur={`${5 + i * 0.7}s`} repeatCount="indefinite" additive="sum" />
+                    <animateTransform attributeName="transform" type="scale" values="1,1; 1.15,0.85; 1,1" dur={`${5 + i * 0.7}s`} repeatCount="indefinite" additive="sum" />
+                    <animate attributeName="opacity" values="0.6;1;0.6" dur={`${5 + i * 0.7}s`} repeatCount="indefinite" />
                   </ellipse>
-                  <rect x={145 + i * 350} y={500} width="10" height="80" />
+                  <rect x={145 + i * 350} y={500} width="10" height="80">
+                    <animate attributeName="opacity" values="0.6;1;0.6" dur={`${5 + i * 0.7}s`} repeatCount="indefinite" />
+                  </rect>
                 </g>
               ))}
             </g>
 
             {/* Flying birds */}
-            <g stroke="currentColor" className="text-primary" strokeWidth="2" fill="none" opacity={0.4}>
+            <g stroke="#EA580C" strokeWidth="3" fill="none" opacity={0.7}>
               {[...Array(4)].map((_, i) => (
                 <path key={i} d={`M ${100 + i * 80} ${150 + i * 50} Q ${110 + i * 80} ${145 + i * 50} ${120 + i * 80} ${150 + i * 50} Q ${130 + i * 80} ${145 + i * 50} ${140 + i * 80} ${150 + i * 50}`}>
                   <animateTransform attributeName="transform" type="translate" values={`0,0; ${1400 + i * 100},-${200 + i * 50}`} dur={`${25 + i * 3}s`} repeatCount="indefinite" />
+                  <animate attributeName="opacity" values="0.5;0.9;0.5" dur="3s" repeatCount="indefinite" />
                 </path>
+              ))}
+            </g>
+
+            {/* Sun/sunset effect */}
+            <g opacity={0.4}>
+              {[...Array(3)].map((_, i) => (
+                <circle key={i} cx="1400" cy="150" r={80 + i * 30} fill="none" stroke="#FCD34D" strokeWidth="2">
+                  <animate attributeName="opacity" values="0.2;0.5;0.2" dur={`${4 + i}s`} repeatCount="indefinite" />
+                  <animate attributeName="r" values={`${80 + i * 30};${90 + i * 30};${80 + i * 30}`} dur={`${4 + i}s`} repeatCount="indefinite" />
+                </circle>
               ))}
             </g>
           </svg>
         </div>
 
         <div className="container mx-auto px-4 lg:px-8 text-center relative z-10">
-          <h2 className="font-display text-5xl md:text-6xl font-bold text-foreground mb-6">
+          <h2 className="font-display text-5xl md:text-6xl font-bold text-gray-900 mb-6 drop-shadow-sm">
             Your Trip. Our Responsibility.
           </h2>
           <Link to="/contact">
