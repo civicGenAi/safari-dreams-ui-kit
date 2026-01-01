@@ -123,8 +123,7 @@ const TravelIdeaDetail = () => {
       {similarIdeas.length > 0 && (
         <div className="bg-muted/30 py-16">
           <div className="container mx-auto px-4 lg:px-8">
-            <h2 className="font-display text-3xl font-bold mb-8">Similar Travel Ideas</h2>
-            <SimilarTours tours={similarIdeas} />
+            <SimilarTours tours={similarIdeas} basePath="/travel-ideas" />
           </div>
         </div>
       )}
