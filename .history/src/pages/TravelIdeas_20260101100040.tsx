@@ -9,8 +9,6 @@ import { Button } from '@/components/ui/button';
 import { supabase, TravelIdea, Article } from '@/lib/supabase';
 import { Card, CardContent } from '@/components/ui/card';
 import { LoadingScreen } from '@/components/ui/loading';
-import offer1 from "@/assets/ideas_home_discount.webp";
-import offer2 from "@/assets/ideas_home_discount2.webp";
 
 const TravelIdeas = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -440,7 +438,7 @@ const TravelIdeas = () => {
               {/* Early Booking Offer */}
               <div className="group relative overflow-hidden rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 border-4 border-primary/60 hover:border-primary">
                 <img
-                   src={offer1}
+                  src="assets/ideas_home_discount1.webp"
                   alt="Early Booking Special Offer"
                   className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
                 />
@@ -462,7 +460,7 @@ const TravelIdeas = () => {
               {/* Holiday Season Offer */}
               <div className="group relative overflow-hidden rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 border-4 border-primary/60 hover:border-primary">
                 <img
-                  src={offer2}
+                  src="ideas_home_discount2.webp"
                   alt="Holiday Season Special Offer"
                   className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
                 />

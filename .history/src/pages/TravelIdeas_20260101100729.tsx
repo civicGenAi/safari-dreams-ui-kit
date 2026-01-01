@@ -9,8 +9,8 @@ import { Button } from '@/components/ui/button';
 import { supabase, TravelIdea, Article } from '@/lib/supabase';
 import { Card, CardContent } from '@/components/ui/card';
 import { LoadingScreen } from '@/components/ui/loading';
-import offer1 from "@/assets/ideas_home_discount.webp";
-import offer2 from "@/assets/ideas_home_discount2.webp";
+import offer1 from "@assets/ideas_home_discount.webp";
+import offer2 from "@assets/ideas_home_discount2.webp";
 
 const TravelIdeas = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);

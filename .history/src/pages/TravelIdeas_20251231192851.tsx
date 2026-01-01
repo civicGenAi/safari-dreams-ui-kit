@@ -9,8 +9,6 @@ import { Button } from '@/components/ui/button';
 import { supabase, TravelIdea, Article } from '@/lib/supabase';
 import { Card, CardContent } from '@/components/ui/card';
 import { LoadingScreen } from '@/components/ui/loading';
-import offer1 from "@/assets/ideas_home_discount.webp";
-import offer2 from "@/assets/ideas_home_discount2.webp";
 
 const TravelIdeas = () => {
   const [openFaq, setOpenFaq] = useState<number | null>(null);
@@ -21,6 +19,7 @@ const TravelIdeas = () => {
 
   // Filter states
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
+  const [selectedDestination, setSelectedDestination] = useState<string>('all');
   const [priceRange, setPriceRange] = useState<string>('all');
   const [durationRange, setDurationRange] = useState<string>('all');
 
@@ -62,10 +61,12 @@ const TravelIdeas = () => {
 
   // Get unique values for filters
   const categories = Array.from(new Set(travelIdeas.map(idea => idea.category)));
+  const destinations = Array.from(new Set(travelIdeas.map(idea => idea.destination)));
 
   // Apply filters
   const filteredIdeas = travelIdeas.filter(idea => {
     if (selectedCategory !== 'all' && idea.category !== selectedCategory) return false;
+    if (selectedDestination !== 'all' && idea.destination !== selectedDestination) return false;
 
     if (priceRange !== 'all') {
       const price = idea.price;
@@ -167,7 +168,7 @@ const TravelIdeas = () => {
           </div>
 
           {showFilters && (
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 animate-in fade-in slide-in-from-top-2 duration-300">
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-4 animate-in fade-in slide-in-from-top-2 duration-300">
               {/* Category Filter */}
               <div>
                 <label className="block text-sm font-medium mb-2">Category</label>
@@ -179,6 +180,21 @@ const TravelIdeas = () => {
                   <option value="all">All Categories</option>
                   {categories.map(cat => (
                     <option key={cat} value={cat}>{cat}</option>
+                  ))}
+                </select>
+              </div>
+
+              {/* Destination Filter */}
+              <div>
+                <label className="block text-sm font-medium mb-2">Destination</label>
+                <select
+                  value={selectedDestination}
+                  onChange={(e) => setSelectedDestination(e.target.value)}
+                  className="w-full px-3 py-2 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary"
+                >
+                  <option value="all">All Destinations</option>
+                  {destinations.map(dest => (
+                    <option key={dest} value={dest}>{dest}</option>
                   ))}
                 </select>
               </div>
@@ -440,7 +456,7 @@ const TravelIdeas = () => {
               {/* Early Booking Offer */}
               <div className="group relative overflow-hidden rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 border-4 border-primary/60 hover:border-primary">
                 <img
-                   src={offer1}
+                  src="ideas_home_discount.webp"
                   alt="Early Booking Special Offer"
                   className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
                 />
@@ -462,7 +478,7 @@ const TravelIdeas = () => {
               {/* Holiday Season Offer */}
               <div className="group relative overflow-hidden rounded-2xl shadow-2xl hover:shadow-3xl transition-all duration-500 border-4 border-primary/60 hover:border-primary">
                 <img
-                  src={offer2}
+                  src="ideas_home_discount2.webp"
                   alt="Holiday Season Special Offer"
                   className="w-full h-64 object-cover transition-transform duration-700 group-hover:scale-110"
                 />
