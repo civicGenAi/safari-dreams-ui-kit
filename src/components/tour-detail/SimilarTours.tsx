@@ -1,13 +1,15 @@
 import { Link } from 'react-router-dom';
-import { Tour } from '@/data/types';
-import { Button } from '@/components/ui/button';
-import { Clock, Users, Star, ArrowRight } from 'lucide-react';
+import { Package, TravelIdea } from '@/lib/supabase';
+import { Clock, Star, ArrowRight } from 'lucide-react';
+
+type SimilarItem = Package | TravelIdea;
 
 interface SimilarToursProps {
-  tours: Tour[];
+  tours: SimilarItem[];
+  basePath?: string;
 }
 
-export const SimilarTours = ({ tours }: SimilarToursProps) => {
+export const SimilarTours = ({ tours, basePath = '/tours' }: SimilarToursProps) => {
   if (tours.length === 0) return null;
 
   return (
@@ -19,7 +21,7 @@ export const SimilarTours = ({ tours }: SimilarToursProps) => {
         {tours.map((tour) => (
           <Link
             key={tour.id}
-            to={`/tours/${tour.slug}`}
+            to={`${basePath}/${tour.slug}`}
             className="group bg-card rounded-2xl overflow-hidden border border-border hover:shadow-lift transition-all"
           >
             {/* Image */}
@@ -37,7 +39,7 @@ export const SimilarTours = ({ tours }: SimilarToursProps) => {
             {/* Content */}
             <div className="p-5">
               <div className="text-secondary text-sm font-heading uppercase tracking-wider mb-2">
-                {tour.location}
+                {tour.destination || tour.category}
               </div>
               <h3 className="font-display font-bold text-lg mb-3 group-hover:text-primary transition-colors line-clamp-2">
                 {tour.title}
@@ -47,15 +49,11 @@ export const SimilarTours = ({ tours }: SimilarToursProps) => {
               <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
                 <div className="flex items-center gap-1">
                   <Clock className="w-4 h-4" />
-                  <span>{tour.durationDays}D</span>
-                </div>
-                <div className="flex items-center gap-1">
-                  <Users className="w-4 h-4" />
-                  <span>{tour.groupSize}</span>
+                  <span>{tour.duration}D</span>
                 </div>
                 <div className="flex items-center gap-1">
                   <Star className="w-4 h-4 fill-secondary text-secondary" />
-                  <span>{tour.rating}</span>
+                  <span>{tour.difficulty}</span>
                 </div>
               </div>
 
