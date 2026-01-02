@@ -4,10 +4,13 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Calendar, Users, MapPin, Star, Send, X } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
 
 interface BookingFormModalProps {
   isOpen: boolean;
   onClose: () => void;
+  packageTitle?: string;
+  packageSlug?: string;
 }
 
 const destinations = [
@@ -25,7 +28,7 @@ const accommodationTypes = [
   { value: 'luxury', label: 'Luxury (5-Star & Exclusive)', icon: '⭐' }
 ];
 
-export const BookingFormModal = ({ isOpen, onClose }: BookingFormModalProps) => {
+export const BookingFormModal = ({ isOpen, onClose, packageTitle, packageSlug }: BookingFormModalProps) => {
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -53,33 +56,90 @@ export const BookingFormModal = ({ isOpen, onClose }: BookingFormModalProps) => 
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate API call
-    await new Promise(resolve => setTimeout(resolve, 1500));
+    try {
+      // Save to database
+      const { error: dbError } = await supabase
+        .from('booking_requests')
+        .insert([
+          {
+            first_name: formData.firstName,
+            last_name: formData.lastName,
+            email: formData.email,
+            phone: formData.phone,
+            destination: formData.destination,
+            travel_style: formData.travelStyle,
+            start_date: formData.startDate,
+            end_date: formData.endDate,
+            adults: parseInt(formData.adults),
+            children: parseInt(formData.children),
+            accommodation: formData.accommodation,
+            budget: formData.budget || null,
+            special_requirements: formData.specialRequirements || null,
+            package_title: packageTitle || null,
+            package_slug: packageSlug || null,
+            status: 'new',
+            submitted_at: new Date().toISOString()
+          }
+        ]);
 
-    console.log('Booking form submitted:', formData);
-    setIsSubmitting(false);
-    setSubmitSuccess(true);
+      if (dbError) throw dbError;
 
-    // Reset and close after success
-    setTimeout(() => {
-      setSubmitSuccess(false);
-      onClose();
-      setFormData({
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        destination: '',
-        travelStyle: '',
-        startDate: '',
-        endDate: '',
-        adults: '2',
-        children: '0',
-        accommodation: 'mid-range',
-        budget: '',
-        specialRequirements: ''
-      });
-    }, 2000);
+      // Send email notification to admin
+      const duration = calculateDuration();
+      await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          to: 'info@demitours.com',
+          subject: `New Booking Request - ${formData.firstName} ${formData.lastName}`,
+          html: `
+            <h2>New Booking Request</h2>
+            ${packageTitle ? `<p><strong>Package:</strong> ${packageTitle}</p>` : ''}
+            <h3>Personal Information</h3>
+            <p><strong>Name:</strong> ${formData.firstName} ${formData.lastName}</p>
+            <p><strong>Email:</strong> ${formData.email}</p>
+            <p><strong>Phone:</strong> ${formData.phone}</p>
+
+            <h3>Trip Details</h3>
+            <p><strong>Destination:</strong> ${formData.destination}</p>
+            <p><strong>Travel Style:</strong> ${formData.travelStyle}</p>
+            <p><strong>Dates:</strong> ${formData.startDate} to ${formData.endDate} (${duration} days)</p>
+            <p><strong>Travelers:</strong> ${formData.adults} adults, ${formData.children} children</p>
+            <p><strong>Accommodation:</strong> ${formData.accommodation}</p>
+            ${formData.budget ? `<p><strong>Budget:</strong> ${formData.budget}</p>` : ''}
+            ${formData.specialRequirements ? `<p><strong>Special Requirements:</strong><br>${formData.specialRequirements.replace(/\n/g, '<br>')}</p>` : ''}
+            <p><strong>Date Submitted:</strong> ${new Date().toLocaleString()}</p>
+          `
+        })
+      }).catch(err => console.error('Email notification failed:', err));
+
+      setSubmitSuccess(true);
+
+      // Reset and close after success
+      setTimeout(() => {
+        setSubmitSuccess(false);
+        onClose();
+        setFormData({
+          firstName: '',
+          lastName: '',
+          email: '',
+          phone: '',
+          destination: '',
+          travelStyle: '',
+          startDate: '',
+          endDate: '',
+          adults: '2',
+          children: '0',
+          accommodation: 'mid-range',
+          budget: '',
+          specialRequirements: ''
+        });
+      }, 2000);
+    } catch (error) {
+      console.error('Booking form submission error:', error);
+      alert('Something went wrong. Please try again.');
+      setIsSubmitting(false);
+    }
   };
 
   const calculateDuration = () => {

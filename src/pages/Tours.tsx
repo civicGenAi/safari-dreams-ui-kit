@@ -134,15 +134,23 @@ const Tours = () => {
       <Navbar />
 
       {/* Hero Section */}
-      <div className="pt-24 pb-12 bg-gradient-to-b from-primary/5 to-transparent">
-        <div className="container mx-auto px-4 lg:px-8">
-          <h1 className="font-display text-4xl md:text-5xl font-bold mb-4">
-            Explore All <span className="text-gradient-gold">Safari Tours</span>
-          </h1>
-          <p className="text-lg text-muted-foreground max-w-2xl">
-            Discover our complete collection of carefully crafted safari experiences. From
-            wildlife adventures to mountain treks, find your perfect journey.
-          </p>
+      <div className="relative h-[400px] md:h-[500px]">
+        <img
+          src="/header_bg_new4.gif"
+          alt="Safari Tours"
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-charcoal/80 via-charcoal/60 to-charcoal/80" />
+        <div className="absolute inset-0 flex items-center">
+          <div className="container mx-auto px-4 lg:px-8">
+            <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
+              Explore All <span className="text-gradient-gold">Safari Tours</span>
+            </h1>
+            <p className="text-lg md:text-xl text-white/90 max-w-2xl">
+              Discover our complete collection of carefully crafted safari experiences. From
+              wildlife adventures to mountain treks, find your perfect journey.
+            </p>
+          </div>
         </div>
       </div>
 

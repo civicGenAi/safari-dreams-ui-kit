@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { ArrowRight, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { supabase } from '@/lib/supabase';
 
 // Import staff images for avatars
 import staffCaudence from '@/assets/footer_customer_care.webp';
@@ -12,15 +13,62 @@ import staffHuruma from '@/assets/footer_customer_care4.webp';
 export const NewsletterSection = () => {
   const [email, setEmail] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [error, setError] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
+    if (!email) return;
+
+    setIsSubmitting(true);
+    setError('');
+
+    try {
+      // Save to database
+      const { error: dbError } = await supabase
+        .from('newsletter_subscriptions')
+        .insert([
+          {
+            email: email.toLowerCase(),
+            subscribed_at: new Date().toISOString(),
+            status: 'active'
+          }
+        ]);
+
+      if (dbError) {
+        if (dbError.code === '23505') { // Duplicate email
+          setError('This email is already subscribed!');
+        } else {
+          throw dbError;
+        }
+        return;
+      }
+
+      // Send email notification to admin
+      await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          to: 'info@demitours.com',
+          subject: 'New Newsletter Subscription',
+          html: `
+            <h2>New Newsletter Subscription</h2>
+            <p><strong>Email:</strong> ${email}</p>
+            <p><strong>Date:</strong> ${new Date().toLocaleString()}</p>
+          `
+        })
+      }).catch(err => console.error('Email notification failed:', err));
+
       setIsSubmitted(true);
       setTimeout(() => {
         setIsSubmitted(false);
         setEmail('');
       }, 3000);
+    } catch (err) {
+      console.error('Newsletter subscription error:', err);
+      setError('Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -107,14 +155,21 @@ export const NewsletterSection = () => {
                   placeholder="Enter your email address"
                   className="w-full h-12 px-5 rounded-md bg-background border border-border text-foreground placeholder:text-muted-foreground/60 focus:outline-none focus:border-secondary transition-colors"
                   required
+                  disabled={isSubmitting}
                 />
+                {error && <p className="text-xs text-red-500 mt-1">{error}</p>}
               </div>
               <Button
                 type="submit"
                 className="bg-secondary hover:bg-secondary/90 text-secondary-foreground h-12 px-6 gap-2"
-                disabled={isSubmitted}
+                disabled={isSubmitted || isSubmitting}
               >
-                {isSubmitted ? (
+                {isSubmitting ? (
+                  <>
+                    <span className="animate-spin">⏳</span>
+                    Subscribing...
+                  </>
+                ) : isSubmitted ? (
                   <>
                     <CheckCircle className="w-4 h-4" />
                     Subscribed!

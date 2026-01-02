@@ -11,7 +11,10 @@ import {
   LogOut,
   Menu,
   X,
-  Lightbulb
+  Lightbulb,
+  Mail,
+  MessageSquare,
+  Calendar
 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -64,6 +67,24 @@ export const AdminLayout = ({ children }: AdminLayoutProps) => {
       label: 'Articles',
       path: '/admin/articles',
       description: 'Manage Wild Tales blog'
+    },
+    {
+      icon: Calendar,
+      label: 'Booking Requests',
+      path: '/admin/bookings',
+      description: 'View quote requests'
+    },
+    {
+      icon: MessageSquare,
+      label: 'Contact Messages',
+      path: '/admin/contacts',
+      description: 'Customer inquiries'
+    },
+    {
+      icon: Mail,
+      label: 'Newsletter',
+      path: '/admin/newsletter',
+      description: 'Email subscriptions'
     },
   ];
 
