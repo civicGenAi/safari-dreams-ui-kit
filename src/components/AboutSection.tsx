@@ -27,11 +27,11 @@ export const AboutSection = () => {
             </h2>
 
             <p className="text-xl text-primary font-semibold mb-4">
-              Jambo, welcome to demi tours and travel
+              Jambo, welcome to DeMi Tours & Travel Africa
             </p>
 
             <p className="text-muted-foreground leading-relaxed">
-              DeMi Tours and Travel: Unveiling the Wonders of Africa and beyond.
+              A locally-owned, women-led ecotourism company and trusted safari specialists in East Africa.
             </p>
           </div>
 
@@ -55,7 +55,7 @@ export const AboutSection = () => {
 
             {/* Experience Badge - Top Right */}
             <div className="absolute -top-4 right-0 lg:right-4 bg-primary text-primary-foreground rounded-2xl px-5 py-4 shadow-primary">
-              <span className="block font-display text-3xl font-bold">20</span>
+              <span className="block font-display text-3xl font-bold">27</span>
               <span className="block font-heading text-xs uppercase tracking-wider">Years of Experience</span>
             </div>
 
@@ -69,21 +69,21 @@ export const AboutSection = () => {
           {/* Right: Descriptions & CTA */}
           <div className="space-y-6">
             <p className="text-muted-foreground leading-relaxed">
-              Nestled in the heart of Arusha, Tanzania, DeMi Tours and Travel beckons travellers with a kaleidoscope of experiences. We are more than just a travel agency; we are architects of adventure, curators of cultural immersion, and facilitators of personal transformation.
+              DeMi Tours & Travel Africa is a locally-owned, women-led ecotourism company and trusted safari specialists in East Africa, championing inclusive tourism and impact travel. With over 27 years of combined experience, we are experts in selling East Africa as a destination, offering carefully curated combined and stand-alone safari experiences across Tanzania, Kenya, Uganda, and Rwanda.
             </p>
 
             <p className="text-muted-foreground leading-relaxed">
-              Our diverse range of travel and tour packages cater to every wanderlust, from the intrepid explorer to the serene beachcomber.
+              Every journey we design prioritizes safety, accessibility, and inclusivity, making it possible for families, persons with disabilities, solo travelers and students to explore East Africa with confidence. We craft immersive, responsible safaris that connect travelers to people, culture, and nature—while ensuring tourism benefits the communities it touches.
             </p>
 
             <p className="text-muted-foreground leading-relaxed">
-              Join DeMi Tours and Travel on an extraordinary adventure and discover the magic that awaits you in East Africa. We promise to unlock the wonders of the region, create lasting memories, and leave you yearning for your next African escapade.
+              At the heart of our work is impact travel—travel that changes lives. Through women empowerment, community partnerships, and conservation-focused experiences, we protect Africa's landscapes and heritage. With DeMi Tours & Travel Africa, travel goes beyond exploration—it becomes a powerful force for inclusion, connection, and lasting positive impact.
             </p>
 
             {/* Stats */}
             <div className="grid grid-cols-3 gap-4 pt-6">
               <div className="text-center">
-                <div className="font-display text-3xl font-bold text-primary">20</div>
+                <div className="font-display text-3xl font-bold text-primary">27</div>
                 <div className="text-xs text-muted-foreground">Years of Experience</div>
               </div>
               <div className="text-center">
@@ -100,7 +100,7 @@ export const AboutSection = () => {
             <div className="pt-4">
               <Link to="/our-story">
                 <Button variant="primary" size="lg">
-                  Our Story
+                  About Us
                 </Button>
               </Link>
             </div>
