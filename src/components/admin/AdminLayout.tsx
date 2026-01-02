@@ -159,19 +159,6 @@ export const AdminLayout = ({ children }: AdminLayoutProps) => {
               );
             })}
           </nav>
-
-          {/* Help Section */}
-          <div className="absolute bottom-0 left-0 right-0 p-4 border-t bg-muted/30">
-            <div className="text-xs text-muted-foreground mb-2">Need Help?</div>
-            <div className="text-xs space-y-1">
-              <a href="/SETUP-INSTRUCTIONS.md" className="block hover:text-primary">
-                📖 Setup Guide
-              </a>
-              <a href="#" className="block hover:text-primary">
-                💬 Support
-              </a>
-            </div>
-          </div>
         </aside>
 
         {/* Overlay for mobile */}
