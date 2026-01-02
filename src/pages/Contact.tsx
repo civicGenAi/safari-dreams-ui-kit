@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { Navbar } from '@/components/Navbar';
 import { Footer } from '@/components/Footer';
 import { WhatsAppButton } from '@/components/WhatsAppButton';
@@ -6,12 +7,79 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
-import { Mail, Phone, MapPin, Clock, MessageCircle, Send } from 'lucide-react';
+import { Mail, Phone, MapPin, Clock, MessageCircle, Send, CheckCircle } from 'lucide-react';
+import { supabase } from '@/lib/supabase';
 
 const Contact = () => {
-  const handleSubmit = (e: React.FormEvent) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    subject: 'General Inquiry',
+    message: ''
+  });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    alert('Message sent! (In real app, this would send the form data to your server)');
+    setIsSubmitting(true);
+
+    try {
+      // Save to database
+      const { error: dbError } = await supabase
+        .from('contact_submissions')
+        .insert([
+          {
+            name: formData.name,
+            email: formData.email,
+            phone: formData.phone || null,
+            subject: formData.subject,
+            message: formData.message,
+            status: 'new',
+            submitted_at: new Date().toISOString()
+          }
+        ]);
+
+      if (dbError) throw dbError;
+
+      // Send email notification to admin
+      await fetch('/api/send-email', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          to: 'info@demitours.com',
+          subject: `New Contact Form: ${formData.subject}`,
+          html: `
+            <h2>New Contact Form Submission</h2>
+            <p><strong>Name:</strong> ${formData.name}</p>
+            <p><strong>Email:</strong> ${formData.email}</p>
+            <p><strong>Phone:</strong> ${formData.phone || 'Not provided'}</p>
+            <p><strong>Subject:</strong> ${formData.subject}</p>
+            <p><strong>Message:</strong></p>
+            <p>${formData.message.replace(/\n/g, '<br>')}</p>
+            <p><strong>Date:</strong> ${new Date().toLocaleString()}</p>
+          `
+        })
+      }).catch(err => console.error('Email notification failed:', err));
+
+      setIsSubmitted(true);
+      setTimeout(() => {
+        setIsSubmitted(false);
+        setFormData({
+          name: '',
+          email: '',
+          phone: '',
+          subject: 'General Inquiry',
+          message: ''
+        });
+      }, 3000);
+    } catch (error) {
+      console.error('Form submission error:', error);
+      alert('Something went wrong. Please try again.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -101,47 +169,105 @@ const Contact = () => {
 
             {/* Contact Form */}
             <div className="lg:col-span-2">
-              <form onSubmit={handleSubmit} className="bg-card rounded-2xl border border-border p-6 md:p-8">
-                <h3 className="font-heading font-semibold text-xl mb-6">Send Us a Message</h3>
-
-                <div className="grid md:grid-cols-2 gap-6 mb-6">
-                  <div>
-                    <Label htmlFor="name">Full Name *</Label>
-                    <Input id="name" required placeholder="John Doe" />
+              {isSubmitted ? (
+                <div className="bg-card rounded-2xl border border-border p-6 md:p-8 text-center">
+                  <div className="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+                    <CheckCircle className="w-10 h-10 text-green-600" />
                   </div>
-                  <div>
-                    <Label htmlFor="email">Email Address *</Label>
-                    <Input type="email" id="email" required placeholder="john@example.com" />
-                  </div>
+                  <h3 className="font-heading font-semibold text-2xl mb-3">Message Sent!</h3>
+                  <p className="text-muted-foreground">
+                    Thank you for contacting us. We'll get back to you within 24 hours.
+                  </p>
                 </div>
+              ) : (
+                <form onSubmit={handleSubmit} className="bg-card rounded-2xl border border-border p-6 md:p-8">
+                  <h3 className="font-heading font-semibold text-xl mb-6">Send Us a Message</h3>
 
-                <div className="grid md:grid-cols-2 gap-6 mb-6">
-                  <div>
-                    <Label htmlFor="phone">Phone Number</Label>
-                    <Input type="tel" id="phone" placeholder="+1 234 567 8900" />
+                  <div className="grid md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                      <Label htmlFor="name">Full Name *</Label>
+                      <Input
+                        id="name"
+                        required
+                        placeholder="John Doe"
+                        value={formData.name}
+                        onChange={(e) => setFormData({...formData, name: e.target.value})}
+                        disabled={isSubmitting}
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="email">Email Address *</Label>
+                      <Input
+                        type="email"
+                        id="email"
+                        required
+                        placeholder="john@example.com"
+                        value={formData.email}
+                        onChange={(e) => setFormData({...formData, email: e.target.value})}
+                        disabled={isSubmitting}
+                      />
+                    </div>
                   </div>
-                  <div>
-                    <Label htmlFor="subject">Subject *</Label>
-                    <select id="subject" required className="w-full px-4 py-2 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary">
-                      <option>General Inquiry</option>
-                      <option>Tour Booking</option>
-                      <option>Custom Safari Request</option>
-                      <option>Group Booking</option>
-                      <option>Other</option>
-                    </select>
+
+                  <div className="grid md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                      <Label htmlFor="phone">Phone Number</Label>
+                      <Input
+                        type="tel"
+                        id="phone"
+                        placeholder="+1 234 567 8900"
+                        value={formData.phone}
+                        onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                        disabled={isSubmitting}
+                      />
+                    </div>
+                    <div>
+                      <Label htmlFor="subject">Subject *</Label>
+                      <select
+                        id="subject"
+                        required
+                        className="w-full px-4 py-2 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary"
+                        value={formData.subject}
+                        onChange={(e) => setFormData({...formData, subject: e.target.value})}
+                        disabled={isSubmitting}
+                      >
+                        <option>General Inquiry</option>
+                        <option>Tour Booking</option>
+                        <option>Custom Safari Request</option>
+                        <option>Group Booking</option>
+                        <option>Other</option>
+                      </select>
+                    </div>
                   </div>
-                </div>
 
-                <div className="mb-6">
-                  <Label htmlFor="message">Your Message *</Label>
-                  <Textarea id="message" required rows={6} placeholder="Tell us about your dream safari..." />
-                </div>
+                  <div className="mb-6">
+                    <Label htmlFor="message">Your Message *</Label>
+                    <Textarea
+                      id="message"
+                      required
+                      rows={6}
+                      placeholder="Tell us about your dream safari..."
+                      value={formData.message}
+                      onChange={(e) => setFormData({...formData, message: e.target.value})}
+                      disabled={isSubmitting}
+                    />
+                  </div>
 
-                <Button type="submit" variant="gold" size="lg" className="w-full md:w-auto">
-                  <Send className="w-4 h-4 mr-2" />
-                  Send Message
-                </Button>
-              </form>
+                  <Button type="submit" variant="gold" size="lg" className="w-full md:w-auto" disabled={isSubmitting}>
+                    {isSubmitting ? (
+                      <>
+                        <span className="animate-spin mr-2">⏳</span>
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <Send className="w-4 h-4 mr-2" />
+                        Send Message
+                      </>
+                    )}
+                  </Button>
+                </form>
+              )}
             </div>
           </div>
         </div>

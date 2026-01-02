@@ -86,3 +86,42 @@ export interface ArticleCategory {
   slug: string;
   created_at: string;
 }
+
+export interface NewsletterSubscription {
+  id: string;
+  email: string;
+  subscribed_at: string;
+  status: 'active' | 'unsubscribed';
+}
+
+export interface ContactSubmission {
+  id: string;
+  name: string;
+  email: string;
+  phone?: string;
+  subject: string;
+  message: string;
+  status: 'new' | 'read' | 'responded';
+  submitted_at: string;
+}
+
+export interface BookingRequest {
+  id: string;
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string;
+  destination: string;
+  travel_style: string;
+  start_date: string;
+  end_date: string;
+  adults: number;
+  children: number;
+  accommodation: string;
+  budget?: string;
+  special_requirements?: string;
+  package_title?: string;
+  package_slug?: string;
+  status: 'new' | 'contacted' | 'quoted' | 'booked' | 'cancelled';
+  submitted_at: string;
+}
