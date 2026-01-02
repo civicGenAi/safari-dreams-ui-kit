@@ -28,7 +28,7 @@ const Contact = () => {
         <div className="absolute inset-0 flex items-center">
           <div className="container mx-auto px-4 lg:px-8 text-center">
             <h1 className="font-display text-4xl md:text-5xl lg:text-6xl font-bold text-white mb-4">
-              Get in <span className="text-gradient-gold">Touch</span>
+              Plan Your <span className="text-gradient-gold">Trip</span>
             </h1>
             <p className="text-lg md:text-xl text-white/90 max-w-2xl mx-auto">
               Have a question about our tours? Want to customize your safari? Our team is here to help you plan your perfect African adventure.

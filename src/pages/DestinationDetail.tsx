@@ -195,7 +195,7 @@ Overall, Jordan is a diverse country that offers something for everyone, from an
         <div className="absolute inset-0 flex items-center">
           <div className="container mx-auto px-4 lg:px-8">
             <div className="text-white mb-4">
-              <Link to="/" className="hover:text-primary transition-colors">Home</Link>
+              <Link to="/" className="hover:text-primary transition-colors">Explore</Link>
               <span className="mx-2">»</span>
               <span>{destination.name}</span>
             </div>
