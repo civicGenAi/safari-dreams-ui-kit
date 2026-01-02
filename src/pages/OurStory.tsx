@@ -84,10 +84,13 @@ const OurStory = () => {
                 </p>
                 <div className="space-y-4 text-muted-foreground leading-relaxed">
                   <p>
-                    Demi Tours and Travel is a "sista" owned travel agency based in Arusha, Tanzania. Something that makes us different from a lot of tour companies is that, the founders are the same as you. Travel enthusiasts.
+                    DeMi Tours & Travel Africa is a locally-owned, women-led ecotourism company and trusted safari specialists in East Africa, championing inclusive tourism and impact travel. With over 27 years of combined experience, we are experts in selling East Africa as a destination, offering carefully curated combined and stand-alone safari experiences across Tanzania, Kenya, Uganda, and Rwanda.
                   </p>
                   <p>
-                    After two decades of industry expertise, our visionary founder, Caudence, recognized a glaring gender gap within the male-dominated travel industry. Driven by the desire to empower more women and bridge this divide, the seed of an idea blossomed, culminating in the birth of Demi Tours and Travel.
+                    After over two decades of industry expertise, our visionary founder, Caudence, recognized a glaring gender gap within the male-dominated travel industry. Driven by the desire to empower more women and bridge this divide, the seed of an idea blossomed, culminating in the birth of DeMi Tours & Travel Africa.
+                  </p>
+                  <p>
+                    Every journey we design prioritizes safety, accessibility, and inclusivity, making it possible for families, persons with disabilities, solo travelers and students to explore East Africa with confidence. We craft immersive, responsible safaris that connect travelers to people, culture, and nature—while ensuring tourism benefits the communities it touches.
                   </p>
                 </div>
               </div>
@@ -125,24 +128,127 @@ const OurStory = () => {
                 <div>
                   <h3 className="font-heading font-bold text-xl mb-3">Social responsibility :</h3>
                   <p className="text-muted-foreground mb-4">
-                    We at Demi Tours, believe in the power of ecotourism as a responsible and sustainable way to explore the natural wonders of our planet.
+                    We at DeMi Tours & Travel Africa, believe in the power of ecotourism as a responsible and sustainable way to explore the natural wonders of our planet.
                     Our commitment to ecotourism goes beyond just showcasing the beauty of the destinations we visit. We also actively support local conservation efforts and promote environmental awareness.
                   </p>
                   <p className="text-muted-foreground">
-                    We achieve this by partnering with accommodation providers, who engage in sustainable practices and initiatives. A portion of our earnings is dedicated to supporting Dyslexia Tanzania, a non-profit organization that aims to raise awareness about dyslexia and advocate for equal learning opportunities for children with dyslexia.
+                    We achieve this by partnering with accommodation providers who engage in sustainable practices and initiatives. At the heart of our work is impact travel—travel that changes lives. Through women empowerment, community partnerships, and conservation-focused experiences, we protect Africa's landscapes and heritage.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Impact Travel - Dyslexia Tanzania Section */}
+      <div className="py-16 bg-gradient-to-br from-primary/5 via-secondary/5 to-primary/10 border-y border-primary/20">
+        <div className="container mx-auto px-4 lg:px-8">
+          <div className="max-w-5xl mx-auto">
+            {/* Header */}
+            <div className="text-center mb-12">
+              <div className="inline-block mb-4">
+                <span className="bg-primary text-primary-foreground px-6 py-2 rounded-full text-sm font-semibold uppercase tracking-wider">
+                  Impact Travel That Changes Lives
+                </span>
+              </div>
+              <h2 className="font-display text-4xl md:text-5xl font-bold mb-6">
+                Every Safari Supports Inclusive Education
+              </h2>
+              <p className="text-xl text-muted-foreground leading-relaxed">
+                Travel with purpose. Your adventure creates lasting impact.
+              </p>
+            </div>
+
+            {/* Main Content */}
+            <div className="grid md:grid-cols-2 gap-12 items-center">
+              {/* Left - Key Message */}
+              <div className="space-y-6">
+                <div className="bg-white rounded-2xl p-8 shadow-lift border-2 border-primary/20">
+                  <div className="flex items-center gap-4 mb-6">
+                    <div className="bg-primary text-primary-foreground rounded-full w-16 h-16 flex items-center justify-center">
+                      <span className="font-display text-2xl font-bold">15%</span>
+                    </div>
+                    <div>
+                      <h3 className="font-heading font-bold text-xl">Of Every Booking</h3>
+                      <p className="text-muted-foreground text-sm">Supports Dyslexia Tanzania</p>
+                    </div>
+                  </div>
+                  <p className="text-muted-foreground leading-relaxed">
+                    <strong className="text-foreground">15% of every booking</strong> supports Dyslexia Tanzania, an NGO we founded following our personal journey as parents of a child with dyslexia—turning every safari into a meaningful contribution to inclusive education.
                   </p>
                 </div>
 
-                <p className="text-muted-foreground italic mb-8">
-                  Thank you for considering DeMi Tours and Travel for your next adventure. We look forward to providing you with an exceptional experience that will create lasting memories.
-                </p>
+                <div className="bg-white rounded-2xl p-6 shadow-md">
+                  <h4 className="font-heading font-bold text-lg mb-3">Our Personal Journey</h4>
+                  <p className="text-muted-foreground leading-relaxed">
+                    As parents of a child with dyslexia, we understand firsthand the challenges families face in accessing quality, inclusive education. This personal experience inspired us to establish Dyslexia Tanzania—ensuring no child is left behind.
+                  </p>
+                </div>
+              </div>
 
-                <Link to="/contact">
-                  <Button variant="primary" size="lg" className="gap-2">
-                    Talk to us
-                    <ArrowRight className="w-5 h-5" />
-                  </Button>
-                </Link>
+              {/* Right - Impact Details */}
+              <div className="space-y-6">
+                <h3 className="font-heading font-bold text-2xl mb-4">How Your Trip Makes a Difference</h3>
+
+                <div className="space-y-4">
+                  <div className="flex gap-4">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">
+                      1
+                    </div>
+                    <div>
+                      <h4 className="font-semibold mb-1">Raising Awareness</h4>
+                      <p className="text-muted-foreground text-sm">
+                        Educating communities about dyslexia and breaking down stigmas surrounding learning differences.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-4">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">
+                      2
+                    </div>
+                    <div>
+                      <h4 className="font-semibold mb-1">Advocating for Equal Opportunities</h4>
+                      <p className="text-muted-foreground text-sm">
+                        Working with schools and policymakers to ensure children with dyslexia receive the support they need.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-4">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">
+                      3
+                    </div>
+                    <div>
+                      <h4 className="font-semibold mb-1">Creating Learning Resources</h4>
+                      <p className="text-muted-foreground text-sm">
+                        Developing specialized tools and training teachers to support dyslexic learners effectively.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex gap-4">
+                    <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary/10 flex items-center justify-center text-primary font-bold">
+                      4
+                    </div>
+                    <div>
+                      <h4 className="font-semibold mb-1">Empowering Families</h4>
+                      <p className="text-muted-foreground text-sm">
+                        Providing guidance and resources to parents navigating their child's educational journey.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="mt-6 p-6 bg-secondary/10 rounded-xl border border-secondary/30">
+                  <p className="text-foreground font-semibold mb-2">
+                    When you book with DeMi Tours & Travel Africa:
+                  </p>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    You're not just embarking on an adventure—you're contributing to a more inclusive Tanzania where every child has the opportunity to learn, grow, and thrive regardless of their learning differences.
+                  </p>
+                </div>
               </div>
             </div>
           </div>
