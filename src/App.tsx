@@ -29,6 +29,9 @@ import AdminDashboard from "./pages/AdminDashboard";
 import AdminPackages from "./pages/AdminPackages";
 import AdminTravelIdeas from "./pages/AdminTravelIdeas";
 import AdminBulkImport from "./pages/AdminBulkImport";
+import AdminBookings from "./pages/AdminBookings";
+import AdminContacts from "./pages/AdminContacts";
+import AdminNewsletter from "./pages/AdminNewsletter";
 import { AdminArticles } from "./components/admin/AdminArticles";
 import { ArticleForm } from "./components/admin/ArticleForm";
 
@@ -135,6 +138,21 @@ const App = () => {
               <Route path="/admin/articles/edit/:id" element={
                 <ProtectedRoute>
                   <ArticleFormWrapper />
+                </ProtectedRoute>
+              } />
+              <Route path="/admin/bookings" element={
+                <ProtectedRoute>
+                  <AdminBookings />
+                </ProtectedRoute>
+              } />
+              <Route path="/admin/contacts" element={
+                <ProtectedRoute>
+                  <AdminContacts />
+                </ProtectedRoute>
+              } />
+              <Route path="/admin/newsletter" element={
+                <ProtectedRoute>
+                  <AdminNewsletter />
                 </ProtectedRoute>
               } />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
