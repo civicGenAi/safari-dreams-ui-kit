@@ -4,7 +4,7 @@ import {
   MapPin,
   Facebook,
   Instagram,
-  Twitter,
+  Linkedin,
   ArrowUp
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
@@ -20,12 +20,12 @@ const destinations = [
 ];
 
 const quickLinks = [
+  { name: 'Explore', href: '/' },
   { name: 'Destinations', href: '/destinations' },
-  { name: 'Travel Ideas', href: '/travel-ideas' },
-  { name: 'Our Story', href: '/our-story' },
-  { name: 'Wild Tales', href: '/wild-tales' },
-  { name: 'FAQs', href: '#faqs' },
-  { name: 'Get in touch', href: '/contact' },
+  { name: 'Experiences', href: '/travel-ideas' },
+  { name: 'About Us', href: '/our-story' },
+  { name: 'Stories', href: '/wild-tales' },
+  { name: 'Plan Your Trip', href: '/contact' },
 ];
 
 export const Footer = () => {
@@ -184,16 +184,33 @@ export const Footer = () => {
             
             {/* Social Links */}
             <div className="flex items-center gap-3">
-              {[Facebook, Twitter, Instagram].map((Icon, index) => (
-                <a
-                  key={index}
-                  href="#"
-                  className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-charcoal transition-colors text-white/70"
-                  aria-label={`Social link ${index + 1}`}
-                >
-                  <Icon className="w-4 h-4" />
-                </a>
-              ))}
+              <a
+                href="https://www.facebook.com/DeMitoursandtravelsafrica/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-charcoal transition-colors text-white/70"
+                aria-label="Facebook"
+              >
+                <Facebook className="w-4 h-4" />
+              </a>
+              <a
+                href="https://www.instagram.com/demitoursandtravelafrica?utm_source=qr"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-charcoal transition-colors text-white/70"
+                aria-label="Instagram"
+              >
+                <Instagram className="w-4 h-4" />
+              </a>
+              <a
+                href="https://www.linkedin.com/company/demi-tours-travel/?originalSubdomain=tz"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-10 h-10 rounded-full border border-white/30 flex items-center justify-center hover:bg-white hover:text-charcoal transition-colors text-white/70"
+                aria-label="LinkedIn"
+              >
+                <Linkedin className="w-4 h-4" />
+              </a>
               <button
                 onClick={scrollToTop}
                 className="w-10 h-10 rounded-full bg-secondary text-charcoal flex items-center justify-center hover:bg-secondary/90 transition-colors ml-2"

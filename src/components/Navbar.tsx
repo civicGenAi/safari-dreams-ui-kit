@@ -72,7 +72,7 @@ export const Navbar = ({ activeCategory, activeDestination }: NavbarProps = {}) 
             <div className="hidden lg:flex items-center gap-8">
               <Link to="/" className={`font-heading text-sm uppercase tracking-widest transition-colors link-underline ${
                 isScrolled ? 'text-charcoal hover:text-primary font-semibold' : 'text-primary-foreground/90 hover:text-primary-foreground'
-              }`}>Home</Link>
+              }`}>Explore</Link>
 
               <div className="relative" onMouseEnter={() => setIsDestinationsOpen(true)} onMouseLeave={() => setIsDestinationsOpen(false)}>
                 <Link to="/destinations" className={`flex items-center gap-1 font-heading text-sm uppercase tracking-widest transition-colors ${
@@ -114,7 +114,7 @@ export const Navbar = ({ activeCategory, activeDestination }: NavbarProps = {}) 
                 <Link to="/travel-ideas" className={`flex items-center gap-1 font-heading text-sm uppercase tracking-widest transition-colors ${
                   isScrolled ? 'text-charcoal hover:text-primary font-semibold' : 'text-primary-foreground/90 hover:text-primary-foreground'
                 }`}>
-                  Travel Ideas
+                  Experiences
                   <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isTravelIdeasOpen ? 'rotate-180' : ''}`} />
                 </Link>
 
@@ -151,13 +151,13 @@ export const Navbar = ({ activeCategory, activeDestination }: NavbarProps = {}) 
               </div>
               <Link to="/our-story" className={`font-heading text-sm uppercase tracking-widest transition-colors link-underline ${
                 isScrolled ? 'text-charcoal hover:text-primary font-semibold' : 'text-primary-foreground/90 hover:text-primary-foreground'
-              }`}>Our Story</Link>
+              }`}>About Us</Link>
               <Link to="/wild-tales" className={`font-heading text-sm uppercase tracking-widest transition-colors link-underline ${
                 isScrolled ? 'text-charcoal hover:text-primary font-semibold' : 'text-primary-foreground/90 hover:text-primary-foreground'
-              }`}>Wild Tales</Link>
+              }`}>Stories</Link>
               <Link to="/contact" className={`font-heading text-sm uppercase tracking-widest transition-colors link-underline ${
                 isScrolled ? 'text-charcoal hover:text-primary font-semibold' : 'text-primary-foreground/90 hover:text-primary-foreground'
-              }`}>Get in Touch</Link>
+              }`}>Plan Your Trip</Link>
             </div>
 
             <div className="hidden lg:flex items-center gap-4">
@@ -203,11 +203,11 @@ export const Navbar = ({ activeCategory, activeDestination }: NavbarProps = {}) 
               Request Free Quote
             </Button>
             <nav className="space-y-1">
-              <Link to="/" className="block py-3 px-4 font-heading text-sm uppercase tracking-wider text-foreground hover:bg-muted rounded-lg" onClick={() => setIsMobileMenuOpen(false)}>Home</Link>
-              <Link to="/travel-ideas" className="block py-3 px-4 font-heading text-sm uppercase tracking-wider text-foreground hover:bg-muted rounded-lg" onClick={() => setIsMobileMenuOpen(false)}>Travel Ideas</Link>
-              <Link to="/our-story" className="block py-3 px-4 font-heading text-sm uppercase tracking-wider text-foreground hover:bg-muted rounded-lg" onClick={() => setIsMobileMenuOpen(false)}>Our Story</Link>
-              <Link to="/wild-tales" className="block py-3 px-4 font-heading text-sm uppercase tracking-wider text-foreground hover:bg-muted rounded-lg" onClick={() => setIsMobileMenuOpen(false)}>Wild Tales</Link>
-              <Link to="/contact" className="block py-3 px-4 font-heading text-sm uppercase tracking-wider text-foreground hover:bg-muted rounded-lg" onClick={() => setIsMobileMenuOpen(false)}>Get in Touch</Link>
+              <Link to="/" className="block py-3 px-4 font-heading text-sm uppercase tracking-wider text-foreground hover:bg-muted rounded-lg" onClick={() => setIsMobileMenuOpen(false)}>Explore</Link>
+              <Link to="/travel-ideas" className="block py-3 px-4 font-heading text-sm uppercase tracking-wider text-foreground hover:bg-muted rounded-lg" onClick={() => setIsMobileMenuOpen(false)}>Experiences</Link>
+              <Link to="/our-story" className="block py-3 px-4 font-heading text-sm uppercase tracking-wider text-foreground hover:bg-muted rounded-lg" onClick={() => setIsMobileMenuOpen(false)}>About Us</Link>
+              <Link to="/wild-tales" className="block py-3 px-4 font-heading text-sm uppercase tracking-wider text-foreground hover:bg-muted rounded-lg" onClick={() => setIsMobileMenuOpen(false)}>Stories</Link>
+              <Link to="/contact" className="block py-3 px-4 font-heading text-sm uppercase tracking-wider text-foreground hover:bg-muted rounded-lg" onClick={() => setIsMobileMenuOpen(false)}>Plan Your Trip</Link>
             </nav>
           </div>
         </div>
