@@ -32,6 +32,7 @@ import AdminBulkImport from "./pages/AdminBulkImport";
 import AdminBookings from "./pages/AdminBookings";
 import AdminContacts from "./pages/AdminContacts";
 import AdminNewsletter from "./pages/AdminNewsletter";
+import AdminAnalytics from "./pages/AdminAnalytics";
 import { AdminArticles } from "./components/admin/AdminArticles";
 import { ArticleForm } from "./components/admin/ArticleForm";
 
@@ -153,6 +154,11 @@ const App = () => {
               <Route path="/admin/newsletter" element={
                 <ProtectedRoute>
                   <AdminNewsletter />
+                </ProtectedRoute>
+              } />
+              <Route path="/admin/analytics" element={
+                <ProtectedRoute>
+                  <AdminAnalytics />
                 </ProtectedRoute>
               } />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
