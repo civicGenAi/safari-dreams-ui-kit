@@ -5,6 +5,7 @@ import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Calendar, Users, MapPin, Star, Send, X } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
+import { sendBookingNotification } from '@/lib/email';
 
 interface BookingFormModalProps {
   isOpen: boolean;
@@ -86,32 +87,23 @@ export const BookingFormModal = ({ isOpen, onClose, packageTitle, packageSlug }:
 
       // Send email notification to admin
       const duration = calculateDuration();
-      await fetch('/api/send-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          to: 'info@demitours.com',
-          subject: `New Booking Request - ${formData.firstName} ${formData.lastName}`,
-          html: `
-            <h2>New Booking Request</h2>
-            ${packageTitle ? `<p><strong>Package:</strong> ${packageTitle}</p>` : ''}
-            <h3>Personal Information</h3>
-            <p><strong>Name:</strong> ${formData.firstName} ${formData.lastName}</p>
-            <p><strong>Email:</strong> ${formData.email}</p>
-            <p><strong>Phone:</strong> ${formData.phone}</p>
-
-            <h3>Trip Details</h3>
-            <p><strong>Destination:</strong> ${formData.destination}</p>
-            <p><strong>Travel Style:</strong> ${formData.travelStyle}</p>
-            <p><strong>Dates:</strong> ${formData.startDate} to ${formData.endDate} (${duration} days)</p>
-            <p><strong>Travelers:</strong> ${formData.adults} adults, ${formData.children} children</p>
-            <p><strong>Accommodation:</strong> ${formData.accommodation}</p>
-            ${formData.budget ? `<p><strong>Budget:</strong> ${formData.budget}</p>` : ''}
-            ${formData.specialRequirements ? `<p><strong>Special Requirements:</strong><br>${formData.specialRequirements.replace(/\n/g, '<br>')}</p>` : ''}
-            <p><strong>Date Submitted:</strong> ${new Date().toLocaleString()}</p>
-          `
-        })
-      }).catch(err => console.error('Email notification failed:', err));
+      await sendBookingNotification({
+        firstName: formData.firstName,
+        lastName: formData.lastName,
+        email: formData.email,
+        phone: formData.phone,
+        destination: formData.destination,
+        travelStyle: formData.travelStyle,
+        startDate: formData.startDate,
+        endDate: formData.endDate,
+        adults: parseInt(formData.adults),
+        children: parseInt(formData.children),
+        accommodation: formData.accommodation,
+        budget: formData.budget,
+        specialRequirements: formData.specialRequirements,
+        packageTitle: packageTitle,
+        duration: duration
+      });
 
       setSubmitSuccess(true);
 

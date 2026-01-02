@@ -9,6 +9,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Mail, Phone, MapPin, Clock, MessageCircle, Send, CheckCircle } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
+import { sendContactNotification } from '@/lib/email';
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -44,24 +45,13 @@ const Contact = () => {
       if (dbError) throw dbError;
 
       // Send email notification to admin
-      await fetch('/api/send-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          to: 'info@demitours.com',
-          subject: `New Contact Form: ${formData.subject}`,
-          html: `
-            <h2>New Contact Form Submission</h2>
-            <p><strong>Name:</strong> ${formData.name}</p>
-            <p><strong>Email:</strong> ${formData.email}</p>
-            <p><strong>Phone:</strong> ${formData.phone || 'Not provided'}</p>
-            <p><strong>Subject:</strong> ${formData.subject}</p>
-            <p><strong>Message:</strong></p>
-            <p>${formData.message.replace(/\n/g, '<br>')}</p>
-            <p><strong>Date:</strong> ${new Date().toLocaleString()}</p>
-          `
-        })
-      }).catch(err => console.error('Email notification failed:', err));
+      await sendContactNotification({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        subject: formData.subject,
+        message: formData.message
+      });
 
       setIsSubmitted(true);
       setTimeout(() => {

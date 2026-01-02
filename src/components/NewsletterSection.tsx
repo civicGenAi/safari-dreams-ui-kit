@@ -3,6 +3,7 @@ import { Button } from '@/components/ui/button';
 import { ArrowRight, CheckCircle } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { supabase } from '@/lib/supabase';
+import { sendNewsletterNotification } from '@/lib/email';
 
 // Import staff images for avatars
 import staffCaudence from '@/assets/footer_customer_care.webp';
@@ -45,19 +46,7 @@ export const NewsletterSection = () => {
       }
 
       // Send email notification to admin
-      await fetch('/api/send-email', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          to: 'info@demitours.com',
-          subject: 'New Newsletter Subscription',
-          html: `
-            <h2>New Newsletter Subscription</h2>
-            <p><strong>Email:</strong> ${email}</p>
-            <p><strong>Date:</strong> ${new Date().toLocaleString()}</p>
-          `
-        })
-      }).catch(err => console.error('Email notification failed:', err));
+      await sendNewsletterNotification(email);
 
       setIsSubmitted(true);
       setTimeout(() => {
