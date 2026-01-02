@@ -14,7 +14,8 @@ import {
   Lightbulb,
   Mail,
   MessageSquare,
-  Calendar
+  Calendar,
+  TrendingUp
 } from 'lucide-react';
 import { useState } from 'react';
 
@@ -43,6 +44,12 @@ export const AdminLayout = ({ children }: AdminLayoutProps) => {
       label: 'Dashboard',
       path: '/admin/dashboard',
       description: 'Overview & statistics'
+    },
+    {
+      icon: TrendingUp,
+      label: 'Analytics',
+      path: '/admin/analytics',
+      description: 'Charts & insights'
     },
     {
       icon: Package,
