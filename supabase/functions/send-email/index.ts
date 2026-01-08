@@ -151,12 +151,12 @@ serve(async (req) => {
         }
       )
     }
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('Error processing email request:', error)
     return new Response(
       JSON.stringify({
         error: 'Internal server error',
-        details: error.message
+        details: error instanceof Error ? error.message : 'Unknown error'
       }),
       {
         status: 500,
