@@ -1,8 +1,19 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, ChevronDown, FileText } from 'lucide-react';
+import { Menu, X, ChevronDown, FileText, MapPin, Compass, Heart, Umbrella, Mountain, Sparkles, Trees, Globe, Car } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { BookingFormModal } from '@/components/BookingFormModal';
+
+// Import map and experience images
+import baseMap from '@/assets/nav/destination.png';
+import migrationImg from '@/assets/nav/migration.avif';
+import romanticImg from '@/assets/nav/romantic.jpg';
+import beachesImg from '@/assets/nav/beaches.jpg';
+import adventuresImg from '@/assets/nav/adventures.jpg';
+import luxuryImg from '@/assets/nav/luxury.jpg';
+import gorillaImg from '@/assets/nav/gollial.jpg';
+import crossborderImg from '@/assets/nav/crossboarder.avif';
+import daytoursImg from '@/assets/nav/daytours.jpg';
 
 interface Destination {
   name: string;
@@ -22,18 +33,19 @@ interface TravelIdea {
   name: string;
   slug: string;
   tours: number;
-  icon: string;
+  icon: React.ReactNode;
+  image: string;
 }
 
 const travelIdeas: TravelIdea[] = [
-  { name: 'Migration Safaris', slug: 'migration-safaris', tours: 6, icon: '🦓' },
-  { name: 'Romantic Holidays', slug: 'romantic-holidays', tours: 8, icon: '💑' },
-  { name: 'Safari Beach Holidays', slug: 'safari-beach-holidays', tours: 10, icon: '🏖️' },
-  { name: 'Adventure Seekers', slug: 'adventure-seekers', tours: 12, icon: '🏔️' },
-  { name: 'Luxury Tours', slug: 'luxury-tours', tours: 7, icon: '✨' },
-  { name: 'Gorilla and Chimp Trekking', slug: 'gorilla-chimp-trekking', tours: 5, icon: '🦍' },
-  { name: 'Cross Border Safaris', slug: 'cross-border-safaris', tours: 9, icon: '🌍' },
-  { name: 'Day Tours', slug: 'day-tours', tours: 8, icon: '🚙' },
+  { name: 'Migration Safaris', slug: 'migration-safaris', tours: 6, icon: <Compass className="w-5 h-5" />, image: migrationImg },
+  { name: 'Romantic Holidays', slug: 'romantic-holidays', tours: 8, icon: <Heart className="w-5 h-5" />, image: romanticImg },
+  { name: 'Safari Beach Holidays', slug: 'safari-beach-holidays', tours: 10, icon: <Umbrella className="w-5 h-5" />, image: beachesImg },
+  { name: 'Adventure Seekers', slug: 'adventure-seekers', tours: 12, icon: <Mountain className="w-5 h-5" />, image: adventuresImg },
+  { name: 'Luxury Tours', slug: 'luxury-tours', tours: 7, icon: <Sparkles className="w-5 h-5" />, image: luxuryImg },
+  { name: 'Gorilla and Chimp Trekking', slug: 'gorilla-chimp-trekking', tours: 5, icon: <Trees className="w-5 h-5" />, image: gorillaImg },
+  { name: 'Cross Border Safaris', slug: 'cross-border-safaris', tours: 9, icon: <Globe className="w-5 h-5" />, image: crossborderImg },
+  { name: 'Day Tours', slug: 'day-tours', tours: 8, icon: <Car className="w-5 h-5" />, image: daytoursImg },
 ];
 
 interface NavbarProps {
@@ -47,12 +59,23 @@ export const Navbar = ({ activeCategory, activeDestination }: NavbarProps = {}) 
   const [isDestinationsOpen, setIsDestinationsOpen] = useState(false);
   const [isTravelIdeasOpen, setIsTravelIdeasOpen] = useState(false);
   const [isBookingModalOpen, setIsBookingModalOpen] = useState(false);
+  const [hoveredDestination, setHoveredDestination] = useState<string | null>(null);
+  const [hoveredExperience, setHoveredExperience] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 50);
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Get current experience image
+  const currentExperienceImage = hoveredExperience 
+    ? travelIdeas.find(idea => idea.slug === hoveredExperience)?.image || migrationImg
+    : migrationImg;
+
+  const currentExperienceName = hoveredExperience
+    ? travelIdeas.find(idea => idea.slug === hoveredExperience)?.name || ''
+    : 'Migration Safaris';
 
   return (
     <>
@@ -74,7 +97,15 @@ export const Navbar = ({ activeCategory, activeDestination }: NavbarProps = {}) 
                 isScrolled ? 'text-charcoal hover:text-primary font-semibold' : 'text-primary-foreground/90 hover:text-primary-foreground'
               }`}>Home</Link>
 
-              <div className="relative" onMouseEnter={() => setIsDestinationsOpen(true)} onMouseLeave={() => setIsDestinationsOpen(false)}>
+              {/* Destinations Mega Dropdown */}
+              <div 
+                className="relative" 
+                onMouseEnter={() => setIsDestinationsOpen(true)} 
+                onMouseLeave={() => {
+                  setIsDestinationsOpen(false);
+                  setHoveredDestination(null);
+                }}
+              >
                 <Link to="/destinations" className={`flex items-center gap-1 font-heading text-sm uppercase tracking-widest transition-colors ${
                   isScrolled ? 'text-charcoal hover:text-primary font-semibold' : 'text-primary-foreground/90 hover:text-primary-foreground'
                 }`}>
@@ -82,35 +113,164 @@ export const Navbar = ({ activeCategory, activeDestination }: NavbarProps = {}) 
                   <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isDestinationsOpen ? 'rotate-180' : ''}`} />
                 </Link>
 
-                <div className={`absolute top-full left-1/2 -translate-x-1/2 pt-4 transition-all duration-300 ${
+                <div className={`absolute top-full left-1/2 -translate-x-1/2 pt-4 transition-all duration-300 ease-out ${
                   isDestinationsOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
                 }`}>
-                  <div className="bg-background rounded-2xl shadow-lift p-4 min-w-[240px] border border-border">
-                    <div className="space-y-1">
-                      {destinations.map((dest, index) => (
-                        <div key={dest.name}>
-                          <Link
-                            to={`/destinations/${dest.slug}`}
-                            className={`block px-3 py-2 rounded-lg hover:bg-muted transition-colors group ${
-                              activeDestination === dest.slug ? 'bg-primary/10' : ''
-                            }`}
-                          >
-                            <span className={`font-heading text-sm font-medium transition-colors ${
-                              activeDestination === dest.slug ? 'text-primary' : 'text-foreground group-hover:text-primary'
-                            }`}>{dest.name}</span>
-                          </Link>
-                          {index < destinations.length - 1 && (
-                            <div className="h-px bg-border/50 my-1" />
-                          )}
+                  <div className="bg-background rounded-2xl shadow-2xl border border-border/50 overflow-hidden" style={{ width: '600px' }}>
+                    <div className="flex">
+                      {/* Left side - Destination List */}
+                      <div className="w-1/2 p-5 bg-muted/30">
+                        <h3 className="font-heading text-xs uppercase tracking-widest text-muted-foreground mb-4 flex items-center gap-2">
+                          <MapPin className="w-4 h-4" />
+                          Choose Your Destination
+                        </h3>
+                        <div className="space-y-1">
+                          {destinations.map((dest) => (
+                            <Link
+                              key={dest.name}
+                              to={`/destinations/${dest.slug}`}
+                              className={`flex items-center gap-3 px-4 py-3 rounded-xl transition-all duration-200 group ${
+                                hoveredDestination === dest.slug 
+                                  ? 'bg-primary/10 shadow-sm' 
+                                  : 'hover:bg-background'
+                              } ${activeDestination === dest.slug ? 'bg-primary/10' : ''}`}
+                              onMouseEnter={() => setHoveredDestination(dest.slug)}
+                            >
+                              <span className="text-2xl">{dest.flag}</span>
+                              <div className="flex-1">
+                                <span className={`font-heading text-sm font-semibold block transition-colors ${
+                                  hoveredDestination === dest.slug ? 'text-primary' : 'text-foreground group-hover:text-primary'
+                                }`}>
+                                  {dest.name}
+                                </span>
+                                <span className="text-xs text-muted-foreground">{dest.tours}+ Tours</span>
+                              </div>
+                              <ChevronDown className={`w-4 h-4 -rotate-90 transition-all duration-200 ${
+                                hoveredDestination === dest.slug ? 'opacity-100 translate-x-0 text-primary' : 'opacity-0 -translate-x-2'
+                              }`} />
+                            </Link>
+                          ))}
                         </div>
-                      ))}
+                        <div className="mt-4 pt-4 border-t border-border/50">
+                          <Link 
+                            to="/destinations" 
+                            className="text-xs font-medium text-primary hover:underline flex items-center gap-1"
+                          >
+                            Explore All Destinations →
+                          </Link>
+                        </div>
+                      </div>
+
+                      {/* Right side - Map Preview */}
+                      <div className="w-1/2 relative bg-gradient-to-br from-amber-50/50 to-orange-50/50 p-4">
+                        <div className="relative w-full h-full min-h-[280px] flex items-center justify-center">
+                          {/* Base Map */}
+                          <div className="relative">
+                            <img 
+                              src={baseMap} 
+                              alt="East Africa Map" 
+                              className={`w-full max-w-[220px] h-auto transition-all duration-300 ${
+                                hoveredDestination ? 'opacity-40' : 'opacity-100'
+                              }`}
+                            />
+                            
+                            {/* Highlighted Country Overlay Effect */}
+                            {hoveredDestination && (
+                              <div className="absolute inset-0 flex items-center justify-center">
+                                <img 
+                                  src={baseMap} 
+                                  alt={`${hoveredDestination} highlighted`}
+                                  className="w-full max-w-[220px] h-auto animate-fade-in"
+                                  style={{
+                                    filter: 'drop-shadow(0 0 20px hsl(var(--primary) / 0.4)) brightness(1.1)',
+                                    clipPath: hoveredDestination === 'tanzania' 
+                                      ? 'polygon(20% 35%, 85% 35%, 85% 95%, 20% 95%)'
+                                      : hoveredDestination === 'kenya'
+                                      ? 'polygon(35% 15%, 75% 15%, 75% 45%, 35% 45%)'
+                                      : hoveredDestination === 'uganda'
+                                      ? 'polygon(15% 10%, 45% 10%, 45% 40%, 15% 40%)'
+                                      : 'polygon(10% 30%, 35% 30%, 35% 55%, 10% 55%)'
+                                  }}
+                                />
+                              </div>
+                            )}
+
+                            {/* Destination Pin Markers */}
+                            <div 
+                              className={`absolute transition-all duration-300 ${
+                                hoveredDestination === 'tanzania' ? 'scale-125' : 'scale-100'
+                              }`}
+                              style={{ top: '55%', left: '55%' }}
+                            >
+                              <div className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                                hoveredDestination === 'tanzania' 
+                                  ? 'bg-primary shadow-lg shadow-primary/50' 
+                                  : 'bg-amber-600/70'
+                              }`} />
+                            </div>
+                            <div 
+                              className={`absolute transition-all duration-300 ${
+                                hoveredDestination === 'kenya' ? 'scale-125' : 'scale-100'
+                              }`}
+                              style={{ top: '28%', left: '55%' }}
+                            >
+                              <div className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                                hoveredDestination === 'kenya' 
+                                  ? 'bg-primary shadow-lg shadow-primary/50' 
+                                  : 'bg-amber-600/70'
+                              }`} />
+                            </div>
+                            <div 
+                              className={`absolute transition-all duration-300 ${
+                                hoveredDestination === 'uganda' ? 'scale-125' : 'scale-100'
+                              }`}
+                              style={{ top: '22%', left: '30%' }}
+                            >
+                              <div className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                                hoveredDestination === 'uganda' 
+                                  ? 'bg-primary shadow-lg shadow-primary/50' 
+                                  : 'bg-amber-600/70'
+                              }`} />
+                            </div>
+                            <div 
+                              className={`absolute transition-all duration-300 ${
+                                hoveredDestination === 'rwanda' ? 'scale-125' : 'scale-100'
+                              }`}
+                              style={{ top: '40%', left: '22%' }}
+                            >
+                              <div className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                                hoveredDestination === 'rwanda' 
+                                  ? 'bg-primary shadow-lg shadow-primary/50' 
+                                  : 'bg-amber-600/70'
+                              }`} />
+                            </div>
+                          </div>
+                        </div>
+                        
+                        {/* Hovered destination name */}
+                        {hoveredDestination && (
+                          <div className="absolute bottom-4 left-4 right-4 text-center animate-fade-in">
+                            <span className="inline-block px-4 py-2 bg-background/90 backdrop-blur-sm rounded-full text-sm font-heading font-semibold text-primary shadow-sm">
+                              {destinations.find(d => d.slug === hoveredDestination)?.flag}{' '}
+                              {destinations.find(d => d.slug === hoveredDestination)?.name}
+                            </span>
+                          </div>
+                        )}
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
 
-              {/* Travel Ideas Dropdown */}
-              <div className="relative" onMouseEnter={() => setIsTravelIdeasOpen(true)} onMouseLeave={() => setIsTravelIdeasOpen(false)}>
+              {/* Experiences Mega Dropdown */}
+              <div 
+                className="relative" 
+                onMouseEnter={() => setIsTravelIdeasOpen(true)} 
+                onMouseLeave={() => {
+                  setIsTravelIdeasOpen(false);
+                  setHoveredExperience(null);
+                }}
+              >
                 <Link to="/travel-ideas" className={`flex items-center gap-1 font-heading text-sm uppercase tracking-widest transition-colors ${
                   isScrolled ? 'text-charcoal hover:text-primary font-semibold' : 'text-primary-foreground/90 hover:text-primary-foreground'
                 }`}>
@@ -118,37 +278,91 @@ export const Navbar = ({ activeCategory, activeDestination }: NavbarProps = {}) 
                   <ChevronDown className={`w-4 h-4 transition-transform duration-300 ${isTravelIdeasOpen ? 'rotate-180' : ''}`} />
                 </Link>
 
-                <div className={`absolute top-full left-1/2 -translate-x-1/2 pt-4 transition-all duration-300 ${
+                <div className={`absolute top-full left-1/2 -translate-x-1/2 pt-4 transition-all duration-300 ease-out ${
                   isTravelIdeasOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
                 }`}>
-                  <div className="bg-background rounded-2xl shadow-lift p-4 min-w-[260px] border border-border">
-                    <div className="space-y-1 max-h-[350px] overflow-y-auto">
-                      {travelIdeas.map((idea, index) => (
-                        <div key={idea.name}>
-                          <Link
-                            to={`/travel-ideas/${idea.slug}`}
-                            className={`block px-3 py-2 rounded-lg hover:bg-muted transition-colors group ${
-                              activeCategory === idea.slug ? 'bg-primary/10' : ''
-                            }`}
-                          >
-                            <span className={`font-heading text-sm font-medium transition-colors ${
-                              activeCategory === idea.slug ? 'text-primary' : 'text-foreground group-hover:text-primary'
-                            }`}>{idea.name}</span>
-                          </Link>
-                          {index < travelIdeas.length - 1 && (
-                            <div className="h-px bg-border/50 my-1" />
-                          )}
+                  <div className="bg-background rounded-2xl shadow-2xl border border-border/50 overflow-hidden" style={{ width: '700px' }}>
+                    <div className="flex">
+                      {/* Left side - Experience List */}
+                      <div className="w-2/5 p-5 bg-muted/30">
+                        <h3 className="font-heading text-xs uppercase tracking-widest text-muted-foreground mb-4 flex items-center gap-2">
+                          <Compass className="w-4 h-4" />
+                          Safari Experiences
+                        </h3>
+                        <div className="space-y-0.5">
+                          {travelIdeas.map((idea) => (
+                            <Link
+                              key={idea.name}
+                              to={`/travel-ideas/${idea.slug}`}
+                              className={`flex items-center gap-3 px-3 py-2.5 rounded-xl transition-all duration-200 group ${
+                                hoveredExperience === idea.slug 
+                                  ? 'bg-primary/10 shadow-sm' 
+                                  : 'hover:bg-background'
+                              } ${activeCategory === idea.slug ? 'bg-primary/10' : ''}`}
+                              onMouseEnter={() => setHoveredExperience(idea.slug)}
+                            >
+                              <span className={`transition-colors ${
+                                hoveredExperience === idea.slug ? 'text-primary' : 'text-muted-foreground group-hover:text-primary'
+                              }`}>
+                                {idea.icon}
+                              </span>
+                              <span className={`font-heading text-sm font-medium transition-colors flex-1 ${
+                                hoveredExperience === idea.slug ? 'text-primary' : 'text-foreground group-hover:text-primary'
+                              }`}>
+                                {idea.name}
+                              </span>
+                              <ChevronDown className={`w-4 h-4 -rotate-90 transition-all duration-200 ${
+                                hoveredExperience === idea.slug ? 'opacity-100 translate-x-0 text-primary' : 'opacity-0 -translate-x-2'
+                              }`} />
+                            </Link>
+                          ))}
                         </div>
-                      ))}
-                    </div>
-                    <div className="mt-3 pt-3 border-t border-border">
-                      <Link to="/travel-ideas" className="text-xs text-primary hover:underline font-medium">
-                        View All →
-                      </Link>
+                        <div className="mt-3 pt-3 border-t border-border/50">
+                          <Link 
+                            to="/travel-ideas" 
+                            className="text-xs font-medium text-primary hover:underline flex items-center gap-1"
+                          >
+                            View All Experiences →
+                          </Link>
+                        </div>
+                      </div>
+
+                      {/* Right side - Image Preview */}
+                      <div className="w-3/5 relative overflow-hidden">
+                        <div className="relative w-full h-full min-h-[380px]">
+                          {/* Image with crossfade */}
+                          <div 
+                            className="absolute inset-0 bg-cover bg-center transition-all duration-500 ease-out"
+                            style={{ 
+                              backgroundImage: `url(${currentExperienceImage})`,
+                              transform: hoveredExperience ? 'scale(1.03)' : 'scale(1)'
+                            }}
+                          />
+                          
+                          {/* Gradient overlay */}
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                          
+                          {/* Experience title overlay */}
+                          <div className="absolute bottom-0 left-0 right-0 p-6">
+                            <div className="animate-fade-in">
+                              <span className="inline-block px-3 py-1 bg-primary/90 backdrop-blur-sm rounded-full text-xs font-medium text-primary-foreground mb-2">
+                                Featured Experience
+                              </span>
+                              <h4 className="font-heading text-2xl font-bold text-white">
+                                {currentExperienceName}
+                              </h4>
+                              <p className="text-white/80 text-sm mt-1">
+                                Discover unforgettable moments
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
+
               <Link to="/our-story" className={`font-heading text-sm uppercase tracking-widest transition-colors link-underline ${
                 isScrolled ? 'text-charcoal hover:text-primary font-semibold' : 'text-primary-foreground/90 hover:text-primary-foreground'
               }`}>About Us</Link>
