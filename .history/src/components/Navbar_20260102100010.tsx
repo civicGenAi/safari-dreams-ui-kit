@@ -72,7 +72,7 @@ export const Navbar = ({ activeCategory, activeDestination }: NavbarProps = {}) 
             <div className="hidden lg:flex items-center gap-8">
               <Link to="/" className={`font-heading text-sm uppercase tracking-widest transition-colors link-underline ${
                 isScrolled ? 'text-charcoal hover:text-primary font-semibold' : 'text-primary-foreground/90 hover:text-primary-foreground'
-              }`}>Home</Link>
+              }`}>Explore</Link>
 
               <div className="relative" onMouseEnter={() => setIsDestinationsOpen(true)} onMouseLeave={() => setIsDestinationsOpen(false)}>
                 <Link to="/destinations" className={`flex items-center gap-1 font-heading text-sm uppercase tracking-widest transition-colors ${
@@ -157,7 +157,7 @@ export const Navbar = ({ activeCategory, activeDestination }: NavbarProps = {}) 
               }`}>Stories</Link>
               <Link to="/contact" className={`font-heading text-sm uppercase tracking-widest transition-colors link-underline ${
                 isScrolled ? 'text-charcoal hover:text-primary font-semibold' : 'text-primary-foreground/90 hover:text-primary-foreground'
-              }`}>Contact Us</Link>
+              }`}>Plan Your Trip</Link>
             </div>
 
             <div className="hidden lg:flex items-center gap-4">
