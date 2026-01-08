@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, ChevronDown, FileText, MapPin, Compass, Heart, Umbrella, Mountain, Sparkles, Trees, Globe, Car } from 'lucide-react';
+import { Menu, X, ChevronDown, FileText, MapPin, Compass } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { BookingFormModal } from '@/components/BookingFormModal';
 
@@ -20,32 +20,34 @@ interface Destination {
   slug: string;
   tours: number;
   flag: string;
+  // Pin position on Africa map (percentage from top-left)
+  pinTop: string;
+  pinLeft: string;
 }
 
 const destinations: Destination[] = [
-  { name: 'Tanzania', slug: 'tanzania', tours: 29, flag: '🇹🇿' },
-  { name: 'Kenya', slug: 'kenya', tours: 4, flag: '🇰🇪' },
-  { name: 'Rwanda', slug: 'rwanda', tours: 6, flag: '🇷🇼' },
-  { name: 'Uganda', slug: 'uganda', tours: 4, flag: '🇺🇬' },
+  { name: 'Tanzania', slug: 'tanzania', tours: 29, flag: '🇹🇿', pinTop: '52%', pinLeft: '58%' },
+  { name: 'Kenya', slug: 'kenya', tours: 4, flag: '🇰🇪', pinTop: '46%', pinLeft: '60%' },
+  { name: 'Rwanda', slug: 'rwanda', tours: 6, flag: '🇷🇼', pinTop: '48%', pinLeft: '54%' },
+  { name: 'Uganda', slug: 'uganda', tours: 4, flag: '🇺🇬', pinTop: '45%', pinLeft: '55%' },
 ];
 
 interface TravelIdea {
   name: string;
   slug: string;
   tours: number;
-  icon: React.ReactNode;
   image: string;
 }
 
 const travelIdeas: TravelIdea[] = [
-  { name: 'Migration Safaris', slug: 'migration-safaris', tours: 6, icon: <Compass className="w-5 h-5" />, image: migrationImg },
-  { name: 'Romantic Holidays', slug: 'romantic-holidays', tours: 8, icon: <Heart className="w-5 h-5" />, image: romanticImg },
-  { name: 'Safari Beach Holidays', slug: 'safari-beach-holidays', tours: 10, icon: <Umbrella className="w-5 h-5" />, image: beachesImg },
-  { name: 'Adventure Seekers', slug: 'adventure-seekers', tours: 12, icon: <Mountain className="w-5 h-5" />, image: adventuresImg },
-  { name: 'Luxury Tours', slug: 'luxury-tours', tours: 7, icon: <Sparkles className="w-5 h-5" />, image: luxuryImg },
-  { name: 'Gorilla and Chimp Trekking', slug: 'gorilla-chimp-trekking', tours: 5, icon: <Trees className="w-5 h-5" />, image: gorillaImg },
-  { name: 'Cross Border Safaris', slug: 'cross-border-safaris', tours: 9, icon: <Globe className="w-5 h-5" />, image: crossborderImg },
-  { name: 'Day Tours', slug: 'day-tours', tours: 8, icon: <Car className="w-5 h-5" />, image: daytoursImg },
+  { name: 'Migration Safaris', slug: 'migration-safaris', tours: 6, image: migrationImg },
+  { name: 'Romantic Holidays', slug: 'romantic-holidays', tours: 8, image: romanticImg },
+  { name: 'Safari Beach Holidays', slug: 'safari-beach-holidays', tours: 10, image: beachesImg },
+  { name: 'Adventure Seekers', slug: 'adventure-seekers', tours: 12, image: adventuresImg },
+  { name: 'Luxury Tours', slug: 'luxury-tours', tours: 7, image: luxuryImg },
+  { name: 'Gorilla and Chimp Trekking', slug: 'gorilla-chimp-trekking', tours: 5, image: gorillaImg },
+  { name: 'Cross Border Safaris', slug: 'cross-border-safaris', tours: 9, image: crossborderImg },
+  { name: 'Day Tours', slug: 'day-tours', tours: 8, image: daytoursImg },
 ];
 
 interface NavbarProps {
@@ -195,55 +197,22 @@ export const Navbar = ({ activeCategory, activeDestination }: NavbarProps = {}) 
                               </div>
                             )}
 
-                            {/* Destination Pin Markers */}
-                            <div 
-                              className={`absolute transition-all duration-300 ${
-                                hoveredDestination === 'tanzania' ? 'scale-125' : 'scale-100'
-                              }`}
-                              style={{ top: '55%', left: '55%' }}
-                            >
-                              <div className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                                hoveredDestination === 'tanzania' 
-                                  ? 'bg-primary shadow-lg shadow-primary/50' 
-                                  : 'bg-amber-600/70'
-                              }`} />
-                            </div>
-                            <div 
-                              className={`absolute transition-all duration-300 ${
-                                hoveredDestination === 'kenya' ? 'scale-125' : 'scale-100'
-                              }`}
-                              style={{ top: '28%', left: '55%' }}
-                            >
-                              <div className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                                hoveredDestination === 'kenya' 
-                                  ? 'bg-primary shadow-lg shadow-primary/50' 
-                                  : 'bg-amber-600/70'
-                              }`} />
-                            </div>
-                            <div 
-                              className={`absolute transition-all duration-300 ${
-                                hoveredDestination === 'uganda' ? 'scale-125' : 'scale-100'
-                              }`}
-                              style={{ top: '22%', left: '30%' }}
-                            >
-                              <div className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                                hoveredDestination === 'uganda' 
-                                  ? 'bg-primary shadow-lg shadow-primary/50' 
-                                  : 'bg-amber-600/70'
-                              }`} />
-                            </div>
-                            <div 
-                              className={`absolute transition-all duration-300 ${
-                                hoveredDestination === 'rwanda' ? 'scale-125' : 'scale-100'
-                              }`}
-                              style={{ top: '40%', left: '22%' }}
-                            >
-                              <div className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                                hoveredDestination === 'rwanda' 
-                                  ? 'bg-primary shadow-lg shadow-primary/50' 
-                                  : 'bg-amber-600/70'
-                              }`} />
-                            </div>
+                            {/* Destination Pin Markers - positioned for Africa map */}
+                            {destinations.map((dest) => (
+                              <div 
+                                key={dest.slug}
+                                className={`absolute transition-all duration-300 ${
+                                  hoveredDestination === dest.slug ? 'scale-150 z-10' : 'scale-100'
+                                }`}
+                                style={{ top: dest.pinTop, left: dest.pinLeft }}
+                              >
+                                <div className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                                  hoveredDestination === dest.slug 
+                                    ? 'bg-primary shadow-lg shadow-primary/50' 
+                                    : 'bg-amber-600/70'
+                                }`} />
+                              </div>
+                            ))}
                           </div>
                         </div>
                         
@@ -301,11 +270,6 @@ export const Navbar = ({ activeCategory, activeDestination }: NavbarProps = {}) 
                               } ${activeCategory === idea.slug ? 'bg-primary/10' : ''}`}
                               onMouseEnter={() => setHoveredExperience(idea.slug)}
                             >
-                              <span className={`transition-colors ${
-                                hoveredExperience === idea.slug ? 'text-primary' : 'text-muted-foreground group-hover:text-primary'
-                              }`}>
-                                {idea.icon}
-                              </span>
                               <span className={`font-heading text-sm font-medium transition-colors flex-1 ${
                                 hoveredExperience === idea.slug ? 'text-primary' : 'text-foreground group-hover:text-primary'
                               }`}>
