@@ -11,7 +11,7 @@ export const ToursSection = () => {
   const [packages, setPackages] = useState<Package[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const filters = ['All', 'Safari', 'Trekking', 'Beach', 'Wildlife', 'Luxury', 'Adventure'];
+  const filters = ['All', 'Safari', 'Trekking', 'Beach', 'Wildlife'];
 
   useEffect(() => {
     fetchPackages();
