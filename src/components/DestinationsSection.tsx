@@ -3,10 +3,10 @@ import { Button } from '@/components/ui/button';
 import worldMap from '@/assets/world-map.webp';
 
 const destinations = [
-  { name: 'Kenya', slug: 'kenya', tours: 4, coordinates: { x: '60.5%', y: '50.5%' } },
-  { name: 'Rwanda', slug: 'rwanda', tours: 6, coordinates: { x: '56.5%', y: '51.0%' } },
-  { name: 'Tanzania', slug: 'tanzania', tours: 29, coordinates: { x: '59.5%', y: '54.0%' } },
-  { name: 'Uganda', slug: 'uganda', tours: 8, coordinates: { x: '57.5%', y: '49.0%' } },
+  { name: 'Kenya', slug: 'kenya', tours: 4, coordinates: { x: '60.5%', y: '50.0%' } },
+  { name: 'Rwanda', slug: 'rwanda', tours: 6, coordinates: { x: '58.3%', y: '51.1%' } },
+  { name: 'Tanzania', slug: 'tanzania', tours: 29, coordinates: { x: '59.7%', y: '53.3%' } },
+  { name: 'Uganda', slug: 'uganda', tours: 8, coordinates: { x: '58.9%', y: '49.4%' } },
 ];
 
 export const DestinationsSection = () => {
