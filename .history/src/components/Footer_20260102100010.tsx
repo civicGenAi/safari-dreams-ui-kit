@@ -94,7 +94,7 @@ export const Footer = () => {
                 className="w-28 h-auto"
               />
               <p className="text-white/70 text-xs mt-2">
-                MigrationSafaridirect Certified by TTSSP
+                DeMi Certified by TTSSP
               </p>
             </div>
           </div>
@@ -126,7 +126,7 @@ export const Footer = () => {
             
             {/* Main Office */}
             <div className="mb-6">
-              <p className="text-white/90 text-sm font-medium">Migration & Safaridirect</p>
+              <p className="text-white/90 text-sm font-medium">DeMi Tours & Travels</p>
               <p className="text-white/70 text-sm">Mega Complex, 7th Flr.</p>
               <p className="text-white/70 text-sm">Livingstone Street.</p>
               <p className="text-white/70 text-sm">P.O Box 15258,</p>
@@ -158,7 +158,7 @@ export const Footer = () => {
               href="mailto:info@demitours.com" 
               className="block mt-4 text-white/90 text-sm hover:text-white transition-colors"
             >
-              travel@migrationsafaridirect.com
+              info@demitours.com
             </a>
           </div>
         </div>
