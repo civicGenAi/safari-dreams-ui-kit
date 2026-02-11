@@ -122,7 +122,7 @@ const Contact = () => {
                       Click here to email us
                     </a>
                     <p className="text-sm text-muted-foreground mt-1">
-                      travel@migrationsafaridirect.com 
+                      info@demitours.com
                     </p>
                   </div>
                 </div>

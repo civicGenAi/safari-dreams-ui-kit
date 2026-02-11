@@ -128,15 +128,15 @@ const TravelIdeas = () => {
 
           <div className="max-w-5xl mx-auto space-y-6 text-muted-foreground leading-relaxed">
             <p>
-              Travel Ideas. DeMi Tours and Travel is a Tanzania-based travel agency that specializes in providing exceptional curated travel experiences. We offer a diverse range of tour packages, including migration safaris, romantic holidays, safari and beach holidays, adventure seekers, luxury tours, gorilla and chimp trekking, cross border safaris, and day tours. DeMi Tours' tour packages cover Tanzania, Kenya, Uganda, and Rwanda, providing travelers with the opportunity to explore East Africa's most sought-after destinations.
+              Travel Ideas. Migration Safaridirect is a Tanzania-based travel agency that specializes in providing exceptional curated travel experiences. We offer a diverse range of tour packages, including migration safaris, romantic holidays, safari and beach holidays, adventure seekers, luxury tours, gorilla and chimp trekking, cross border safaris, and day tours. DeMi Tours' tour packages cover Tanzania, Kenya, Uganda, and Rwanda, providing travelers with the opportunity to explore East Africa's most sought-after destinations.
             </p>
 
             <p>
-              In addition to our East African tours, DeMi Tours and Travel also offers pilgrimage tours to Egypt, Israel, and Jordan. Whether you're looking to embark on a spiritual journey or simply discover the beauty of the holy land, DeMi Tours has got you covered.
+              In addition to our East African tours, Migration Safaridirect also offers pilgrimage tours to Egypt, Israel, and Jordan. Whether you're looking to embark on a spiritual journey or simply discover the beauty of the holy land, DeMi Tours has got you covered.
             </p>
 
             <p>
-              DeMi Tours and Travel is committed to providing travelers with exceptional experiences that leave lasting memories. With our extensive knowledge of the region and years of experience in the travel industry, we ensure that our clients receive top-notch service, personalized attention, and expert guidance. Our team of experienced travel professionals works tirelessly to make sure that every aspect of your trip is taken care of, from the moment you arrive until the time you depart.
+              Migration Safaridirect is committed to providing travelers with exceptional experiences that leave lasting memories. With our extensive knowledge of the region and years of experience in the travel industry, we ensure that our clients receive top-notch service, personalized attention, and expert guidance. Our team of experienced travel professionals works tirelessly to make sure that every aspect of your trip is taken care of, from the moment you arrive until the time you depart.
             </p>
 
             <p>
@@ -144,7 +144,7 @@ const TravelIdeas = () => {
             </p>
 
             <p>
-              Overall, DeMi Tours and Travel is the go-to travel agency for those seeking unforgettable travel experiences in East Africa and the Holy Land.
+              Overall, Migration Safaridirect is the go-to travel agency for those seeking unforgettable travel experiences in East Africa and the Holy Land.
             </p>
           </div>
         </div>

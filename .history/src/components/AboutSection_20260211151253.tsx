@@ -17,7 +17,7 @@ export const AboutSection = () => {
             <div className="flex items-center gap-3 mb-6 lg:justify-start justify-center">
               <div className="w-12 h-px bg-primary" />
               <span className="font-heading text-sm uppercase tracking-widest text-primary">
-                At Migration Safaridirect
+                At Migration sSafaridirect
               </span>
             </div>
 
@@ -27,7 +27,7 @@ export const AboutSection = () => {
             </h2>
 
             <p className="text-xl text-primary font-semibold mb-4">
-              Jambo, welcome to Migration Safaridirect!
+              Jambo, welcome to DeMi Tours & Travel Africa
             </p>
 
             <p className="text-muted-foreground leading-relaxed">
@@ -69,7 +69,7 @@ export const AboutSection = () => {
           {/* Right: Descriptions & CTA */}
           <div className="space-y-6">
             <p className="text-muted-foreground leading-relaxed">
-              Migration Safaridirect is a locally-owned, women-led ecotourism company and trusted safari specialists in East Africa, championing inclusive tourism and impact travel. With over 27 years of combined experience, we are experts in selling East Africa as a destination, offering carefully curated combined and stand-alone safari experiences across Tanzania, Kenya, Uganda, and Rwanda.
+              DeMi Tours & Travel Africa is a locally-owned, women-led ecotourism company and trusted safari specialists in East Africa, championing inclusive tourism and impact travel. With over 27 years of combined experience, we are experts in selling East Africa as a destination, offering carefully curated combined and stand-alone safari experiences across Tanzania, Kenya, Uganda, and Rwanda.
             </p>
 
             <p className="text-muted-foreground leading-relaxed">

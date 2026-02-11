@@ -87,7 +87,7 @@ const OurStory = () => {
                     Migration Safaridirectis a locally-owned, women-led ecotourism company and trusted safari specialists in East Africa, championing inclusive tourism and impact travel. With over 27 years of combined experience, we are experts in selling East Africa as a destination, offering carefully curated combined and stand-alone safari experiences across Tanzania, Kenya, Uganda, and Rwanda.
                   </p>
                   <p>
-                    After over two decades of industry expertise, our visionary founder, Caudence, recognized a glaring gender gap within the male-dominated travel industry. Driven by the desire to empower more women and bridge this divide, the seed of an idea blossomed, culminating in the birth of Migration  Safaridirect.
+                    After over two decades of industry expertise, our visionary founder, Caudence, recognized a glaring gender gap within the male-dominated travel industry. Driven by the desire to empower more women and bridge this divide, the seed of an idea blossomed, culminating in the birth of DeMi Tours & Travel Africa.
                   </p>
                   <p>
                     Every journey we design prioritizes safety, accessibility, and inclusivity, making it possible for families, persons with disabilities, solo travelers and students to explore East Africa with confidence. We craft immersive, responsible safaris that connect travelers to people, culture, and nature—while ensuring tourism benefits the communities it touches.
