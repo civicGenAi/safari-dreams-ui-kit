@@ -2,13 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
-import adv01 from '@/assets/tours_daytours_arusha_national_park2.webp';
-import adv02 from '@/assets/idea_crossborder_elephants.webp';
-import adv03 from '@/assets/ideas_daytour_leopardkill.webp';
-import adv04 from '@/assets/idea_luxury_poolside.webp';
-import adv05 from '@/assets/ideas_migration_wildebeast.jpg';
-import adv06 from '@/assets/idea_gorilla_chimp_trek.webp';
-
 // Custom SVG Icons
 const AdventureIcon = () => (
   <svg viewBox="0 0 64 64" fill="none" className="w-full h-full">
@@ -85,7 +78,7 @@ const experiences = [
     count: '12+',
     description: 'Thrilling expeditions for the bold traveler.',
     color: 'bg-orange-500/10 text-orange-600',
-    image: adv01,
+    image: '/src/assets/tours_daytours_arusha_national_park2.webp',
     slug: 'adventure-seekers',
   },
   {
@@ -94,7 +87,7 @@ const experiences = [
     count: '8+',
     description: 'Multi-country safari adventures.',
     color: 'bg-emerald-500/10 text-emerald-600',
-    image: adv02,
+    image: '/src/assets/idea_crossborder_elephants.webp',
     slug: 'cross-border-safaris',
   },
   {
@@ -103,7 +96,7 @@ const experiences = [
     count: '15+',
     description: 'Perfect short excursions and city tours.',
     color: 'bg-amber-500/10 text-amber-600',
-    image: adv03,
+    image: '/src/assets/ideas_daytour_leopardkill.webp',
     slug: 'day-tours',
   },
   {
@@ -112,7 +105,7 @@ const experiences = [
     count: '6+',
     description: 'Premium experiences with exclusive lodges.',
     color: 'bg-purple-500/10 text-purple-600',
-    image: adv04,
+    image: '/src/assets/idea_luxury_poolside.webp',
     slug: 'luxury-tours',
   },
   {
@@ -121,7 +114,7 @@ const experiences = [
     count: '5+',
     description: 'Witness the Great Wildebeest Migration.',
     color: 'bg-blue-500/10 text-blue-600',
-    image: adv05,
+    image: '/src/assets/ideas_migration_wildebeast.jpg',
     slug: 'migration-safaris',
   },
   {
@@ -130,7 +123,7 @@ const experiences = [
     count: '7+',
     description: 'Encounter our closest relatives in the wild.',
     color: 'bg-green-500/10 text-green-600',
-    image: adv06,
+    image: '/src/assets/idea_gorilla_chimp_trek.webp',
     slug: 'gorilla-chimp-trekking',
   },
 ];
@@ -221,7 +214,7 @@ export const ExperiencesSection = () => {
           <div className="flex items-center justify-center gap-3 mb-6">
             <div className="w-12 h-px bg-primary" />
             <span className="font-heading text-sm uppercase tracking-widest text-primary">
-              Migration Safari direct
+              Demi Tours and Travel
             </span>
             <div className="w-12 h-px bg-primary" />
           </div>

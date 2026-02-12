@@ -7,6 +7,14 @@ import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { NewsletterSection } from '@/components/NewsletterSection';
 import { Button } from '@/components/ui/button';
 
+import dest01 from '@/assets/dest/Tanzania-Landmarks-Mount-Kilimanjaro.jpg';
+import dest02 from '@/assets/dest/kenya.jpg';
+import dest03 from '@/assets/dest/rwanda.jpg';
+import dest04 from '@/assets/dest/uganda.jpg';
+import dest05 from '@/assets/dest/sa.jpg';
+import dest06 from '@/assets/dest/namibia-giraffe-drinking-wildlife-scaled.webp';
+import dest07 from '@/assets/dest/Botswana-Okavango-Delta-10.jpg';
+
 const Destinations = () => {
   const [showComingSoon, setShowComingSoon] = useState<string | null>(null);
 
@@ -15,7 +23,7 @@ const Destinations = () => {
       name: 'Tanzania',
       slug: 'tanzania',
       tours: 29,
-      image: '/src/assets/dest/tanzania.jpg',
+      image: dest01,
       description: 'Serengeti & Kilimanjaro await',
       badge: 'Popular'
     },
@@ -23,7 +31,7 @@ const Destinations = () => {
       name: 'Kenya',
       slug: 'kenya',
       tours: 4,
-      image: '/src/assets/dest/kenya.jpg',
+      image: dest02,
       description: 'Witness the great migration',
       badge: 'Hot Deal'
     },
@@ -31,7 +39,7 @@ const Destinations = () => {
       name: 'Rwanda',
       slug: 'rwanda',
       tours: 6,
-      image: '/src/assets/dest/rwanda.jpg',
+      image: dest03,
       description: 'Trek with mountain gorillas',
       badge: 'Wildlife'
     },
@@ -39,7 +47,7 @@ const Destinations = () => {
       name: 'Uganda',
       slug: 'uganda',
       tours: 4,
-      image: '/src/assets/dest/uganda.jpg',
+      image: dest04,
       description: 'Pearl of Africa adventure',
       badge: 'Adventure'
     },
@@ -49,21 +57,21 @@ const Destinations = () => {
     {
       name: 'South Africa',
       slug: 'south-africa',
-      image: '/src/assets/dest/south-africa.jpg',
+      image: dest05,
       description: 'Safari meets sophistication',
       badge: 'Coming Soon'
     },
     {
       name: 'Namibia',
       slug: 'namibia',
-      image: '/src/assets/dest/namibia.jpg',
+      image: dest06,
       description: 'Desert landscapes & wildlife',
       badge: 'Coming Soon'
     },
     {
       name: 'Botswana',
       slug: 'botswana',
-      image: '/src/assets/dest/botswana.jpg',
+      image: dest07,
       description: 'Pristine wilderness & delta',
       badge: 'Coming Soon'
     },
@@ -83,14 +91,14 @@ const Destinations = () => {
       {/* Hero Section */}
       <div className="relative h-[300px] md:h-[400px]">
         <img
-          src="/src/assets/header_bg_new4.gif"
+          src="/header_bg_new4.gif"
           alt="Destinations"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 flex items-center">
           <div className="container mx-auto px-4 lg:px-8">
             <div className="text-white mb-4">
-              <Link to="/" className="hover:text-primary transition-colors">Home</Link>
+              <Link to="/" className="hover:text-primary transition-colors">Explore</Link>
               <span className="mx-2">»</span>
               <span>Destinations</span>
             </div>
@@ -182,7 +190,7 @@ const Destinations = () => {
       <div className="relative py-32 md:py-40 overflow-hidden">
         <div className="absolute inset-0">
           <img
-            src="/src/assets/destination_home.webp"
+            src="/destination_home.webp"
             alt="Curated Destinations"
             className="w-full h-full object-cover"
           />
@@ -307,7 +315,7 @@ const Destinations = () => {
                       </h3>
                       <p className="text-white/90 text-sm mb-4">{dest.description}</p>
                       <div className="flex items-center gap-2 text-white/80 text-sm">
-                        <span>{dest.tours}+ Tours Available</span>
+                        <span>{'tours' in dest ? `${dest.tours}+ Tours Available` : 'Coming Soon'}</span>
                         <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                       </div>
                     </div>

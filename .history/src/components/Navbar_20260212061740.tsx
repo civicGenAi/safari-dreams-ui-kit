@@ -14,7 +14,6 @@ import luxuryImg from '@/assets/nav/luxury.jpg';
 import gorillaImg from '@/assets/nav/gollial.jpg';
 import crossborderImg from '@/assets/nav/crossboarder.avif';
 import daytoursImg from '@/assets/nav/daytours.jpg';
-import logo from '@/assets/logo.png'; 
 
 interface Destination {
   name: string;
@@ -89,7 +88,7 @@ export const Navbar = ({ activeCategory, activeDestination }: NavbarProps = {}) 
           <div className="flex items-center justify-between">
             <Link to="/" className="flex items-center">
               <img
-                src={logo}
+                src="/logo.png"
                 alt="Logo"
                 className="h-12 md:h-14 w-auto"
               />

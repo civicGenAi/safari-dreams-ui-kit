@@ -7,6 +7,14 @@ import { WhatsAppButton } from '@/components/WhatsAppButton';
 import { NewsletterSection } from '@/components/NewsletterSection';
 import { Button } from '@/components/ui/button';
 
+import dest01 from '@/assets/dest/Tanzania-Landmarks-Mount-Kilimanjaro.jpg';
+import dest02 from '@/assets/dest/kenya.jpg';
+import dest03 from '@/assets/dest/rwanda.jpg';
+import dest04 from '@/assets/dest/uganda.jpg';
+import dest05 from '@/assets/dest/sa.jpg';
+import dest06 from '@/assets/dest/namibia-giraffe-drinking-wildlife-scaled.webp';
+import dest07 from '@/assets/dest/Botswana-Okavango-Delta-10.jpg';
+
 const Destinations = () => {
   const [showComingSoon, setShowComingSoon] = useState<string | null>(null);
 
@@ -15,7 +23,7 @@ const Destinations = () => {
       name: 'Tanzania',
       slug: 'tanzania',
       tours: 29,
-      image: '/src/assets/dest/Tanzania-Landmarks-Mount-Kilimanjaro.jpg',
+      image: dest01,
       description: 'Serengeti & Kilimanjaro await',
       badge: 'Popular'
     },
@@ -23,7 +31,7 @@ const Destinations = () => {
       name: 'Kenya',
       slug: 'kenya',
       tours: 4,
-      image: '/src/assets/dest/kenya.jpg',
+      image: dest02,
       description: 'Witness the great migration',
       badge: 'Hot Deal'
     },
@@ -31,7 +39,7 @@ const Destinations = () => {
       name: 'Rwanda',
       slug: 'rwanda',
       tours: 6,
-      image: '/src/assets/dest/rwanda.jpg',
+      image: dest03,
       description: 'Trek with mountain gorillas',
       badge: 'Wildlife'
     },
@@ -39,7 +47,7 @@ const Destinations = () => {
       name: 'Uganda',
       slug: 'uganda',
       tours: 4,
-      image: '/src/assets/dest/uganda.jpg',
+      image: dest04,
       description: 'Pearl of Africa adventure',
       badge: 'Adventure'
     },
@@ -49,21 +57,21 @@ const Destinations = () => {
     {
       name: 'South Africa',
       slug: 'south-africa',
-      image: '/src/assets/dest/sa.jpg',
+      image: dest05,
       description: 'Safari meets sophistication',
       badge: 'Coming Soon'
     },
     {
       name: 'Namibia',
       slug: 'namibia',
-      image: '/src/assets/dest/namibia-giraffe-drinking-wildlife-scaled.webp',
+      image: dest06,
       description: 'Desert landscapes & wildlife',
       badge: 'Coming Soon'
     },
     {
       name: 'Botswana',
       slug: 'botswana',
-      image: '/src/assets/dest/Botswana-Okavango-Delta-10.jpg',
+      image: dest07,
       description: 'Pristine wilderness & delta',
       badge: 'Coming Soon'
     },

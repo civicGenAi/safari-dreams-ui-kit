@@ -1,12 +1,16 @@
 import { Link } from 'react-router-dom';
 import { ArrowRight } from 'lucide-react';
 
+import package01 from '@/assets/offers/home_special_offers2.webp';
+import package02 from '@/assets/offers/lion_cubs_bromance.webp';
+import package03 from '@/assets/offers/home_special_offers_lion.webp';
+
 const packages = [
   {
     title: 'Suns Out Bums Out',
     discount: '15%',
     description: 'off on all advance bookings',
-    image: '/src/assets/home_special_offers2.webp',
+    image: package01,
     cta: 'Book Now',
     color: 'primary',
   },
@@ -14,7 +18,7 @@ const packages = [
     title: 'Repeat Clients',
     discount: '18%',
     description: 'off on all advance bookings',
-    image: '/src/assets/lion_cubs_bromance.webp',
+    image: package02,
     cta: 'Book Now',
     color: 'secondary',
   },
@@ -22,7 +26,7 @@ const packages = [
     title: 'Exclusive Deals',
     discount: '25%',
     description: 'Save up to 25%? Book 3 months upfront',
-    image: '/src/assets/home_special_offers_lion.webp',
+    image: package03,
     cta: 'Book Now',
     color: 'gold',
   },
@@ -76,7 +80,7 @@ export const SeasonalPackagesSection = () => {
                     <img
                       src={pkg.image}
                       alt={pkg.title}
-                      className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110"
+                      className="w-full h-full object-cover object-center transition-transform duration-700 group-hover:scale-105"
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-charcoal/90 via-charcoal/50 to-transparent" />
                   </div>
