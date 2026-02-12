@@ -486,11 +486,11 @@ export const PackageForm = ({ package: editPackage, tableName = 'packages', onSu
                     <SelectItem value="migration-safaris"> Migration Safaris</SelectItem>
                     <SelectItem value="Trekking"> Trekking</SelectItem>
                     <SelectItem value="wildlife"> Wildlife</SelectItem>
-                    <SelectItem value="Beach"> Beach</SelectItem>
+                    <SelectItem value="beach"> Beach</SelectItem>
                     <SelectItem value="Luxury">Luxury</SelectItem>
-                    <SelectItem value="aAll-year"> All Year</SelectItem>
-                    <SelectItem value="Family"> Family</SelectItem>
-                    <SelectItem value="DayTrip"> Day Trips</SelectItem>
+                    <SelectItem value="all-year"> All Year</SelectItem>
+                    <SelectItem value="family"> Family</SelectItem>
+                    <SelectItem value="daytrip"> Day Trips</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
