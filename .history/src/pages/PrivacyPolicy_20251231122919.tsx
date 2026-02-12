@@ -43,7 +43,7 @@ const PrivacyPolicy = () => {
               <section className="mb-12">
                 <h2 className="font-display text-3xl font-bold text-foreground mb-4">1. Introduction</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  At Migration Safari direct, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.
+                  At DeMi Tours and Travel, we are committed to protecting your privacy and ensuring the security of your personal information. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you visit our website or use our services.
                 </p>
               </section>
 
@@ -150,7 +150,7 @@ const PrivacyPolicy = () => {
                     <li><strong className="text-foreground">Objection:</strong> Object to certain types of processing of your personal information</li>
                   </ul>
                   <p className="mt-4">
-                    To exercise these rights, please contact us at <a href="mailto: travel@migrationsafaridirect.com" className="text-primary hover:underline">travel@migrationsafaridirect.com</a>
+                    To exercise these rights, please contact us at <a href="mailto:info@demitours.com" className="text-primary hover:underline">info@demitours.com</a>
                   </p>
                 </div>
               </section>
@@ -203,7 +203,7 @@ const PrivacyPolicy = () => {
                   <p>If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:</p>
                   <div className="mt-4 bg-muted/30 rounded-lg p-6">
                     <p>
-                      <strong className="text-foreground">Migration Safari direct</strong><br />
+                      <strong className="text-foreground">DeMi Tours and Travel</strong><br />
                       Mega Complex, 7th Floor<br />
                       Livingstone Street<br />
                       P.O Box 15258, Arusha, Tanzania

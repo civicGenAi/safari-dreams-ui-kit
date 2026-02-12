@@ -43,7 +43,7 @@ const TermsConditions = () => {
               <section className="mb-12">
                 <h2 className="font-display text-3xl font-bold text-foreground mb-4">1. Introduction</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  Welcome to Migration Safari direct. These Terms and Conditions govern your use of our website and services. By accessing our website or booking any of our services, you agree to be bound by these terms. Please read them carefully before proceeding with any bookings.
+                  Welcome to DeMi Tours and Travel. These Terms and Conditions govern your use of our website and services. By accessing our website or booking any of our services, you agree to be bound by these terms. Please read them carefully before proceeding with any bookings.
                 </p>
               </section>
 
@@ -51,7 +51,7 @@ const TermsConditions = () => {
                 <h2 className="font-display text-3xl font-bold text-foreground mb-4">2. Booking and Payment</h2>
                 <div className="space-y-4 text-muted-foreground leading-relaxed">
                   <p>
-                    <strong className="text-foreground">2.1 Reservation:</strong> All bookings are subject to availability and confirmation by Migration Safari direct. A booking is confirmed only upon receipt of the required deposit or full payment.
+                    <strong className="text-foreground">2.1 Reservation:</strong> All bookings are subject to availability and confirmation by DeMi Tours and Travel. A booking is confirmed only upon receipt of the required deposit or full payment.
                   </p>
                   <p>
                     <strong className="text-foreground">2.2 Payment Terms:</strong> A non-refundable deposit of 30% is required at the time of booking. The balance payment is due 60 days before the tour departure date.
@@ -156,7 +156,7 @@ const TermsConditions = () => {
               <section className="mb-12">
                 <h2 className="font-display text-3xl font-bold text-foreground mb-4">11. Intellectual Property</h2>
                 <p className="text-muted-foreground leading-relaxed">
-                  All content on the DeMi Tours website, including text, images, logos, and designs, is the property ofMigration Safari direct and is protected by copyright laws. Unauthorized use is prohibited.
+                  All content on the DeMi Tours website, including text, images, logos, and designs, is the property of DeMi Tours and Travel and is protected by copyright laws. Unauthorized use is prohibited.
                 </p>
               </section>
 
@@ -179,11 +179,11 @@ const TermsConditions = () => {
                 <div className="text-muted-foreground leading-relaxed">
                   <p>For questions regarding these Terms and Conditions, please contact us:</p>
                   <p className="mt-4">
-                    <strong className="text-foreground">Migration  Safari direct</strong><br />
+                    <strong className="text-foreground">DeMi Tours and Travel</strong><br />
                     Mega Complex, 7th Floor<br />
                     Livingstone Street<br />
                     P.O Box 15258, Arusha, Tanzania<br />
-                    Email: travel@migrationsafaridirect.com<br />
+                    Email: info@demitours.com<br />
                     Phone: +(255) 688 535848 / +(255) 762 238763
                   </p>
                 </div>
@@ -191,7 +191,7 @@ const TermsConditions = () => {
 
               <div className="border-t border-border pt-8 mt-12">
                 <p className="text-center text-muted-foreground">
-                  By booking withMigration Safari direct, you acknowledge that you have read, understood, and agree to these Terms and Conditions.
+                  By booking with DeMi Tours and Travel, you acknowledge that you have read, understood, and agree to these Terms and Conditions.
                 </p>
               </div>
             </div>

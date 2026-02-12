@@ -179,11 +179,11 @@ const TermsConditions = () => {
                 <div className="text-muted-foreground leading-relaxed">
                   <p>For questions regarding these Terms and Conditions, please contact us:</p>
                   <p className="mt-4">
-                    <strong className="text-foreground">Migration  Safari direct</strong><br />
+                    <strong className="text-foreground">DeMi Tours and Travel</strong><br />
                     Mega Complex, 7th Floor<br />
                     Livingstone Street<br />
                     P.O Box 15258, Arusha, Tanzania<br />
-                    Email: travel@migrationsafaridirect.com<br />
+                    Email: info@demitours.com<br />
                     Phone: +(255) 688 535848 / +(255) 762 238763
                   </p>
                 </div>

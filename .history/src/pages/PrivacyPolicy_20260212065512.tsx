@@ -150,7 +150,7 @@ const PrivacyPolicy = () => {
                     <li><strong className="text-foreground">Objection:</strong> Object to certain types of processing of your personal information</li>
                   </ul>
                   <p className="mt-4">
-                    To exercise these rights, please contact us at <a href="mailto: travel@migrationsafaridirect.com" className="text-primary hover:underline">travel@migrationsafaridirect.com</a>
+                    To exercise these rights, please contact us at <a href="mailto:info@demitours.com" className="text-primary hover:underline">info@demitours.com</a>
                   </p>
                 </div>
               </section>

@@ -253,7 +253,7 @@ const CookiePreferences = () => {
                 <h2 className="font-display text-3xl font-bold text-foreground mb-4">Contact Us</h2>
                 <p className="text-muted-foreground leading-relaxed">
                   If you have any questions about our use of cookies, please contact us at{' '}
-                  <a href="mailto:travel@migrationsafaridirect.com" className="text-primary hover:underline">travel@migrationsafaridirect.com</a>
+                  <a href="mailto:info@demitours.com" className="text-primary hover:underline">info@demitours.com</a>
                 </p>
               </section>
             </div>
