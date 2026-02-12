@@ -483,13 +483,12 @@ export const PackageForm = ({ package: editPackage, tableName = 'packages', onSu
                     <SelectValue placeholder="Select category" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="migration-safaris"> Migration Safaris</SelectItem>
-                    <SelectItem value="Trekking"> Trekking</SelectItem>
-                    <SelectItem value="Wildlife"> Wildlife</SelectItem>
-                    <SelectItem value="Beach"> Beach</SelectItem>
-                    <SelectItem value="Luxury">Luxury</SelectItem>
-                    <SelectItem value="all-year"> All Year</SelectItem>
-                    <SelectItem value="Family"> Family</SelectItem>
+                    <SelectItem value="Safari">🦁 Safari</SelectItem>
+                    <SelectItem value="Trekking">🥾 Trekking</SelectItem>
+                    <SelectItem value="Wildlife">🦒 Wildlife</SelectItem>
+                    <SelectItem value="Beach">🏖️ Beach</SelectItem>
+                    <SelectItem value="Luxury">💎 Luxury</SelectItem>
+                    <SelectItem value="Adventure">⛰️ Adventure</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
