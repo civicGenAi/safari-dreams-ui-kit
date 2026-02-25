@@ -40,7 +40,7 @@ export const PackageForm = ({ package: editPackage, tableName = 'packages', onSu
     if (stored) {
       try {
         return JSON.parse(stored);
-      } catch {}
+      } catch { }
     }
     return {
       title: '',
@@ -67,7 +67,7 @@ export const PackageForm = ({ package: editPackage, tableName = 'packages', onSu
     if (stored) {
       try {
         return JSON.parse(stored);
-      } catch {}
+      } catch { }
     }
     return [];
   });
@@ -78,7 +78,7 @@ export const PackageForm = ({ package: editPackage, tableName = 'packages', onSu
     if (stored) {
       try {
         return JSON.parse(stored);
-      } catch {}
+      } catch { }
     }
     return [];
   });
@@ -89,7 +89,7 @@ export const PackageForm = ({ package: editPackage, tableName = 'packages', onSu
     if (stored) {
       try {
         return JSON.parse(stored);
-      } catch {}
+      } catch { }
     }
     return [];
   });
@@ -98,10 +98,10 @@ export const PackageForm = ({ package: editPackage, tableName = 'packages', onSu
     if (editPackage) {
       const itinerary = Array.isArray(editPackage.itinerary) && editPackage.itinerary.length > 0
         ? editPackage.itinerary.map(day => ({
-            ...day,
-            activities: day.activities || [],
-            images: day.images || []
-          }))
+          ...day,
+          activities: day.activities || [],
+          images: day.images || []
+        }))
         : [{ day: 1, title: '', description: '', activities: [], images: [] }];
       return itinerary;
     }
@@ -110,7 +110,7 @@ export const PackageForm = ({ package: editPackage, tableName = 'packages', onSu
       try {
         const parsed = JSON.parse(stored);
         return parsed.length > 0 ? parsed : [{ day: 1, title: '', description: '', activities: [], images: [] }];
-      } catch {}
+      } catch { }
     }
     return [{ day: 1, title: '', description: '', activities: [], images: [] }];
   });
@@ -409,13 +409,12 @@ export const PackageForm = ({ package: editPackage, tableName = 'packages', onSu
           <div key={step.number} className="flex items-center flex-1">
             <div className="flex flex-col items-center flex-1">
               <div
-                className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition-all ${
-                  currentStep > step.number
+                className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition-all ${currentStep > step.number
                     ? 'bg-green-500 text-white'
                     : currentStep === step.number
-                    ? 'bg-primary text-white'
-                    : 'bg-muted text-muted-foreground'
-                }`}
+                      ? 'bg-primary text-white'
+                      : 'bg-muted text-muted-foreground'
+                  }`}
               >
                 {currentStep > step.number ? <Check className="w-5 h-5" /> : step.number}
               </div>
@@ -426,9 +425,8 @@ export const PackageForm = ({ package: editPackage, tableName = 'packages', onSu
             </div>
             {index < steps.length - 1 && (
               <div
-                className={`h-1 flex-1 mx-2 ${
-                  currentStep > step.number ? 'bg-green-500' : 'bg-muted'
-                }`}
+                className={`h-1 flex-1 mx-2 ${currentStep > step.number ? 'bg-green-500' : 'bg-muted'
+                  }`}
               />
             )}
           </div>
@@ -483,14 +481,22 @@ export const PackageForm = ({ package: editPackage, tableName = 'packages', onSu
                     <SelectValue placeholder="Select category" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="migration-safaris"> Migration Safaris</SelectItem>
-                    <SelectItem value="Trekking"> Trekking</SelectItem>
-                    <SelectItem value="wildlife"> Wildlife</SelectItem>
-                    <SelectItem value="Beach"> Beach</SelectItem>
-                    <SelectItem value="Luxury">Luxury</SelectItem>
-                    <SelectItem value="aAll-year"> All Year</SelectItem>
-                    <SelectItem value="Family"> Family</SelectItem>
-                    <SelectItem value="DayTrip"> Day Trips</SelectItem>
+                    <SelectItem value="wildlife-safari">Wildlife Safari</SelectItem>
+                    <SelectItem value="migration-safari">Migration Safari</SelectItem>
+                    <SelectItem value="trekking">Trekking</SelectItem>
+                    <SelectItem value="adventure">Adventure</SelectItem>
+                    <SelectItem value="cultural-heritage">Cultural & Heritage</SelectItem>
+                    <SelectItem value="beach">Beach</SelectItem>
+                    <SelectItem value="marine-activities">Marine Activities</SelectItem>
+                    <SelectItem value="luxury">Luxury</SelectItem>
+                    <SelectItem value="honeymoon">Honeymoon</SelectItem>
+                    <SelectItem value="family">Family</SelectItem>
+                    <SelectItem value="photography">Photographic Safari</SelectItem>
+                    <SelectItem value="bird-watching">Bird Watching</SelectItem>
+                    <SelectItem value="wellness-retreat">Wellness Retreat</SelectItem>
+                    <SelectItem value="conservation-volunteer">Conservation</SelectItem>
+                    <SelectItem value="mice">MICE / Business</SelectItem>
+                    <SelectItem value="day-trip">Day Trips</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
@@ -502,9 +508,9 @@ export const PackageForm = ({ package: editPackage, tableName = 'packages', onSu
                     <SelectValue placeholder="Select difficulty" />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="Easy">😊 Easy - Suitable for all</SelectItem>
-                    <SelectItem value="Moderate">😅 Moderate - Some fitness required</SelectItem>
-                    <SelectItem value="Challenging">💪 Challenging - Good fitness needed</SelectItem>
+                    <SelectItem value="Easy"> Easy - Suitable for all</SelectItem>
+                    <SelectItem value="Moderate"> Moderate - Some fitness required</SelectItem>
+                    <SelectItem value="Challenging"> Challenging - Good fitness needed</SelectItem>
                   </SelectContent>
                 </Select>
               </div>
