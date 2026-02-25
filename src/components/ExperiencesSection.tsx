@@ -12,69 +12,69 @@ import adv06 from '@/assets/idea_gorilla_chimp_trek.webp';
 // Custom SVG Icons
 const AdventureIcon = () => (
   <svg viewBox="0 0 64 64" fill="none" className="w-full h-full">
-    <path d="M32 8L38 20L52 22L42 31L45 45L32 38L19 45L22 31L12 22L26 20L32 8Z" fill="currentColor" opacity="0.2"/>
-    <path d="M32 8L38 20L52 22L42 31L45 45L32 38L19 45L22 31L12 22L26 20L32 8Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    <circle cx="32" cy="32" r="20" stroke="currentColor" strokeWidth="2" strokeDasharray="4 4"/>
-    <path d="M32 12V16M32 48V52M12 32H16M48 32H52" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+    <path d="M32 8L38 20L52 22L42 31L45 45L32 38L19 45L22 31L12 22L26 20L32 8Z" fill="currentColor" opacity="0.2" />
+    <path d="M32 8L38 20L52 22L42 31L45 45L32 38L19 45L22 31L12 22L26 20L32 8Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <circle cx="32" cy="32" r="20" stroke="currentColor" strokeWidth="2" strokeDasharray="4 4" />
+    <path d="M32 12V16M32 48V52M12 32H16M48 32H52" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
   </svg>
 );
 
 const CrossBorderIcon = () => (
   <svg viewBox="0 0 64 64" fill="none" className="w-full h-full">
-    <circle cx="32" cy="32" r="24" stroke="currentColor" strokeWidth="2" fill="currentColor" opacity="0.1"/>
-    <path d="M8 32C8 18.7 18.7 8 32 8C45.3 8 56 18.7 56 32" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <path d="M8 32C8 45.3 18.7 56 32 56C45.3 56 56 45.3 56 32" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeDasharray="8 4"/>
-    <path d="M32 8V56M12 20H52M12 44H52" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <path d="M20 12Q32 28 44 12M20 52Q32 36 44 52" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+    <circle cx="32" cy="32" r="24" stroke="currentColor" strokeWidth="2" fill="currentColor" opacity="0.1" />
+    <path d="M8 32C8 18.7 18.7 8 32 8C45.3 8 56 18.7 56 32" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    <path d="M8 32C8 45.3 18.7 56 32 56C45.3 56 56 45.3 56 32" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeDasharray="8 4" />
+    <path d="M32 8V56M12 20H52M12 44H52" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    <path d="M20 12Q32 28 44 12M20 52Q32 36 44 52" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
   </svg>
 );
 
 const DayTourIcon = () => (
   <svg viewBox="0 0 64 64" fill="none" className="w-full h-full">
-    <circle cx="32" cy="28" r="12" fill="currentColor" opacity="0.2"/>
-    <circle cx="32" cy="28" r="12" stroke="currentColor" strokeWidth="2"/>
-    <path d="M32 16V12M32 40V44M44 28H48M16 28H20" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <path d="M41.5 18.5L44.5 15.5M19.5 37.5L22.5 34.5M22.5 18.5L19.5 15.5M44.5 37.5L41.5 34.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <path d="M12 48H52C52 52 48 54 44 54H20C16 54 12 52 12 48Z" fill="currentColor" opacity="0.2" stroke="currentColor" strokeWidth="2" strokeLinejoin="round"/>
+    <circle cx="32" cy="28" r="12" fill="currentColor" opacity="0.2" />
+    <circle cx="32" cy="28" r="12" stroke="currentColor" strokeWidth="2" />
+    <path d="M32 16V12M32 40V44M44 28H48M16 28H20" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    <path d="M41.5 18.5L44.5 15.5M19.5 37.5L22.5 34.5M22.5 18.5L19.5 15.5M44.5 37.5L41.5 34.5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    <path d="M12 48H52C52 52 48 54 44 54H20C16 54 12 52 12 48Z" fill="currentColor" opacity="0.2" stroke="currentColor" strokeWidth="2" strokeLinejoin="round" />
   </svg>
 );
 
 const LuxuryIcon = () => (
   <svg viewBox="0 0 64 64" fill="none" className="w-full h-full">
-    <path d="M32 8L36 24H48L38 32L42 48L32 40L22 48L26 32L16 24H28L32 8Z" fill="currentColor" opacity="0.2"/>
-    <path d="M32 8L36 24H48L38 32L42 48L32 40L22 48L26 32L16 24H28L32 8Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-    <circle cx="32" cy="32" r="4" fill="currentColor"/>
-    <path d="M24 16L20 12M40 16L44 12M18 28L12 26M46 28L52 26M18 40L12 42M46 40L52 42" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/>
+    <path d="M32 8L36 24H48L38 32L42 48L32 40L22 48L26 32L16 24H28L32 8Z" fill="currentColor" opacity="0.2" />
+    <path d="M32 8L36 24H48L38 32L42 48L32 40L22 48L26 32L16 24H28L32 8Z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    <circle cx="32" cy="32" r="4" fill="currentColor" />
+    <path d="M24 16L20 12M40 16L44 12M18 28L12 26M46 28L52 26M18 40L12 42M46 40L52 42" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
   </svg>
 );
 
 const MigrationIcon = () => (
   <svg viewBox="0 0 64 64" fill="none" className="w-full h-full">
-    <path d="M12 44C12 44 18 36 24 36C30 36 32 44 38 44C44 44 48 36 52 36" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeDasharray="4 4"/>
-    <ellipse cx="20" cy="28" rx="6" ry="8" fill="currentColor" opacity="0.2"/>
-    <ellipse cx="20" cy="28" rx="6" ry="8" stroke="currentColor" strokeWidth="2"/>
-    <path d="M18 24L16 20L18 22L20 20L18 24Z" fill="currentColor"/>
-    <ellipse cx="35" cy="24" rx="5" ry="6" fill="currentColor" opacity="0.2"/>
-    <ellipse cx="35" cy="24" rx="5" ry="6" stroke="currentColor" strokeWidth="2"/>
-    <path d="M33 21L31 18L33 19.5L35 18L33 21Z" fill="currentColor"/>
-    <ellipse cx="48" cy="30" rx="4" ry="5" fill="currentColor" opacity="0.2"/>
-    <ellipse cx="48" cy="30" rx="4" ry="5" stroke="currentColor" strokeWidth="2"/>
-    <path d="M47 28L45 25L47 26.5L49 25L47 28Z" fill="currentColor"/>
-    <path d="M8 50H56" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+    <path d="M12 44C12 44 18 36 24 36C30 36 32 44 38 44C44 44 48 36 52 36" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeDasharray="4 4" />
+    <ellipse cx="20" cy="28" rx="6" ry="8" fill="currentColor" opacity="0.2" />
+    <ellipse cx="20" cy="28" rx="6" ry="8" stroke="currentColor" strokeWidth="2" />
+    <path d="M18 24L16 20L18 22L20 20L18 24Z" fill="currentColor" />
+    <ellipse cx="35" cy="24" rx="5" ry="6" fill="currentColor" opacity="0.2" />
+    <ellipse cx="35" cy="24" rx="5" ry="6" stroke="currentColor" strokeWidth="2" />
+    <path d="M33 21L31 18L33 19.5L35 18L33 21Z" fill="currentColor" />
+    <ellipse cx="48" cy="30" rx="4" ry="5" fill="currentColor" opacity="0.2" />
+    <ellipse cx="48" cy="30" rx="4" ry="5" stroke="currentColor" strokeWidth="2" />
+    <path d="M47 28L45 25L47 26.5L49 25L47 28Z" fill="currentColor" />
+    <path d="M8 50H56" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
   </svg>
 );
 
 const GorillaIcon = () => (
   <svg viewBox="0 0 64 64" fill="none" className="w-full h-full">
-    <circle cx="32" cy="30" r="16" fill="currentColor" opacity="0.1"/>
-    <circle cx="32" cy="30" r="16" stroke="currentColor" strokeWidth="2"/>
-    <circle cx="26" cy="28" r="3" fill="currentColor"/>
-    <circle cx="38" cy="28" r="3" fill="currentColor"/>
-    <path d="M28 36C28 36 30 38 32 38C34 38 36 36 36 36" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <circle cx="18" cy="20" r="6" fill="currentColor" opacity="0.2" stroke="currentColor" strokeWidth="2"/>
-    <circle cx="46" cy="20" r="6" fill="currentColor" opacity="0.2" stroke="currentColor" strokeWidth="2"/>
-    <path d="M24 46C24 46 26 50 32 50C38 50 40 46 40 46" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
-    <path d="M22 40L18 52M42 40L46 52" stroke="currentColor" strokeWidth="2" strokeLinecap="round"/>
+    <circle cx="32" cy="30" r="16" fill="currentColor" opacity="0.1" />
+    <circle cx="32" cy="30" r="16" stroke="currentColor" strokeWidth="2" />
+    <circle cx="26" cy="28" r="3" fill="currentColor" />
+    <circle cx="38" cy="28" r="3" fill="currentColor" />
+    <path d="M28 36C28 36 30 38 32 38C34 38 36 36 36 36" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    <circle cx="18" cy="20" r="6" fill="currentColor" opacity="0.2" stroke="currentColor" strokeWidth="2" />
+    <circle cx="46" cy="20" r="6" fill="currentColor" opacity="0.2" stroke="currentColor" strokeWidth="2" />
+    <path d="M24 46C24 46 26 50 32 50C38 50 40 46 40 46" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
+    <path d="M22 40L18 52M42 40L46 52" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
   </svg>
 );
 
@@ -221,17 +221,17 @@ export const ExperiencesSection = () => {
           <div className="flex items-center justify-center gap-3 mb-6">
             <div className="w-12 h-px bg-primary" />
             <span className="font-heading text-sm uppercase tracking-widest text-primary">
-              Migration Safari direct
+              Discover Your Travel Style
             </span>
             <div className="w-12 h-px bg-primary" />
           </div>
           <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold mb-6">
-            Come With Us to
-            <span className="text-primary block">New Experiences</span>
+            Curate Your
+            <span className="text-primary block">Perfect Journey</span>
           </h2>
           <p className="text-muted-foreground text-lg">
-            Discover the perfect adventure tailored to your travel style.
-            From heart-pumping safaris to serene nature walks.
+            From heart-pounding wildlife encounters to serene beach escapes,
+            explore adventures styled just for you.
           </p>
         </div>
 
