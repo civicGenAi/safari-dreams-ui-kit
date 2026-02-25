@@ -916,14 +916,18 @@ export const PackageForm = ({ package: editPackage, tableName = 'packages', onSu
 
           {currentStep < 4 ? (
             <Button
+              key="btn-next"
               type="button"
               variant="primary"
-              onClick={() => setCurrentStep(currentStep + 1)}
+              onClick={(e) => {
+                e.preventDefault();
+                setCurrentStep(currentStep + 1);
+              }}
             >
               Next Step
             </Button>
           ) : (
-            <Button type="submit" variant="primary" disabled={loading}>
+            <Button key="btn-submit" type="submit" variant="primary" disabled={loading}>
               {loading ? 'Saving...' : editPackage ? 'Update Package' : 'Create Package'}
             </Button>
           )}
