@@ -410,10 +410,10 @@ export const PackageForm = ({ package: editPackage, tableName = 'packages', onSu
             <div className="flex flex-col items-center flex-1">
               <div
                 className={`w-10 h-10 rounded-full flex items-center justify-center font-bold transition-all ${currentStep > step.number
-                    ? 'bg-green-500 text-white'
-                    : currentStep === step.number
-                      ? 'bg-primary text-white'
-                      : 'bg-muted text-muted-foreground'
+                  ? 'bg-green-500 text-white'
+                  : currentStep === step.number
+                    ? 'bg-primary text-white'
+                    : 'bg-muted text-muted-foreground'
                   }`}
               >
                 {currentStep > step.number ? <Check className="w-5 h-5" /> : step.number}
@@ -485,6 +485,7 @@ export const PackageForm = ({ package: editPackage, tableName = 'packages', onSu
                     <SelectItem value="migration-safari">Migration Safari</SelectItem>
                     <SelectItem value="trekking">Trekking</SelectItem>
                     <SelectItem value="adventure">Adventure</SelectItem>
+                    <SelectItem value="nature-culture">Nature & Culture</SelectItem>
                     <SelectItem value="cultural-heritage">Cultural & Heritage</SelectItem>
                     <SelectItem value="beach">Beach</SelectItem>
                     <SelectItem value="marine-activities">Marine Activities</SelectItem>
