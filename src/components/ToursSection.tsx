@@ -11,7 +11,25 @@ export const ToursSection = () => {
   const [packages, setPackages] = useState<Package[]>([]);
   const [loading, setLoading] = useState(true);
 
-  const filters = ['All', 'Safari', 'Trekking', 'Beach', 'Wildlife'];
+  const filters = [
+    { value: 'All', label: 'All' },
+    { value: 'wildlife-safari', label: 'Wildlife Safari' },
+    { value: 'migration-safari', label: 'Migration Safari' },
+    { value: 'trekking', label: 'Trekking' },
+    { value: 'adventure', label: 'Adventure' },
+    { value: 'nature-culture', label: 'Nature & Culture' },
+    { value: 'cultural-heritage', label: 'Cultural & Heritage' },
+    { value: 'beach', label: 'Beach' },
+    { value: 'marine-activities', label: 'Marine Activities' },
+    { value: 'luxury', label: 'Luxury' },
+    { value: 'honeymoon', label: 'Honeymoon' },
+    { value: 'family', label: 'Family' },
+    { value: 'photography', label: 'Photographic Safari' },
+    { value: 'bird-watching', label: 'Bird Watching' },
+    { value: 'wellness-retreat', label: 'Wellness Retreat' },
+    { value: 'conservation-volunteer', label: 'Conservation' },
+    { value: 'day-trip', label: 'Day Trips' }
+  ];
 
   useEffect(() => {
     fetchPackages();
@@ -162,15 +180,14 @@ export const ToursSection = () => {
           <div className="flex flex-wrap gap-2">
             {filters.map((filter) => (
               <button
-                key={filter}
-                onClick={() => setActiveFilter(filter)}
-                className={`px-4 py-2 rounded-lg font-heading text-sm transition-all ${
-                  activeFilter === filter
-                    ? 'bg-primary text-primary-foreground'
-                    : 'bg-muted text-muted-foreground hover:bg-primary/10'
-                }`}
+                key={filter.value}
+                onClick={() => setActiveFilter(filter.value)}
+                className={`px-4 py-2 rounded-lg font-heading text-sm transition-all ${activeFilter === filter.value
+                  ? 'bg-primary text-primary-foreground'
+                  : 'bg-muted text-muted-foreground hover:bg-primary/10'
+                  }`}
               >
-                {filter}
+                {filter.label}
               </button>
             ))}
           </div>
@@ -217,7 +234,7 @@ export const ToursSection = () => {
 
                   {/* Category Badge */}
                   <div className="absolute top-4 left-4 bg-secondary text-white px-3 py-1 rounded-full text-xs font-heading font-semibold">
-                    {pkg.category}
+                    {filters.find(f => f.value === pkg.category)?.label || pkg.category}
                   </div>
 
                   {/* Difficulty Badge */}
