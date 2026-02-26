@@ -35,6 +35,17 @@ const Contact = () => {
     setIsSubmitting(true);
 
     try {
+      // Verify Turnstile token via edge function
+      const { data: verification, error: verifyError } = await supabase.functions.invoke('verify-turnstile', {
+        body: JSON.stringify({ token: turnstileToken }),
+      });
+      if (verifyError) throw verifyError;
+      if (!verification?.success) {
+        alert('Turnstile verification failed. Please try again.');
+        setIsSubmitting(false);
+        return;
+      }
+
       // Save to database
       const { error: dbError } = await supabase
         .from('contact_submissions')
