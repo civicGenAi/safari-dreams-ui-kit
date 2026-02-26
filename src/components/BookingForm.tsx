@@ -1,18 +1,25 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import { 
-  Users, 
-  Calendar, 
-  MapPin, 
-  User, 
-  Mail, 
-  Phone, 
-  Globe, 
+import { supabase } from '@/lib/supabase';
+import { sendBookingNotification } from '@/lib/email';
+import {
+  Users,
+  Calendar,
+  MapPin,
+  User,
+  Mail,
+  Phone,
+  Globe,
   MessageSquare,
   ChevronRight,
   CheckCircle,
-  Sparkles
+  Sparkles,
+  CreditCard,
+  Building,
+  ArrowRight,
+  X
 } from 'lucide-react';
+
 
 const destinations = [
   { value: 'tanzania', label: 'Tanzania', flag: '🇹🇿' },
@@ -50,14 +57,96 @@ export const BookingForm = () => {
     message: '',
   });
 
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState<'email' | 'bank' | 'skip'>('skip');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleInitialSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log(formData);
+    setShowPaymentModal(true);
+  };
+
+  const handleFinalSubmit = async () => {
+    setIsSubmitting(true);
+
+    try {
+      const specialReqsWithPayment = `${formData.message}\n\n[Payment Preference: ${paymentMethod}]`.trim();
+      const duration = formData.startDate && formData.endDate
+        ? Math.max(1, Math.ceil((new Date(formData.endDate).getTime() - new Date(formData.startDate).getTime()) / (1000 * 60 * 60 * 24)))
+        : 0;
+
+      // Save to database
+      const { error: dbError } = await supabase
+        .from('booking_requests')
+        .insert([
+          {
+            first_name: formData.name.split(' ')[0] || '',
+            last_name: formData.name.split(' ').slice(1).join(' ') || '.',
+            email: formData.email,
+            phone: formData.phone,
+            destination: formData.destination,
+            travel_style: formData.tourType,
+            start_date: formData.startDate,
+            end_date: formData.endDate || null,
+            adults: formData.adults,
+            children: formData.children,
+            accommodation: formData.accommodation,
+            special_requirements: specialReqsWithPayment,
+            status: 'new',
+            submitted_at: new Date().toISOString()
+          }
+        ]);
+
+      if (dbError) throw dbError;
+
+      // Send email notification to admin
+      await sendBookingNotification({
+        firstName: formData.name.split(' ')[0] || '',
+        lastName: formData.name.split(' ').slice(1).join(' ') || '.',
+        email: formData.email,
+        phone: formData.phone,
+        destination: formData.destination,
+        travelStyle: formData.tourType,
+        startDate: formData.startDate,
+        endDate: formData.endDate || undefined,
+        adults: formData.adults,
+        children: formData.children,
+        accommodation: formData.accommodation,
+        specialRequirements: specialReqsWithPayment,
+        duration: duration
+      });
+
+      setIsSubmitting(false);
+      setShowPaymentModal(false);
+      alert('Your quote request has been sent successfully! We will contact you shortly.');
+
+      // Reset form
+      setStep(1);
+      setFormData({
+        destination: '',
+        tourType: '',
+        adults: 2,
+        children: 0,
+        startDate: '',
+        endDate: '',
+        name: '',
+        email: '',
+        phone: '',
+        nationality: '',
+        accommodation: 'standard',
+        message: '',
+      });
+      setPaymentMethod('skip');
+
+    } catch (error) {
+      console.error('Booking form submission error:', error);
+      alert('Something went wrong. Please try again.');
+      setIsSubmitting(false);
+    }
   };
 
   return (
@@ -73,14 +162,14 @@ export const BookingForm = () => {
                 Start Planning
               </span>
             </div>
-            
+
             <h2 className="font-display text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-6">
               Request Your
               <span className="text-gradient-gold block">Free Quote</span>
             </h2>
-            
+
             <p className="text-muted-foreground text-lg mb-8">
-              Tell us about your dream safari and we'll create a personalized itinerary 
+              Tell us about your dream safari and we'll create a personalized itinerary
               just for you. No obligations, completely free.
             </p>
 
@@ -123,26 +212,24 @@ export const BookingForm = () => {
               {[1, 2, 3].map((s) => (
                 <div key={s} className="flex items-center">
                   <div
-                    className={`w-10 h-10 rounded-full flex items-center justify-center font-heading font-semibold transition-colors ${
-                      s <= step
-                        ? 'bg-primary text-primary-foreground'
-                        : 'bg-muted text-muted-foreground'
-                    }`}
+                    className={`w-10 h-10 rounded-full flex items-center justify-center font-heading font-semibold transition-colors ${s <= step
+                      ? 'bg-primary text-primary-foreground'
+                      : 'bg-muted text-muted-foreground'
+                      }`}
                   >
                     {s < step ? <CheckCircle className="w-5 h-5" /> : s}
                   </div>
                   {s < 3 && (
                     <div
-                      className={`w-16 lg:w-24 h-1 mx-2 rounded-full transition-colors ${
-                        s < step ? 'bg-primary' : 'bg-muted'
-                      }`}
+                      className={`w-16 lg:w-24 h-1 mx-2 rounded-full transition-colors ${s < step ? 'bg-primary' : 'bg-muted'
+                        }`}
                     />
                   )}
                 </div>
               ))}
             </div>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleInitialSubmit}>
               {/* Step 1: Tour Details */}
               {step === 1 && (
                 <div className="space-y-6 animate-fade-in">
@@ -403,11 +490,10 @@ export const BookingForm = () => {
                           key={option.value}
                           type="button"
                           onClick={() => setFormData({ ...formData, accommodation: option.value })}
-                          className={`p-4 rounded-xl border-2 text-center transition-all ${
-                            formData.accommodation === option.value
-                              ? 'border-secondary bg-secondary/10'
-                              : 'border-border hover:border-secondary/50'
-                          }`}
+                          className={`p-4 rounded-xl border-2 text-center transition-all ${formData.accommodation === option.value
+                            ? 'border-secondary bg-secondary/10'
+                            : 'border-border hover:border-secondary/50'
+                            }`}
                         >
                           <span className="text-2xl mb-2 block">{option.icon}</span>
                           <span className="font-heading text-sm font-medium text-foreground">
@@ -464,6 +550,132 @@ export const BookingForm = () => {
           </div>
         </div>
       </div>
+
+      {/* Payment Options Modal */}
+      {showPaymentModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
+          <div className="bg-background rounded-3xl w-full max-w-lg shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-6 border-b border-border">
+              <div>
+                <h3 className="font-display text-xl font-bold text-foreground">Complete Your Booking</h3>
+                <p className="text-sm text-muted-foreground mt-1">Select an optional payment method to secure your spot</p>
+              </div>
+              <button
+                type="button"
+                onClick={() => setShowPaymentModal(false)}
+                className="p-2 text-muted-foreground hover:bg-muted rounded-full transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-6 space-y-4">
+              {/* Option 1: Direct Pay Link (Email) */}
+              <button
+                type="button"
+                onClick={() => setPaymentMethod('email')}
+                className={`w-full text-left p-4 rounded-xl border-2 transition-all flex items-center gap-4 ${paymentMethod === 'email'
+                  ? 'border-primary bg-primary/5'
+                  : 'border-border hover:border-primary/50'
+                  }`}
+              >
+                <div className={`w-12 h-12 rounded-full flex items-center justify-center ${paymentMethod === 'email' ? 'bg-primary text-white' : 'bg-muted text-muted-foreground'}`}>
+                  <CreditCard className="w-6 h-6" />
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-heading font-semibold text-foreground">Direct Pay Link</h4>
+                  <p className="text-sm text-muted-foreground">Pay securely online via DPO Group</p>
+                </div>
+              </button>
+
+              {/* Option 2: Bank Transfer */}
+              <button
+                type="button"
+                onClick={() => setPaymentMethod('bank')}
+                className={`w-full text-left p-4 rounded-xl border-2 transition-all flex items-center gap-4 ${paymentMethod === 'bank'
+                  ? 'border-secondary bg-secondary/5'
+                  : 'border-border hover:border-secondary/50'
+                  }`}
+              >
+                <div className={`w-12 h-12 rounded-full flex items-center justify-center ${paymentMethod === 'bank' ? 'bg-secondary text-white' : 'bg-muted text-muted-foreground'}`}>
+                  <Building className="w-6 h-6" />
+                </div>
+                <div className="flex-1">
+                  <h4 className="font-heading font-semibold text-foreground">Bank Transfer</h4>
+                  <p className="text-sm text-muted-foreground">Direct bank deposit details</p>
+                </div>
+              </button>
+
+              {/* Dynamic Content Based on Selection */}
+              {paymentMethod === 'email' && (
+                <div className="mt-4 p-4 bg-primary/10 rounded-xl border border-primary/20 animate-in slide-in-from-top-2">
+                  <p className="text-sm text-foreground font-medium mb-2">Click below to pay via our secure gateway:</p>
+                  <a
+                    href="https://shop.directpay.online//paymybills/DemiToursAndTravelsCompanyLimited"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-semibold text-sm underline underline-offset-4"
+                  >
+                    Proceed to Direct Pay Online
+                    <ArrowRight className="w-4 h-4" />
+                  </a>
+                </div>
+              )}
+
+              {paymentMethod === 'bank' && (
+                <div className="mt-4 p-4 bg-secondary/10 rounded-xl border border-secondary/20 animate-in slide-in-from-top-2">
+                  <p className="font-bold text-foreground mb-2 text-sm">Bank Details (Tanzania):</p>
+                  <ul className="text-sm text-muted-foreground space-y-1 font-mono">
+                    <li><span className="text-foreground font-semibold">Bank:</span> CRDB Bank PLC</li>
+                    <li><span className="text-foreground font-semibold">Account Name:</span> Demi Tours & Travels</li>
+                    <li><span className="text-foreground font-semibold">Account No (USD):</span> 025XXXXXXXX</li>
+                    <li><span className="text-foreground font-semibold">SWIFT Code:</span> CORUTZTZ</li>
+                  </ul>
+                  <p className="text-xs text-secondary mt-3 italic">* Please include your name in the payment reference.</p>
+                </div>
+              )}
+
+              <div className="flex items-center gap-2 pt-2">
+                <input
+                  type="radio"
+                  id="skip_payment"
+                  name="payment"
+                  checked={paymentMethod === 'skip'}
+                  onChange={() => setPaymentMethod('skip')}
+                  className="text-primary focus:ring-primary w-4 h-4"
+                />
+                <label htmlFor="skip_payment" className="text-sm text-muted-foreground cursor-pointer">
+                  Skip payment for now (I will pay later)
+                </label>
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="p-6 border-t border-border bg-muted/30 flex gap-4">
+              <Button
+                type="button"
+                variant="outline"
+                className="flex-1"
+                onClick={() => setShowPaymentModal(false)}
+              >
+                Cancel
+              </Button>
+              <Button
+                type="button"
+                variant="primary"
+                className="flex-1 gap-2"
+                onClick={handleFinalSubmit}
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? 'Processing...' : 'Submit Booking'}
+                {!isSubmitting && <CheckCircle className="w-4 h-4" />}
+              </Button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 };

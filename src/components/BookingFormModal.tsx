@@ -3,7 +3,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
-import { Calendar, Users, MapPin, Star, Send, X } from 'lucide-react';
+import { Calendar, Users, MapPin, Star, Send, X, CreditCard, Building, ArrowRight, CheckCircle } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { sendBookingNotification } from '@/lib/email';
 
@@ -48,16 +48,24 @@ export const BookingFormModal = ({ isOpen, onClose, packageTitle, packageSlug }:
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [showPaymentModal, setShowPaymentModal] = useState(false);
+  const [paymentMethod, setPaymentMethod] = useState<'email' | 'bank' | 'skip'>('skip');
 
   const handleInputChange = (field: string, value: string) => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleInitialSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    setShowPaymentModal(true);
+  };
+
+  const handleFinalSubmit = async () => {
     setIsSubmitting(true);
 
     try {
+      const specialReqsWithPayment = `${formData.specialRequirements || ''}\n\n[Payment Preference: ${paymentMethod}]`.trim();
+
       // Save to database
       const { error: dbError } = await supabase
         .from('booking_requests')
@@ -75,7 +83,7 @@ export const BookingFormModal = ({ isOpen, onClose, packageTitle, packageSlug }:
             children: parseInt(formData.children),
             accommodation: formData.accommodation,
             budget: formData.budget || null,
-            special_requirements: formData.specialRequirements || null,
+            special_requirements: specialReqsWithPayment,
             package_title: packageTitle || null,
             package_slug: packageSlug || null,
             status: 'new',
@@ -100,7 +108,7 @@ export const BookingFormModal = ({ isOpen, onClose, packageTitle, packageSlug }:
         children: parseInt(formData.children),
         accommodation: formData.accommodation,
         budget: formData.budget,
-        specialRequirements: formData.specialRequirements,
+        specialRequirements: specialReqsWithPayment,
         packageTitle: packageTitle,
         duration: duration
       });
@@ -111,6 +119,7 @@ export const BookingFormModal = ({ isOpen, onClose, packageTitle, packageSlug }:
       setTimeout(() => {
         setSubmitSuccess(false);
         onClose();
+        setShowPaymentModal(false);
         setFormData({
           firstName: '',
           lastName: '',
@@ -126,6 +135,7 @@ export const BookingFormModal = ({ isOpen, onClose, packageTitle, packageSlug }:
           budget: '',
           specialRequirements: ''
         });
+        setPaymentMethod('skip');
       }, 2000);
     } catch (error) {
       console.error('Booking form submission error:', error);
@@ -167,7 +177,7 @@ export const BookingFormModal = ({ isOpen, onClose, packageTitle, packageSlug }:
             </p>
           </div>
         ) : (
-          <form onSubmit={handleSubmit} className="space-y-8">
+          <form onSubmit={handleInitialSubmit} className="space-y-8">
             {/* Personal Information */}
             <div className="space-y-4">
               <h3 className="font-heading text-lg font-semibold flex items-center gap-2 text-foreground">
@@ -348,11 +358,10 @@ export const BookingFormModal = ({ isOpen, onClose, packageTitle, packageSlug }:
                 {accommodationTypes.map((type) => (
                   <label
                     key={type.value}
-                    className={`relative flex items-center gap-3 p-4 border-2 rounded-xl cursor-pointer transition-all ${
-                      formData.accommodation === type.value
-                        ? 'border-primary bg-primary/5'
-                        : 'border-border hover:border-primary/50'
-                    }`}
+                    className={`relative flex items-center gap-3 p-4 border-2 rounded-xl cursor-pointer transition-all ${formData.accommodation === type.value
+                      ? 'border-primary bg-primary/5'
+                      : 'border-border hover:border-primary/50'
+                      }`}
                   >
                     <input
                       type="radio"
@@ -367,7 +376,7 @@ export const BookingFormModal = ({ isOpen, onClose, packageTitle, packageSlug }:
                     {formData.accommodation === type.value && (
                       <div className="w-5 h-5 rounded-full bg-primary flex items-center justify-center">
                         <svg className="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 12 12">
-                          <path d="M10 3L4.5 8.5L2 6" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round"/>
+                          <path d="M10 3L4.5 8.5L2 6" stroke="currentColor" strokeWidth="2" fill="none" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                       </div>
                     )}
@@ -450,6 +459,132 @@ export const BookingFormModal = ({ isOpen, onClose, packageTitle, packageSlug }:
               </Button>
             </div>
           </form>
+        )}
+
+        {/* Payment Options Modal */}
+        {showPaymentModal && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
+            <div className="bg-background rounded-3xl w-full max-w-lg shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200 border border-border">
+              {/* Modal Header */}
+              <div className="flex items-center justify-between p-6 border-b border-border">
+                <div>
+                  <h3 className="font-display text-xl font-bold text-foreground">Complete Your Booking</h3>
+                  <p className="text-sm text-muted-foreground mt-1">Select an optional payment method to secure your spot</p>
+                </div>
+                <button
+                  onClick={() => setShowPaymentModal(false)}
+                  className="p-2 text-muted-foreground hover:bg-muted rounded-full transition-colors"
+                  type="button"
+                >
+                  <X className="w-5 h-5" />
+                </button>
+              </div>
+
+              {/* Modal Content */}
+              <div className="p-6 space-y-4 max-h-[60vh] overflow-y-auto">
+                {/* Option 1: Direct Pay Link (Email) */}
+                <button
+                  type="button"
+                  onClick={() => setPaymentMethod('email')}
+                  className={`w-full text-left p-4 rounded-xl border-2 transition-all flex items-center gap-4 ${paymentMethod === 'email'
+                    ? 'border-primary bg-primary/5'
+                    : 'border-border hover:border-primary/50'
+                    }`}
+                >
+                  <div className={`w-12 h-12 rounded-full flex items-center justify-center ${paymentMethod === 'email' ? 'bg-primary text-white' : 'bg-muted text-muted-foreground'}`}>
+                    <CreditCard className="w-6 h-6" />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="font-heading font-semibold text-foreground">Direct Pay Link</h4>
+                    <p className="text-sm text-muted-foreground">Pay securely online via DPO Group</p>
+                  </div>
+                </button>
+
+                {/* Option 2: Bank Transfer */}
+                <button
+                  type="button"
+                  onClick={() => setPaymentMethod('bank')}
+                  className={`w-full text-left p-4 rounded-xl border-2 transition-all flex items-center gap-4 ${paymentMethod === 'bank'
+                    ? 'border-secondary bg-secondary/5'
+                    : 'border-border hover:border-secondary/50'
+                    }`}
+                >
+                  <div className={`w-12 h-12 rounded-full flex items-center justify-center ${paymentMethod === 'bank' ? 'bg-secondary text-white' : 'bg-muted text-muted-foreground'}`}>
+                    <Building className="w-6 h-6" />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="font-heading font-semibold text-foreground">Bank Transfer</h4>
+                    <p className="text-sm text-muted-foreground">Direct bank deposit details</p>
+                  </div>
+                </button>
+
+                {/* Dynamic Content Based on Selection */}
+                {paymentMethod === 'email' && (
+                  <div className="mt-4 p-4 bg-primary/10 rounded-xl border border-primary/20 animate-in slide-in-from-top-2">
+                    <p className="text-sm text-foreground font-medium mb-2">Click below to pay via our secure gateway:</p>
+                    <a
+                      href="https://shop.directpay.online//paymybills/DemiToursAndTravelsCompanyLimited"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-semibold text-sm underline underline-offset-4"
+                    >
+                      Proceed to Direct Pay Online
+                      <ArrowRight className="w-4 h-4" />
+                    </a>
+                  </div>
+                )}
+
+                {paymentMethod === 'bank' && (
+                  <div className="mt-4 p-4 bg-secondary/10 rounded-xl border border-secondary/20 animate-in slide-in-from-top-2">
+                    <p className="font-bold text-foreground mb-2 text-sm">Bank Details (Tanzania):</p>
+                    <ul className="text-sm text-muted-foreground space-y-1 font-mono">
+                      <li><span className="text-foreground font-semibold">Bank:</span> CRDB Bank PLC</li>
+                      <li><span className="text-foreground font-semibold">Account Name:</span> Demi Tours & Travels</li>
+                      <li><span className="text-foreground font-semibold">Account No (USD):</span> 025XXXXXXXX</li>
+                      <li><span className="text-foreground font-semibold">SWIFT Code:</span> CORUTZTZ</li>
+                    </ul>
+                    <p className="text-xs text-secondary mt-3 italic">* Please include your name in the payment reference.</p>
+                  </div>
+                )}
+
+                <div className="flex items-center gap-2 pt-2">
+                  <input
+                    type="radio"
+                    id="skip_payment_modal"
+                    name="payment_modal"
+                    checked={paymentMethod === 'skip'}
+                    onChange={() => setPaymentMethod('skip')}
+                    className="text-primary focus:ring-primary w-4 h-4"
+                  />
+                  <label htmlFor="skip_payment_modal" className="text-sm text-muted-foreground cursor-pointer">
+                    Skip payment for now (I will pay later)
+                  </label>
+                </div>
+              </div>
+
+              {/* Modal Footer */}
+              <div className="p-6 border-t border-border bg-muted/30 flex gap-4">
+                <Button
+                  variant="outline"
+                  className="flex-1"
+                  onClick={() => setShowPaymentModal(false)}
+                  type="button"
+                >
+                  Cancel
+                </Button>
+                <Button
+                  variant="primary"
+                  className="flex-1 gap-2"
+                  onClick={handleFinalSubmit}
+                  disabled={isSubmitting}
+                  type="button"
+                >
+                  {isSubmitting ? 'Processing...' : 'Submit Booking'}
+                  {!isSubmitting && <CheckCircle className="w-4 h-4" />}
+                </Button>
+              </div>
+            </div>
+          </div>
         )}
       </DialogContent>
     </Dialog>
