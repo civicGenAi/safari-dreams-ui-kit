@@ -55,16 +55,12 @@ export const BookingFormModal = ({ isOpen, onClose, packageTitle, packageSlug }:
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
-  const handleInitialSubmit = (e: React.FormEvent) => {
+  const handleBookingSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setShowPaymentModal(true);
-  };
-
-  const handleFinalSubmit = async () => {
     setIsSubmitting(true);
 
     try {
-      const specialReqsWithPayment = `${formData.specialRequirements || ''}\n\n[Payment Preference: ${paymentMethod}]`.trim();
+      const specialReqsWithPayment = `${formData.specialRequirements || ''}`.trim();
 
       // Save to database
       const { error: dbError } = await supabase
@@ -113,35 +109,30 @@ export const BookingFormModal = ({ isOpen, onClose, packageTitle, packageSlug }:
         duration: duration
       });
 
+      setIsSubmitting(false);
       setSubmitSuccess(true);
+      setShowPaymentModal(true); // Popup payment options immediately
 
-      // Reset and close after success
-      setTimeout(() => {
-        setSubmitSuccess(false);
-        onClose();
-        setShowPaymentModal(false);
-        setFormData({
-          firstName: '',
-          lastName: '',
-          email: '',
-          phone: '',
-          destination: '',
-          travelStyle: '',
-          startDate: '',
-          endDate: '',
-          adults: '2',
-          children: '0',
-          accommodation: 'mid-range',
-          budget: '',
-          specialRequirements: ''
-        });
-        setPaymentMethod('skip');
-      }, 2000);
     } catch (error) {
       console.error('Booking form submission error:', error);
       alert('Something went wrong. Please try again.');
       setIsSubmitting(false);
     }
+  };
+
+  const handleFullClose = () => {
+    setShowPaymentModal(false);
+    onClose();
+    setTimeout(() => {
+      setSubmitSuccess(false);
+      setFormData({
+        firstName: '', lastName: '', email: '', phone: '',
+        destination: '', travelStyle: '', startDate: '', endDate: '',
+        adults: '2', children: '0', accommodation: 'mid-range',
+        budget: '', specialRequirements: ''
+      });
+      setPaymentMethod('skip');
+    }, 300);
   };
 
   const calculateDuration = () => {
@@ -177,7 +168,7 @@ export const BookingFormModal = ({ isOpen, onClose, packageTitle, packageSlug }:
             </p>
           </div>
         ) : (
-          <form onSubmit={handleInitialSubmit} className="space-y-8">
+          <form onSubmit={handleBookingSubmit} className="space-y-8">
             {/* Personal Information */}
             <div className="space-y-4">
               <h3 className="font-heading text-lg font-semibold flex items-center gap-2 text-foreground">
@@ -468,11 +459,14 @@ export const BookingFormModal = ({ isOpen, onClose, packageTitle, packageSlug }:
               {/* Modal Header */}
               <div className="flex items-center justify-between p-6 border-b border-border">
                 <div>
-                  <h3 className="font-display text-xl font-bold text-foreground">Complete Your Booking</h3>
-                  <p className="text-sm text-muted-foreground mt-1">Select an optional payment method to secure your spot</p>
+                  <div className="inline-flex items-center gap-2 text-green-600 mb-2">
+                    <CheckCircle className="w-6 h-6" />
+                    <h3 className="font-display text-xl font-bold">Booking Received!</h3>
+                  </div>
+                  <p className="text-sm text-muted-foreground mt-1">We've saved your request. Do you want to secure your spot now by paying?</p>
                 </div>
                 <button
-                  onClick={() => setShowPaymentModal(false)}
+                  onClick={handleFullClose}
                   className="p-2 text-muted-foreground hover:bg-muted rounded-full transition-colors"
                   type="button"
                 >
@@ -563,24 +557,14 @@ export const BookingFormModal = ({ isOpen, onClose, packageTitle, packageSlug }:
               </div>
 
               {/* Modal Footer */}
-              <div className="p-6 border-t border-border bg-muted/30 flex gap-4">
+              <div className="p-6 border-t border-border bg-muted/30 flex justify-end">
                 <Button
                   variant="outline"
-                  className="flex-1"
-                  onClick={() => setShowPaymentModal(false)}
+                  className="w-full md:w-auto"
+                  onClick={handleFullClose}
                   type="button"
                 >
-                  Cancel
-                </Button>
-                <Button
-                  variant="primary"
-                  className="flex-1 gap-2"
-                  onClick={handleFinalSubmit}
-                  disabled={isSubmitting}
-                  type="button"
-                >
-                  {isSubmitting ? 'Processing...' : 'Submit Booking'}
-                  {!isSubmitting && <CheckCircle className="w-4 h-4" />}
+                  Close Window
                 </Button>
               </div>
             </div>

@@ -65,16 +65,12 @@ export const BookingForm = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleInitialSubmit = (e: React.FormEvent) => {
+  const handleBookingSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setShowPaymentModal(true);
-  };
-
-  const handleFinalSubmit = async () => {
     setIsSubmitting(true);
 
     try {
-      const specialReqsWithPayment = `${formData.message}\n\n[Payment Preference: ${paymentMethod}]`.trim();
+      const specialReqsWithPayment = `${formData.message}`.trim();
       const duration = formData.startDate && formData.endDate
         ? Math.max(1, Math.ceil((new Date(formData.endDate).getTime() - new Date(formData.startDate).getTime()) / (1000 * 60 * 60 * 24)))
         : 0;
@@ -121,8 +117,8 @@ export const BookingForm = () => {
       });
 
       setIsSubmitting(false);
-      setShowPaymentModal(false);
-      alert('Your quote request has been sent successfully! We will contact you shortly.');
+      // Lead is captured, now show payment popup
+      setShowPaymentModal(true);
 
       // Reset form
       setStep(1);
@@ -140,7 +136,6 @@ export const BookingForm = () => {
         accommodation: 'standard',
         message: '',
       });
-      setPaymentMethod('skip');
 
     } catch (error) {
       console.error('Booking form submission error:', error);
@@ -229,7 +224,7 @@ export const BookingForm = () => {
               ))}
             </div>
 
-            <form onSubmit={handleInitialSubmit}>
+            <form onSubmit={handleBookingSubmit}>
               {/* Step 1: Tour Details */}
               {step === 1 && (
                 <div className="space-y-6 animate-fade-in">
@@ -533,10 +528,9 @@ export const BookingForm = () => {
                       type="submit"
                       variant="gold"
                       size="xl"
-                      className="flex-1 gap-2"
                     >
-                      <Sparkles className="w-5 h-5" />
-                      Request Quote
+                      {isSubmitting ? <span className="animate-spin mr-2">⏳</span> : <Sparkles className="w-5 h-5" />}
+                      {isSubmitting ? 'Processing...' : 'Request Quote'}
                     </Button>
                   </div>
 
@@ -549,133 +543,129 @@ export const BookingForm = () => {
             </form>
           </div>
         </div>
-      </div>
+      </div >
 
       {/* Payment Options Modal */}
-      {showPaymentModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
-          <div className="bg-background rounded-3xl w-full max-w-lg shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
-            {/* Modal Header */}
-            <div className="flex items-center justify-between p-6 border-b border-border">
-              <div>
-                <h3 className="font-display text-xl font-bold text-foreground">Complete Your Booking</h3>
-                <p className="text-sm text-muted-foreground mt-1">Select an optional payment method to secure your spot</p>
+      {
+        showPaymentModal && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-in fade-in duration-200">
+            <div className="bg-background rounded-3xl w-full max-w-lg shadow-2xl overflow-hidden animate-in zoom-in-95 duration-200">
+              {/* Modal Header */}
+              <div className="flex items-center justify-between p-6 border-b border-border">
+                <div>
+                  <div className="inline-flex items-center gap-2 text-green-600 mb-2">
+                    <CheckCircle className="w-6 h-6" />
+                    <h3 className="font-display text-xl font-bold">Booking Received!</h3>
+                  </div>
+                  <p className="text-sm text-muted-foreground">We've saved your request. Do you want to secure your spot now by paying?</p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => setShowPaymentModal(false)}
+                  className="p-2 text-muted-foreground hover:bg-muted rounded-full transition-colors"
+                >
+                  <X className="w-5 h-5" />
+                </button>
               </div>
-              <button
-                type="button"
-                onClick={() => setShowPaymentModal(false)}
-                className="p-2 text-muted-foreground hover:bg-muted rounded-full transition-colors"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
 
-            {/* Modal Content */}
-            <div className="p-6 space-y-4">
-              {/* Option 1: Direct Pay Link (Email) */}
-              <button
-                type="button"
-                onClick={() => setPaymentMethod('email')}
-                className={`w-full text-left p-4 rounded-xl border-2 transition-all flex items-center gap-4 ${paymentMethod === 'email'
-                  ? 'border-primary bg-primary/5'
-                  : 'border-border hover:border-primary/50'
-                  }`}
-              >
-                <div className={`w-12 h-12 rounded-full flex items-center justify-center ${paymentMethod === 'email' ? 'bg-primary text-white' : 'bg-muted text-muted-foreground'}`}>
-                  <CreditCard className="w-6 h-6" />
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-heading font-semibold text-foreground">Direct Pay Link</h4>
-                  <p className="text-sm text-muted-foreground">Pay securely online via DPO Group</p>
-                </div>
-              </button>
+              {/* Modal Content */}
+              <div className="p-6 space-y-4">
+                {/* Option 1: Direct Pay Link (Email) */}
+                <button
+                  type="button"
+                  onClick={() => setPaymentMethod('email')}
+                  className={`w-full text-left p-4 rounded-xl border-2 transition-all flex items-center gap-4 ${paymentMethod === 'email'
+                    ? 'border-primary bg-primary/5'
+                    : 'border-border hover:border-primary/50'
+                    }`}
+                >
+                  <div className={`w-12 h-12 rounded-full flex items-center justify-center ${paymentMethod === 'email' ? 'bg-primary text-white' : 'bg-muted text-muted-foreground'}`}>
+                    <CreditCard className="w-6 h-6" />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="font-heading font-semibold text-foreground">Direct Pay Link</h4>
+                    <p className="text-sm text-muted-foreground">Pay securely online via DPO Group</p>
+                  </div>
+                </button>
 
-              {/* Option 2: Bank Transfer */}
-              <button
-                type="button"
-                onClick={() => setPaymentMethod('bank')}
-                className={`w-full text-left p-4 rounded-xl border-2 transition-all flex items-center gap-4 ${paymentMethod === 'bank'
-                  ? 'border-secondary bg-secondary/5'
-                  : 'border-border hover:border-secondary/50'
-                  }`}
-              >
-                <div className={`w-12 h-12 rounded-full flex items-center justify-center ${paymentMethod === 'bank' ? 'bg-secondary text-white' : 'bg-muted text-muted-foreground'}`}>
-                  <Building className="w-6 h-6" />
-                </div>
-                <div className="flex-1">
-                  <h4 className="font-heading font-semibold text-foreground">Bank Transfer</h4>
-                  <p className="text-sm text-muted-foreground">Direct bank deposit details</p>
-                </div>
-              </button>
+                {/* Option 2: Bank Transfer */}
+                <button
+                  type="button"
+                  onClick={() => setPaymentMethod('bank')}
+                  className={`w-full text-left p-4 rounded-xl border-2 transition-all flex items-center gap-4 ${paymentMethod === 'bank'
+                    ? 'border-secondary bg-secondary/5'
+                    : 'border-border hover:border-secondary/50'
+                    }`}
+                >
+                  <div className={`w-12 h-12 rounded-full flex items-center justify-center ${paymentMethod === 'bank' ? 'bg-secondary text-white' : 'bg-muted text-muted-foreground'}`}>
+                    <Building className="w-6 h-6" />
+                  </div>
+                  <div className="flex-1">
+                    <h4 className="font-heading font-semibold text-foreground">Bank Transfer</h4>
+                    <p className="text-sm text-muted-foreground">Direct bank deposit details</p>
+                  </div>
+                </button>
 
-              {/* Dynamic Content Based on Selection */}
-              {paymentMethod === 'email' && (
-                <div className="mt-4 p-4 bg-primary/10 rounded-xl border border-primary/20 animate-in slide-in-from-top-2">
-                  <p className="text-sm text-foreground font-medium mb-2">Click below to pay via our secure gateway:</p>
-                  <a
-                    href="https://shop.directpay.online//paymybills/DemiToursAndTravelsCompanyLimited"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-semibold text-sm underline underline-offset-4"
-                  >
-                    Proceed to Direct Pay Online
-                    <ArrowRight className="w-4 h-4" />
-                  </a>
-                </div>
-              )}
+                {/* Dynamic Content Based on Selection */}
+                {paymentMethod === 'email' && (
+                  <div className="mt-4 p-4 bg-primary/10 rounded-xl border border-primary/20 animate-in slide-in-from-top-2">
+                    <p className="text-sm text-foreground font-medium mb-2">Click below to pay via our secure gateway:</p>
+                    <a
+                      href="https://shop.directpay.online//paymybills/DemiToursAndTravelsCompanyLimited"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 text-primary hover:text-primary/80 font-semibold text-sm underline underline-offset-4"
+                    >
+                      Proceed to Direct Pay Online
+                      <ArrowRight className="w-4 h-4" />
+                    </a>
+                  </div>
+                )}
 
-              {paymentMethod === 'bank' && (
-                <div className="mt-4 p-4 bg-secondary/10 rounded-xl border border-secondary/20 animate-in slide-in-from-top-2">
-                  <p className="font-bold text-foreground mb-2 text-sm">Bank Details (Tanzania):</p>
-                  <ul className="text-sm text-muted-foreground space-y-1 font-mono">
-                    <li><span className="text-foreground font-semibold">Bank:</span> CRDB Bank PLC</li>
-                    <li><span className="text-foreground font-semibold">Account Name:</span> Demi Tours & Travels</li>
-                    <li><span className="text-foreground font-semibold">Account No (USD):</span> 025XXXXXXXX</li>
-                    <li><span className="text-foreground font-semibold">SWIFT Code:</span> CORUTZTZ</li>
-                  </ul>
-                  <p className="text-xs text-secondary mt-3 italic">* Please include your name in the payment reference.</p>
-                </div>
-              )}
+                {paymentMethod === 'bank' && (
+                  <div className="mt-4 p-4 bg-secondary/10 rounded-xl border border-secondary/20 animate-in slide-in-from-top-2">
+                    <p className="font-bold text-foreground mb-2 text-sm">Bank Details (Tanzania):</p>
+                    <ul className="text-sm text-muted-foreground space-y-1 font-mono">
+                      <li><span className="text-foreground font-semibold">Bank:</span> CRDB Bank PLC</li>
+                      <li><span className="text-foreground font-semibold">Account Name:</span> Demi Tours & Travels</li>
+                      <li><span className="text-foreground font-semibold">Account No (USD):</span> 025XXXXXXXX</li>
+                      <li><span className="text-foreground font-semibold">SWIFT Code:</span> CORUTZTZ</li>
+                    </ul>
+                    <p className="text-xs text-secondary mt-3 italic">* Please include your name in the payment reference.</p>
+                  </div>
+                )}
 
-              <div className="flex items-center gap-2 pt-2">
-                <input
-                  type="radio"
-                  id="skip_payment"
-                  name="payment"
-                  checked={paymentMethod === 'skip'}
-                  onChange={() => setPaymentMethod('skip')}
-                  className="text-primary focus:ring-primary w-4 h-4"
-                />
-                <label htmlFor="skip_payment" className="text-sm text-muted-foreground cursor-pointer">
-                  Skip payment for now (I will pay later)
-                </label>
+                <div className="flex items-center gap-2 pt-2">
+                  <input
+                    type="radio"
+                    id="skip_payment"
+                    name="payment"
+                    checked={paymentMethod === 'skip'}
+                    onChange={() => setPaymentMethod('skip')}
+                    className="text-primary focus:ring-primary w-4 h-4"
+                  />
+                  <label htmlFor="skip_payment" className="text-sm text-muted-foreground cursor-pointer">
+                    Skip payment for now (I will pay later)
+                  </label>
+                </div>
               </div>
-            </div>
 
-            {/* Modal Footer */}
-            <div className="p-6 border-t border-border bg-muted/30 flex gap-4">
-              <Button
-                type="button"
-                variant="outline"
-                className="flex-1"
-                onClick={() => setShowPaymentModal(false)}
-              >
-                Cancel
-              </Button>
-              <Button
-                type="button"
-                variant="primary"
-                className="flex-1 gap-2"
-                onClick={handleFinalSubmit}
-                disabled={isSubmitting}
-              >
-                {isSubmitting ? 'Processing...' : 'Submit Booking'}
-                {!isSubmitting && <CheckCircle className="w-4 h-4" />}
-              </Button>
+              {/* Modal Footer */}
+              <div className="p-6 border-t border-border bg-muted/30 flex justify-end">
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="w-full md:w-auto"
+                  onClick={() => setShowPaymentModal(false)}
+                >
+                  Close Window
+                </Button>
+              </div>
             </div>
           </div>
         </div>
-      )}
-    </section>
+  )
+}
+    </section >
   );
 };

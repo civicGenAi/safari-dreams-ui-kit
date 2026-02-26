@@ -43,16 +43,10 @@ export const TourBookingWidget = ({ tour }: TourBookingWidgetProps) => {
       return;
     }
 
-    setShowPaymentModal(true);
-  };
-
-  const handleFinalSubmit = async () => {
     setSubmitting(true);
 
     try {
-      const specialReqsWithPayment = `${formData.message}\n\n[Payment Preference: ${paymentMethod}]`.trim();
-
-      // Save to database
+      // Save to database FIRST
       const { error: dbError } = await supabase
         .from('booking_requests')
         .insert([
@@ -70,7 +64,7 @@ export const TourBookingWidget = ({ tour }: TourBookingWidgetProps) => {
             accommodation: 'Not Specified',
             package_title: tour.title,
             package_slug: tour.slug,
-            special_requirements: specialReqsWithPayment,
+            special_requirements: formData.message,
             status: 'new',
             submitted_at: new Date().toISOString()
           }
@@ -87,24 +81,24 @@ export const TourBookingWidget = ({ tour }: TourBookingWidgetProps) => {
         destination: tour.location || 'Not Specified',
         travelStyle: 'Package Booking',
         startDate: formData.date,
-        endDate: '',
+        endDate: formData.date,
         adults: adults,
         children: children,
         accommodation: 'Not Specified',
         packageTitle: tour.title,
-        specialRequirements: specialReqsWithPayment,
+        specialRequirements: formData.message,
         duration: 0,
       });
 
       toast({
-        title: 'Quote Request Sent!',
-        description: 'Our team will contact you within 24 hours',
+        title: 'Booking Received!',
+        description: 'Your request has been successfully saved.',
       });
+
       setSubmitting(false);
-      setShowPaymentModal(false);
-      setShowQuoteForm(false);
+      // Lead captured! Now show payment options:
+      setShowPaymentModal(true);
       setFormData({ name: '', email: '', phone: '', date: '', message: '' });
-      setPaymentMethod('skip');
 
     } catch (error) {
       console.error('Booking submission error:', error);
@@ -327,12 +321,15 @@ export const TourBookingWidget = ({ tour }: TourBookingWidgetProps) => {
             {/* Modal Header */}
             <div className="flex items-center justify-between p-6 border-b border-border">
               <div>
-                <h3 className="font-display text-xl font-bold text-foreground">Complete Your Booking</h3>
-                <p className="text-sm text-muted-foreground mt-1">Select an optional payment method to secure your spot</p>
+                <div className="inline-flex items-center gap-2 text-green-600 mb-2">
+                  <CheckCircle className="w-6 h-6" />
+                  <h3 className="font-display text-xl font-bold">Booking Received!</h3>
+                </div>
+                <p className="text-sm text-muted-foreground">We've saved your request. Do you want to secure your spot now by paying?</p>
               </div>
               <button
                 type="button"
-                onClick={() => setShowPaymentModal(false)}
+                onClick={() => { setShowPaymentModal(false); setShowQuoteForm(false); }}
                 className="p-2 text-muted-foreground hover:bg-muted rounded-full transition-colors"
               >
                 <X className="w-5 h-5" />
@@ -422,24 +419,14 @@ export const TourBookingWidget = ({ tour }: TourBookingWidgetProps) => {
             </div>
 
             {/* Modal Footer */}
-            <div className="p-6 border-t border-border bg-muted/30 flex gap-4">
+            <div className="p-6 border-t border-border bg-muted/30 flex justify-end">
               <Button
                 type="button"
                 variant="outline"
-                className="flex-1"
-                onClick={() => setShowPaymentModal(false)}
+                className="w-full md:w-auto"
+                onClick={() => { setShowPaymentModal(false); setShowQuoteForm(false); }}
               >
-                Cancel
-              </Button>
-              <Button
-                type="button"
-                variant="primary"
-                className="flex-1 gap-2"
-                onClick={handleFinalSubmit}
-                disabled={submitting}
-              >
-                {submitting ? 'Processing...' : 'Submit Booking'}
-                {!submitting && <CheckCircle className="w-4 h-4" />}
+                Close Window
               </Button>
             </div>
           </div>

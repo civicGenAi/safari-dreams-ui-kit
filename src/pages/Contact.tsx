@@ -10,6 +10,9 @@ import { Textarea } from '@/components/ui/textarea';
 import { Mail, Phone, MapPin, Clock, MessageCircle, Send, CheckCircle } from 'lucide-react';
 import { supabase } from '@/lib/supabase';
 import { sendContactNotification } from '@/lib/email';
+import { Turnstile } from '@marsidev/react-turnstile';
+
+const TURNSTILE_SITE_KEY = import.meta.env.VITE_TURNSTILE_SITE_KEY || "0x4AAAAAACgBxfkG4v3q_bcn";
 
 const Contact = () => {
   const [formData, setFormData] = useState({
@@ -21,9 +24,14 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (!turnstileToken) {
+      alert('Please complete the security check before submitting.');
+      return;
+    }
     setIsSubmitting(true);
 
     try {
@@ -63,6 +71,7 @@ const Contact = () => {
           subject: 'General Inquiry',
           message: ''
         });
+        setTurnstileToken(null);
       }, 3000);
     } catch (error) {
       console.error('Form submission error:', error);
@@ -122,7 +131,7 @@ const Contact = () => {
                       Click here to email us
                     </a>
                     <p className="text-sm text-muted-foreground mt-1">
-                      travel@migrationsafaridirect.com 
+                      travel@migrationsafaridirect.com
                     </p>
                   </div>
                 </div>
@@ -181,7 +190,7 @@ const Contact = () => {
                         required
                         placeholder="John Doe"
                         value={formData.name}
-                        onChange={(e) => setFormData({...formData, name: e.target.value})}
+                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                         disabled={isSubmitting}
                       />
                     </div>
@@ -193,7 +202,7 @@ const Contact = () => {
                         required
                         placeholder="john@example.com"
                         value={formData.email}
-                        onChange={(e) => setFormData({...formData, email: e.target.value})}
+                        onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                         disabled={isSubmitting}
                       />
                     </div>
@@ -207,7 +216,7 @@ const Contact = () => {
                         id="phone"
                         placeholder="+1 234 567 8900"
                         value={formData.phone}
-                        onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                        onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
                         disabled={isSubmitting}
                       />
                     </div>
@@ -218,7 +227,7 @@ const Contact = () => {
                         required
                         className="w-full px-4 py-2 rounded-lg border border-border bg-background focus:outline-none focus:ring-2 focus:ring-primary"
                         value={formData.subject}
-                        onChange={(e) => setFormData({...formData, subject: e.target.value})}
+                        onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                         disabled={isSubmitting}
                       >
                         <option>General Inquiry</option>
@@ -238,12 +247,21 @@ const Contact = () => {
                       rows={6}
                       placeholder="Tell us about your dream safari..."
                       value={formData.message}
-                      onChange={(e) => setFormData({...formData, message: e.target.value})}
+                      onChange={(e) => setFormData({ ...formData, message: e.target.value })}
                       disabled={isSubmitting}
                     />
                   </div>
 
-                  <Button type="submit" variant="gold" size="lg" className="w-full md:w-auto" disabled={isSubmitting}>
+                  <div className="mb-6 flex flex-col gap-2">
+                    <Turnstile
+                      siteKey={TURNSTILE_SITE_KEY}
+                      onSuccess={(token) => setTurnstileToken(token)}
+                      onExpire={() => setTurnstileToken(null)}
+                      onError={() => setTurnstileToken(null)}
+                    />
+                  </div>
+
+                  <Button type="submit" variant="gold" size="lg" className="w-full md:w-auto" disabled={isSubmitting || !turnstileToken}>
                     {isSubmitting ? (
                       <>
                         <span className="animate-spin mr-2">⏳</span>
