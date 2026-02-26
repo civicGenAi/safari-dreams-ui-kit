@@ -56,7 +56,7 @@ export const sendEmail = async (emailData: EmailData): Promise<boolean> => {
  */
 export const sendNewsletterNotification = async (email: string): Promise<boolean> => {
   return sendEmail({
-    to: 'info@demitours.com',
+    to: 'travel@migrationsafaridirect.com',
     subject: 'New Newsletter Subscription',
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -83,7 +83,7 @@ export const sendContactNotification = async (data: {
   message: string;
 }): Promise<boolean> => {
   return sendEmail({
-    to: 'info@demitours.com',
+    to: 'travel@migrationsafaridirect.com',
     subject: `New Contact Form: ${data.subject}`,
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
@@ -135,7 +135,7 @@ export const sendBookingNotification = async (data: {
   duration: number;
 }): Promise<boolean> => {
   return sendEmail({
-    to: 'info@demitours.com',
+    to: 'travel@migrationsafaridirect.com',
     subject: `New Booking Request - ${data.firstName} ${data.lastName}`,
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
